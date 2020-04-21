@@ -1,0 +1,196 @@
+7311 -> Decimal
+0000016217 -> Octal
+0x00001C8F -> Hexadecimal
+0X00001C8F -> Hexadecimal
+000000018 -> No Reconocido
+0000001C8F -> No Reconocido
+
+215 -> Decimal
+0000000327 -> Octal
+0x000000D7 -> Hexadecimal
+0X000000D7 -> Hexadecimal
+000000028 -> No Reconocido
+00000000D7 -> No Reconocido
+
+1617 -> Decimal
+0000003121 -> Octal
+0x00000651 -> Hexadecimal
+0X00000651 -> Hexadecimal
+000000038 -> No Reconocido
+0000000651 -> Octal
+
+4173 -> Decimal
+0000010115 -> Octal
+0x0000104D -> Hexadecimal
+0X0000104D -> Hexadecimal
+000000048 -> No Reconocido
+000000104D -> No Reconocido
+
+9604 -> Decimal
+0000022604 -> Octal
+0x00002584 -> Hexadecimal
+0X00002584 -> Hexadecimal
+000000058 -> No Reconocido
+0000002584 -> No Reconocido
+
+3483 -> Decimal
+0000006633 -> Octal
+0x00000D9B -> Hexadecimal
+0X00000D9B -> Hexadecimal
+000000068 -> No Reconocido
+0000000D9B -> No Reconocido
+
+563 -> Decimal
+0000001063 -> Octal
+0x00000233 -> Hexadecimal
+0X00000233 -> Hexadecimal
+000000078 -> No Reconocido
+0000000233 -> Octal
+
+9631 -> Decimal
+0000022637 -> Octal
+0x0000259F -> Hexadecimal
+0X0000259F -> Hexadecimal
+000000088 -> No Reconocido
+000000259F -> No Reconocido
+
+1316 -> Decimal
+0000002444 -> Octal
+0x00000524 -> Hexadecimal
+0X00000524 -> Hexadecimal
+000000098 -> No Reconocido
+0000000524 -> Octal
+
+8102 -> Decimal
+0000017646 -> Octal
+0x00001FA6 -> Hexadecimal
+0X00001FA6 -> Hexadecimal
+000000108 -> No Reconocido
+0000001FA6 -> No Reconocido
+
+4922 -> Decimal
+0000011472 -> Octal
+0x0000133A -> Hexadecimal
+0X0000133A -> Hexadecimal
+000000118 -> No Reconocido
+000000133A -> No Reconocido
+
+6086 -> Decimal
+0000013706 -> Octal
+0x000017C6 -> Hexadecimal
+0X000017C6 -> Hexadecimal
+000000128 -> No Reconocido
+00000017C6 -> No Reconocido
+
+1888 -> Decimal
+0000003540 -> Octal
+0x00000760 -> Hexadecimal
+0X00000760 -> Hexadecimal
+000000138 -> No Reconocido
+0000000760 -> Octal
+
+1004 -> Decimal
+0000001754 -> Octal
+0x000003EC -> Hexadecimal
+0X000003EC -> Hexadecimal
+000000148 -> No Reconocido
+00000003EC -> No Reconocido
+
+2440 -> Decimal
+0000004610 -> Octal
+0x00000988 -> Hexadecimal
+0X00000988 -> Hexadecimal
+000000158 -> No Reconocido
+0000000988 -> No Reconocido
+
+1742 -> Decimal
+0000003316 -> Octal
+0x000006CE -> Hexadecimal
+0X000006CE -> Hexadecimal
+000000168 -> No Reconocido
+00000006CE -> No Reconocido
+
+1983 -> Decimal
+0000003677 -> Octal
+0x000007BF -> Hexadecimal
+0X000007BF -> Hexadecimal
+000000178 -> No Reconocido
+00000007BF -> No Reconocido
+
+6505 -> Decimal
+0000014551 -> Octal
+0x00001969 -> Hexadecimal
+0X00001969 -> Hexadecimal
+000000188 -> No Reconocido
+0000001969 -> No Reconocido
+
+5164 -> Decimal
+0000012054 -> Octal
+0x0000142C -> Hexadecimal
+0X0000142C -> Hexadecimal
+000000198 -> No Reconocido
+000000142C -> No Reconocido
+
+2100 -> Decimal
+0000004064 -> Octal
+0x00000834 -> Hexadecimal
+0X00000834 -> Hexadecimal
+000000208 -> No Reconocido
+0000000834 -> No Reconocido
+
+1290 -> Decimal
+0000002412 -> Octal
+0x0000050A -> Hexadecimal
+0X0000050A -> Hexadecimal
+000000218 -> No Reconocido
+000000050A -> No Reconocido
+
+3906 -> Decimal
+0000007502 -> Octal
+0x00000F42 -> Hexadecimal
+0X00000F42 -> Hexadecimal
+000000228 -> No Reconocido
+0000000F42 -> No Reconocido
+
+6393 -> Decimal
+0000014371 -> Octal
+0x000018F9 -> Hexadecimal
+0X000018F9 -> Hexadecimal
+000000238 -> No Reconocido
+00000018F9 -> No Reconocido
+
+1564 -> Decimal
+0000003034 -> Octal
+0x0000061C -> Hexadecimal
+0X0000061C -> Hexadecimal
+000000248 -> No Reconocido
+000000061C -> No Reconocido
+
+6924 -> Decimal
+0000015414 -> Octal
+0x00001B0C -> Hexadecimal
+0X00001B0C -> Hexadecimal
+000000258 -> No Reconocido
+0000001B0C -> No Reconocido
+
+7338 -> Decimal
+0000016252 -> Octal
+0x00001CAA -> Hexadecimal
+0X00001CAA -> Hexadecimal
+000000268 -> No Reconocido
+0000001CAA -> No Reconocido
+
+8327 -> Decimal
+0000020207 -> Octal
+0x00002087 -> Hexadecimal
+0X00002087 -> Hexadecimal
+000000278 -> No Reconocido
+0000002087 -> No Reconocido
+
+7268 -> Decimal
+0000016144 -> Octal
+0x00001C64 -> Hexadecimal
+0X00001C64 -> Hexadecimal
+000000288 -> No Reconocido
+0000001C64 -> No Reconocido
+
