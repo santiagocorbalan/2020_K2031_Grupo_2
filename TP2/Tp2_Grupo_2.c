@@ -2,9 +2,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+//Pila
 struct Nodo {
-    Char info;
-    Nodo* sig;
+    char info;
+    nodo* sig;
+};
+
+//Lo que va a devolver la TT
+struct Transicion {
+    int estadoSiguiente;
+    char[3] cadenaPush;
 };
 
 int tipos (char a);
@@ -13,14 +20,17 @@ void push (Nodo*&, char);
 
 int main(){
 
-	    int matriz[6][5]={
-					  {3,1,3,0,3},
-                      {1,1,0,3,3},
-                      {3,1,3,1,3},
-                      {1,1,0,3,2},
-                      {3,3,0,3,2},
-                      {3,3,0,3,3}
-					  };
+    int matriz[6][5]= {
+                        {3,1,3,0,3},
+                        {1,1,0,3,3},
+                        {3,1,3,1,3},
+                        {1,1,0,3,2},
+                        {3,3,0,3,2},
+                        {3,3,0,3,3}
+                      };
+    
+    //Arreglo de 3 dimensiones: tabla de transición
+    //int tablaTransicion = [][][];
 
     int columna = 0;
     int estadoActual = 0;
