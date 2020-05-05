@@ -3,7 +3,7 @@
 #include <stdlib.h>
 
 struct Nodo {
-    estadoSiguiente Int;
+    Char info;
     Nodo* sig;
 };
 
@@ -25,8 +25,9 @@ int main(){
     int columna = 0;
     int estadoActual = 0;
     int estadoFinal = 0;
+    char cimaDeLaPila
     
-    char str[20];
+    char str[50];
     printf("Ingrese una expresión: ");
     gets(str);
     
@@ -60,7 +61,7 @@ int tipos (char a)
 string pop(Nodo* &p) {
     char c;
     Nodo* aux = p;
-    c = aux->estadoSiguiente;
+    c = aux->info;
     p = aux->sig;
     delete aux;
     return c;
@@ -68,7 +69,7 @@ string pop(Nodo* &p) {
 
 void push(Nodo* &p, char c){
     Nodo* aux = new Nodo();
-    aux->estadoSiguiente = c;
+    aux->info = c;
     aux->sig = p;
     p = aux;
 }
