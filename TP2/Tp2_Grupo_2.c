@@ -9,10 +9,13 @@ struct Nodo {
 };
 
 //Lo que va a devolver la TT
-struct Transicion {
+struct EST {
     int estadoSiguiente;
     char[3] cadenaPush;
 };
+
+// 4 = q0, q1, q2, qr ; 2 = $, R ; 6 columnas + columna R
+struct EST TT[4][2][6]
 
 int tipos (char a);
 char pop (Nodo*&);
