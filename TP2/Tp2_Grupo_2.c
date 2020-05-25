@@ -86,3 +86,165 @@ void push(Nodo* &p, char c){
     aux->sig = p;
     p = aux;
 }
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+
+typedef struct Nodo{
+    int dato;
+    struct Nodo* sig;
+}Nodo;
+
+void push(Nodo *,char);
+void pop(Nodo *);
+int cimaPila (Nodo *primero);
+
+int main(){
+    
+    typedef struct estmatriz {
+    int estado_sig;
+    char cad_push [3];
+    }
+    struct estmatriz est_matriz [4][2][6];
+    est_matriz [0][0][0] = (3,"\n")
+    est_matriz [0][0][1] = (1,"$")       
+    est_matriz [0][0][2] = (3,"\n")             
+    est_matriz [0][0][3] = (0,"R$")
+    est_matriz [0][0][4] = (3,"\n")
+    est_matriz [1][0][0] = (1,"$")
+    est_matriz [1][0][1] = (1,"$")       
+    est_matriz [1][0][2] = (0,"$")             
+    est_matriz [1][0][3] = (3,"\n")
+    est_matriz [1][0][4] = (3,"\n")
+    est_matriz [0][1][0] = (3,"\n")
+    est_matriz [0][1][1] = (1,"R")       
+    est_matriz [0][1][2] = (3,"\n")             
+    est_matriz [0][1][3] = (0,"RR")
+    est_matriz [0][1][4] = (3,"\n")
+    est_matriz [1][1][0] = (1,"R")
+    est_matriz [1][1][1] = (1,"R")      
+    est_matriz [1][1][2] = (0,"R")             
+    est_matriz [1][1][3] = (3,"\n")
+    est_matriz [1][1][4] = (2,"E")
+    est_matriz [2][1][0] = (3,"\n")
+    est_matriz [2][1][1] = (3,"\n")       
+    est_matriz [2][1][2] = (0,"R")            
+    est_matriz [2][1][3] = (3,"\n")
+    est_matriz [2][1][4] = (2,"E")
+    est_matriz [2][0][0] = (3,"\n")
+    est_matriz [2][0][1] = (3,"\n")       
+    est_matriz [2][0][2] = (0,"$")             
+    est_matriz [2][0][3] = (3,"\n")
+    est_matriz [2][0][4] = (3,"\n")
+    
+    estmatriz a ;
+
+     char caracter;
+     int estado_actual = 0;
+     int i=0;
+     int abre=0;
+     int cierra=0;
+     
+     Nodo* primero = NULL;
+     char caracter1 = '$';
+     push (primero,caracter1);
+     
+     
+     char operacion [128];
+
+     printf("Ingrese la operacion: ");
+     scanf("%s" , operacion);
+     caracter=operacion[i];
+     
+    
+    while (caracter != '\0'){
+
+         a = est_matriz [estado_actual] [cimaPila(primero)] [determinar_columna(caracter)] ;
+          
+        if (caracter == '('){
+                abre++;
+               pop(primero);
+              pushvec(primero,a.cad_push[1]);
+              pushvec(primero,a.cad_push[0]);
+            }
+            
+         if (caracter == ')'){
+                cierra++;
+                pop(primero);
+            }
+            
+        estado_actual = a.estado_sig;
+        i++;
+        caracter =operacion[i];
+    }
+    
+    
+    if ((abre-cierra) == 0){
+    printf("La Operacion Ingresada Es Correcta.");
+    }else {
+        printf("Syntax Error.");
+    }
+
+    
+    return 0;
+}
+
+
+int cimaPila (Nodo *primero)
+{
+    
+    if (primero!=NULL){
+                
+                int z; 
+             if (primero-> dato == '$'){
+                   z = 0 ;
+            }
+            
+             if (primero-> dato == 'R'){
+                 z = 1 ;
+            }
+               
+        return z;
+  }
+
+}
+
+void push(Nodo *primero,char n) 
+{
+    Nodo* nuevoNodo = (Nodo*)malloc(sizeof(Nodo)); 
+    nuevoNodo->dato = n ;                             
+    nuevoNodo->sig  = primero;
+    primero = nuevoNodo;
+}
+
+
+void pop(Nodo *primero) 
+{
+   if(primero != NULL){
+   Nodo* aux = primero;
+   primero = aux->sig;                                   
+   free(aux);               
+}
+}
+
+
+int determinar_columna(char a)
+{
+    int col = 0;
+    switch(a)
+
+    {
+
+      case '0': col=0; break;
+      case '1'...'9': col=1; break;
+      case '+': case '-': case '*': case '/':  col=2; break;
+      case '(': col=3; break;
+      case ')': col=4; break;
+      default: col=5;
+
+    }
+    return col;
+}
