@@ -108,39 +108,13 @@ int main(){
     int estado_sig;
     char cad_push [3];
     }
-    struct estmatriz est_matriz [4][2][6];
-    est_matriz [0][0][0] = (3,"\n")
-    est_matriz [0][0][1] = (1,"$")       
-    est_matriz [0][0][2] = (3,"\n")             
-    est_matriz [0][0][3] = (0,"R$")
-    est_matriz [0][0][4] = (3,"\n")
-    est_matriz [1][0][0] = (1,"$")
-    est_matriz [1][0][1] = (1,"$")       
-    est_matriz [1][0][2] = (0,"$")             
-    est_matriz [1][0][3] = (3,"\n")
-    est_matriz [1][0][4] = (3,"\n")
-    est_matriz [0][1][0] = (3,"\n")
-    est_matriz [0][1][1] = (1,"R")       
-    est_matriz [0][1][2] = (3,"\n")             
-    est_matriz [0][1][3] = (0,"RR")
-    est_matriz [0][1][4] = (3,"\n")
-    est_matriz [1][1][0] = (1,"R")
-    est_matriz [1][1][1] = (1,"R")      
-    est_matriz [1][1][2] = (0,"R")             
-    est_matriz [1][1][3] = (3,"\n")
-    est_matriz [1][1][4] = (2,"E")
-    est_matriz [2][1][0] = (3,"\n")
-    est_matriz [2][1][1] = (3,"\n")       
-    est_matriz [2][1][2] = (0,"R")            
-    est_matriz [2][1][3] = (3,"\n")
-    est_matriz [2][1][4] = (2,"E")
-    est_matriz [2][0][0] = (3,"\n")
-    est_matriz [2][0][1] = (3,"\n")       
-    est_matriz [2][0][2] = (0,"$")             
-    est_matriz [2][0][3] = (3,"\n")
-    est_matriz [2][0][4] = (3,"\n")
-    
-    estmatriz a ;
+    struct estmatriz est_matriz [4][2][6] = {
+        {3,""},{1,"$"},{3,""},{0,"R$"},{3,""},{1,"$"},
+        {1,"$"},{0,"$"},{3,""},{3,""},{3,""},{1,"R"},
+        {3,""},{0,"RR"},{3,""},{1,"R"},{1,"R"},{0,"R"},
+        {3,""},{2,"E"},{3,""},{3,""},{0,"R"},{3,""},
+        {2,"E"},{3,""},{3,""},{0,"$"},{3,""},{3,""}
+    }
 
      char caracter;
      int estado_actual = 0;
