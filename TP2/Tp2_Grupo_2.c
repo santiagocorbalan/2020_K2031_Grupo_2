@@ -86,9 +86,9 @@ int main() {
     strcpy(TT[2][0][4].cad_push, "");
     
     int estado_actual = 0;
-    int b = 0;
+    int estado_parcial = 0;
     int i = 0;
-    char operr[3];
+    char caracteres[3];
     
     char caracter1 = '$';
     push(caracter1);
@@ -102,25 +102,25 @@ int main() {
     
     while (caracter != '\0'){
         
-        b = TT[estado_actual] [ultimo()] [determinar_columna(caracter)].estado ;
-        strcpy(operr,TT[estado_actual] [ultimo()] [determinar_columna(caracter)].cad_push);
+        estado_parcial = TT[estado_actual] [ultimo()] [determinar_columna(caracter)].estado ;
+        strcpy(caracteres,TT[estado_actual] [ultimo()] [determinar_columna(caracter)].cad_push);
 
-        if (b == 3) {
+        if (estado_parcial == 3) {
             printf("Syntax Error.\n");
-             return 0;
+            return 0;
         }
 
         if (caracter == '(') {
             char val = pop();
             push(val);
-            push(operr[0]);
+            push(caracteres[0]);
         }
             
         if (caracter == ')') {
             pop();
         }
     
-        estado_actual = b;
+        estado_actual = estado_parcial;
         i++;
         caracter = operacion[i];
     }
@@ -130,7 +130,7 @@ int main() {
     if (vacia()) {
             
         if (estado_actual != 0 ) {
-            printf("La Operacion Ingresada Es Correcta.\n");
+            printf("La operacion ingresada es correcta.\n");
         } else {
             printf("Syntax Error.\n");
         }
@@ -142,17 +142,22 @@ int main() {
     return 0;
 }
 
-int determinar_columna(char a) {
+int determinar_columna(char c) {
     
-    int col = 0;
-    switch (a) {
-        case '0': col=0; break;
-        case '1'...'9': col=1; break;
-        case '+': case '-': case '*': case '/':  col=2; break;
-        case '(': col=3; break;
-        case ')': col=4; break;
+    int columna = 0;
+    switch (c) {
+        case '0': columna = 0;
+        break;
+        case '1'...'9': columna = 1;
+        break;
+        case '+': case '-': case '*': case '/':  columna = 2;
+        break;
+        case '(': columna = 3;
+        break;
+        case ')': columna = 4;
+        break;
     }
-    return col;
+    return columna;
 }
 
 char pop(void) {
