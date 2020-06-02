@@ -93,17 +93,16 @@ int main() {
     char caracterInicial = '$';
     push(caracterInicial);
     
-    
     char operacion [128];
 
     printf("Ingrese la operacion: ");
-    scanf("%s" , operacion);
+    scanf("%s", operacion);
     char caracter = operacion[i];
     
     while (caracter != '\0'){
         
         estado_parcial = TT[estado_actual] [ultimo()] [determinar_columna(caracter)].estado ;
-        strcpy(caracteres,TT[estado_actual] [ultimo()] [determinar_columna(caracter)].cad_push);
+        strcpy(caracteres, TT[estado_actual] [ultimo()] [determinar_columna(caracter)].cad_push);
 
         if (estado_parcial == 3) {
             printf("Syntax Error.\n");
@@ -128,7 +127,7 @@ int main() {
     pop();
                
     if (vacia()) {
-            
+        
         if (estado_actual != 0 ) {
             printf("La operacion ingresada es correcta.\n");
         } else {
@@ -143,7 +142,6 @@ int main() {
 }
 
 int determinar_columna(char c) {
-    
     int columna = 0;
     switch (c) {
         case '0': columna = 0;
@@ -161,11 +159,11 @@ int determinar_columna(char c) {
 }
 
 char pop(void) {
-    
     if (superior != NULL) {
+        
         struct nodo *temporal = superior;
-        char valor = superior->dato;
-        superior = superior->siguiente;
+        char valor = superior-> dato;
+        superior = superior-> siguiente;
  
         free(temporal);
         return valor;
@@ -173,15 +171,13 @@ char pop(void) {
 }
 
 void push(char caracter) {
-
   struct nodo *nuevoNodo = malloc(sizeof(struct nodo));
-  nuevoNodo->dato = caracter;
-  nuevoNodo->siguiente = superior;
+  nuevoNodo-> dato = caracter;
+  nuevoNodo-> siguiente = superior;
   superior = nuevoNodo;
 }
 
 int ultimo() {
-    
     if (superior-> dato == '$'){
         return 0;
     }
@@ -189,7 +185,6 @@ int ultimo() {
     if (superior-> dato == 'R'){
         return 1;
     }
-
 }
 
 bool vacia(void) {
