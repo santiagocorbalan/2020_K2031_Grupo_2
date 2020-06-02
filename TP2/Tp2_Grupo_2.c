@@ -147,8 +147,7 @@ int main()
       } else {
         printf("Syntax Error.\n");
       }
-                
-      printf("%c", operr[0]);       
+                    
 
 
     return 0;
