@@ -1,118 +1,146 @@
-#include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include <string.h>
 
+struct nodo {
+  char dato;
+  struct nodo *siguiente;
+};
 
-typedef struct Nodo{
-    int dato;
-    struct Nodo* sig;
-} Nodo;
 
-void push(Nodo *,char);
-void pop(Nodo *);
-int cimaPila (Nodo *primero);
+void push(char caracter);  
+char pop(void); 
+int ultimo(void); 
 
-int main(){
+struct nodo *superior = NULL;
+
+int determinar_columna(char a);
+
+
+int main()
+
+{
     
-    typedef struct estmatriz {
-        int estado_sig;
-        char cad_push [3];
-    }
+
+    struct loc { 
+        int estado; 
+        char cad_push[3]; 
+        };  
     
-    struct estmatriz est_matriz [4][2][6] = {
-        {3,""},{1,"$"},{3,""},{0,"R$"},{3,""},{1,"$"},
-        {1,"$"},{0,"$"},{3,""},{3,""},{3,""},{1,"R"},
-        {3,""},{0,"RR"},{3,""},{1,"R"},{1,"R"},{0,"R"},
-        {3,""},{2,"E"},{3,""},{3,""},{0,"R"},{3,""},
-        {2,"E"},{3,""},{3,""},{0,"$"},{3,""},{3,""}
-    }
-
-     char caracter;
-     int estado_actual = 0;
-     int i=0;
-     int abre=0;
-     int cierra=0;
-     
-     Nodo* primero = NULL;
-     char caracter1 = '$';
-     push (primero,caracter1);
-     
-     
-     char operacion [128];
-
-     printf("Ingrese la operacion: ");
-     scanf("%s" , operacion);
-     caracter=operacion[i];
-     
+    struct loc TT[5][5][6];
+    TT [0] [0] [0].estado = 3;
+    strcpy(TT[0][0][0].cad_push, "");
+    TT [0] [0] [1].estado = 1; 
+    strcpy(TT[0][0][1].cad_push, "$");
+    TT [0] [0] [2].estado = 3; 
+    strcpy(TT[0][0][2].cad_push, "");
+    TT [0] [0] [3].estado = 0; 
+    strcpy(TT[0][0][3].cad_push, "R$");
+    TT [0] [0] [4].estado = 3; 
+    strcpy(TT[0][0][4].cad_push, "");
+    TT [1] [0] [0].estado = 1; 
+    strcpy(TT[1][0][0].cad_push, "$");
+    TT [1] [0] [1].estado = 1; 
+    strcpy(TT[1][0][1].cad_push, "$");
+    TT [1] [0] [2].estado = 0; 
+    strcpy(TT[1][0][2].cad_push, "$");
+    TT [1] [0] [3].estado = 3; 
+    strcpy(TT[1][0][3].cad_push, "");
+    TT [1] [0] [4].estado = 3;     
+    strcpy(TT[1][0][4].cad_push, "");
+    TT [0] [1] [0].estado = 3; 
+    strcpy(TT[0][1][0].cad_push, "");
+    TT [0] [1] [1].estado = 1; 
+    strcpy(TT[0][1][1].cad_push, "R");
+    TT [0] [1] [2].estado = 3; 
+    strcpy(TT[0][1][2].cad_push, "");
+    TT [0] [1] [3].estado = 0; 
+    strcpy(TT[0][1][3].cad_push, "RR");
+    TT [0] [1] [4].estado = 3; 
+    strcpy(TT[0][1][4].cad_push, "");
+    TT [1] [1] [0].estado = 1; 
+    strcpy(TT[1][1][0].cad_push, "R");
+    TT [1] [1] [1].estado = 1; 
+    strcpy(TT[1][1][1].cad_push, "R");
+    TT [1] [1] [2].estado = 0; 
+    strcpy(TT[1][1][2].cad_push, "R");
+    TT [1] [1] [3].estado = 3; 
+    strcpy(TT[1][1][3].cad_push, "");
+    TT [1] [1] [4].estado = 2; 
+    strcpy(TT[1][1][4].cad_push, "E");
+    TT [2] [1] [0].estado = 3; 
+    strcpy(TT[2][1][0].cad_push, "");
+    TT [2] [1] [1].estado = 3; 
+    strcpy(TT[2][1][1].cad_push, "");
+    TT [2] [1] [2].estado = 0; 
+    strcpy(TT[2][1][2].cad_push, "R");
+    TT [2] [1] [3].estado = 3; 
+    strcpy(TT[2][1][3].cad_push, "");
+    TT [2] [1] [4].estado = 2; 
+    strcpy(TT[2][1][4].cad_push, "E");
+    TT [2] [0] [0].estado = 3; 
+    strcpy(TT[2][0][0].cad_push, "");
+    TT [2] [0] [1].estado = 3; 
+    strcpy(TT[2][0][1].cad_push, "");
+    TT [2] [0] [2].estado = 0; 
+    strcpy(TT[2][0][2].cad_push, "$");
+    TT [2] [0] [3].estado = 3; 
+    strcpy(TT[2][0][3].cad_push, "");
+    TT [2] [0] [4].estado = 3; 
+    strcpy(TT[2][0][4].cad_push, "");
     
-    while (caracter != '\0'){
+    int estado_actual = 0;
+    int b = 0 ;
+    int i=0;
+    int abre=0;
+    int cierra=0;
+    
+    char operr[3];
+    
+    char caracter1 = '$';
+    push(caracter1);
+    
+    
+    char operacion [128];
 
-         a = est_matriz [estado_actual] [cimaPila(primero)] [determinar_columna(caracter)] ;
-          
-        if (caracter == '('){
-                abre++;
-               pop(primero);
-              pushvec(primero,a.cad_push[1]);
-              pushvec(primero,a.cad_push[0]);
+
+    printf("Ingrese la operacion: ");
+    scanf("%s" , operacion);
+    char caracter = operacion[i];
+    
+     while (caracter != '\0'){
+        
+           b = TT[estado_actual] [ultimo()] [determinar_columna(caracter)].estado ;
+           strcpy(operr,TT[0] [1] [3].cad_push);
+
+
+            if (caracter == '('){
+             abre++;
+             char val = pop();
+             push(val);
+             push(operr[0]);
             }
             
          if (caracter == ')'){
                 cierra++;
-                pop(primero);
+                pop();
             }
             
-        estado_actual = a.estado_sig;
+        	
+        estado_actual = b;
         i++;
         caracter =operacion[i];
     }
-    
-    
+
+  
     if ((abre-cierra) == 0){
     printf("La Operacion Ingresada Es Correcta.");
     }else {
         printf("Syntax Error.");
+        
     }
 
-    
     return 0;
-}
-
-
-int cimaPila (Nodo *primero)
-{
-    
-    if (primero!=NULL){
-                
-                int z; 
-             if (primero-> dato == '$'){
-                   z = 0 ;
-            }
-            
-             if (primero-> dato == 'R'){
-                 z = 1 ;
-            }
-               
-        return z;
-  }
-
-}
-
-void push(Nodo *primero,char n) 
-{
-    Nodo* nuevoNodo = (Nodo*)malloc(sizeof(Nodo)); 
-    nuevoNodo->dato = n ;                             
-    nuevoNodo->sig  = primero;
-    primero = nuevoNodo;
-}
-
-
-void pop(Nodo *primero) 
-{
-   if(primero != NULL){
-   Nodo* aux = primero;
-   primero = aux->sig;                                   
-   free(aux);               
-   }
 }
 
 
@@ -133,3 +161,40 @@ int determinar_columna(char a)
     }
     return col;
 }
+
+char pop(void) {
+    
+    if (superior != NULL) {
+
+        struct nodo *temporal = superior;
+        char valor = superior->dato;
+        superior = superior->siguiente;
+ 
+        free(temporal);
+        return valor;
+    }
+}
+
+
+void push(char caracter) {
+
+  struct nodo *nuevoNodo = malloc(sizeof(struct nodo));
+  nuevoNodo->dato = caracter;
+  nuevoNodo->siguiente = superior;
+  superior = nuevoNodo;
+}
+
+
+
+int ultimo() {
+              
+         if (superior-> dato == '$'){
+                   return 0 ;
+            }
+            
+             if (superior-> dato == 'R'){
+                 return 1 ;
+            }
+
+          }
+
