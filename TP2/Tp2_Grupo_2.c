@@ -22,6 +22,7 @@ int main()
 
 {
     
+
     struct loc { 
         int estado; 
         char cad_push[3]; 
@@ -108,10 +109,16 @@ int main()
      while (caracter != '\0'){
         
            b = TT[estado_actual] [ultimo()] [determinar_columna(caracter)].estado ;
-           strcpy(operr,TT[0] [1] [3].cad_push);
+           strcpy(operr,TT[estado_actual] [ultimo()] [determinar_columna(caracter)].cad_push);
+          
+          if (b == 3){
+              
+             printf("Syntax Error.\n");
+              
+             return 0;
+            }
 
-
-            if (caracter == '('){
+          if (caracter == '('){
              char val = pop();
              push(val);
              push(operr[0]);
@@ -152,7 +159,6 @@ int determinar_columna(char a)
       case '+': case '-': case '*': case '/':  col=2; break;
       case '(': col=3; break;
       case ')': col=4; break;
-      default: col=5;
 
     }
     return col;
