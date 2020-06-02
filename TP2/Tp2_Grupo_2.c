@@ -110,7 +110,7 @@ int main()
         
            b = TT[estado_actual] [ultimo()] [determinar_columna(caracter)].estado ;
            strcpy(operr,TT[estado_actual] [ultimo()] [determinar_columna(caracter)].cad_push);
-          
+
           if (b == 3){
               
              printf("Syntax Error.\n");
@@ -134,13 +134,21 @@ int main()
         caracter =operacion[i];
     }
 
-    pop();	
-
-    if (vacia()) {
+       pop();
+               
+        if (vacia()) {
+            
+            if (estado_actual != 0 ) {
         printf("La Operacion Ingresada Es Correcta.\n");
+            }
+            else {
+        printf("Syntax Error.\n");
+      }
       } else {
         printf("Syntax Error.\n");
       }
+                
+      printf("%c", operr[0]);       
 
 
     return 0;
