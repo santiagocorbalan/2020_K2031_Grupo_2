@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <stdbool.h>
 
 struct nodo {
   char dato;
@@ -11,7 +12,7 @@ struct nodo {
 void push(char caracter);  
 char pop(void); 
 int ultimo(void); 
-
+bool vacia(void);  
 struct nodo *superior = NULL;
 
 int determinar_columna(char a);
@@ -21,7 +22,6 @@ int main()
 
 {
     
-
     struct loc { 
         int estado; 
         char cad_push[3]; 
@@ -92,9 +92,6 @@ int main()
     int estado_actual = 0;
     int b = 0 ;
     int i=0;
-    int abre=0;
-    int cierra=0;
-    
     char operr[3];
     
     char caracter1 = '$';
@@ -115,30 +112,29 @@ int main()
 
 
             if (caracter == '('){
-             abre++;
              char val = pop();
              push(val);
              push(operr[0]);
             }
             
          if (caracter == ')'){
-                cierra++;
                 pop();
             }
             
-        	
+        
         estado_actual = b;
         i++;
         caracter =operacion[i];
     }
 
-  
-    if ((abre-cierra) == 0){
-    printf("La Operacion Ingresada Es Correcta.");
-    }else {
-        printf("Syntax Error.");
-        
-    }
+    pop();	
+
+    if (vacia()) {
+        printf("La Operacion Ingresada Es Correcta.\n");
+      } else {
+        printf("Syntax Error.\n");
+      }
+
 
     return 0;
 }
@@ -198,3 +194,4 @@ int ultimo() {
 
           }
 
+bool vacia(void) { return superior == NULL; }
