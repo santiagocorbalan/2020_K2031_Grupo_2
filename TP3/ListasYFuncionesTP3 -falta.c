@@ -2,9 +2,9 @@
 #include <string.h>
 #include <stdlib.h> 
 #include <math.h>
-#include <ctype.h> 
+#include <ctype.h>
 
-/////////////////////////////////   CONSTANTES   /////////////////////////////////
+// CONSTANTES
 
 typedef struct nodoConstante{
     char* cadena;
@@ -18,10 +18,10 @@ constantes *primerHexadecimal = NULL;
 constantes *primerReal = NULL;
 constantes *primerCaracter = NULL;
 
-/////////////////////////////////   CONSTANTES DECIMALES   /////////////////////////////////
+// CONSTANTES DECIMALES
 
 void insertarConstanteDecimal(char* cadena){
-    constantes *nuevo;
+    constantes *nuevo = NULL;
     nuevo = (constantes*)malloc(sizeof(constantes));
     
     nuevo->cadena = strdup(cadena);
@@ -31,34 +31,33 @@ void insertarConstanteDecimal(char* cadena){
     nuevo->sig = NULL;
 
 
-    if(primerDecimal == NULL){
+    if (primerDecimal == NULL) {
         primerDecimal = nuevo;
-    }
-    else{
+    } else {
         constantes * aux;
         aux = primerDecimal;
 
-        while(aux->sig != NULL){
+        while (aux->sig != NULL) {
             aux = aux->sig;
         }
         aux->sig = nuevo;
     }
 }
 
-void constantesDecimales(char* cadena){
+void constantesDecimales(char* cadena) {
     insertarConstanteDecimal(cadena);
 }
 
-void reporteConstantesDecimales(){
+void reporteConstantesDecimales() {
     printf("\nReporte Constantes Decimales\n\n");
-    if(primerDecimal==NULL)
+    if (primerDecimal == NULL)
         printf("\tNo se encontraron constantes decimales\n");
-    else{
+    else {
         int totalAcumulado = 0;
         constantes* aux; 
         aux = primerDecimal; 
         
-        while(aux != NULL){
+        while(aux != NULL) {
             printf("Cadena: %s\tValor: %d\n",aux->cadena,aux->valor);
             totalAcumulado += aux->valor;
             aux = aux->sig;
@@ -67,127 +66,124 @@ void reporteConstantesDecimales(){
     }    
 }
 
-/////////////////////////////////   CONSTANTES OCTALES   /////////////////////////////////
+// CONSTANTES OCTALES
 
-void insertarConstanteOctal(char* cadena){
-    constantes *nuevo;
+void insertarConstanteOctal(char* cadena) {
+    constantes *nuevo = NULL;
     nuevo = (constantes*)malloc(sizeof(constantes));
     nuevo->cadena = strdup(cadena);
     nuevo->valor = strtol(cadena,NULL,8); // long int strtol (const char* str, char** endptr, int base); Convertir cadena en entero largo
     nuevo->sig = NULL;
 
-    if(primerOctal == NULL){
+    if (primerOctal == NULL) {
         primerOctal = nuevo;
-    }
-    else{
+    } else {
         constantes* aux;
         aux = primerOctal;
 
-        while(aux->sig != NULL){
+        while (aux->sig != NULL) {
             aux = aux->sig;
         }
         aux->sig = nuevo;
     }
 }
 
-void constantesOctales(char* cadena){
+void constantesOctales(char* cadena) {
     insertarConstanteOctal(cadena);
 }
 
-void reporteConstantesOctales(){
+void reporteConstantesOctales() {
     printf("\nReporte Constantes Octales\n\n");
-    if(primerOctal==NULL)
+    if (primerOctal == NULL) {
         printf("\tNo se encontraron constantes octales\n");
-    else{
+    } else {
         constantes* aux; 
         aux = primerOctal; 
-        while(aux != NULL){
+        while (aux != NULL) {
             printf("Cadena: %s\tValor: %d\n",aux->cadena,aux->valor);
             aux = aux->sig;
         }
     }
 }
 
-/////////////////////////////////   CONSTANTES HEXADECIMALES   /////////////////////////////////
+// CONSTANTES HEXADECIMALES
 
-void insertarConstanteHexadecimal(char* cadena){
-    constantes *nuevo;
+void insertarConstanteHexadecimal(char* cadena) {
+    constantes *nuevo = NULL;
     nuevo = (constantes*)malloc(sizeof(constantes));
     nuevo->cadena = strdup(cadena);
     nuevo->valor = strtol(cadena,NULL,16);
     nuevo->sig = NULL;
 
-    if(primerHexadecimal == NULL){
+    if (primerHexadecimal == NULL) {
         primerHexadecimal = nuevo;
-    }
-    else{
+    } else {
         constantes* aux;
         aux = primerHexadecimal;
 
-        while(aux->sig != NULL){
+        while (aux->sig != NULL) {
             aux = aux->sig;
         }
         aux->sig = nuevo;
     }
 }
 
-void constantesHexadecimales(char* cadena){
+void constantesHexadecimales(char* cadena) {
     insertarConstanteHexadecimal(cadena);
 }
 
-void reporteConstantesHexadecimales(){
+void reporteConstantesHexadecimales() {
     printf("\nReporte Constantes Hexadecimales\n\n");
-    if(primerHexadecimal==NULL)
+    if (primerHexadecimal == NULL) {
         printf("\tNo se encontraron constantes hexadecimales\n");
-    else{
+    } else {
         constantes* aux; 
         aux = primerHexadecimal; 
-        while(aux != NULL){
+        while (aux != NULL) {
             printf("Cadena: %s\tValor: %d\n",aux->cadena,aux->valor);
             aux = aux->sig;
         }
     }
 }
 
-/////////////////////////////////   CONSTANTES REALES  /////////////////////////////////
+// CONSTANTES REALES
 
-void insertarConstanteReal(char* cadena){
-    constantes *nuevo;
+void insertarConstanteReal(char* cadena) {
+    constantes *nuevo = NULL;
     nuevo = (constantes*)malloc(sizeof(constantes));
     nuevo->cadena = strdup(cadena); //Devuelve un puntero a una cadena de bytes terminada en null, que es un duplicado de la cadena a la que apunta Cadena
     nuevo->sig = NULL;
 
-    if(primerReal == NULL){
+    if (primerReal == NULL) {
         primerReal = nuevo;
-    }
-    else{
+    } else {
         constantes* aux;
         aux = primerReal;
 
-        while(aux->sig != NULL){
+        while (aux->sig != NULL) {
             aux = aux->sig;
         }
         aux->sig = nuevo;
     }
 }
 
-void constantesReales(char* cadena){
+void constantesReales(char* cadena) {
     insertarConstanteReal(cadena);
 }
 
-void reporteConstantesReales(){
+void reporteConstantesReales() {
     int parteEntera;
     double parteDecimal;
     double valor;
 
     printf("\nReporte Constantes Reales\n\n");
-    constantes* aux; 
-    if(primerReal==NULL)
+    constantes* aux;
+    
+    if (primerReal == NULL) {
         printf("\tNo se encontraron constantes reales\n");
-    else{
+    } else {
         aux = primerReal; 
-        while(aux != NULL)
-        {
+        while (aux != NULL) {
             valor = atof(aux->cadena); //convierte una cadena a su valor numérico pero en coma flotante
             parteEntera = (int) valor; // convertir valor a tipo int - entero
             parteDecimal = valor - parteEntera;
@@ -198,47 +194,47 @@ void reporteConstantesReales(){
     }
 }
 
-////////////////////   CONSTANTES CARACTER   ///////////////////
+// CONSTANTES CARACTER
 
 void insertarConstanteCaracter(char* cadena){
-    constantes *nuevo;
+    constantes *nuevo = NULL;
     nuevo = (constantes*)malloc(sizeof(constantes));
     nuevo->cadena = strdup(cadena);
     nuevo->sig = NULL;
 
-    if(primerCaracter == NULL){
+    if (primerCaracter == NULL) {
         primerCaracter = nuevo;
-    }
-    else{
+    } else {
         constantes* aux;
         aux = primerCaracter;
 
-        while(aux->sig != NULL){
+        while (aux->sig != NULL) {
             aux = aux->sig;
         }
         aux->sig = nuevo;
     }
 }
 
-void constantesCaracter(char* cadena){
+void constantesCaracter(char* cadena) {
     insertarConstanteCaracter(cadena);
 }
 
-void reporteConstantesCaracter(){
+void reporteConstantesCaracter() {
     printf("\nReporte Constantes Caracter\n\n");
-    if(primerCaracter==NULL)
+    if (primerCaracter == NULL) {
         printf("\tNo se encontraron constantes caracter\n");
-    else{
+    } else {
         constantes* aux;
-        aux = primerCaracter; 
-        while(aux != NULL){
+        aux = primerCaracter;
+        
+        while (aux != NULL) {
             printf("%s\n",aux->cadena);
             aux = aux->sig;
         }
     }
 }
 
-/////////////////////////////////   LITERALES CADENAS   /////////////////////////////////
+// LITERALES CADENA
 
 typedef struct nodoLiteralCadena{
     char* cadena;
@@ -248,7 +244,7 @@ typedef struct nodoLiteralCadena{
 
 literalCadena *primerLiteralCadena = NULL;
 
-void insertarLiteralCadena(char* cadena){
+void insertarLiteralCadena(char* cadena) {
     literalCadena *nuevo;
     nuevo = (literalCadena*)malloc(sizeof(literalCadena)); // reservo memoria con malloc
     
@@ -256,39 +252,38 @@ void insertarLiteralCadena(char* cadena){
     nuevo->longitud = strlen(cadena)-2; // strlen te da la longitud de una cadena ¿menos 2?
     nuevo->sig = NULL;
 
-    if(primerLiteralCadena == NULL){
+    if (primerLiteralCadena == NULL) {
         primerLiteralCadena = nuevo;
-    }
-    else{
+    } else {
         literalCadena* aux;
         aux = primerLiteralCadena;
 
-        while(aux->sig != NULL){
+        while (aux->sig != NULL) {
             aux = aux->sig;
         }
         aux->sig = nuevo;
     }
 }
 
-void literalesCadena(char* cadena){
+void literalesCadena(char* cadena) {
     insertarLiteralCadena(cadena);
 }
 
-void reporteLiteralesCadena(){
+void reporteLiteralesCadena() {
     printf("\nReporte Literales cadena\n\n");
-    if(primerLiteralCadena==NULL)
+    if (primerLiteralCadena == NULL) {
         printf("\tNo se encontraron literales cadena\n");
-    else{
+    } else {
         literalCadena* aux; 
         aux = primerLiteralCadena; 
-        while(aux != NULL){
+        while (aux != NULL) {
             printf("La cadena encontrada es %s\tY su Longitud es: %d\n",aux->cadena,aux->longitud);
             aux = aux->sig;
         }
     }
 }
 
-/////////////////////////////////   PALABRAS RESERVADAS    /////////////////////////////////
+// PALABRAS RESERVADAS
 
 typedef struct nodoPalabraReservada{
     char* cadena;
@@ -299,45 +294,124 @@ typedef struct nodoPalabraReservada{
 palabraReservada *primerPalabraReservada = NULL;
 
 void insertarPalabraReservada(char* cadena,char* tipo){
-    palabraReservada *nuevo;
+    palabraReservada *nuevo = NULL;
     nuevo = (palabraReservada*)malloc(sizeof(palabraReservada));
     nuevo->cadena = strdup(cadena);
     nuevo->tipo = tipo;
     nuevo->sig = NULL;
 
-    if(primerPalabraReservada == NULL){
+    if (primerPalabraReservada == NULL) {
         primerPalabraReservada = nuevo;
-    }
-    else{
+    } else {
         palabraReservada* aux;
         aux = primerPalabraReservada;
 
-        while(aux->sig != NULL){
+        while (aux->sig != NULL) {
             aux = aux->sig;
         }
         aux->sig = nuevo;
     }
 }
 
-void palabrasReservadas(char* cadena,char* tipo){
+void palabrasReservadas(char* cadena,char* tipo) {
     insertarPalabraReservada(cadena,tipo);
 }
 
-void reportePalabrasReservadas(){
+void reportePalabrasReservadas() {
     printf("\nReporte Palabras Reservadas\n\n");
-    if(primerPalabraReservada==NULL)
+    if (primerPalabraReservada == NULL) {
         printf("\tNo se encontraron palabras reservadas\n");
-    else{
+    } else {
         palabraReservada* aux;
         aux = primerPalabraReservada;
-        while(aux != NULL){
+        
+        while (aux != NULL) {
             printf("La palabra reservada es :%s\t (%s)\n",aux->cadena,aux->tipo);
             aux = aux->sig;
         }
     }
 }
 
-/////////////////////////////////   OPERADORES Y CARACTERES DE PUNTUACION   /////////////////////////////////
+// IDENTIFICADORES
+
+typedef struct nodoIdentificador{
+    char* cadena;
+    int cantidad;
+    struct nodoIdentificador *sig;
+}identificador;
+
+identificador* punteroIdentificador = NULL;
+
+void insertarIdentificador(char* cadena) {
+    if (punteroIdentificador == NULL) {
+        identificador* nuevo = NULL;
+        nuevo = (identificador*)malloc(sizeof(identificador));
+        nuevo->cadena = strdup(cadena);
+        nuevo->cantidad = 1;
+        nuevo->sig = NULL;
+        punteroIdentificador = nuevo;
+    } else {
+        identificador* aux = punteroIdentificador;
+        
+        while ((strcmp(cadena,aux->cadena) != 0) && aux->sig != NULL) {
+            aux = aux->sig;
+        }
+
+        if (aux->sig == NULL) {
+            operadorCaracter* nuevo = NULL;
+            nuevo = (operadorCaracter*)malloc(sizeof(operadorCaracter));
+            nuevo->cadena = strdup(cadena);
+        
+            nuevo->cantidad = 1;
+            nuevo->sig = NULL;
+            aux->sig = nuevo;
+        } else {
+            aux->cantidad = aux->cantidad + 1;
+        }
+    }
+}
+
+void listaIdentificadores(char* cadena){
+    insertarIdentificador(cadena);
+}
+
+void reporteIdentificadores(){
+    printf("\nReporte identificadores\n\n");
+    identificador* aux = punteroIdentificador;
+    if (punteroIdentificador == NULL)
+        printf("\tNo se encontraron identificadores\n");
+    ordenarAlfabeticamente(punteroIdentificador);
+    while (aux != NULL) {
+        printf("Identificador: %s\tCantidad de veces que aparece: %d\n",aux->cadena,aux->cantidad);
+        aux = aux->sig;
+    }
+}
+
+void ordenarAlfabeticamente(identificador* listaIds) {
+    if (listaIds != NULL) { //Si la lista no es vacía
+        identificador *aux = NULL;
+        identificador *actual = NULL;
+        identificador *tmp = NULL; // Temporal para el traspaso de datos
+        
+        aux = listaIds; //El primero
+        while( listaIds->sig != NULL ) {
+            actual = aux->sig;
+            while (actual != NULL) {
+                if (stcmp(aux->cadena, actual->dato) > 0) { //Si la primer cadena es mayor a la segunda (alfabeticamente)
+                    tmp->cadena = aux->cadena
+                    tmp-> cantidad = aux->cadena
+                    aux->cadena = actual->cadena
+                    aux->cantidad = actual->cantidad
+                }
+                actual = actual->sig;
+            }
+            aux = aux->sig;
+        }
+        
+    }
+}
+
+// OPERADORES Y CARACTERES DE PUNTUACION
 
 typedef struct nodoOperador_CaracterDePuntuacion{
     char* cadena;
@@ -347,25 +421,26 @@ typedef struct nodoOperador_CaracterDePuntuacion{
 
 operadorCaracter* punteroOperadorCaracter = NULL;
 
-void insertarOperadorCaracterPuntc(char* cadena){
-    if(punteroOperadorCaracter == NULL){
+void insertarOperadorCaracterPuntc(char* cadena) {
+    if (punteroOperadorCaracter == NULL) {
         
-        operadorCaracter* nuevo;
+        operadorCaracter* nuevo = NULL;
         nuevo = (operadorCaracter*)malloc(sizeof(operadorCaracter));
         nuevo->cadena = strdup(cadena);
         // strdup hace malloc((strlen(cadena)+1)*sizeof(char)); y strcpy(nuevo->cadena,cadena);
         nuevo->cantidad = 1;
         nuevo->sig = NULL;
         punteroOperadorCaracter = nuevo; 
-    }
-    else{
+    } else {
+        
         operadorCaracter* aux = punteroOperadorCaracter;
+        
         while((strcmp(cadena,aux->cadena) != 0) && aux->sig != NULL){  // strcmp si devuelve 0 entonces el contenido de ambas cadenas son iguales
             // si no existe el caracter y NO estoy parado en el ultimo de la lista
             aux = aux->sig;
         }
 
-        if(aux->sig == NULL){ // si estoy parado en el ultimo de la lista
+        if (aux->sig == NULL) { // si estoy parado en el ultimo de la lista
             operadorCaracter* nuevo;
             nuevo = (operadorCaracter*)malloc(sizeof(operadorCaracter));
             nuevo->cadena = strdup(cadena);
@@ -373,29 +448,29 @@ void insertarOperadorCaracterPuntc(char* cadena){
             nuevo->cantidad = 1;
             nuevo->sig = NULL;
             aux->sig = nuevo;
-        }
-        else{ // si ya existe el caracter
+            
+        } else { // si ya existe el caracter
             aux->cantidad = aux->cantidad +1;
         }
     }
 }
 
-void operadoresCaracteresPuntc(char* cadena){
+void operadoresCaracteresPuntc(char* cadena) {
     insertarOperadorCaracterPuntc(cadena);
 }
 
-void reporteOperadoresCaracteresPuntc(){
+void reporteOperadoresCaracteresPuntc() {
     printf("\nReporte Operadores/Caracteres de Puntuacion\n\n");
     operadorCaracter *aux = punteroOperadorCaracter;
-    if(punteroOperadorCaracter==NULL)
+    if (punteroOperadorCaracter == NULL)
         printf("\tNo se encontraron Operadores/Caracteres de Puntuacion\n");
-    while(aux != NULL){
+    while (aux != NULL) {
         printf("Operador/Caracter: %s\tCantidad de veces que aparece: %d\n",aux->cadena,aux->cantidad);
         aux = aux->sig;
     }
 } 
 
-//////////////////////////  REPORTES  ////////////////////////////////////
+// REPORTES
 
 void reportes(){
     reportePalabrasReservadas();
@@ -406,4 +481,5 @@ void reportes(){
     reporteConstantesReales();
     reporteConstantesCaracter();
     reporteOperadoresCaracteresPuntc();
+    reporteIdentificadores();
 }
