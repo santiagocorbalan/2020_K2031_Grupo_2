@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "ListasYFuncionesTP3.c"
+#include "ListasYFuncionesTP3.h"
 //Listado de identificadores encontrados indicando la cantidad de veces que aparece cada uno de ellos.
 // El listado debe estar ordenado alfabéticamente.  printf("Encontre un identificador: %s de longitud %d \n", yytext, yyleng);
 
