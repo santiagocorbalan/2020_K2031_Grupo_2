@@ -63,9 +63,9 @@ PUNTUACION_OPERACION    "*"|")"|"-"|"%"|";"|"?"|"]"|"&"|"#"|"."|"<"|","|"^"|"'"|
 
 int main(){
 
-    fopen("docDePrueba.c","r");
+    yyin = fopen("docDePrueba.c","r");
 
-    yylex();
+     yylex();
     
     reportes();
 

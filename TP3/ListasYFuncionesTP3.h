@@ -385,7 +385,7 @@ void ordenarAlfabeticamente(identificador* listaIds) {
         while( listaIds->sig != NULL ) {
             actual = aux->sig;
             while (actual != NULL) {
-                if (strcmp(aux->cadena, actual->dato) > 0) { //Si la primer cadena es mayor a la segunda (alfabeticamente)
+                if (strcmp(aux->cadena, actual->cadena) > 0) { //Si la primer cadena es mayor a la segunda (alfabeticamente)
                     tmp->cadena = aux->cadena;
                     //tmp-> cantidad = aux->cadena;
                     aux->cadena = actual->cadena;
