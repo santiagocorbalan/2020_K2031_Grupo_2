@@ -14,7 +14,7 @@ int main (){
     int hexa = 0xAF;
     float real = 10.3456789;
 
-    "Literal Cadena"
+    "Literal Cadena";
 
 
-};
+}

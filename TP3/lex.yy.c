@@ -497,42 +497,19 @@ static char *yy_last_accepting_cpos;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 "tp3.l"
+#line 1 ".\\AnalizadorLexicoTP3.l"
 #define INITIAL 0
-#line 4 "tp3.l"
+#line 4 ".\\AnalizadorLexicoTP3.l"
 
 #include <stdio.h>
+#include <string.h>
 #include <stdlib.h>
+#include "ListasYFuncionesTP3.h"
 //Listado de identificadores encontrados indicando la cantidad de veces que aparece cada uno de ellos.
-// El listado debe estar ordenado alfabéticamente.
-/*
-struct ListaIdentificador{
-   string palabra;
-   ListaIdentificador *siguiente;     
-}
-
-ListaIdentificadores *ListaIdentificadores = NULL;
+// El listado debe estar ordenado alfabéticamente.  printf("Encontre un identificador: %s de longitud %d \n", yytext, yyleng);
 
 
-void lista(ListaIdentificador *&lista, string data){
-    ListaIdentificador *p,*anterior,*n = new ListaIdentificador;
-    n->palabra=data; 
-    p=lista; 
-    while(p!=NULL && (strcmp(p->info,data)>0))
-    {
-        anterior=p;
-        p=p->siguiente;
-    }
-    n->siguiente=p;
-    if(p != lista)
-        anterior->siguiente=n;
-    else
-        lista=n;
-
-}
-
-*/
-#line 536 "lex.yy.c"
+#line 513 "lex.yy.c"
 
 /* Macros after this point can all be overridden by user definitions in
  * section 1.
@@ -683,11 +660,12 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
 
-#line 49 "tp3.l"
+#line 26 ".\\AnalizadorLexicoTP3.l"
 
 
 
-#line 691 "lex.yy.c"
+
+#line 669 "lex.yy.c"
 
 	if ( yy_init )
 		{
@@ -775,85 +753,85 @@ case 1:
 yy_c_buf_p = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 52 "tp3.l"
-{printf("Encontre un comentario: %s de longitud %d \n", yytext, yyleng);}
+#line 30 ".\\AnalizadorLexicoTP3.l"
+{printf("Encontré un comentario: %s de longitud %d \n", yytext, yyleng);}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 54 "tp3.l"
-{printf("Encontre un comentario de multiples lineas: %s de longitud %d \n", yytext, yyleng);}
+#line 32 ".\\AnalizadorLexicoTP3.l"
+{printf("Encontré un comentario de multiples lineas: %s de longitud %d \n", yytext, yyleng);}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 56 "tp3.l"
-{printf("Encontre una palabra reservada (tipo de dato): %s de longitud %d\n",yytext, yyleng);}
+#line 34 ".\\AnalizadorLexicoTP3.l"
+{printf("Encontré una palabra reservada (tipo de dato): %s de longitud %d\n",yytext, yyleng);}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 58 "tp3.l"
-{printf("Encontre una palabra reservada (estructuras de control): %s de longitud %d\n",yytext, yyleng);}
+#line 36 ".\\AnalizadorLexicoTP3.l"
+{printf("Encontré una palabra reservada (estructuras de control): %s de longitud %d\n",yytext, yyleng);}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 60 "tp3.l"
-{printf("Encontre una palabra reservada (otros): %s de longitud %d\n",yytext, yyleng);}
+#line 38 ".\\AnalizadorLexicoTP3.l"
+{printf("Encontré una palabra reservada (otros): %s de longitud %d\n",yytext, yyleng);}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 62 "tp3.l"
-{printf("Encontre un identificador: %s de longitud %d \n", yytext, yyleng);}
+#line 40 ".\\AnalizadorLexicoTP3.l"
+{printf("Encontré un identificador: %s de longitud %d \n", yytext, yyleng);listaIdentificadores(yytext);}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 64 "tp3.l"
-{printf("Encontre un literal cadena: %s de longitud %d \n", yytext, yyleng);}// probar
+#line 42 ".\\AnalizadorLexicoTP3.l"
+{printf("Encontré un literal cadena: %s de longitud %d \n", yytext, yyleng);}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 66 "tp3.l"
-{printf("Encontre la constante entera decimal: %s de longitud %d \n",yytext,yyleng);} //defino la regla y hago que muestre que constante encontró yytext y de que longitud es yyleng.
+#line 44 ".\\AnalizadorLexicoTP3.l"
+{printf("Encontré la constante entera decimal: %s de longitud %d \n",yytext,yyleng);constantesDecimales(yytext);} //defino la regla y hago que muestre que constante encontró yytext y de que longitud es yyleng.
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 68 "tp3.l"
-{printf("Encontre una constante entera octal: %s de longitud %d \n", yytext, yyleng);}
+#line 46 ".\\AnalizadorLexicoTP3.l"
+{printf("Encontré una constante entera octal: %s de longitud %d \n", yytext, yyleng);constantesOctales(yytext);}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 70 "tp3.l"
-{printf("Encontre una constante entera hexadecimal: %s de longitud %d \n", yytext, yyleng);}
+#line 48 ".\\AnalizadorLexicoTP3.l"
+{printf("Encontré una constante entera hexadecimal: %s de longitud %d \n", yytext, yyleng);constantesHexadecimales(yytext);}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 72 "tp3.l"
-{printf("Encontre una constante real: %s de longitud %d \n", yytext, yyleng);}
+#line 50 ".\\AnalizadorLexicoTP3.l"
+{printf("Encontré una constante real: %s de longitud %d \n", yytext, yyleng);constantesReales(yytext);}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 74 "tp3.l"
-{printf("Encontre una constante real: %s de longitud %d \n", yytext, yyleng);}
+#line 52 ".\\AnalizadorLexicoTP3.l"
+{printf("Encontré una constante real: %s de longitud %d \n", yytext, yyleng);constantesReales(yytext);}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 76 "tp3.l"
-{printf("Encontre una constante caracter %s de longitud %d \n", yytext, yyleng);}
+#line 54 ".\\AnalizadorLexicoTP3.l"
+{printf("Encontré una constante caracter %s de longitud %d \n", yytext, yyleng); constantesCaracter(yytext);}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 78 "tp3.l"
-{printf("Encontre un caracter de puntuacion/operador: %s de longitud %d \n",yytext,yyleng);} // probar
+#line 56 ".\\AnalizadorLexicoTP3.l"
+{printf("Encontré un caracter de puntuación/operador: %s de longitud %d \n",yytext,yyleng);operadoresCaracteresPuntc(yytext);}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 80 "tp3.l"
-{printf("Encontre una cadena no reconocida: %s de longitud %d \n",yytext,yyleng);}
+#line 58 ".\\AnalizadorLexicoTP3.l"
+{printf("Encontré una cadena no reconocida: %s de longitud %d \n",yytext,yyleng);}
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 83 "tp3.l"
+#line 61 ".\\AnalizadorLexicoTP3.l"
 ECHO;
 	YY_BREAK
-#line 857 "lex.yy.c"
+#line 835 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1739,15 +1717,18 @@ int main()
 	return 0;
 	}
 #endif
-#line 83 "tp3.l"
-
-
-
+#line 61 ".\\AnalizadorLexicoTP3.l"
 
 
 
 int main(){
+
+    yyin = fopen("docDePrueba.c","r");
+
+     yylex();
     
-    yylex();
+    reportes();
+
     return 0;
+
 }
