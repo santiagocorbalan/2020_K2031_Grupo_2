@@ -334,81 +334,87 @@ void reportePalabrasReservadas() {
 
 // IDENTIFICADORES
 
-typedef struct nodoIdentificador{
-    char* cadena;
-    int cantidad;
-    struct nodoIdentificador *sig;
+
+typedef struct nodoID{
+	char* cadena;
+	int cantidad;
+	struct nodoID* sig;		
 }identificador;
 
-identificador* punteroIdentificador = NULL;
+identificador* primerID = NULL;
 
-void insertarIdentificador(char* cadena) {
-    if (punteroIdentificador == NULL) {
-        identificador* nuevo = NULL;
-        nuevo = (identificador*)malloc(sizeof(identificador));
+int buscarIdentificador(char* cadena){
+	identificador* aux = primerID;
+	while(strcmp(cadena,aux->cadena)!=0 && aux->sig != NULL){ // que cadena y aux -> cadena sea distinto de 0 nos garantisamos que el contenido no sea igual
+		aux = aux->sig;
+	}                                                 // se guarda la cantidad de veces que aparece el ID
+	
+	if(strcmp(cadena,aux->cadena)==0){ //  si devuelve 0 entonces el contenido de ambas cadenas son iguales (con strcmp)
+		aux->cantidad += 1;
+		return 1;
+	}
+	else if(aux->sig == NULL){
+		return 0;
+	}		
+}
+
+int criterioOrdenamiento(char* cadena1,char* cadena2){
+	
+	int resultado = strcasecmp(cadena1,cadena2);  // compara sus argumentos después de traducir cada carácter a su correspondiente en minúscul
+	
+	if(resultado < 0)		// Si minuscula1 tiene menor ascii devuelve < 0    	ej: a y z 
+		    return 0;
+	    else if(resultado > 0)	// Si minuscula1 tiene mayor ascii devuelve > 0		ej: z y a
+		    return 1;
+	else{ // Caso cuando en minusculas son iguales			ej: A y a
+		resultado = strcmp(cadena1,cadena2); // Comparo con las cadenas originales
+		if(resultado < 0)
+			return 0;   // Devuelve 0 cuando cadena1 es mayuscula antes de cadena2 	ej: A y a
+		else 
+			return 1;	// Devuelve 1 cuando cadena1 es mayuscula despues de cadena2 ej: a y A
+	}
+}
+
+void insertarIdentificadorOrdenado(char* cadena){
+	if(primerID == NULL){ // si la lista esta vacia
+		struct nodoID* nuevo;
+		nuevo = (struct nodoID*)malloc(sizeof(struct nodoID));
         nuevo->cadena = strdup(cadena);
-        nuevo->cantidad = 1;
-        nuevo->sig = NULL;
-        punteroIdentificador = nuevo;
-    } else {
-        identificador* aux = punteroIdentificador;
-        
-        while ((strcmp(cadena,aux->cadena) != 0) && aux->sig != NULL) {
-            aux = aux->sig;
-        }
-
-        if (aux->sig == NULL) {
-            operadorCaracter* nuevo = NULL;
-            nuevo = (operadorCaracter*)malloc(sizeof(operadorCaracter));
-            nuevo->cadena = strdup(cadena);
-        
-            nuevo->cantidad = 1;
-            nuevo->sig = NULL;
-            aux->sig = nuevo;
-        } else {
-            aux->cantidad = aux->cantidad + 1;
-        }
-    }
+        // strdup hace malloc((strlen(cadena)+1)*sizeof(char)); y strcpy(nuevo->cadena,cadena);
+		primerID = nuevo;
+		strcpy(primerID->cadena,cadena);
+		primerID->cantidad = 1;
+		primerID->sig = NULL;
+	}
+	else{
+		if(!(criterioOrdenamiento(cadena,primerID->cadena))){ // si el ID a insertar es el nuevo primero (o sea no tendria que avanzar con el criterio de ordenamiento)
+			identificador* nuevo;
+			nuevo = (identificador*)malloc(sizeof(identificador));
+        	nuevo->cadena = strdup(cadena);
+        	// strdup hace malloc((strlen(cadena)+1)*sizeof(char)); y strcpy(nuevo->cadena,cadena);
+			nuevo->sig = primerID;
+			nuevo->cantidad = 1;
+			primerID = nuevo;
+		}
+		else if(!buscarIdentificador(cadena)){ // si el ID ya estaba en la lista lo incremento de cantidad
+			// si el ID no estaba en la lista lo inserto ordenado
+			identificador* aux = primerID;
+			while(aux->sig != NULL && criterioOrdenamiento(cadena,aux->sig->cadena)){ // busco la posicion donde insertar el ID
+				aux = aux->sig;
+			}
+			identificador* nuevo;
+			nuevo = (identificador*)malloc(sizeof(identificador));
+        	nuevo->cadena = strdup(cadena);
+        	// strdup hace malloc((strlen(cadena)+1)*sizeof(char)); y strcpy(nuevo->cadena,cadena);
+			nuevo->cantidad = 1;
+			nuevo->sig = aux->sig;
+			aux->sig = nuevo;				
+		}	
+	}
 }
 
-void listaIdentificadores(char* cadena){
-    insertarIdentificador(cadena);
-}
-
-void reporteIdentificadores(){
-    printf("\nReporte identificadores\n\n");
-    identificador* aux = punteroIdentificador;
-    if (punteroIdentificador == NULL)
-        printf("\tNo se encontraron identificadores\n");
-    ordenarAlfabeticamente(punteroIdentificador);
-    while (aux != NULL) {
-        printf("Identificador: %s\tCantidad de veces que aparece: %d\n",aux->cadena,aux->cantidad);
-        aux = aux->sig;
-    }
-}
-
-void ordenarAlfabeticamente(identificador* listaIds) {
-    if (listaIds != NULL) { //Si la lista no es vacía
-        identificador *aux = NULL;
-        identificador *actual = NULL;
-        identificador *tmp = NULL; // Temporal para el traspaso de datos
-        
-        aux = listaIds; //El primero
-        while( listaIds->sig != NULL ) {
-            actual = aux->sig;
-            while (actual != NULL) {
-                if (stcmp(aux->cadena, actual->dato) > 0) { //Si la primer cadena es mayor a la segunda (alfabeticamente)
-                    tmp->cadena = aux->cadena
-                    tmp-> cantidad = aux->cadena
-                    aux->cadena = actual->cadena
-                    aux->cantidad = actual->cantidad
-                }
-                actual = actual->sig;
-            }
-            aux = aux->sig;
-        }
-        
-    }
+void identificadores(char* cadena){
+    insertarIdentificadorOrdenado(cadena);
 }
 
 // OPERADORES Y CARACTERES DE PUNTUACION

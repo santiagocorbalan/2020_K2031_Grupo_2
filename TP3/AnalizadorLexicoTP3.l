@@ -1,4 +1,5 @@
 %option noyywrap
+%option yylineno
 
 %{
 
@@ -27,35 +28,35 @@ PUNTUACION_OPERACION    "*"|")"|"-"|"%"|";"|"?"|"]"|"&"|"#"|"."|"<"|","|"^"|"'"|
 
 
 
-"//".*$ {printf("Encontré un comentario: %s de longitud %d \n", yytext, yyleng);}
+"//".*$ {comentarios(yytext,"Comentario de una linea");}
 
-"/*"[^"*/"]*"*/" {printf("Encontré un comentario de multiples lineas: %s de longitud %d \n", yytext, yyleng);}
+"/*"[^"*/"]*"*/" {comentarios(yytext,"Comentario de multiples lineas");}
 
-{TIPO_DATO} {printf("Encontré una palabra reservada (tipo de dato): %s de longitud %d\n",yytext, yyleng);}
+{TIPO_DATO} {palabrasReservadas(yytext,"Tipo de dato");}
 
-{ESTRUCTURA_CONTROL}  {printf("Encontré una palabra reservada (estructuras de control): %s de longitud %d\n",yytext, yyleng);}
+{ESTRUCTURA_CONTROL}  {palabrasReservadas(yytext,"Estructura de control");}
 
-{OTROS} {printf("Encontré una palabra reservada (otros): %s de longitud %d\n",yytext, yyleng);}
+{OTROS}      {palabrasReservadas(yytext,"Tipo de dato");}
 
-({LETRA}|_)({LETRA}|{DIGITO_DECIMAL}|_)* {printf("Encontré un identificador: %s de longitud %d \n", yytext, yyleng);listaIdentificadores(yytext);}
+({LETRA}|_)({LETRA}|{DIGITO_DECIMAL}|_)* {identificadores(yytext);}
 
-\"[^\"]*\" {printf("Encontré un literal cadena: %s de longitud %d \n", yytext, yyleng);}
+\"[^\"]*\" {}
 
-[1-9]{DIGITO_DECIMAL}* {printf("Encontré la constante entera decimal: %s de longitud %d \n",yytext,yyleng);constantesDecimales(yytext);} //defino la regla y hago que muestre que constante encontró yytext y de que longitud es yyleng.
+[1-9]{DIGITO_DECIMAL}* {constantesDecimales(yytext);} //defino la regla y hago que muestre que constante encontró yytext y de que longitud es yyleng.
 
-0{DIGITO_OCTAL}* {printf("Encontré una constante entera octal: %s de longitud %d \n", yytext, yyleng);constantesOctales(yytext);}
+0{DIGITO_OCTAL}* {constantesOctales(yytext);}
 
-0[xX]{DIGITO_HEXADECIMAL}+ {printf("Encontré una constante entera hexadecimal: %s de longitud %d \n", yytext, yyleng);constantesHexadecimales(yytext);}
+0[xX]{DIGITO_HEXADECIMAL}+ {constantesHexadecimales(yytext);}
 
-{DIGITO_DECIMAL}+(\.)({EXPONENCIAL}{SIGNO}?{DIGITO_DECIMAL}+)? {printf("Encontré una constante real: %s de longitud %d \n", yytext, yyleng);constantesReales(yytext);}
+{DIGITO_DECIMAL}+(\.)({EXPONENCIAL}{SIGNO}?{DIGITO_DECIMAL}+)? {constantesReales(yytext);}
 
-{DIGITO_DECIMAL}*(\.){DIGITO_DECIMAL}+({EXPONENCIAL}({SIGNO}?){DIGITO_DECIMAL}+)? {printf("Encontré una constante real: %s de longitud %d \n", yytext, yyleng);constantesReales(yytext);}
+{DIGITO_DECIMAL}*(\.){DIGITO_DECIMAL}+({EXPONENCIAL}({SIGNO}?){DIGITO_DECIMAL}+)? {constantesReales(yytext);}
 
-\'[^']\' {printf("Encontré una constante caracter %s de longitud %d \n", yytext, yyleng); constantesCaracter(yytext);}
+\'[^']\' {constantesCaracter(yytext);}
 
-{PUNTUACION_OPERACION} {printf("Encontré un caracter de puntuación/operador: %s de longitud %d \n",yytext,yyleng);operadoresCaracteresPuntc(yytext);}
+{PUNTUACION_OPERACION} {operadoresCaracteresPuntc(yytext);}
 
-. {printf("Encontré una cadena no reconocida: %s de longitud %d \n",yytext,yyleng);}
+. {printf(caracNoReconocidos(yytext,yylineno);}
 
 
 %%
