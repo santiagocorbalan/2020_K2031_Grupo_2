@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "ListasYFuncionesTP3.h"
+#include "ListasYFuncionesTP4.h" //Esto no va más
 %}
 
 DIGITO_DECIMAL          [0-9] 
@@ -23,18 +23,49 @@ PUNTUACION_OPERACION    "*"|")"|"-"|"%"|";"|"?"|"]"|"&"|"#"|"."|"<"|","|"^"|"'"|
 "//".*$ {}
 "/*"[^"*/"]*"*/" {}
 {TIPO_DATO} {}
-{ESTRUCTURA_CONTROL}  {palabrasReservadas(}
+//  {ESTRUCTURA_CONTROL}  {palabrasReservadas(} //ESTO NO SIRVE MAS
 {OTROS}      {palabrasReservadas(}
 ({LETRA}|_)({LETRA}|{DIGITO_DECIMAL}|_)* {}
 \"[^\"]*\" {}
-[1-9]{DIGITO_DECIMAL}* {}
-0{DIGITO_OCTAL}* {}
-0[xX]{DIGITO_HEXADECIMAL}+ {}
-{DIGITO_DECIMAL}+(\.)({EXPONENCIAL}{SIGNO}?{DIGITO_DECIMAL}+)? {}
-{DIGITO_DECIMAL}*(\.){DIGITO_DECIMAL}+({EXPONENCIAL}({SIGNO}?){DIGITO_DECIMAL}+)? {}
-\'[^']\' {}
 {PUNTUACION_OPERACION} {}
 . {}
+
+// CONSTANTES
+[1-9]{DIGITO_DECIMAL}* {return CONSTANTEDECIMAL;}
+0{DIGITO_OCTAL}* {return CONSTANTEOCTAL}
+0[xX]{DIGITO_HEXADECIMAL}+ {return CONSTANTEHEXADECIMAL}
+{DIGITO_DECIMAL}+(\.)({EXPONENCIAL}{SIGNO}?{DIGITO_DECIMAL}+)? {return CONSTANTEREAL}
+{DIGITO_DECIMAL}*(\.){DIGITO_DECIMAL}+({EXPONENCIAL}({SIGNO}?){DIGITO_DECIMAL}+)? {return CONSTANTEREAL}
+\'[^']\' {return CONSTANTECARACTER}
+
+// PALABRAS RESERVADAS 
+if {return IF; }
+while {return WHILE; }
+for {return FOR; }
+else {return ELSE; }
+do {return DO; }
+switch {return SWITCH; }
+case {return CASE; }
+default {return DEFAULT; }
+break {return BREAK; }
+char {return CHAR; }
+int {return INT; }
+double {return DOUBLE; }
+float {return FLOAT; }
+long {return LONG; }
+short {return SHORT; }
+
+// OPERADORES MULTIPLES
+"++" { return INCREMENTO; }
+"--" { return DECREMENTO; }
+"+=" { return INCREMENTOASIGNACION; }
+"-=" { return DECREMENTOASIGNACION; }
+"==" { return RELACIONALIGUAL; }
+"!=" { return RELACIONALDIFERENTE; }
+">=" { return MAYORIGUAL; }
+"<=" { return MENORIGUAL; }
+"&&" { return AND; }
+"||" { return OR; }
 %%
 
 int main(){
