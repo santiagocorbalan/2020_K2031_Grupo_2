@@ -20,6 +20,7 @@ int yywrap(){
 %token <strval> AND OR // && y ||
 %token <strval> RELACIONALIGUAL RELACIONALDIFERENTE // == y !=
 %token <strval> MAYORIGUAL MENORIGUAL // >= y <=
+%token ACCESOPUNTERO // -> 
 %token CONSTANTE CONSTANTEDECIMAL CONSTANTEOCTAL CONSTANTEHEXADECIMAL CONSTANTEPUNTOFIJO CONSTANTEREAL CONSTANTECARACTER
 %token CHAR INT DOUBLE FLOAT LONG SHORT
 %token <strval> IF ELSE WHILE DO SWITCH FOR CASE BREAK DEFAULT 
@@ -76,9 +77,6 @@ exp_y_logico:
     exp_o_inclusivo
     | exp_y_logico AND exp_o_inclusivo
 ;
-//Acá faltan algunos lógicos que no considero relevantes (pero hay que ver cómo resolver
-//el hecho de que exp y logico tiene un exp o inclusivo).
-
 exp_y:
     exp_igualdad
     | exp_y '&' exp_igualdad
@@ -95,7 +93,6 @@ exp_relacional:
     | exp_relacional MENORIGUAL exp_corrimiento
     | exp_relacional MAYORIGUAL exp_corrimiento
 ;
-//Acá vendría exp corrimiento
 exp_aditiva:
     exp_multiplicativa
     | exp_aditiva '+' exp_multiplicativa
@@ -107,27 +104,17 @@ exp_multiplicativa:
     | exp_multiplicativa '/' exp_conversion
     | exp_multiplicativa '%' exp_conversion
 ;
-exp_conversion:
-    exp_unaria
-    | //(<nombreDeTipo>) exp_conversion
-;
 exp_unaria:
     exp_sufijo
     | INCREMENTO exp_unaria
     | DECREMENTO exp_unaria
-    | operadorUnario exp_conversion
 ;
-
-operadorUnario: & | * | + | - | ! ;
-
-//Falta expresión sufijo, lista de argumentos y expresión primaria.
-
 exp_sufijo:
     exp_primaria
     | exp_sufijo '[' expresion ']'
     | exp_sufijo '(' listaArgumentos ')'
     | exp_sufijo '.' IDENTIFICADOR
-    | exp_sufijo '->' IDENTIFICADOR //EL -> CREO QUE HAY QUE DEFINIRLO COMO TOKEN Y AGREGARLO EN LEX TB.
+    | exp_sufijo ACCESOPUNTERO IDENTIFICADOR
     | exp_sufijo INCREMENTO
     | exp_sufijo DECREMENTO
 ;
@@ -145,6 +132,7 @@ exp_primaria:
 ;
 
 // %% SENTENCIAS %%
+
 sentencia: 
     sent_expresion
    | sent_compuesta
@@ -153,28 +141,33 @@ sentencia:
    | sent_seleccion
 ;
 
-sentExpresion: expresion ';'
+sentExpresion: 
+    expresion ';'
     | error ';'
 ;
 
-sent_seleccion: IF '(' expresion ')' sentencia 
+sent_seleccion: 
+    IF '(' expresion ')' sentencia 
     | IF '(' expresion ')' sentencia ELSE sentencia 
     | SWITCH '(' expresion ')' sentenciaSwitch
     | error ';'
 ;
 
-sentenciaSwitch: '{' sentenciaCase sentenciaSwitchDefault '}'
+sentenciaSwitch: 
+    '{' sentenciaCase sentenciaSwitchDefault '}'
     | '{' sentenciaCase '}'
     | '{' sentenciaSwitchDefault '}'
     | '{' '}'
     | error '}'
 ;
 
-sentenciaCase: CASE num ':' sentencia 
+sentenciaCase: 
+    CASE num ':' sentencia 
     | error '}'
 ;
 
-sentenciaSwitchDefault: DEFAULT ':' sentencia
+sentenciaSwitchDefault: 
+    DEFAULT ':' sentencia
     | error '}'
 ;
 
@@ -193,7 +186,7 @@ sent_compuesta:
 listaSentencias: 
     listaSentencias sentencia
     | sentencia
-    | //vacio
+// | vacio
 ;
 
 
