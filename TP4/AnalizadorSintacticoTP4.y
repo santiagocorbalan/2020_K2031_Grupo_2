@@ -9,8 +9,9 @@ int yywrap(){
 %}
 
 %union {
-    int ival;
-    char strval[30];
+    int enteroval;
+    char* stringval;
+    double dobleval;
 }
 
 //FALTA TERMINAR DE ASIGNAR EL CAMPO DE LA UNION QUE VAN A UTILIZAR

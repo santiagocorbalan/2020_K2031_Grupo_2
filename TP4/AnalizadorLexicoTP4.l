@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "ListasYFuncionesTP4.h" //Esto no va más
+#include "ListasYFuncionesTP4.tab.h" //Archivo que va a generar Bison
 %}
 
 DIGITO_DECIMAL          [0-9] 
@@ -20,25 +20,24 @@ EXPONENCIAL             [eE]
 PUNTUACION_OPERACION    "*"|")"|"-"|"%"|";"|"?"|"]"|"&"|"#"|"."|"<"|","|"^"|"'"|"+"|"/"|"="|"["|"("|"@"|":"|">"|">="|"<="|"=="|"&&"|"||"|"++"|"--"|"!="|"<<"|"<<="|">>"|">>="|"~"|"&="|"|="|"^="|"->"|"->*"|".*"|"{"|"}"|"$"|"\t"
 
 %%
-"//".*$ {}
-"/*"[^"*/"]*"*/" {}
-{TIPO_DATO} {}
-//  {ESTRUCTURA_CONTROL}  {palabrasReservadas(} //ESTO NO SIRVE MAS
-{OTROS}      {palabrasReservadas(}
-({LETRA}|_)({LETRA}|{DIGITO_DECIMAL}|_)* {}
-\"[^\"]*\" {}
-{PUNTUACION_OPERACION} {}
-. {}
 
-// CONSTANTES
-[1-9]{DIGITO_DECIMAL}* {return CONSTANTEDECIMAL;}
-0{DIGITO_OCTAL}* {return CONSTANTEOCTAL}
-0[xX]{DIGITO_HEXADECIMAL}+ {return CONSTANTEHEXADECIMAL}
-{DIGITO_DECIMAL}+(\.)({EXPONENCIAL}{SIGNO}?{DIGITO_DECIMAL}+)? {return CONSTANTEREAL}
-{DIGITO_DECIMAL}*(\.){DIGITO_DECIMAL}+({EXPONENCIAL}({SIGNO}?){DIGITO_DECIMAL}+)? {return CONSTANTEREAL}
-\'[^']\' {return CONSTANTECARACTER}
 
-// PALABRAS RESERVADAS 
+
+[1-9]{DIGITO_DECIMAL}* {yylval.enteroval = atoi(yytext);return CONSTANTEDECIMAL;}
+
+0{DIGITO_OCTAL}* {yylval.enteroval = strtol(yytext,NULL,8);return CONSTANTEOCTAL;}
+
+0[xX]{DIGITO_HEXADECIMAL}+ {yylval.enteroval = strtol(yytext,NULL,16);return CONSTANTEHEXADECIMAL;}
+
+{DIGITO_DECIMAL}+(\.)({EXPONENCIAL}{SIGNO}?{DIGITO_DECIMAL}+)? {yylval.dobleval = atof(yytext);return CONSTANTEREAL;}
+
+{DIGITO_DECIMAL}*(\.){DIGITO_DECIMAL}+({EXPONENCIAL}({SIGNO}?){DIGITO_DECIMAL}+)? {yylval.dobleval = atof(yytext);return CONSTANTEREAL;}
+
+\'[^']\' {yylval.stringval = strdup(yytext);return CONSTANTECARACTER;}
+
+\"[^\"]*\" {yylval.stringval = strdup(yytext); return LITERALCADENA;} 
+
+ 
 if         { return IF; }
 while      { return WHILE; }
 for        { return FOR; }
@@ -55,7 +54,6 @@ float      { return FLOAT; }
 long       { return LONG; }
 short      { return SHORT; }
 
-// CARACTERES SIMPLES
 "("        { return '('; }
 ")"        { return ')'; }
 "{"        { return '{'; }
@@ -72,7 +70,6 @@ short      { return SHORT; }
 "/"        { return '/'; }
 "%"        { return '%'; }
 
-// OPERADORES MULTIPLES
 "++"       { return INCREMENTO; }
 "--"       { return DECREMENTO; }
 "+="       { return INCREMENTOASIGNACION; }
@@ -85,10 +82,3 @@ short      { return SHORT; }
 "||"       { return OR; }
 
 %%
-
-int main(){
-    yyin = fopen("docDePrueba.c","r");
-    yylex();
-
-    return 0;
-}
