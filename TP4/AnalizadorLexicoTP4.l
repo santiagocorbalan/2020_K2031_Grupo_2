@@ -39,33 +39,51 @@ PUNTUACION_OPERACION    "*"|")"|"-"|"%"|";"|"?"|"]"|"&"|"#"|"."|"<"|","|"^"|"'"|
 \'[^']\' {return CONSTANTECARACTER}
 
 // PALABRAS RESERVADAS 
-if {return IF; }
-while {return WHILE; }
-for {return FOR; }
-else {return ELSE; }
-do {return DO; }
-switch {return SWITCH; }
-case {return CASE; }
-default {return DEFAULT; }
-break {return BREAK; }
-char {return CHAR; }
-int {return INT; }
-double {return DOUBLE; }
-float {return FLOAT; }
-long {return LONG; }
-short {return SHORT; }
+if         { return IF; }
+while      { return WHILE; }
+for        { return FOR; }
+else       { return ELSE; }
+do         { return DO; }
+switch     { return SWITCH; }
+case       { return CASE; }
+default    { return DEFAULT; }
+break      { return BREAK; }
+char       { return CHAR; }
+int        { return INT; }
+double     { return DOUBLE; }
+float      { return FLOAT; }
+long       { return LONG; }
+short      { return SHORT; }
+
+// CARACTERES SIMPLES
+"("        { return '('; }
+")"        { return ')'; }
+"{"        { return '{'; }
+"}"        { return '}'; }
+";"        { return ';'; }
+":"        { return ':'; }
+","        { return ','; }
+"="        { return '='; }
+"<"        { return '<'; }
+">"        { return '>'; }
+"+"        { return '+'; }
+"-"        { return '-'; }
+"*"        { return '*'; }
+"/"        { return '/'; }
+"%"        { return '%'; }
 
 // OPERADORES MULTIPLES
-"++" { return INCREMENTO; }
-"--" { return DECREMENTO; }
-"+=" { return INCREMENTOASIGNACION; }
-"-=" { return DECREMENTOASIGNACION; }
-"==" { return RELACIONALIGUAL; }
-"!=" { return RELACIONALDIFERENTE; }
-">=" { return MAYORIGUAL; }
-"<=" { return MENORIGUAL; }
-"&&" { return AND; }
-"||" { return OR; }
+"++"       { return INCREMENTO; }
+"--"       { return DECREMENTO; }
+"+="       { return INCREMENTOASIGNACION; }
+"-="       { return DECREMENTOASIGNACION; }
+"=="       { return RELACIONALIGUAL; }
+"!="       { return RELACIONALDIFERENTE; }
+">="       { return MAYORIGUAL; }
+"<="       { return MENORIGUAL; }
+"&&"       { return AND; }
+"||"       { return OR; }
+
 %%
 
 int main(){
