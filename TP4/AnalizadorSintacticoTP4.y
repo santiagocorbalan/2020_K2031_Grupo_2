@@ -14,7 +14,7 @@ int yywrap(){
     double dobleval;
 }
 
-//FALTA TERMINAR DE ASIGNAR EL CAMPO DE LA UNION QUE VAN A UTILIZAR
+%token IDENTIFICADOR
 %token <strval> INCREMENTO DECREMENTO //++ y --
 %token <strval> INCREMENTOASIGNACION DECREMENTOASIGNACION  // += y -=
 %token <strval> AND OR // && y ||
@@ -24,6 +24,7 @@ int yywrap(){
 %token CHAR INT DOUBLE FLOAT LONG SHORT
 %token <strval> IF ELSE WHILE DO SWITCH FOR CASE BREAK DEFAULT 
 %token <strval> RETURN 
+%token error //Lo implementamos al final de todo
 
 %type expresion
 %type exp_asignacion
@@ -117,10 +118,31 @@ exp_unaria:
     | operadorUnario exp_conversion
 ;
 
-operadorUnario: & | * | + | - | ~ | ! ;
+operadorUnario: & | * | + | - | ! ;
 
 //Falta expresión sufijo, lista de argumentos y expresión primaria.
 
+exp_sufijo:
+    exp_primaria
+    | exp_sufijo '[' expresion ']'
+    | exp_sufijo '(' listaArgumentos ')'
+    | exp_sufijo '.' IDENTIFICADOR
+    | exp_sufijo '->' IDENTIFICADOR //EL -> CREO QUE HAY QUE DEFINIRLO COMO TOKEN Y AGREGARLO EN LEX TB.
+    | exp_sufijo INCREMENTO
+    | exp_sufijo DECREMENTO
+;
+
+listaArgumentos:
+    exp_asignacion
+    | listaArgumentos ',' exp_asignacion
+;
+
+exp_primaria:
+    IDENTIFICADOR
+    | CONSTANTE
+//| CONSTANTE CADENA
+    | '(' expresion ')'
+;
 
 // %% SENTENCIAS %%
 sentencia: 
@@ -172,7 +194,6 @@ listaSentencias:
     listaSentencias sentencia
     | sentencia
     | //vacio
-    | error
 ;
 
 

@@ -21,8 +21,6 @@ PUNTUACION_OPERACION    "*"|")"|"-"|"%"|";"|"?"|"]"|"&"|"#"|"."|"<"|","|"^"|"'"|
 
 %%
 
-
-
 [1-9]{DIGITO_DECIMAL}* {yylval.enteroval = atoi(yytext);return CONSTANTEDECIMAL;}
 
 0{DIGITO_OCTAL}* {yylval.enteroval = strtol(yytext,NULL,8);return CONSTANTEOCTAL;}
@@ -36,6 +34,8 @@ PUNTUACION_OPERACION    "*"|")"|"-"|"%"|";"|"?"|"]"|"&"|"#"|"."|"<"|","|"^"|"'"|
 \'[^']\' {yylval.stringval = strdup(yytext);return CONSTANTECARACTER;}
 
 \"[^\"]*\" {yylval.stringval = strdup(yytext); return LITERALCADENA;} 
+
+({LETRA}|_)({LETRA}|{DIGITO_DECIMAL}|_)* { return IDENTIFICADOR; }
 
  
 if         { return IF; }
@@ -80,5 +80,6 @@ short      { return SHORT; }
 "<="       { return MENORIGUAL; }
 "&&"       { return AND; }
 "||"       { return OR; }
+"->"       { return ACCESOPUNTERO; }
 
 %%
