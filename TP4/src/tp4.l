@@ -85,10 +85,6 @@ short      { return SHORT; }
 %%
 
 int main(){
-
     yyin = fopen("docDePrueba.c","r");
-
- 
     return 0;
-
 }

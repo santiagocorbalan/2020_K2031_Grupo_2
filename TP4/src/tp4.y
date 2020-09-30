@@ -191,8 +191,6 @@ listaSentencias:
 // | vacio
 ;
 
-
-
 int yyerror (char *mensaje)  /* Funcion de error */
 {
   printf ("Error: %s\n", mensaje);
