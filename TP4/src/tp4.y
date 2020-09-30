@@ -191,6 +191,9 @@ listaSentencias:
 // | vacio
 ;
 
+// %% Gramatica declaraciones %%
+
+
 int yyerror (char *mensaje)  /* Funcion de error */
 {
   printf ("Error: %s\n", mensaje);
