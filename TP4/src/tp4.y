@@ -58,7 +58,7 @@ int yywrap(){
 
 expresion: 
     exp_asignacion 
-    | expresion , exp_asignacion
+    | expresion ',' exp_asignacion
 ;
 exp_asignacion:
     exp_condicional
@@ -66,7 +66,7 @@ exp_asignacion:
 ;
 exp_condicional:
     exp_o_logico
-    | exp_o_logico ? expresion : exp_condicional
+    | exp_o_logico '?' expresion ':' exp_condicional
 ;
 operador_asignacion: '=' | INCREMENTOASIGNACION | DECREMENTOASIGNACION ;
 //Los demás no los agrego porque no son tan importantes.
