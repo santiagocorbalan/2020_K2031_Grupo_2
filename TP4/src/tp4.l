@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "ListasYFuncionesTP4.tab.h" //Archivo que va a generar Bison
+#include "tp4.tab.h" //Archivo que va a generar Bison
 %}
 
 DIGITO_DECIMAL          [0-9] 
@@ -83,3 +83,12 @@ short      { return SHORT; }
 "->"       { return ACCESOPUNTERO; }
 
 %%
+
+int main(){
+
+    yyin = fopen("docDePrueba.c","r");
+
+ 
+    return 0;
+
+}

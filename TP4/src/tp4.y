@@ -2,11 +2,13 @@
     #include <stdio.h>
 
 int yylex();
+int yyerror (char*);
 int yywrap(){
     return (1);
 }
 
 %}
+
 
 %union {
     int enteroval;
@@ -198,3 +200,17 @@ listaSentencias:
 
 
 
+int yyerror (char *mensaje)  /* Funcion de error */
+{
+  printf ("Error: %s\n", mensaje);
+}
+
+void main(){
+
+   #ifdef BISON_DEBUG
+        yydebug = 1;
+#endif    
+ 
+   printf("Entre al parse:\n");
+   yyparse();
+}
