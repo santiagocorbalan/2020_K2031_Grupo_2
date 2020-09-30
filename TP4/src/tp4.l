@@ -27,11 +27,9 @@ PUNTUACION_OPERACION    "*"|")"|"-"|"%"|";"|"?"|"]"|"&"|"#"|"."|"<"|","|"^"|"'"|
 
 0[xX]{DIGITO_HEXADECIMAL}+ {yylval.enteroval = strtol(yytext,NULL,16);return CONSTANTEHEXADECIMAL;}
 
-{DIGITO_DECIMAL}+(\.)({EXPONENCIAL}{SIGNO}?{DIGITO_DECIMAL}+)? {yylval.dobleval = atof(yytext);return CONSTANTEREAL;}
+{DIGITO_DECIMAL}*"."{DIGITO_DECIMAL}*(EXPONENCIAL(SIGNO)?{DIGITO_DECIMAL}+)? {yylval.dobleval = atof(yytext);return CONSTANTEREAL;}
 
-{DIGITO_DECIMAL}*(\.){DIGITO_DECIMAL}+({EXPONENCIAL}({SIGNO}?){DIGITO_DECIMAL}+)? {yylval.dobleval = atof(yytext);return CONSTANTEREAL;}
-
-\'[^']\' {yylval.stringval = strdup(yytext);return CONSTANTECARACTER;}
+\'[^']\'   {yylval.stringval = strdup(yytext);return CONSTANTECARACTER;}
 
 \"[^\"]*\" {yylval.stringval = strdup(yytext); return LITERALCADENA;} 
 
@@ -83,8 +81,3 @@ short      { return SHORT; }
 "->"       { return ACCESOPUNTERO; }
 
 %%
-
-int main(){
-    yyin = fopen("docDePrueba.c","r");
-    return 0;
-}
