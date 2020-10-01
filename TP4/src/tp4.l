@@ -23,9 +23,9 @@ PUNTUACION_OPERACION    "*"|")"|"-"|"%"|";"|"?"|"]"|"&"|"#"|"."|"<"|","|"^"|"'"|
 
 [1-9]{DIGITO_DECIMAL}* {yylval.enteroval = atoi(yytext);return CONSTANTEDECIMAL;}
 
-0{DIGITO_OCTAL}* {yylval.enteroval = strtol(yytext,NULL,8);return CONSTANTEOCTAL;}
+0{DIGITO_OCTAL}* {yylval.enteroval = strtol(yytext,NULL,0);return CONSTANTEOCTAL;}
 
-0[xX]{DIGITO_HEXADECIMAL}+ {yylval.enteroval = strtol(yytext,NULL,16);return CONSTANTEHEXADECIMAL;}
+0[xX]{DIGITO_HEXADECIMAL}+ {yylval.enteroval = strtol(yytext,NULL,0);return CONSTANTEHEXADECIMAL;}
 
 {DIGITO_DECIMAL}*"."{DIGITO_DECIMAL}*(EXPONENCIAL(SIGNO)?{DIGITO_DECIMAL}+)? {yylval.dobleval = atof(yytext);return CONSTANTEREAL;}
 
