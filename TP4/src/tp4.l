@@ -53,6 +53,16 @@ double     { return DOUBLE; }
 float      { return FLOAT; }
 long       { return LONG; }
 short      { return SHORT; }
+typedef    { return TYPEDF;}
+static     { return STATIC;}
+auto       {return AUTO;}
+register   {return REGISTER;}
+extern     {return EXTERN;}
+struct      {return STRUCT;}
+union       {return UNION;}
+void        {return VOID;}
+signed      {return SIGNED;}
+unsigned    {return UNSIGNED;}
 
 "("        { return '('; }
 ")"        { return ')'; }

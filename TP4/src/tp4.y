@@ -28,6 +28,11 @@ int yywrap(){
 %token <strval> IF ELSE WHILE DO SWITCH FOR CASE BREAK DEFAULT 
 %token <strval> RETURN 
 %token error //Lo implementamos al final de todo
+%token TYPEDEF STATIC AUTO REGISTER EXTERN
+%token STRUCT UNION
+%token VOID SIGNED UNSIGNED
+%token VOLATILE CONST
+
 
 %type expresion
 %type exp_asignacion
@@ -229,22 +234,32 @@ lista_deinicializadores:   inicializador
                        | lista_deinicializadores ',' inicializador
 ;
 
-especificador_declase_dealmacenamiento: TYPEDEF
-                                        | STATIC  // agregar en archivo.l y en %tokens
+especificador_declase_dealmacenamiento:  TYPEDEF
+                                        | STATIC  
                                         | AUTO
                                         | REGISTER
                                         | EXTERN
 
 
 
-especificador_tipo:   TIPO_DATO  // "void"|"char"|"short"|"int"|"long"|"float"|"double"|"signed"|"unsigned" poner en %tokens y en archivo.l
+especificador_tipo:   tipo_dedato 
                     | especificador_struct_union
                     | especificador_enum
-                    | nombre_detypedef //agregar
+                    | nombre_detypedef
 ;
 
+tipo_dedato:     VOID
+                | CHAR
+                | SHORT
+                | INT
+                | LONG
+                | FLOAT
+                | DOUBLE
+                | SIGNED
+                | UNSIGNED
+
 calificador_detipo:  CONST
-                    | VOLATILE /// Agregar a archivo.l y %token
+                    | VOLATILE 
 
 especificador_struct_union:   struct_union IDENTIFICADOR_opcional '{' lista_declaradores_struct '}'
                             | struct_union IDENTIFICADOR
@@ -255,7 +270,7 @@ IDENTIFICADOR_opcional:   /* Vacio */
 ;
 
 struct_union: STRUCT
-             | UNION //agregar en archivo.l y en %Token
+             | UNION
 
 
 lista_declaradores_struct:   declaracion_struct
@@ -372,9 +387,6 @@ declarador_abstracto_directo_opcional:   /* Vacio */
 lista_tipos_param_opcional:   /* Vacio */
                         | lista_tipos_param
 ;
-
-
-
 
 
 
