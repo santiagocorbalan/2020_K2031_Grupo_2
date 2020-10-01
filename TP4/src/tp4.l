@@ -81,3 +81,10 @@ short      { return SHORT; }
 "->"       { return ACCESOPUNTERO; }
 
 %%
+
+int main (){
+
+    yyin = fopen("DocPrueba.c","r");
+
+    return 0;
+}
