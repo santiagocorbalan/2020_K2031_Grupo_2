@@ -27,10 +27,7 @@ int yywrap(){
 %token CHAR INT DOUBLE FLOAT LONG SHORT
 %token <strval> IF ELSE WHILE DO SWITCH FOR CASE BREAK DEFAULT 
 %token <strval> RETURN 
-<<<<<<< HEAD
-//%token error //Lo implementamos al final de todo
-
-
+//token error //Lo implementamos al final de todo
 %type <strval> expresion
 %type <strval> exp_asignacion
 %type <strval> exp_igualdad
@@ -40,7 +37,7 @@ int yywrap(){
 %type <strval> exp_y_logico
 %type <strval> exp_unaria
 %type <strval> op_asignacion
-%type <enteroval >num
+%type <enteroval> num
 %type <strval> sentencia
 %type <strval> sent_iteracion
 %type <strval> sent_compuesta
@@ -48,33 +45,6 @@ int yywrap(){
 %type <strval> sentenciaSwitch
 %type <strval> sentenciaSwitchDefault
 %type <strval> listaSentencias
-
-=======
-%token error //Lo implementamos al final de todo
-%token TYPEDEF STATIC AUTO REGISTER EXTERN
-%token STRUCT UNION
-%token VOID SIGNED UNSIGNED
-%token VOLATILE CONST
-
-
-%type expresion
-%type exp_asignacion
-%type exp_igualdad
-%type exp_o_inclusivo
-%type exp_o_logico
-%type exp_y
-%type exp_y_logico
-%type exp_unaria
-%type op_asignacion
-%type num
-%type sentencia
-%type sent_iteracion
-%type sent_compuesta
-%type sentenciaCase
-%type sentenciaSwitch
-%type sentenciaSwitchDefault
-%type listaSentencias
->>>>>>> 3f4bdb537aacc9cba86fcfb3319d5cee60339a06
 
 %left '='
 %right AND OR
@@ -414,16 +384,9 @@ lista_tipos_param_opcional:   // Vacio //
                         | lista_tipos_param
 ;
 
-
 %%
 
-<<<<<<< HEAD
-
-
-int yyerror (char *mensaje)  // Funcion de error //
-=======
 int yyerror (char *mensaje)  /* Funcion de error */
->>>>>>> 3f4bdb537aacc9cba86fcfb3319d5cee60339a06
 {
   printf ("Error: %s\n", mensaje);
 }
