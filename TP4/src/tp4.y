@@ -27,6 +27,7 @@ int yywrap(){
 %token CHAR INT DOUBLE FLOAT LONG SHORT
 %token <strval> IF ELSE WHILE DO SWITCH FOR CASE BREAK DEFAULT 
 %token <strval> RETURN 
+<<<<<<< HEAD
 //%token error //Lo implementamos al final de todo
 
 
@@ -48,6 +49,32 @@ int yywrap(){
 %type <strval> sentenciaSwitchDefault
 %type <strval> listaSentencias
 
+=======
+%token error //Lo implementamos al final de todo
+%token TYPEDEF STATIC AUTO REGISTER EXTERN
+%token STRUCT UNION
+%token VOID SIGNED UNSIGNED
+%token VOLATILE CONST
+
+
+%type expresion
+%type exp_asignacion
+%type exp_igualdad
+%type exp_o_inclusivo
+%type exp_o_logico
+%type exp_y
+%type exp_y_logico
+%type exp_unaria
+%type op_asignacion
+%type num
+%type sentencia
+%type sent_iteracion
+%type sent_compuesta
+%type sentenciaCase
+%type sentenciaSwitch
+%type sentenciaSwitchDefault
+%type listaSentencias
+>>>>>>> 3f4bdb537aacc9cba86fcfb3319d5cee60339a06
 
 %left '='
 %right AND OR
@@ -233,22 +260,32 @@ lista_deinicializadores:   inicializador
                        | lista_deinicializadores ',' inicializador
 ;
 
-especificador_declase_dealmacenamiento: TYPEDEF
-                                        | STATIC  // agregar en archivo.l y en %tokens
+especificador_declase_dealmacenamiento:  TYPEDEF
+                                        | STATIC  
                                         | AUTO
                                         | REGISTER
                                         | EXTERN
 
 
 
-especificador_tipo:   TIPO_DATO  // "void"|"char"|"short"|"int"|"long"|"float"|"double"|"signed"|"unsigned" poner en %tokens y en archivo.l
+especificador_tipo:   tipo_dedato 
                     | especificador_struct_union
                     | especificador_enum
-                    | nombre_detypedef //agregar
+                    | nombre_detypedef
 ;
 
+tipo_dedato:     VOID
+                | CHAR
+                | SHORT
+                | INT
+                | LONG
+                | FLOAT
+                | DOUBLE
+                | SIGNED
+                | UNSIGNED
+
 calificador_detipo:  CONST
-                    | VOLATILE /// Agregar a archivo.l y %token
+                    | VOLATILE 
 
 especificador_struct_union:   struct_union IDENTIFICADOR_opcional '{' lista_declaradores_struct '}'
                             | struct_union IDENTIFICADOR
@@ -259,7 +296,7 @@ IDENTIFICADOR_opcional:   // Vacio //
 ;
 
 struct_union: STRUCT
-             | UNION //agregar en archivo.l y en %Token
+             | UNION
 
 
 lista_declaradores_struct:   declaracion_struct
@@ -380,9 +417,13 @@ lista_tipos_param_opcional:   // Vacio //
 
 %%
 
+<<<<<<< HEAD
 
 
 int yyerror (char *mensaje)  // Funcion de error //
+=======
+int yyerror (char *mensaje)  /* Funcion de error */
+>>>>>>> 3f4bdb537aacc9cba86fcfb3319d5cee60339a06
 {
   printf ("Error: %s\n", mensaje);
 }
