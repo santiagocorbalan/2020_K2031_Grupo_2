@@ -12,7 +12,7 @@ int yywrap(){
 
 %union {
     int enteroval;
-    char* stringval;
+    char* strval;
     double dobleval;
 }
 
@@ -27,25 +27,27 @@ int yywrap(){
 %token CHAR INT DOUBLE FLOAT LONG SHORT
 %token <strval> IF ELSE WHILE DO SWITCH FOR CASE BREAK DEFAULT 
 %token <strval> RETURN 
-%token error //Lo implementamos al final de todo
+//%token error //Lo implementamos al final de todo
 
-%type expresion
-%type exp_asignacion
-%type exp_igualdad
-%type exp_o_inclusivo
-%type exp_o_logico
-%type exp_y
-%type exp_y_logico
-%type exp_unaria
-%type op_asignacion
-%type num
-%type sentencia
-%type sent_iteracion
-%type sent_compuesta
-%type sentenciaCase
-%type sentenciaSwitch
-%type sentenciaSwitchDefault
-%type listaSentencias
+
+%type <strval> expresion
+%type <strval> exp_asignacion
+%type <strval> exp_igualdad
+%type <strval> exp_o_inclusivo
+%type <strval> exp_o_logico
+%type <strval> exp_y
+%type <strval> exp_y_logico
+%type <strval> exp_unaria
+%type <strval> op_asignacion
+%type <enteroval >num
+%type <strval> sentencia
+%type <strval> sent_iteracion
+%type <strval> sent_compuesta
+%type <strval> sentenciaCase
+%type <strval> sentenciaSwitch
+%type <strval> sentenciaSwitchDefault
+%type <strval> listaSentencias
+
 
 %left '='
 %right AND OR
@@ -54,11 +56,11 @@ int yywrap(){
 %right '+' '-'
 %right '*' '/' '^' '%'
 
-// %% EXPRESIONES %%
+%%
+//  EXPRESIONES //
 
-expresion: 
-    exp_asignacion 
-    | expresion ',' exp_asignacion
+expresion: exp_asignacion {puts ("Encontre una expresión");}
+            | expresion ',' exp_asignacion
 ;
 exp_asignacion:
     exp_condicional
@@ -191,12 +193,14 @@ listaSentencias:
 // | vacio
 ;
 
-// %% Gramatica declaraciones %%
+
+
+//  Gramatica declaraciones 
 
 declaracion: especificadores_declaracion lista_declaradores_opcional
 ; //preguntar si es necesario el punto y coma despues de cada produccion
 
-lista_declaradores_opcional:    /* Vacio */
+lista_declaradores_opcional:    // Vacio //
                                 | lista_declaradores
 ;
 
@@ -205,7 +209,7 @@ especificadores_declaracion: especificador_declase_dealmacenamiento especificado
                              | calificador_detipo  especificadores_declaracion_opcional //CALIFICADOR_DETIPO = CONST VOLATILE
 ;
 
-especificadores_declaracion_opcional:   /* Vacio */
+especificadores_declaracion_opcional:   // Vacio //
                                     | especificadores_declaracion
 ;
 
@@ -221,8 +225,8 @@ inicializador:   exp_asignacion
                | '{' lista_deinicializadores coma_opcional '}' // chequear si esta bien 
 ;
 
-coma_opcional:   /* Vacio */
-          | ','
+coma_opcional:  // Vacio //
+                | ','
 ;
 
 lista_deinicializadores:   inicializador
@@ -250,7 +254,7 @@ especificador_struct_union:   struct_union IDENTIFICADOR_opcional '{' lista_decl
                             | struct_union IDENTIFICADOR
 ;
 
-IDENTIFICADOR_opcional:   /* Vacio */
+IDENTIFICADOR_opcional:   // Vacio //
                          | IDENTIFICADOR
 ;
 
@@ -269,7 +273,7 @@ lista_calificadores:   especificador_tipo lista_calificadores_opcional
                      | calificador_detipo lista_calificadores_opcional
 ;
 
-lista_calificadores_opcional:   /* Vacio */
+lista_calificadores_opcional:   // Vacio //
                              | lista_calificadores
 ;
 
@@ -281,14 +285,14 @@ decla_struct:   decla
               | decla_opcional ':' exp_constante
 ;
 
-decla_opcional:   /* Vacio */
+decla_opcional:   // Vacio //
                 | decla
 ;
 
 decla: puntero_opcional declarador_directo
 ;
 
-puntero_opcional:   /* Vacio */
+puntero_opcional:   // Vacio //
                  | puntero
 ;
 
@@ -296,7 +300,7 @@ puntero:   '*' lista_calificadores_tipos_opcional
          | '*' lista_calificadores_tipos_opcional puntero
 ;
 
-lista_calificadores_tipos_opcional:   /* Vacio */
+lista_calificadores_tipos_opcional:   // Vacio //
                                     | lista_calificadores_tipos
 ;
 
@@ -311,7 +315,7 @@ declarador_directo:   IDENTIFICADOR
                     | declarador_directo '(' lista_identificadores_opcional ')'
 ;
 
-lista_identificadores_opcional:   /* Vacio */
+lista_identificadores_opcional:   // Vacio //
                                 | lista_identificadores
 ;
 
@@ -327,7 +331,7 @@ declaracion_parametro:   especificadores_declaracion decla
                        | especificadores_declaracion declarador_abstracto_opcional
 ;
 
-declarador_abstracto_opcional:   /* Vacio */
+declarador_abstracto_opcional:   // Vacio //
                                  | declarador_abstracto
 ;   
 
@@ -365,30 +369,32 @@ declarador_abstracto_directo:   '(' declarador_abstracto ')'
                               | declarador_abstracto_directo_opcional '(' lista_tipos_param_opcional ')' 
 ;
 
-declarador_abstracto_directo_opcional:   /* Vacio */
+declarador_abstracto_directo_opcional:   // Vacio //
                                      | declarador_abstracto_directo
 ;
 
-lista_tipos_param_opcional:   /* Vacio */
+lista_tipos_param_opcional:   // Vacio //
                         | lista_tipos_param
 ;
 
 
+%%
 
 
 
-
-int yyerror (char *mensaje)  /* Funcion de error */
+int yyerror (char *mensaje)  // Funcion de error //
 {
   printf ("Error: %s\n", mensaje);
 }
 
-void main(){
+int main(){
 
    #ifdef BISON_DEBUG
         yydebug = 1;
 #endif    
- 
+    yyin = fopen ("docDePrueba.c","r");
    printf("Entre al parse:\n");
    yyparse();
+   
+   return 0;
 }
