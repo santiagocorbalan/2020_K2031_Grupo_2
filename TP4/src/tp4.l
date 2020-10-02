@@ -29,9 +29,9 @@ PUNTUACION_OPERACION    "*"|")"|"-"|"%"|";"|"?"|"]"|"&"|"#"|"."|"<"|","|"^"|"'"|
 
 {DIGITO_DECIMAL}*"."{DIGITO_DECIMAL}*(EXPONENCIAL(SIGNO)?{DIGITO_DECIMAL}+)? {yylval.dobleval = atof(yytext);return CONSTANTEREAL;}
 
-\'[^']\'   {yylval.stringval = strdup(yytext);return CONSTANTECARACTER;}
+\'[^']\'   {yylval.strval = strdup(yytext);return CONSTANTECARACTER;}
 
-\"[^\"]*\" {yylval.stringval = strdup(yytext); return LITERALCADENA;}
+\"[^\"]*\" {yylval.strval = strdup(yytext); return LITERALCADENA;}
 
 "enum" {return ENUM;}
 

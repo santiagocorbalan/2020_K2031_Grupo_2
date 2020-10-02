@@ -43,6 +43,7 @@ int yywrap(){
 %type <strval> exp_unaria
 %type <strval> exp_relacional
 %type <strval> exp_corrimiento
+%type <strval> exp_condicional
 %type <strval> op_asignacion
 %type <enteroval> num
 %type <strval> sentencia
