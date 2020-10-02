@@ -53,7 +53,7 @@ double     { return DOUBLE; }
 float      { return FLOAT; }
 long       { return LONG; }
 short      { return SHORT; }
-typedef    { return TYPEDF;}
+typedef    { return TYPEDEF;}
 static     { return STATIC;}
 auto       {return AUTO;}
 register   {return REGISTER;}

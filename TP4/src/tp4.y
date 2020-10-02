@@ -17,16 +17,21 @@ int yywrap(){
 }
 
 %token IDENTIFICADOR
-%token <strval> INCREMENTO DECREMENTO //++ y --
-%token <strval> INCREMENTOASIGNACION DECREMENTOASIGNACION  // += y -=
-%token <strval> AND OR // && y ||
-%token <strval> RELACIONALIGUAL RELACIONALDIFERENTE // == y !=
-%token <strval> MAYORIGUAL MENORIGUAL // >= y <=
+%token INCREMENTO DECREMENTO //++ y --
+%token INCREMENTOASIGNACION DECREMENTOASIGNACION  // += y -=
+%token AND OR // && y ||
+%token RELACIONALIGUAL RELACIONALDIFERENTE // == y !=
+%token MAYORIGUAL MENORIGUAL // >= y <=
 %token ACCESOPUNTERO // -> 
 %token CONSTANTE CONSTANTEDECIMAL CONSTANTEOCTAL CONSTANTEHEXADECIMAL CONSTANTEPUNTOFIJO CONSTANTEREAL CONSTANTECARACTER
 %token CHAR INT DOUBLE FLOAT LONG SHORT
-%token <strval> IF ELSE WHILE DO SWITCH FOR CASE BREAK DEFAULT 
-%token <strval> RETURN 
+%token IF ELSE WHILE DO SWITCH FOR CASE BREAK DEFAULT 
+%token RETURN
+%token TYPEDEF STATIC AUTO REGISTER EXTERN
+%token STRUCT UNION
+%token VOID SIGNED UNSIGNED
+%token VOLATILE CONST
+%token ENUM 
 //token error //Lo implementamos al final de todo
 %type <strval> expresion
 %type <strval> exp_asignacion
@@ -36,6 +41,8 @@ int yywrap(){
 %type <strval> exp_y
 %type <strval> exp_y_logico
 %type <strval> exp_unaria
+%type <strval> exp_relacional
+%type <strval> exp_corrimiento
 %type <strval> op_asignacion
 %type <enteroval> num
 %type <strval> sentencia
@@ -67,7 +74,7 @@ exp_condicional:
     exp_o_logico
     | exp_o_logico '?' expresion ':' exp_condicional
 ;
-operador_asignacion: '=' | INCREMENTOASIGNACION | DECREMENTOASIGNACION ;
+op_asignacion: '=' | INCREMENTOASIGNACION | DECREMENTOASIGNACION ;
 //Los demás no los agrego porque no son tan importantes.
 
 exp_o_logico:
