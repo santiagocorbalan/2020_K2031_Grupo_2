@@ -33,6 +33,7 @@ int yywrap(){
 %token VOLATILE CONST
 %token ENUM 
 //token error //Lo implementamos al final de todo
+/*
 %type <strval> expresion
 %type <strval> exp_asignacion
 %type <strval> exp_igualdad
@@ -53,6 +54,10 @@ int yywrap(){
 %type <strval> sentenciaSwitch
 %type <strval> sentenciaSwitchDefault
 %type <strval> listaSentencias
+
+
+*/
+
 
 %left '='
 %right AND OR
