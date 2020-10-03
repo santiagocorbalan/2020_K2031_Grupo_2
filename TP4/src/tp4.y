@@ -190,7 +190,7 @@ sent_iteracion:
     | DO sentencia WHILE '(' expresion ')' ';'
     | FOR '(' expresion ';' expresion ';' expresion ')' sentencia
     | error ';'
-
+;
 // %% SENTENCIAS COMPUESTAS %%
 
 sent_compuesta: 
