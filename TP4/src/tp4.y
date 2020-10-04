@@ -88,8 +88,8 @@ exp_o_logico:
     | exp_o_logico OR exp_y_logico
 ;
 exp_y_logico:
-    exp_o_inclusivo
-    | exp_y_logico AND exp_o_inclusivo
+    exp_y       //exp_o_inclusivo
+    | exp_y_logico AND exp_y
 ;
 exp_y:
     exp_igualdad
