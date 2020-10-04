@@ -269,12 +269,15 @@ tipo_dedato:     VOID
                 | SIGNED
                 | UNSIGNED
 ;
-calificador_detipo:  CONST
-                    | VOLATILE 
-;
+
 especificador_struct_union:   struct_union IDENTIFICADOR_opcional '{' lista_declaradores_struct '}'
                             | struct_union IDENTIFICADOR
 ;
+
+calificador_detipo:  CONST
+                    | VOLATILE 
+;
+
 
 IDENTIFICADOR_opcional:   // Vacio //
                          | IDENTIFICADOR
@@ -282,7 +285,7 @@ IDENTIFICADOR_opcional:   // Vacio //
 
 struct_union: STRUCT
              | UNION
-
+;
 
 lista_declaradores_struct:   declaracion_struct
                            | lista_declaradores_struct declaracion_struct
