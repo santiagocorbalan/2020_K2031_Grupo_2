@@ -33,11 +33,9 @@ PUNTUACION_OPERACION    "*"|")"|"-"|"%"|";"|"?"|"]"|"&"|"#"|"."|"<"|","|"^"|"'"|
 
 \"[^\"]*\" {yylval.strval = strdup(yytext); return LITERALCADENA;}
 
-"enum" {return ENUM;}
-
 ({LETRA}|_)({LETRA}|{DIGITO_DECIMAL}|_)* { return IDENTIFICADOR; }
 
- 
+"enum" {return ENUM;} 
 if         { return IF; }
 while      { return WHILE; }
 for        { return FOR; }

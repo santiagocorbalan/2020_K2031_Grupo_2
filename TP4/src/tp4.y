@@ -7,6 +7,8 @@ int yywrap(){
     return (1);
 }
 
+extern FILE* yyin;
+
 %}
 
 
@@ -23,7 +25,8 @@ int yywrap(){
 %token RELACIONALIGUAL RELACIONALDIFERENTE // == y !=
 %token MAYORIGUAL MENORIGUAL // >= y <=
 %token ACCESOPUNTERO // -> 
-%token CONSTANTE CONSTANTEDECIMAL CONSTANTEOCTAL CONSTANTEHEXADECIMAL CONSTANTEPUNTOFIJO CONSTANTEREAL CONSTANTECARACTER
+%token CONSTANTEDECIMAL CONSTANTEOCTAL CONSTANTEHEXADECIMAL  CONSTANTEREAL CONSTANTECARACTER
+%token LITERALCADENA
 %token CHAR INT DOUBLE FLOAT LONG SHORT
 %token IF ELSE WHILE DO SWITCH FOR CASE BREAK DEFAULT 
 %token RETURN
@@ -142,11 +145,22 @@ listaArgumentos:
 
 exp_primaria:
     IDENTIFICADOR
-    | CONSTANTE
-//| CONSTANTE CADENA
+    | constante
+    | LITERALCADENA
     | '(' expresion ')'
 ;
 
+constante:
+     CONSTANTEDECIMAL
+    | CONSTANTEOCTAL 
+    | CONSTANTEHEXADECIMAL
+    | CONSTANTEREAL
+    | CONSTANTECARACTER
+;    
+
+exp_constante:
+    exp_condicional
+    ;
 // %% SENTENCIAS %%
 
 sentencia: 
@@ -178,7 +192,8 @@ sentenciaSwitch:
 ;
 
 sentenciaCase: 
-    CASE num ':' sentencia 
+  //  CASE num ':' sentencia 
+    CASE constante ':' sentencia
     | error '}'
 ;
 
@@ -307,8 +322,10 @@ declaradores_struct:   decla_struct
 ;
 
 decla_struct:   decla
-              | decla_opcional ':' exp_constante
+              //| decla_opcional ':' exp_constante
+              | decla_opcional ':' constante
 ;
+
 
 decla_opcional:   // Vacio //
                 | decla
@@ -335,7 +352,7 @@ lista_calificadores_tipos:   calificador_detipo
 
 declarador_directo:   IDENTIFICADOR
                     | '(' decla ')'
-                    | declarador_directo '[' exp_constante_opcional ']' //exp_constante_opcional no esta en el PDF 
+                    | declarador_directo '[' exp_constante ']' //exp_constante_opcional no esta en el PDF 
                     | declarador_directo '(' lista_tipos_param ')'
                     | declarador_directo '(' lista_identificadores_opcional ')'
 ;
@@ -373,7 +390,8 @@ lista_enumeradores:   enumerador
 ;
 
 enumerador:   const_de_enumeracion
-            | const_de_enumeracion '=' exp_constante
+           // | const_de_enumeracion '=' exp_constante
+              | const_de_enumeracion '=' constante
 ;
 
 const_de_enumeracion: IDENTIFICADOR
@@ -390,7 +408,7 @@ declarador_abstracto:   puntero
 ;
 
 declarador_abstracto_directo:   '(' declarador_abstracto ')'
-                              | declarador_abstracto_directo_opcional '['   exp_constante_opcional   ']'
+                              | declarador_abstracto_directo_opcional '['   exp_constante   ']'
                               | declarador_abstracto_directo_opcional '(' lista_tipos_param_opcional ')' 
 ;
 
@@ -413,10 +431,9 @@ int main(){
 
    #ifdef BISON_DEBUG
         yydebug = 1;
-#endif    
+    #endif    
     yyin = fopen ("docDePrueba.c","r");
-   printf("Entre al parse:\n");
-   yyparse();
-   
-   return 0;
+    printf("Entre al parse:\n");
+    yyparse();
+    return 0;
 }
