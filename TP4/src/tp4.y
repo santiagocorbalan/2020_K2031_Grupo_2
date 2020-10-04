@@ -101,11 +101,12 @@ exp_igualdad:
     | exp_igualdad RELACIONALDIFERENTE exp_relacional
 ;
 exp_relacional:
-    exp_corrimiento
-    | exp_relacional '<' exp_corrimiento
-    | exp_relacional '>' exp_corrimiento
-    | exp_relacional MENORIGUAL exp_corrimiento
-    | exp_relacional MAYORIGUAL exp_corrimiento
+    //exp_corrimiento
+    exp_aditiva
+    | exp_relacional '<' exp_aditiva
+    | exp_relacional '>' exp_aditiva
+    | exp_relacional MENORIGUAL exp_aditiva
+    | exp_relacional MAYORIGUAL exp_aditiva
 ;
 exp_aditiva:
     exp_multiplicativa
@@ -113,11 +114,12 @@ exp_aditiva:
     | exp_aditiva '-' exp_multiplicativa
 ;
 exp_multiplicativa:
-    exp_conversion
-    | exp_multiplicativa '*' exp_conversion
-    | exp_multiplicativa '/' exp_conversion
-    | exp_multiplicativa '%' exp_conversion
+    exp_unaria
+    | exp_multiplicativa '*' exp_unaria
+    | exp_multiplicativa '/' exp_unaria
+    | exp_multiplicativa '%' exp_unaria
 ;
+
 exp_unaria:
     exp_sufijo
     | INCREMENTO exp_unaria
