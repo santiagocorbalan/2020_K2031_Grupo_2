@@ -268,10 +268,10 @@ tipo_dedato:     VOID
                 | DOUBLE
                 | SIGNED
                 | UNSIGNED
-
+;
 calificador_detipo:  CONST
                     | VOLATILE 
-
+;
 especificador_struct_union:   struct_union IDENTIFICADOR_opcional '{' lista_declaradores_struct '}'
                             | struct_union IDENTIFICADOR
 ;
