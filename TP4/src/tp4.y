@@ -157,7 +157,7 @@ sentencia:
    | sent_seleccion
 ;
 
-sentExpresion: 
+sent_expresion: 
     expresion ';'
     | error ';'
 ;
@@ -250,7 +250,7 @@ especificador_declase_dealmacenamiento:  TYPEDEF
                                         | AUTO
                                         | REGISTER
                                         | EXTERN
-
+;
 
 
 especificador_tipo:   tipo_dedato 
