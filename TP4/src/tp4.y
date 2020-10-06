@@ -421,17 +421,20 @@ lista_tipos_param_opcional:   // Vacio //
 ;
 
 %%
-
-int yyerror (char *mensaje)  /* Funcion de error */
+/*
+int yyerror (char *mensaje)  // Funcion de error //
 {
   printf ("Error: %s\n", mensaje);
 }
+*/
 
 int main(){
 
+/*
    #ifdef BISON_DEBUG
         yydebug = 1;
     #endif    
+*/    
     yyin = fopen ("docDePrueba.c","r");
     printf("Entre al parse:\n");
     yyparse();

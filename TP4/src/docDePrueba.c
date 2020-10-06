@@ -1,6 +1,6 @@
 int main (){
 
-    char san = 'Hola';
+    char san = 'Hola'; //Error
 
     //Ejemplo de comentario de una linea
 
