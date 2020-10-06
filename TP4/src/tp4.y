@@ -71,6 +71,17 @@ flag_ExpresionEncontrada = 0;
 %right '*' '/' '^' '%'
 
 %%
+
+input:    /* vacio */
+        | input programa
+;
+
+programa:     '\n'
+        | expresion '\n'
+        | sentencia '\n'
+        | expresion '\n'
+;
+
 // SENTENCIAS 
 
 sentencia: 
@@ -224,7 +235,7 @@ exp_constante:
 //  DECLARACIONES
 
 declaracion: especificadores_declaracion lista_declaradores_opcional
-; //preguntar si es necesario el punto y coma despues de cada produccion
+; 
 
 lista_declaradores_opcional:    // Vacio //
                                 | lista_declaradores
