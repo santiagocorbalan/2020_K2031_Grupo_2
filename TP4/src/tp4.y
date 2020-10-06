@@ -8,6 +8,7 @@ int yywrap(){
 }
 
 extern FILE* yyin;
+flag_ExpresionEncontrada = 0;
 
 %}
 
@@ -70,9 +71,66 @@ extern FILE* yyin;
 %right '*' '/' '^' '%'
 
 %%
+// SENTENCIAS 
+
+sentencia: 
+    sent_expresion
+   | sent_compuesta
+   | sent_seleccion 
+   | sent_iteracion
+;
+
+sent_expresion: 
+    expresion ';'
+    //| error ';'
+;
+
+sent_compuesta: 
+    '{' listaSentencias '}'
+;
+
+listaSentencias: 
+    listaSentencias sentencia
+    | sentencia // | vacio
+;
+
+sent_seleccion: 
+    IF '(' expresion ')' sentencia 
+    | IF '(' expresion ')' sentencia ELSE sentencia 
+    | SWITCH '(' expresion ')' sentenciaSwitch
+    | error ';'
+;
+
+sentenciaSwitch: 
+    '{' sentenciaCase sentenciaSwitchDefault '}'
+    | '{' sentenciaCase '}'
+    | '{' sentenciaSwitchDefault '}'
+    | '{' '}'
+    | error '}'
+;
+
+sentenciaCase: 
+  //  CASE num ':' sentencia 
+    CASE constante ':' sentencia
+    | error '}'
+;
+
+sentenciaSwitchDefault: 
+    DEFAULT ':' sentencia
+    | error '}'
+;
+
+sent_iteracion: 
+    WHILE '(' expresion ')' sentencia
+    | DO sentencia WHILE '(' expresion ')' ';'
+    | FOR '(' expresion ';' expresion ';' expresion ')' sentencia
+ //   | error ';'
+;
+
+
 //  EXPRESIONES //
 
-expresion: exp_asignacion {puts ("Encontre una expresión");}
+expresion: exp_asignacion 
             | expresion ',' exp_asignacion
 ;
 exp_asignacion:
@@ -129,7 +187,7 @@ exp_unaria:
     | DECREMENTO exp_unaria
 ;
 exp_sufijo:
-    exp_primaria
+    exp_primaria    
     | exp_sufijo '[' expresion ']'
     | exp_sufijo '(' listaArgumentos ')'
     | exp_sufijo '.' IDENTIFICADOR
@@ -161,68 +219,9 @@ constante:
 exp_constante:
     exp_condicional
     ;
-// %% SENTENCIAS %%
-
-sentencia: 
-    sent_expresion
-   | sent_compuesta
-   | sent_seleccion 
-   | sent_iteracion
-   | sent_seleccion
-;
-
-sent_expresion: 
-    expresion ';'
-    | error ';'
-;
-
-sent_seleccion: 
-    IF '(' expresion ')' sentencia 
-    | IF '(' expresion ')' sentencia ELSE sentencia 
-    | SWITCH '(' expresion ')' sentenciaSwitch
-    | error ';'
-;
-
-sentenciaSwitch: 
-    '{' sentenciaCase sentenciaSwitchDefault '}'
-    | '{' sentenciaCase '}'
-    | '{' sentenciaSwitchDefault '}'
-    | '{' '}'
-    | error '}'
-;
-
-sentenciaCase: 
-  //  CASE num ':' sentencia 
-    CASE constante ':' sentencia
-    | error '}'
-;
-
-sentenciaSwitchDefault: 
-    DEFAULT ':' sentencia
-    | error '}'
-;
-
-sent_iteracion: 
-    WHILE '(' expresion ')' sentencia
-    | DO sentencia WHILE '(' expresion ')' ';'
-    | FOR '(' expresion ';' expresion ';' expresion ')' sentencia
-    | error ';'
-;
-// %% SENTENCIAS COMPUESTAS %%
-
-sent_compuesta: 
-    '{' listaSentencias '}'
-;
-
-listaSentencias: 
-    listaSentencias sentencia
-    | sentencia
-// | vacio
-;
 
 
-
-//  Gramatica declaraciones 
+//  DECLARACIONES
 
 declaracion: especificadores_declaracion lista_declaradores_opcional
 ; //preguntar si es necesario el punto y coma despues de cada produccion

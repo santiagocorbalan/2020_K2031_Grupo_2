@@ -96,7 +96,7 @@ typedef union YYSTYPE
 {
 
 /* Line 1676 of yacc.c  */
-#line 15 "../src/tp4.y"
+#line 16 "../src/tp4.y"
 
     int enteroval;
     char* strval;
