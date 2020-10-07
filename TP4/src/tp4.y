@@ -273,6 +273,9 @@ constante:
             | CONSTANTEHEXADECIMAL
             | CONSTANTEOCTAL
             | CONSTANTEREAL
+            | CONSTANTECARACTER
+            | LITERALCADENA
+            
 ;
 
 declaracionFunciones:   
