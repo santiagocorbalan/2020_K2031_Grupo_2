@@ -104,7 +104,6 @@ listaDeDeclaracionesOpcional: /* vacio */
                                 | declaracion
                                 | listaDeDeclaracionesOpcional declaracion
 ;
-
 listaSentencias: 
     listaSentencias sentencia
     | sentencia // | vacio
@@ -242,6 +241,7 @@ exp_constante:
 declaracion:    
                   declaracionVariablesSimples 
                 | declaracionFunciones
+                | definicionFunciones
 ;
 
 declaracionVariablesSimples: 
@@ -285,6 +285,9 @@ opcionReferencia:       /* vacio */
                         | '&'
 ;
 
+definicionFunciones:    
+                        TIPO_DATO IDENTIFICADOR '(' opcionArgumentosConTipo ')' sentencia
+;
 %%
 /*
 int yyerror (char *mensaje)  // Funcion de error //
