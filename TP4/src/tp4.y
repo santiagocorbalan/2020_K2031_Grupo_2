@@ -258,7 +258,7 @@ unaVariableSimple:
 ;
 
 opcionInicializacion:   /* vacio */
-                            | opcionDeAsignacion exp_condicional
+                            | opcionDeAsignacion constante
 ;
 
 opcionDeAsignacion: 
@@ -267,6 +267,13 @@ opcionDeAsignacion:
                     | += 
                     | -= 
 ; 
+
+constante: 
+            | CONSTANTEDECIMAL
+            | CONSTANTEHEXADECIMAL
+            | CONSTANTEOCTAL
+            | CONSTANTEREAL
+;
 
 declaracionFunciones:   
                         TIPO_DATO IDENTIFICADOR '(' opcionArgumentosConTipo ')' ';' 
