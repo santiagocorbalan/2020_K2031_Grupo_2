@@ -1,10 +1,12 @@
+
 %option noyywrap
-%option yylineno
+%option yylineno
+
 %{
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "ListasYFuncionesTP3.h"
+#include "ListasYFuncionesTP3.c"
 
 %}
 DIGITO_DECIMAL          [0-9] 
