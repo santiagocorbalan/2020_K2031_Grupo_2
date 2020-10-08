@@ -262,10 +262,10 @@ opcionInicializacion:   /* vacio */
 ;
 
 opcionDeAsignacion: 
-                       = 
-                    | *= 
-                    | += 
-                    | -= 
+                       '=' 
+                    | '*=' 
+                    | '+=' 
+                    | '-=' 
 ; 
 
 constante: 

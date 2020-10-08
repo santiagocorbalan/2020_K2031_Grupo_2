@@ -85,7 +85,7 @@
      UNSIGNED = 301,
      VOLATILE = 302,
      CONST = 303,
-     ENUM = 304
+     TIPO_DATO = 304
    };
 #endif
 

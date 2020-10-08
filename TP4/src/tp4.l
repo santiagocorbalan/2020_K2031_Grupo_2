@@ -33,7 +33,7 @@ PUNTUACION_OPERACION    "*"|")"|"-"|"%"|";"|"?"|"]"|"&"|"#"|"."|"<"|","|"^"|"'"|
 
 \"[^\"]*\" {yylval.strval = strdup(yytext); return LITERALCADENA;}
 
-TIPO_DATO {yylval.strval = strdup(yytext); return TIPO_DATO}
+TIPO_DATO {yylval.strval = strdup(yytext); return TIPO_DATO;}
 
 ({LETRA}|_)({LETRA}|{DIGITO_DECIMAL}|_)* { return IDENTIFICADOR; }
 
