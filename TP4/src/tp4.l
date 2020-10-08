@@ -1,5 +1,4 @@
 %option noyywrap
-%option yylineno
 
 %{
 #include <stdio.h>
@@ -44,43 +43,9 @@ if         { return IF; }
 while      { return WHILE; }
 for        { return FOR; }
 else       { return ELSE; }
-do         { return DO; }
-switch     { return SWITCH; }
-case       { return CASE; }
-default    { return DEFAULT; }
-break      { return BREAK; }
-char       { return CHAR; }
-int        { return INT; }
-double     { return DOUBLE; }
-float      { return FLOAT; }
-long       { return LONG; }
-short      { return SHORT; }
-typedef    { return TYPEDEF; }
-static     { return STATIC; }
-auto       { return AUTO; }
-register   { return REGISTER; }
-extern     { return EXTERN; }
-struct     { return STRUCT; }
-union      { return UNION; }
-void       { return VOID; }
-signed     { return SIGNED; }
-unsigned   { return UNSIGNED; }
-
-"("        { return '('; }
-")"        { return ')'; }
-"{"        { return '{'; }
-"}"        { return '}'; }
-";"        { return ';'; }
-":"        { return ':'; }
-","        { return ','; }
-"="        { return '='; }
-"<"        { return '<'; }
-">"        { return '>'; }
-"+"        { return '+'; }
-"-"        { return '-'; }
-"*"        { return '*'; }
-"/"        { return '/'; }
-"%"        { return '%'; }
+do         { return DO;}
+switch     { return SWITCH;}
+return     { return RETURN;}
 
 "++"       { return INCREMENTO; }
 "--"       { return DECREMENTO; }
@@ -93,5 +58,23 @@ unsigned   { return UNSIGNED; }
 "&&"       { return AND; }
 "||"       { return OR; }
 "->"       { return ACCESOPUNTERO; }
+
+
+";"        { return ';'; }
+":"        { return ':'; }
+","        { return ','; }
+"="        { return '='; }
+"<"        { return '<'; }
+">"        { return '>'; }
+"+"        { return '+'; }
+"-"        { return '-'; }
+"*"        { return '*'; }
+"/"        { return '/'; }
+"%"        { return '%'; }
+")"        { return ')'; }
+"{"        { return '{'; }
+"("        { return '('; }
+"}"        { return '}'; }
+
 
 %%
