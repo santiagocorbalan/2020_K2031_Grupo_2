@@ -12,14 +12,16 @@ DIGITO_DECIMAL          [0-9]
 DIGITO_OCTAL            [0-7]
 DIGITO_HEXADECIMAL      [0-9A-Fa-f]
 LETRA                   [a-zA-Z]
-TIPO_DATO               char|int|float|double|long|short|signed|unsigned|void|enum|struct|typedef|union|const
-ESTRUCTURA_CONTROL      switch|case|break|default|continue|do|while|if|else|for|return|goto
-OTROS                   volatile|extern|static|auto|register|sizeof
+TIPO_DATO               char|int|float|double|long|short|signed|unsigned|void
 SIGNO                   [\+\-]
 EXPONENCIAL             [eE]
 PUNTUACION_OPERACION    "*"|")"|"-"|"%"|";"|"?"|"]"|"&"|"#"|"."|"<"|","|"^"|"'"|"+"|"/"|"="|"["|"("|"@"|":"|">"|">="|"<="|"=="|"&&"|"||"|"++"|"--"|"!="|"<<"|"<<="|">>"|">>="|"~"|"&="|"|="|"^="|"->"|"->*"|".*"|"{"|"}"|"$"|"\t"
 
 %%
+
+"\n" {return '\n';}
+
+" "|"\t" {}
 
 [1-9]{DIGITO_DECIMAL}* {yylval.enteroval = atoi(yytext);return CONSTANTEDECIMAL;}
 
