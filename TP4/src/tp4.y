@@ -79,7 +79,7 @@ input:    /* vacio */
 programa:     '\n'
         | expresion '\n'
         | sentencia '\n'
-        | expresion '\n'
+       // | expresion '\n'
 ;
 
 // SENTENCIAS 
