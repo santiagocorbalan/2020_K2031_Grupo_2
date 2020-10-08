@@ -35,7 +35,7 @@ flag_ExpresionEncontrada = 0;
 %token STRUCT UNION
 %token VOID SIGNED UNSIGNED
 %token VOLATILE CONST
-%token ENUM 
+%token TIPO_DATO
 //token error //Lo implementamos al final de todo
 /*
 %type <strval> expresion
@@ -275,7 +275,7 @@ constante:
             | CONSTANTEREAL
             | CONSTANTECARACTER
             | LITERALCADENA
-            
+
 ;
 
 declaracionFunciones:   
