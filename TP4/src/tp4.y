@@ -60,8 +60,8 @@ int flag_ExpresionEncontrada = 0;
 %type <strval> sent_iteracion
 %type <strval> sent_compuesta
 %type <strval> listaSentencias
-
-
+%type <strval> variableSimple
+%type <strval> definicionFunciones
 */
 
 
@@ -217,6 +217,7 @@ exp_primaria: IDENTIFICADOR
 
 //  DECLARACIONES
 
+
 declaracion: declaracionVariablesSimples 
             | declaracionFunciones
             | definicionFunciones
@@ -225,11 +226,11 @@ declaracion: declaracionVariablesSimples
 declaracionVariablesSimples: TIPO_DATO listaVariablesSimples ';'
 ;
 
-listaVariablesSimples: unaVariableSimple       
-                     | listaVariablesSimples ',' unaVariableSimple
+listaVariablesSimples: variableSimple       
+                     | listaVariablesSimples ',' variableSimple
 ;
 
-unaVariableSimple: IDENTIFICADOR opcionInicializacion
+variableSimple: IDENTIFICADOR opcionInicializacion
 ;
 
 opcionInicializacion:   /* vacio */
