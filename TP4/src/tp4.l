@@ -5,6 +5,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include "tp4.tab.h" //Archivo que va a generar Bison
+extern FILE* yyin;
 %}
 
 DIGITO_DECIMAL          [0-9] 
@@ -36,17 +37,15 @@ PUNTUACION_OPERACION    "*"|")"|"-"|"%"|";"|"?"|"]"|"&"|"#"|"."|"<"|","|"^"|"'"|
 
 TIPO_DATO {yylval.strval = strdup(yytext); return TIPO_DATO;}
 
-({LETRA}|_)({LETRA}|{DIGITO_DECIMAL}|_)* { return IDENTIFICADOR; }
-
+({LETRA}|_)({LETRA}|{DIGITO_DECIMAL}|_)* { yylval.strval = strdup(yytext); return IDENTIFICADOR; }
  
-if         { return IF; }
-while      { return WHILE; }
-for        { return FOR; }
-else       { return ELSE; }
+if         { return IF;}
+while      { return WHILE;}
+for        { return FOR;}
+else       { return ELSE;}
 do         { return DO;}
 switch     { return SWITCH;}
 return     { return RETURN;}
-
 "++"       { return INCREMENTO; }
 "--"       { return DECREMENTO; }
 "+="       { return INCREMENTOASIGNACION; }
@@ -58,8 +57,6 @@ return     { return RETURN;}
 "&&"       { return AND; }
 "||"       { return OR; }
 "->"       { return ACCESOPUNTERO; }
-
-
 ";"        { return ';'; }
 ":"        { return ':'; }
 ","        { return ','; }

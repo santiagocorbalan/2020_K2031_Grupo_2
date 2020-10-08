@@ -40,52 +40,31 @@
       know about them.  */
    enum yytokentype {
      IDENTIFICADOR = 258,
-     INCREMENTO = 259,
-     DECREMENTO = 260,
-     INCREMENTOASIGNACION = 261,
-     DECREMENTOASIGNACION = 262,
-     AND = 263,
-     OR = 264,
-     RELACIONALIGUAL = 265,
-     RELACIONALDIFERENTE = 266,
-     MAYORIGUAL = 267,
-     MENORIGUAL = 268,
-     ACCESOPUNTERO = 269,
-     CONSTANTEDECIMAL = 270,
-     CONSTANTEOCTAL = 271,
-     CONSTANTEHEXADECIMAL = 272,
-     CONSTANTEREAL = 273,
-     CONSTANTECARACTER = 274,
-     LITERALCADENA = 275,
-     CHAR = 276,
-     INT = 277,
-     DOUBLE = 278,
-     FLOAT = 279,
-     LONG = 280,
-     SHORT = 281,
-     IF = 282,
-     ELSE = 283,
-     WHILE = 284,
-     DO = 285,
-     SWITCH = 286,
-     FOR = 287,
-     CASE = 288,
-     BREAK = 289,
-     DEFAULT = 290,
-     RETURN = 291,
-     TYPEDEF = 292,
-     STATIC = 293,
-     AUTO = 294,
-     REGISTER = 295,
-     EXTERN = 296,
-     STRUCT = 297,
-     UNION = 298,
-     VOID = 299,
-     SIGNED = 300,
-     UNSIGNED = 301,
-     VOLATILE = 302,
-     CONST = 303,
-     TIPO_DATO = 304
+     TIPO_DATO = 259,
+     INCREMENTO = 260,
+     DECREMENTO = 261,
+     INCREMENTOASIGNACION = 262,
+     DECREMENTOASIGNACION = 263,
+     AND = 264,
+     OR = 265,
+     RELACIONALIGUAL = 266,
+     RELACIONALDIFERENTE = 267,
+     MAYORIGUAL = 268,
+     MENORIGUAL = 269,
+     ACCESOPUNTERO = 270,
+     CONSTANTEDECIMAL = 271,
+     CONSTANTEOCTAL = 272,
+     CONSTANTEHEXADECIMAL = 273,
+     CONSTANTEREAL = 274,
+     CONSTANTECARACTER = 275,
+     LITERALCADENA = 276,
+     IF = 277,
+     ELSE = 278,
+     WHILE = 279,
+     DO = 280,
+     SWITCH = 281,
+     FOR = 282,
+     RETURN = 283
    };
 #endif
 
@@ -96,7 +75,7 @@ typedef union YYSTYPE
 {
 
 /* Line 1676 of yacc.c  */
-#line 16 "../src/tp4.y"
+#line 25 "../src/tp4.y"
 
     int enteroval;
     char* strval;
@@ -105,7 +84,7 @@ typedef union YYSTYPE
 
 
 /* Line 1676 of yacc.c  */
-#line 109 "tp4.tab.h"
+#line 88 "tp4.tab.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */

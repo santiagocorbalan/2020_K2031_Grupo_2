@@ -5,16 +5,19 @@
 
 int yylex();
 
-FILE* yyin;
-
+extern FILE* yyin;
 int yyerror (char*);
 
 int yywrap(){
     return (1);
 }
 
-
-int flag_ExpresionEncontrada = 0;
+int flag_error = 0;
+int flag_SentExpresion = 0;
+int flag_SentCompuesta = 0;
+int flag_Seleccion = 0;
+int flag_Iteracion = 0;
+int flag_DeSalto  = 0;
 
 %}
 
@@ -86,11 +89,11 @@ programa:     expresion '\n'
 // SENTENCIAS 
 
 sentencia: 
-    sent_expresion
-   | sent_compuesta
-   | sent_seleccion 
-   | sent_iteracion
-   | sent_deSalto
+    sent_expresion {if (flag_SentExpresion == 0) printf("Se declaro una sentencia simple\n"); flag_SentExpresion = 1;}
+   | sent_compuesta {if (flag_SentCompuesta == 0) printf("Se declaro una sentencia compuesta\n"); flag_SentCompuesta = 1;}
+   | sent_seleccion {if (flag_Seleccion == 0) printf("Se declaro una sentencia simple\n"); flag_Seleccion = 1;}
+   | sent_iteracion {if (flag_Iteracion == 0) printf("Se declaro una sentencia simple\n"); flag_Iteracion = 1;}
+   | sent_deSalto 
 ;
 
 sent_expresion: ';'
@@ -117,17 +120,18 @@ listaSentenciasOpcional:  /* vacio */
 ;
 
 sent_seleccion: 
-    IF '(' expresion ')' sentencia 
-    | IF '(' expresion ')' sentencia ELSE sentencia 
-    | SWITCH '(' expresion ')' sentencia // en vez de sentencia SWITCH la cambiamos por sentencia para acortar
+    IF '(' expresion ')' sentencia  
+    | IF '(' expresion ')' sentencia ELSE sentencia  
+    | SWITCH '(' expresion ')' sentencia 
+    // en vez de sentencia SWITCH la cambiamos por sentencia para acortar
     | error ';'
 ;
 
 sent_iteracion: 
-    WHILE '(' expresion ')' sentencia
-    | DO sentencia WHILE '(' expresion ')' ';'
-    | FOR '(' expresion ';' expresion ';' expresion ')' sentencia
- //   | error ';'
+    WHILE '(' expresion ')' sentencia  {if (flag_Iteracion == 0) printf("Se declaro correctamente una sentencia \"while\" \n"); flag_Iteracion = 1;}
+    | DO sentencia WHILE '(' expresion ')' ';'  {if (flag_Iteracion == 0) printf("Se declaro correctamente una sentencia \"do while\"\n"); flag_Iteracion = 1;}
+    | FOR '(' expresion ';' expresion ';' expresion ')' sentencia  {if (flag_Iteracion == 0) printf("Se declaro correctamente una sentencia \"for\" \n"); flag_Iteracion = 1;}
+ // | error ';'
 ;
 
 sent_deSalto: RETURN expresionOpcional ';' // contemplamos el caso del Return ya que es el mas conocido
@@ -205,7 +209,7 @@ exp_sufijo:
 
 listaArgumentosOpcional: /* vacio */
                         | exp_asignacion
-                        | listaArgumentos ',' exp_asignacion
+                        | listaDeDeclaracionesOpcional ',' exp_asignacion
 ;
 
 exp_primaria: IDENTIFICADOR
@@ -242,8 +246,7 @@ constante: CONSTANTEDECIMAL
         | CONSTANTEOCTAL
         | CONSTANTEREAL
         | CONSTANTECARACTER
-        | LITERALCADENA
-
+      //  | LITERALCADENA
 ;
 
 declaracionFunciones: TIPO_DATO IDENTIFICADOR '(' opcionArgumentosConTipo ')' ';' 
@@ -264,17 +267,19 @@ opcionReferencia: /* vacio */
 
 definicionFunciones: TIPO_DATO IDENTIFICADOR '(' opcionArgumentosConTipo ')' sentencia
 ;
+
 %%
 
 
-int main(){
+int main(void){
 
-
+    int flag_parse;
     yyin = fopen ("docDePrueba.c","r");
-    printf("Entre al parse:\n");
-    yyparse();
-    
-    return 0;
+    //printf("Entre al parse:\n");
+    flag_parse = yyparse();
+    fclose(yyin);
+    return flag_parse;
+
 }
 
 /*
