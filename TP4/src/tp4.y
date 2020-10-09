@@ -274,10 +274,15 @@ definicionFunciones: TIPODATO IDENTIFICADOR '(' opcionArgumentosConTipo ')' sent
 int main(void){
 
     int flag_parse;
+    
     yyin = fopen ("docDePrueba.c","r");
+    
     //printf("Entre al parse:\n");
+    
     flag_parse = yyparse();
+    
     fclose(yyin);
+
     return flag_parse;
 
 }

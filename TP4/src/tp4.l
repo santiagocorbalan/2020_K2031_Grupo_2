@@ -73,5 +73,6 @@ return     { return RETURN;}
 "("        { return '('; }
 "}"        { return '}'; }
 
+. {printf("No se reconoce el carecter",yytext);}
 
 %%
