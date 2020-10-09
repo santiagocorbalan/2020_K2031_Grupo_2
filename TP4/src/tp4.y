@@ -29,7 +29,7 @@ int flag_DeSalto  = 0;
 }
 
 %token <strval> IDENTIFICADOR
-%token <strval> TIPO_DATO
+%token <strval> TIPODATO
 %token <strval> INCREMENTO DECREMENTO                       //++ y --
 %token <strval> INCREMENTOASIGNACION DECREMENTOASIGNACION   // += y -=
 %token <strval> AND OR                                      // && y ||
@@ -227,7 +227,7 @@ declaracion: declaracionVariablesSimples
             | definicionFunciones
 ;
 
-declaracionVariablesSimples: TIPO_DATO listaVariablesSimples ';'
+declaracionVariablesSimples: TIPODATO listaVariablesSimples ';'
 ;
 
 listaVariablesSimples: variableSimple       
@@ -249,23 +249,23 @@ constante: CONSTANTEDECIMAL
         | LITERALCADENA
 ;
 
-declaracionFunciones: TIPO_DATO IDENTIFICADOR '(' opcionArgumentosConTipo ')' ';' 
+declaracionFunciones: TIPODATO IDENTIFICADOR '(' opcionArgumentosConTipo ')' ';' 
 ;
 
 opcionArgumentosConTipo:        /* vacio */ 
-                                | TIPO_DATO opcionReferencia IDENTIFICADOR
-                                | TIPO_DATO opcionReferencia IDENTIFICADOR ',' argumentosConTipo 
+                                | TIPODATO opcionReferencia IDENTIFICADOR
+                                | TIPODATO opcionReferencia IDENTIFICADOR ',' argumentosConTipo 
 ;
 
-argumentosConTipo: TIPO_DATO opcionReferencia IDENTIFICADOR
-                 | TIPO_DATO opcionReferencia IDENTIFICADOR ',' argumentosConTipo
+argumentosConTipo: TIPODATO opcionReferencia IDENTIFICADOR
+                 | TIPODATO opcionReferencia IDENTIFICADOR ',' argumentosConTipo
 ;
 
 opcionReferencia: /* vacio */
                   | '&'
 ;
 
-definicionFunciones: TIPO_DATO IDENTIFICADOR '(' opcionArgumentosConTipo ')' sentencia
+definicionFunciones: TIPODATO IDENTIFICADOR '(' opcionArgumentosConTipo ')' sentencia
 ;
 
 %%
