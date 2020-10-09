@@ -246,7 +246,7 @@ constante: CONSTANTEDECIMAL
         | CONSTANTEOCTAL
         | CONSTANTEREAL
         | CONSTANTECARACTER
-      //  | LITERALCADENA
+        | LITERALCADENA
 ;
 
 declaracionFunciones: TIPO_DATO IDENTIFICADOR '(' opcionArgumentosConTipo ')' ';' 

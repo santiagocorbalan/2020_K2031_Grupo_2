@@ -21,7 +21,7 @@ PUNTUACION_OPERACION    "*"|")"|"-"|"%"|";"|"?"|"]"|"&"|"#"|"."|"<"|","|"^"|"'"|
 
 "\n" {return '\n';}
 
-" "|"\t" {}
+" "|"\t"
 
 [1-9]{DIGITO_DECIMAL}* {yylval.enteroval = atoi(yytext);return CONSTANTEDECIMAL;}
 
