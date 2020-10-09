@@ -84,6 +84,7 @@ input:    /* vacio */
 programa:     expresion '\n'
             | sentencia '\n'
             | declaracion '\n'
+            | definicionFunciones
 ;
 
 // SENTENCIAS 
@@ -224,7 +225,6 @@ exp_primaria: IDENTIFICADOR
 
 declaracion: declaracionVariablesSimples 
             | declaracionFunciones
-            | definicionFunciones
 ;
 
 declaracionVariablesSimples: TIPODATO listaVariablesSimples ';'
