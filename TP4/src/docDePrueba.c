@@ -1,8 +1,12 @@
 int main (){
 
-int a = 0x10A
-int b = 005
-int c = 25
+int a,b = 0x10A;
+char c = 'a';
+if (a == b){
 
-if (a > b)
+    return a=c;
+}
+
+return 1;
+
 }
