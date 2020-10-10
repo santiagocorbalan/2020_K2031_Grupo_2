@@ -23,6 +23,53 @@ PUNTUACION_OPERACION    "*"|")"|"-"|"%"|";"|"?"|"]"|"&"|"#"|"."|"<"|","|"^"|"'"|
 
 " "|"\t"
 
+"("        { return '('; }
+")"        { return ')'; }
+"["        { return '['; }
+"]"        { return '['; }
+","        { return ','; }
+"?"        { return '?';}
+":"        { return ':'; }
+";"        { return ';'; }
+"{"        { return '{'; }
+"}"        { return '}'; }
+"&"        { return '&'; }
+
+if         { return IF;}
+switch     { return SWITCH;}
+else       { return ELSE;}
+while      { return WHILE;}
+for        { return FOR;}
+do         { return DO;}
+return     { return RETURN;}
+
+"++"       { return INCREMENTO; }
+"--"       { return DECREMENTO; }
+"*"        { return '*'; }
+"/"        { return '/'; }
+"%"        { return '%'; }
+"+"        { return '+'; }
+"-"        { return '-'; }
+"&&"       { return AND; }
+"||"       { return OR; }
+
+TIPO_DATO {yylval.strval = strdup(yytext); return TIPO_DATO;}
+
+">"        { return '>'; }
+"<"        { return '<'; }
+">="       { return MAYORIGUAL; }
+"<="       { return MENORIGUAL; }
+"=="       { return RELACIONALIGUAL; }
+"!="       { return RELACIONALDIFERENTE; }
+"="        { return '='; }
+"+="       { return INCREMENTOASIGNACION; }
+"-="       { return DECREMENTOASIGNACION; }
+"->"       { return ACCESOPUNTERO; }
+
+({LETRA}|_)({LETRA}|{DIGITO_DECIMAL}|_)* { yylval.strval = strdup(yytext); return IDENTIFICADOR; }
+
+\"[^\"]*\" {yylval.strval = strdup(yytext); return LITERALCADENA;}
+
 [1-9]{DIGITO_DECIMAL}* {yylval.enteroval = atoi(yytext);return CONSTANTEDECIMAL;}
 
 0{DIGITO_OCTAL}* {yylval.enteroval = strtol(yytext,NULL,0);return CONSTANTEOCTAL;}
@@ -31,49 +78,7 @@ PUNTUACION_OPERACION    "*"|")"|"-"|"%"|";"|"?"|"]"|"&"|"#"|"."|"<"|","|"^"|"'"|
 
 {DIGITO_DECIMAL}*"."{DIGITO_DECIMAL}*(EXPONENCIAL(SIGNO)?{DIGITO_DECIMAL}+)? {yylval.dobleval = atof(yytext);return CONSTANTEREAL;}
 
-if         { return IF;}
-while      { return WHILE;}
-for        { return FOR;}
-else       { return ELSE;}
-do         { return DO;}
-switch     { return SWITCH;}
-return     { return RETURN;}
-
 \'[^']\'   {yylval.strval = strdup(yytext);return CONSTANTECARACTER;}
-
-\"[^\"]*\" {yylval.strval = strdup(yytext); return LITERALCADENA;}
-
-TIPO_DATO {yylval.strval = strdup(yytext); return TIPODATO;}
-
-({LETRA}|_)({LETRA}|{DIGITO_DECIMAL}|_)* { yylval.strval = strdup(yytext); return IDENTIFICADOR; }
- 
-
-"++"       { return INCREMENTO; }
-"--"       { return DECREMENTO; }
-"+="       { return INCREMENTOASIGNACION; }
-"-="       { return DECREMENTOASIGNACION; }
-"=="       { return RELACIONALIGUAL; }
-"!="       { return RELACIONALDIFERENTE; }
-">="       { return MAYORIGUAL; }
-"<="       { return MENORIGUAL; }
-"&&"       { return AND; }
-"||"       { return OR; }
-"->"       { return ACCESOPUNTERO; }
-";"        { return ';'; }
-":"        { return ':'; }
-","        { return ','; }
-"="        { return '='; }
-"<"        { return '<'; }
-">"        { return '>'; }
-"+"        { return '+'; }
-"-"        { return '-'; }
-"*"        { return '*'; }
-"/"        { return '/'; }
-"%"        { return '%'; }
-")"        { return ')'; }
-"{"        { return '{'; }
-"("        { return '('; }
-"}"        { return '}'; }
 
 . {printf("\nCaracter no reconocido: %c", yytext[0]);}
 

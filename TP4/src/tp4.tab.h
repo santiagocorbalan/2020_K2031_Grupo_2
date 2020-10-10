@@ -40,7 +40,7 @@
       know about them.  */
    enum yytokentype {
      IDENTIFICADOR = 258,
-     TIPODATO = 259,
+     TIPO_DATO = 259,
      INCREMENTO = 260,
      DECREMENTO = 261,
      INCREMENTOASIGNACION = 262,
@@ -75,7 +75,7 @@ typedef union YYSTYPE
 {
 
 /* Line 1676 of yacc.c  */
-#line 25 "tp4.y"
+#line 27 "tp4.y"
 
     int enteroval;
     char* strval;

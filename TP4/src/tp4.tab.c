@@ -76,7 +76,9 @@
 
 int yylex();
 
-extern FILE* yyin;
+
+FILE* yyin;
+
 int yyerror (char*);
 
 int yywrap(){
@@ -93,7 +95,7 @@ int flag_DeSalto  = 0;
 
 
 /* Line 189 of yacc.c  */
-#line 97 "tp4.tab.c"
+#line 99 "tp4.tab.c"
 
 /* Enabling traces.  */
 #ifndef YYDEBUG
@@ -121,7 +123,7 @@ int flag_DeSalto  = 0;
       know about them.  */
    enum yytokentype {
      IDENTIFICADOR = 258,
-     TIPODATO = 259,
+     TIPO_DATO = 259,
      INCREMENTO = 260,
      DECREMENTO = 261,
      INCREMENTOASIGNACION = 262,
@@ -156,7 +158,7 @@ typedef union YYSTYPE
 {
 
 /* Line 214 of yacc.c  */
-#line 25 "tp4.y"
+#line 27 "tp4.y"
 
     int enteroval;
     char* strval;
@@ -165,7 +167,7 @@ typedef union YYSTYPE
 
 
 /* Line 214 of yacc.c  */
-#line 169 "tp4.tab.c"
+#line 171 "tp4.tab.c"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
@@ -177,7 +179,7 @@ typedef union YYSTYPE
 
 
 /* Line 264 of yacc.c  */
-#line 181 "tp4.tab.c"
+#line 183 "tp4.tab.c"
 
 #ifdef short
 # undef short
@@ -503,17 +505,17 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint16 yyrline[] =
 {
-       0,    80,    80,    81,    84,    85,    86,    87,    93,    94,
-      95,    96,    97,   100,   101,   106,   109,   110,   111,   113,
-     114,   118,   119,   120,   124,   125,   126,   128,   132,   133,
-     134,   138,   141,   142,   148,   149,   152,   153,   156,   157,
-     159,   160,   161,   165,   166,   168,   169,   172,   173,   176,
-     177,   178,   180,   181,   182,   183,   184,   186,   187,   188,
-     190,   191,   192,   193,   196,   197,   198,   202,   203,   204,
-     205,   206,   207,   208,   211,   212,   213,   216,   217,   218,
-     219,   226,   227,   230,   233,   234,   237,   240,   241,   244,
-     245,   246,   247,   248,   249,   252,   255,   256,   257,   260,
-     261,   264,   265,   268
+       0,    82,    82,    83,    86,    87,    88,    89,    95,    96,
+      97,    98,    99,   102,   103,   108,   111,   112,   113,   115,
+     116,   120,   121,   122,   126,   127,   128,   130,   134,   135,
+     136,   140,   143,   144,   150,   151,   154,   155,   158,   159,
+     161,   162,   163,   167,   168,   170,   171,   174,   175,   178,
+     179,   180,   182,   183,   184,   185,   186,   188,   189,   190,
+     192,   193,   194,   195,   198,   199,   200,   204,   205,   206,
+     207,   208,   209,   210,   213,   214,   215,   218,   219,   220,
+     221,   228,   229,   232,   235,   236,   239,   242,   243,   246,
+     247,   248,   249,   250,   251,   254,   257,   258,   259,   262,
+     263,   266,   267,   270
 };
 #endif
 
@@ -522,7 +524,7 @@ static const yytype_uint16 yyrline[] =
    First, the terminals, then, starting at YYNTOKENS, nonterminals.  */
 static const char *const yytname[] =
 {
-  "$end", "error", "$undefined", "IDENTIFICADOR", "TIPODATO",
+  "$end", "error", "$undefined", "IDENTIFICADOR", "TIPO_DATO",
   "INCREMENTO", "DECREMENTO", "INCREMENTOASIGNACION",
   "DECREMENTOASIGNACION", "AND", "OR", "RELACIONALIGUAL",
   "RELACIONALDIFERENTE", "MAYORIGUAL", "MENORIGUAL", "ACCESOPUNTERO",
@@ -1569,56 +1571,56 @@ yyreduce:
         case 8:
 
 /* Line 1455 of yacc.c  */
-#line 93 "tp4.y"
+#line 95 "tp4.y"
     {if (flag_SentExpresion == 0) printf("Se declaro una sentencia simple\n"); flag_SentExpresion = 1;;}
     break;
 
   case 9:
 
 /* Line 1455 of yacc.c  */
-#line 94 "tp4.y"
+#line 96 "tp4.y"
     {if (flag_SentCompuesta == 0) printf("Se declaro una sentencia compuesta\n"); flag_SentCompuesta = 1;;}
     break;
 
   case 10:
 
 /* Line 1455 of yacc.c  */
-#line 95 "tp4.y"
+#line 97 "tp4.y"
     {if (flag_Seleccion == 0) printf("Se declaro una sentencia simple\n"); flag_Seleccion = 1;;}
     break;
 
   case 11:
 
 /* Line 1455 of yacc.c  */
-#line 96 "tp4.y"
+#line 98 "tp4.y"
     {if (flag_Iteracion == 0) printf("Se declaro una sentencia simple\n"); flag_Iteracion = 1;;}
     break;
 
   case 28:
 
 /* Line 1455 of yacc.c  */
-#line 132 "tp4.y"
+#line 134 "tp4.y"
     {if (flag_Iteracion == 0) printf("Se declaro correctamente una sentencia \"while\" \n"); flag_Iteracion = 1;;}
     break;
 
   case 29:
 
 /* Line 1455 of yacc.c  */
-#line 133 "tp4.y"
+#line 135 "tp4.y"
     {if (flag_Iteracion == 0) printf("Se declaro correctamente una sentencia \"do while\"\n"); flag_Iteracion = 1;;}
     break;
 
   case 30:
 
 /* Line 1455 of yacc.c  */
-#line 134 "tp4.y"
+#line 136 "tp4.y"
     {if (flag_Iteracion == 0) printf("Se declaro correctamente una sentencia \"for\" \n"); flag_Iteracion = 1;;}
     break;
 
 
 
 /* Line 1455 of yacc.c  */
-#line 1622 "tp4.tab.c"
+#line 1624 "tp4.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1830,7 +1832,7 @@ yyreturn:
 
 
 /* Line 1675 of yacc.c  */
-#line 271 "tp4.y"
+#line 273 "tp4.y"
 
 
 
@@ -1844,10 +1846,9 @@ int main(void){
 */
     yyin = fopen ("docDePrueba.c","r");
     
-    //printf("Entre al parse:\n");
-    
     flag_parse = yyparse();
-    
+    puts("Sali del parse");
+
     fclose(yyin);
 
     return flag_parse;

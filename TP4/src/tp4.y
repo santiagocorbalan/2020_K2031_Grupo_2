@@ -31,7 +31,7 @@ int flag_DeSalto  = 0;
 }
 
 %token <strval> IDENTIFICADOR
-%token <strval> TIPODATO
+%token <strval> TIPO_DATO
 %token <strval> INCREMENTO DECREMENTO                       //++ y --
 %token <strval> INCREMENTOASIGNACION DECREMENTOASIGNACION   // += y -=
 %token <strval> AND OR                                      // && y ||
@@ -229,7 +229,7 @@ declaracion: declaracionVariablesSimples
             | declaracionFunciones
 ;
 
-declaracionVariablesSimples: TIPODATO listaVariablesSimples ';'
+declaracionVariablesSimples: TIPO_DATO listaVariablesSimples ';'
 ;
 
 listaVariablesSimples: variableSimple       
@@ -251,23 +251,23 @@ constante: CONSTANTEDECIMAL
         | LITERALCADENA
 ;
 
-declaracionFunciones: TIPODATO IDENTIFICADOR '(' opcionArgumentosConTipo ')' ';' 
+declaracionFunciones: TIPO_DATO IDENTIFICADOR '(' opcionArgumentosConTipo ')' ';' 
 ;
 
 opcionArgumentosConTipo:        /* vacio */ 
-                                | TIPODATO opcionReferencia IDENTIFICADOR
-                                | TIPODATO opcionReferencia IDENTIFICADOR ',' argumentosConTipo 
+                                | TIPO_DATO opcionReferencia IDENTIFICADOR
+                                | TIPO_DATO opcionReferencia IDENTIFICADOR ',' argumentosConTipo 
 ;
 
-argumentosConTipo: TIPODATO opcionReferencia IDENTIFICADOR
-                 | TIPODATO opcionReferencia IDENTIFICADOR ',' argumentosConTipo
+argumentosConTipo: TIPO_DATO opcionReferencia IDENTIFICADOR
+                 | TIPO_DATO opcionReferencia IDENTIFICADOR ',' argumentosConTipo
 ;
 
 opcionReferencia: /* vacio */
                   | '&'
 ;
 
-definicionFunciones: TIPODATO IDENTIFICADOR '(' opcionArgumentosConTipo ')' sentencia
+definicionFunciones: TIPO_DATO IDENTIFICADOR '(' opcionArgumentosConTipo ')' sentencia
 ;
 
 %%
@@ -275,7 +275,7 @@ definicionFunciones: TIPODATO IDENTIFICADOR '(' opcionArgumentosConTipo ')' sent
 
 int main(void){
 
-    //int flag_parse;
+    int flag_parse;
   /*  
      #ifdef BISON_DEBUG
         yydebug = 1;
@@ -283,14 +283,12 @@ int main(void){
 */
     yyin = fopen ("docDePrueba.c","r");
     
-    //printf("Entre al parse:\n");
-    
-    //flag_parse = yyparse();
-    yyparse();
+    flag_parse = yyparse();
+    puts("Sali del parse");
 
     fclose(yyin);
 
-    return "prueba"; //flag_parse;
+    return flag_parse;
 
 }
 
