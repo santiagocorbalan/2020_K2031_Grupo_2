@@ -274,7 +274,11 @@ definicionFunciones: TIPODATO IDENTIFICADOR '(' opcionArgumentosConTipo ')' sent
 int main(void){
 
     int flag_parse;
-    
+  /*  
+     #ifdef BISON_DEBUG
+        yydebug = 1;
+    #endif   
+*/
     yyin = fopen ("docDePrueba.c","r");
     
     //printf("Entre al parse:\n");
