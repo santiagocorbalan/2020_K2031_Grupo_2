@@ -240,7 +240,7 @@ variableSimple: IDENTIFICADOR opcionInicializacion
 ;
 
 opcionInicializacion:   /* vacio */
-                     | op_asignacion constante // ojo con constante revisar
+                     | op_asignacion exp_condicional // ojo con constante revisar
 ;
 
 constante: CONSTANTEDECIMAL
@@ -248,7 +248,7 @@ constante: CONSTANTEDECIMAL
         | CONSTANTEOCTAL
         | CONSTANTEREAL
         | CONSTANTECARACTER
-        | LITERALCADENA
+
 ;
 
 declaracionFunciones: TIPO_DATO IDENTIFICADOR '(' opcionArgumentosConTipo ')' ';' 
