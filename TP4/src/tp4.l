@@ -5,7 +5,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include "tp4.tab.h" 
-extern FILE* yyin;
+
 %}
 
 DIGITO_DECIMAL          [0-9] 
@@ -31,6 +31,14 @@ PUNTUACION_OPERACION    "*"|")"|"-"|"%"|";"|"?"|"]"|"&"|"#"|"."|"<"|","|"^"|"'"|
 
 {DIGITO_DECIMAL}*"."{DIGITO_DECIMAL}*(EXPONENCIAL(SIGNO)?{DIGITO_DECIMAL}+)? {yylval.dobleval = atof(yytext);return CONSTANTEREAL;}
 
+if         { return IF;}
+while      { return WHILE;}
+for        { return FOR;}
+else       { return ELSE;}
+do         { return DO;}
+switch     { return SWITCH;}
+return     { return RETURN;}
+
 \'[^']\'   {yylval.strval = strdup(yytext);return CONSTANTECARACTER;}
 
 \"[^\"]*\" {yylval.strval = strdup(yytext); return LITERALCADENA;}
@@ -39,13 +47,7 @@ TIPO_DATO {yylval.strval = strdup(yytext); return TIPODATO;}
 
 ({LETRA}|_)({LETRA}|{DIGITO_DECIMAL}|_)* { yylval.strval = strdup(yytext); return IDENTIFICADOR; }
  
-if         { return IF;}
-while      { return WHILE;}
-for        { return FOR;}
-else       { return ELSE;}
-do         { return DO;}
-switch     { return SWITCH;}
-return     { return RETURN;}
+
 "++"       { return INCREMENTO; }
 "--"       { return DECREMENTO; }
 "+="       { return INCREMENTOASIGNACION; }

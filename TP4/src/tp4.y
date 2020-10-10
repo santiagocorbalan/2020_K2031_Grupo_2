@@ -5,7 +5,9 @@
 
 int yylex();
 
-extern FILE* yyin;
+
+FILE* yyin;
+
 int yyerror (char*);
 
 int yywrap(){
@@ -273,7 +275,7 @@ definicionFunciones: TIPODATO IDENTIFICADOR '(' opcionArgumentosConTipo ')' sent
 
 int main(void){
 
-    int flag_parse;
+    //int flag_parse;
   /*  
      #ifdef BISON_DEBUG
         yydebug = 1;
@@ -283,11 +285,12 @@ int main(void){
     
     //printf("Entre al parse:\n");
     
-    flag_parse = yyparse();
-    
+    //flag_parse = yyparse();
+    yyparse();
+
     fclose(yyin);
 
-    return flag_parse;
+    return "prueba"; //flag_parse;
 
 }
 
