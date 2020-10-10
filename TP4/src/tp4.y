@@ -86,7 +86,7 @@ input:    /* vacio */
 programa:     expresion '\n'
             | sentencia '\n'
             | declaracion '\n'
-            | definicionFunciones
+            | definicionFunciones '\n'
 ;
 
 // SENTENCIAS 
@@ -112,14 +112,15 @@ listaDeDeclaracionesOpcional: /* vacio */
                                 | declaracion
                                 | listaDeDeclaracionesOpcional declaracion
 ;
-listaSentencias: sentencia
-                | listaSentencias sentencia
-     
-;
 
 listaSentenciasOpcional:  /* vacio */
                         | sentencia
                         | listaSentencias sentencia
+;
+
+listaSentencias: sentencia
+                | listaSentencias sentencia
+     
 ;
 
 sent_seleccion: 
@@ -133,7 +134,7 @@ sent_seleccion:
 sent_iteracion: 
     WHILE '(' expresion ')' sentencia  {if (flag_Iteracion == 0) printf("Se declaro correctamente una sentencia \"while\" \n"); flag_Iteracion = 1;}
     | DO sentencia WHILE '(' expresion ')' ';'  {if (flag_Iteracion == 0) printf("Se declaro correctamente una sentencia \"do while\"\n"); flag_Iteracion = 1;}
-    | FOR '(' expresion ';' expresion ';' expresion ')' sentencia  {if (flag_Iteracion == 0) printf("Se declaro correctamente una sentencia \"for\" \n"); flag_Iteracion = 1;}
+    | FOR '(' expresionOpcional ';' expresionOpcional ';' expresionOpcional ')' sentencia  {if (flag_Iteracion == 0) printf("Se declaro correctamente una sentencia \"for\" \n"); flag_Iteracion = 1;}
  // | error ';'
 ;
 
