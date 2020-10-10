@@ -58,7 +58,6 @@ int flag_DeSalto  = 0;
 %token <strval> RETURN
 %token <strval> error
 
-
 /*
 %type <strval> expresion
 %type <strval> exp_asignacion
@@ -81,13 +80,8 @@ int flag_DeSalto  = 0;
 %type <strval> definicionFunciones
 */
 
-
-%left '='
-%right AND OR
-%right '<' '>' MAYORIGUAL MENORIGUAL
-%right RELACIONALIGUAL RELACIONALDIFERENTE
-%right '+' '-'
-%right '*' '/' '^' '%'
+%left '+' '-' '*' '/' '^' '%' ',' '<' '>' OR AND RELACIONALIGUAL RELACIONALDIFERENTE MAYORIGUAL MENORIGUAL
+%right '=' ':' '&' '!' '(' ')' '[' ']' INCREMENTOASIGNACION DECREMENTOASIGNACION INCREMENTO DECREMENTO   
 
 %%
 
@@ -156,7 +150,6 @@ expresionOpcional: /* vacio */
                     | expresion
 ;
 
-
 //  EXPRESIONES //
 
 expresion: exp_asignacion 
@@ -170,37 +163,43 @@ exp_asignacion: exp_condicional
 exp_condicional: exp_o_logico
                 | exp_o_logico '?' expresion ':' exp_condicional
 ;
+
 op_asignacion: '=' 
                 | INCREMENTOASIGNACION 
                 | DECREMENTOASIGNACION 
 ;
-//Los demás no los agrego porque no son tan importantes.
 
 exp_o_logico: exp_y_logico
             | exp_o_logico OR exp_y_logico
 ;
+
 exp_y_logico: exp_y       //exp_o_inclusivo
             | exp_y_logico AND exp_y
 ;
+
 exp_y:
     exp_igualdad
     | exp_y '&' exp_igualdad
 ;
+
 exp_igualdad:
     exp_relacional
     | exp_igualdad RELACIONALIGUAL exp_relacional
     | exp_igualdad RELACIONALDIFERENTE exp_relacional
 ;
+
 exp_relacional: exp_aditiva
                 | exp_relacional '<' exp_aditiva
                 | exp_relacional '>' exp_aditiva
                 | exp_relacional MENORIGUAL exp_aditiva
                 | exp_relacional MAYORIGUAL exp_aditiva
 ;
+
 exp_aditiva: exp_multiplicativa
             | exp_aditiva '+' exp_multiplicativa
             | exp_aditiva '-' exp_multiplicativa
 ;
+
 exp_multiplicativa: exp_unaria
     | exp_multiplicativa '*' exp_unaria
     | exp_multiplicativa '/' exp_unaria
@@ -259,7 +258,6 @@ constante: CONSTANTEDECIMAL
         | CONSTANTEOCTAL
         | CONSTANTEREAL
         | CONSTANTECARACTER
-
 ;
 
 declaracionFunciones: TIPO_DATO IDENTIFICADOR '(' opcionArgumentosConTipo ')' ';' 
@@ -282,7 +280,6 @@ definicionFunciones: TIPO_DATO IDENTIFICADOR '(' opcionArgumentosConTipo ')' sen
 ;
 
 %%
-
 
 int main(void){
 
