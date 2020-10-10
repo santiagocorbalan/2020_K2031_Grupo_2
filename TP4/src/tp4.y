@@ -7,7 +7,7 @@ int yylex();
 
 
 FILE* yyin;
-
+FILE* yyout;
 int yyerror (char*);
 
 int yywrap(){
@@ -80,9 +80,9 @@ int flag_DeSalto  = 0;
 %type <strval> definicionFunciones
 */
 
-%left '+' '-' '*' '/' '^' '%' ',' '<' '>' OR AND RELACIONALIGUAL RELACIONALDIFERENTE MAYORIGUAL MENORIGUAL
+/* %left '+' '-' '*' '/' '^' '%' ',' '<' '>' OR AND RELACIONALIGUAL RELACIONALDIFERENTE MAYORIGUAL MENORIGUAL
 %right '=' ':' '&' '!' '(' ')' '[' ']' INCREMENTOASIGNACION DECREMENTOASIGNACION INCREMENTO DECREMENTO   
-
+ */
 %%
 
 input:    /* vacio */
@@ -286,20 +286,21 @@ definicionFunciones: TIPO_DATO IDENTIFICADOR '(' opcionArgumentosConTipo ')' sen
 
 int main(void){
 
-    int flag_parse;
-  /*  
+      /*  
      #ifdef BISON_DEBUG
         yydebug = 1;
     #endif   
 */
+    yyout = fopen ("docDePrueba.c","w");
     yyin = fopen ("docDePrueba.c","r");
     
-    flag_parse = yyparse();
+    yyparse();
     puts("Sali del parse");
 
+    fclose(yyout);
     fclose(yyin);
 
-    return flag_parse;
+    return 2;
 
 }
 
