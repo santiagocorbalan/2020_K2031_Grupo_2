@@ -73,6 +73,6 @@ return     { return RETURN;}
 "("        { return '('; }
 "}"        { return '}'; }
 
-. {printf("No se reconoce el carecter",yytext);}
+. {printf("\nCaracter no reconocido: %c", yytext[0]);}
 
 %%
