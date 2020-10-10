@@ -14,13 +14,6 @@ int yywrap(){
     return (1);
 }
 
-int flag_error = 0;
-int flag_SentExpresion = 0;
-int flag_SentCompuesta = 0;
-int flag_Seleccion = 0;
-int flag_Iteracion = 0;
-int flag_DeSalto  = 0;
-
 %}
 
 
@@ -104,11 +97,6 @@ sentencia:
    | sent_deSalto 
 ;
 
-sent_expresion: ';'  {printf("\nSe encontro una sentencia vacia.");}
-                | expresion ';'  {printf("\nSe encontro una sentencia de expresion");}
-
-;
-
 sent_compuesta: 
     '{' listaDeDeclaracionesOpcional listaSentenciasOpcional '}' {printf("\nSe encontro una sentencia compuesta");}
 ;
@@ -118,21 +106,25 @@ listaDeDeclaracionesOpcional: /* vacio */
                                 | listaDeDeclaracionesOpcional declaracion
 ;
 
-listaSentenciasOpcional:  /* vacio */
-                        | sentencia
-                        | listaSentencias sentencia
-;
-
 listaSentencias: sentencia
                 | listaSentencias sentencia
      
 ;
 
+listaSentenciasOpcional:  /* vacio */
+                        | sentencia
+                        | listaSentencias sentencia
+;
+
+sent_expresion: ';'  {printf("\nSe encontro una sentencia vacia.");}
+                | expresion ';'  {printf("\nSe encontro una sentencia de expresion");}
+
+;
+
 sent_seleccion: 
     IF '(' expresion ')' sentencia  
     | IF '(' expresion ')' sentencia ELSE sentencia  
-    | SWITCH '(' expresion ')' sentencia 
-    // en vez de sentencia SWITCH la cambiamos por sentencia para acortar
+    | SWITCH '(' expresion ')' sentencia  // en vez de sentencia SWITCH la cambiamos por sentencia para acortar
     | error ';'
 ;
 
@@ -256,14 +248,8 @@ opcionInicializacion:   /* vacio */
                      | op_asignacion exp_condicional // ojo con constante revisar
 ;
 
-constante: CONSTANTEDECIMAL
-        | CONSTANTEHEXADECIMAL
-        | CONSTANTEOCTAL
-        | CONSTANTEREAL
-        | CONSTANTECARACTER
-;
-
-declaracionFunciones: TIPO_DATO IDENTIFICADOR '(' opcionArgumentosConTipo ')' ';' {printf("\n Se declara la funcion %s de tipo %s ", $<strval>2, $<strval>1);}
+declaracionFunciones: 
+TIPO_DATO IDENTIFICADOR '(' opcionArgumentosConTipo ')' ';' {printf("\n Se declara la funcion %s de tipo %s ", $<strval>2, $<strval>1);}
 ;
 
 opcionArgumentosConTipo:        /* vacio */ 
@@ -279,7 +265,15 @@ opcionReferencia: /* vacio */
                   | '&'
 ;
 
-definicionFunciones: TIPO_DATO IDENTIFICADOR '(' opcionArgumentosConTipo ')' sentencia {printf("\n Se define la funcion %s de tipo %s", $<strval>2, $<strval>1);}
+definicionFunciones: 
+                    TIPO_DATO IDENTIFICADOR '(' opcionArgumentosConTipo ')' sentencia {printf("\n Se define la funcion %s de tipo %s", $<strval>2, $<strval>1);}
+;
+
+constante: CONSTANTEDECIMAL
+        | CONSTANTEHEXADECIMAL
+        | CONSTANTEOCTAL
+        | CONSTANTEREAL
+        | CONSTANTECARACTER
 ;
 
 %%
