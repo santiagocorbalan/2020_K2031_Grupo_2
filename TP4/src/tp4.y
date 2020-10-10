@@ -97,20 +97,20 @@ programa:
 // SENTENCIAS 
 
 sentencia: 
-    sent_expresion {if (flag_SentExpresion == 0) printf("Se declaro una sentencia simple\n"); flag_SentExpresion = 1;}
-   | sent_compuesta {if (flag_SentCompuesta == 0) printf("Se declaro una sentencia compuesta\n"); flag_SentCompuesta = 1;}
-   | sent_seleccion {if (flag_Seleccion == 0) printf("Se declaro una sentencia de seleccion\n"); flag_Seleccion = 1;}
-   | sent_iteracion {if (flag_Iteracion == 0) printf("Se declaro una sentencia de iteración \n"); flag_Iteracion = 1;}
+    sent_expresion 
+   | sent_compuesta 
+   | sent_seleccion 
+   | sent_iteracion 
    | sent_deSalto 
 ;
 
-sent_expresion: ';'
-                | expresion ';'
+sent_expresion: ';'  {printf("\nSe encontro una sentencia vacia.");}
+                | expresion ';'  {printf("\nSe encontro una sentencia de expresion");}
 
 ;
 
 sent_compuesta: 
-    '{' listaDeDeclaracionesOpcional listaSentenciasOpcional '}' // ambas sentencias en la llave son opcionales
+    '{' listaDeDeclaracionesOpcional listaSentenciasOpcional '}' {printf("\nSe encontro una sentencia compuesta");}
 ;
 
 listaDeDeclaracionesOpcional: /* vacio */
@@ -137,13 +137,13 @@ sent_seleccion:
 ;
 
 sent_iteracion: 
-    WHILE '(' expresion ')' sentencia  {if (flag_Iteracion == 0) printf("Se declaro correctamente una sentencia \"while\" \n"); flag_Iteracion = 1;}
-    | DO sentencia WHILE '(' expresion ')' ';'  {if (flag_Iteracion == 0) printf("Se declaro correctamente una sentencia \"do while\"\n"); flag_Iteracion = 1;}
-    | FOR '(' expresionOpcional ';' expresionOpcional ';' expresionOpcional ')' sentencia  {if (flag_Iteracion == 0) printf("Se declaro correctamente una sentencia \"for\" \n"); flag_Iteracion = 1;}
+    WHILE '(' expresion ')' sentencia  { printf("Se declaro correctamente una sentencia \"while\" \n");}
+    | DO sentencia WHILE '(' expresion ')' ';'  {printf("Se declaro correctamente una sentencia \"do while\"\n"); }
+    | FOR '(' expresionOpcional ';' expresionOpcional ';' expresionOpcional ')' sentencia  {printf("Se declaro correctamente una sentencia \"for\" \n");}
  // | error ';'
 ;
 
-sent_deSalto: RETURN expresionOpcional ';' // contemplamos el caso del Return ya que es el mas conocido
+sent_deSalto: RETURN expresionOpcional ';' {printf("\nSe encontro una sentencia de salto.");}
 ;
 
 expresionOpcional: /* vacio */
@@ -239,14 +239,17 @@ declaracion: declaracionVariablesSimples
             | definicionFunciones
 ;
 
-declaracionVariablesSimples: TIPO_DATO listaVariablesSimples ';' {printf(" de tipo %s.", $<strval>1);}
+declaracionVariablesSimples: 
+            TIPO_DATO listaVariablesSimples ';' {printf(" de tipo %s.", $<strval>1);}
 ;
 
-listaVariablesSimples: variableSimple        {printf("\nSe declara la variable %s", $<strval>1);}
+listaVariablesSimples: 
+                        variableSimple        {printf("\nSe declara la variable %s", $<strval>1);}
                      | listaVariablesSimples ',' variableSimple {printf(", y la variable %s", $<strval>3);}
 ;
 
-variableSimple: IDENTIFICADOR opcionInicializacion {strcpy($<strval>$, $<strval>1);}
+variableSimple: 
+                        IDENTIFICADOR opcionInicializacion {strcpy($<strval>$, $<strval>1);}
 ;
 
 opcionInicializacion:   /* vacio */
@@ -260,7 +263,7 @@ constante: CONSTANTEDECIMAL
         | CONSTANTECARACTER
 ;
 
-declaracionFunciones: TIPO_DATO IDENTIFICADOR '(' opcionArgumentosConTipo ')' ';' 
+declaracionFunciones: TIPO_DATO IDENTIFICADOR '(' opcionArgumentosConTipo ')' ';' {printf("\n Se declara la funcion %s de tipo %s ", $<strval>2, $<strval>1);}
 ;
 
 opcionArgumentosConTipo:        /* vacio */ 
@@ -276,7 +279,7 @@ opcionReferencia: /* vacio */
                   | '&'
 ;
 
-definicionFunciones: TIPO_DATO IDENTIFICADOR '(' opcionArgumentosConTipo ')' sentencia
+definicionFunciones: TIPO_DATO IDENTIFICADOR '(' opcionArgumentosConTipo ')' sentencia {printf("\n Se define la funcion %s de tipo %s", $<strval>2, $<strval>1);}
 ;
 
 %%
