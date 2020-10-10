@@ -79,7 +79,7 @@ typedef union YYSTYPE
 
     int enteroval;
     char* strval;
-    double dobleval;
+    float dobleval;
 
 
 

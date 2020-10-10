@@ -27,22 +27,34 @@ int flag_DeSalto  = 0;
 %union {
     int enteroval;
     char* strval;
-    double dobleval;
+    float dobleval;
 }
 
 %token <strval> IDENTIFICADOR
 %token <strval> TIPO_DATO
-%token <strval> INCREMENTO DECREMENTO                       //++ y --
-%token <strval> INCREMENTOASIGNACION DECREMENTOASIGNACION   // += y -=
-%token <strval> AND OR                                      // && y ||
-%token <strval> RELACIONALIGUAL RELACIONALDIFERENTE         // == y !=
-%token <strval> MAYORIGUAL MENORIGUAL                       // >= y <=
+%token <strval> INCREMENTO
+%token <strval> DECREMENTO                    //++ y --
+%token <strval> INCREMENTOASIGNACION
+%token <strval> DECREMENTOASIGNACION   // += y -=
+%token <strval> AND
+%token <strval> OR                                      // && y ||
+%token <strval> RELACIONALIGUAL 
+%token <strval> RELACIONALDIFERENTE         // == y !=
+%token <strval> MAYORIGUAL 
+%token <strval> MENORIGUAL                       // >= y <=
 %token <strval> ACCESOPUNTERO                               // -> 
-%token <enteroval> CONSTANTEDECIMAL CONSTANTEOCTAL CONSTANTEHEXADECIMAL 
+%token <enteroval> CONSTANTEDECIMAL
+%token <enteroval> CONSTANTEOCTAL 
+%token <enteroval> CONSTANTEHEXADECIMAL 
 %token <dobleval> CONSTANTEREAL 
 %token <strval> CONSTANTECARACTER
 %token <strval> LITERALCADENA 
-%token <strval> IF ELSE WHILE DO SWITCH FOR 
+%token <strval> IF
+%token <strval> ELSE
+%token <strval> WHILE
+%token <strval> DO
+%token <strval> SWITCH
+%token <strval> FOR 
 %token <strval> RETURN
 %token <strval> error
 
@@ -83,10 +95,9 @@ input:    /* vacio */
         | input programa
 ;
 
-programa:     expresion '\n'
-            | sentencia '\n'
+programa:    
+             sentencia '\n'
             | declaracion '\n'
-            | definicionFunciones '\n'
 ;
 
 // SENTENCIAS 
@@ -94,8 +105,8 @@ programa:     expresion '\n'
 sentencia: 
     sent_expresion {if (flag_SentExpresion == 0) printf("Se declaro una sentencia simple\n"); flag_SentExpresion = 1;}
    | sent_compuesta {if (flag_SentCompuesta == 0) printf("Se declaro una sentencia compuesta\n"); flag_SentCompuesta = 1;}
-   | sent_seleccion {if (flag_Seleccion == 0) printf("Se declaro una sentencia simple\n"); flag_Seleccion = 1;}
-   | sent_iteracion {if (flag_Iteracion == 0) printf("Se declaro una sentencia simple\n"); flag_Iteracion = 1;}
+   | sent_seleccion {if (flag_Seleccion == 0) printf("Se declaro una sentencia de seleccion\n"); flag_Seleccion = 1;}
+   | sent_iteracion {if (flag_Iteracion == 0) printf("Se declaro una sentencia de iteración \n"); flag_Iteracion = 1;}
    | sent_deSalto 
 ;
 
@@ -213,7 +224,7 @@ exp_sufijo:
 
 listaArgumentosOpcional: /* vacio */
                         | exp_asignacion
-                        | listaDeDeclaracionesOpcional ',' exp_asignacion
+                        | listaArgumentosOpcional ',' exp_asignacion
 ;
 
 exp_primaria: IDENTIFICADOR
@@ -222,22 +233,21 @@ exp_primaria: IDENTIFICADOR
             | '(' expresion ')'
 ;
 
-
 //  DECLARACIONES
-
 
 declaracion: declaracionVariablesSimples 
             | declaracionFunciones
+            | definicionFunciones
 ;
 
-declaracionVariablesSimples: TIPO_DATO listaVariablesSimples ';'
+declaracionVariablesSimples: TIPO_DATO listaVariablesSimples ';' {printf(" de tipo %s.", $<strval>1);}
 ;
 
-listaVariablesSimples: variableSimple       
-                     | listaVariablesSimples ',' variableSimple
+listaVariablesSimples: variableSimple        {printf("\nSe declara la variable %s", $<strval>1);}
+                     | listaVariablesSimples ',' variableSimple {printf(", y la variable %s", $<strval>3);}
 ;
 
-variableSimple: IDENTIFICADOR opcionInicializacion
+variableSimple: IDENTIFICADOR opcionInicializacion {strcpy($<strval>$, $<strval>1);}
 ;
 
 opcionInicializacion:   /* vacio */
