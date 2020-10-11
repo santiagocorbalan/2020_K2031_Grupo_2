@@ -249,7 +249,7 @@ variableSimple:
 ;
 
 opcionInicializacion:   /* vacio */
-                     | op_asignacion exp_condicional // ojo con constante revisar
+                     | op_asignacion constante // ojo con constante revisar
 ;
 
 declaracionFunciones: 
