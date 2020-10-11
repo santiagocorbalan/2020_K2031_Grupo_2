@@ -6,9 +6,6 @@
 int yylex();
 
 
-/* FILE* yyin;
-FILE* yyout;
- */
 int yyerror (char*);
 
 int yywrap(){
@@ -85,6 +82,7 @@ input:    /* vacio */
 
 programa:     sentencia '\n'
             | declaracion '\n'
+            | definicionFunciones 
 ;
 
 // SENTENCIAS 
@@ -234,7 +232,6 @@ constante: CONSTANTEDECIMAL
 
 declaracion: declaracionVariablesSimples 
             | declaracionFunciones
-            | definicionFunciones
 ;
 
 declaracionVariablesSimples: 
@@ -286,14 +283,10 @@ int main(void){
         yydebug = 1;
     #endif   
 */
-/*     yyout = fopen ("docDePrueba.c","w");
-    yyin = fopen ("docDePrueba.c","r");
-     */
     yyparse();
     puts("Sali del parse");
 
-    fclose(yyout);
-    fclose(yyin);
+
 
     return 2;
 
