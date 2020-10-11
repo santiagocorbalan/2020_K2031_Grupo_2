@@ -257,16 +257,12 @@ declaracionFunciones:
 ;
 
 opcionArgumentosConTipo: /* vacio */ 
-                        | TIPO_DATO opcionReferencia IDENTIFICADOR
-                        | TIPO_DATO opcionReferencia IDENTIFICADOR ',' argumentosConTipo 
+                        | TIPO_DATO  IDENTIFICADOR
+                        | TIPO_DATO  IDENTIFICADOR ',' argumentosConTipo 
 ;
 
-argumentosConTipo: TIPO_DATO opcionReferencia IDENTIFICADOR
-                 | TIPO_DATO opcionReferencia IDENTIFICADOR ',' argumentosConTipo
-;
-
-opcionReferencia: /* vacio */
-                  | '&'
+argumentosConTipo: TIPO_DATO  IDENTIFICADOR
+                 | TIPO_DATO  IDENTIFICADOR ',' argumentosConTipo
 ;
 
 definicionFunciones: 
