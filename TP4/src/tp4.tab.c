@@ -76,7 +76,7 @@
 
 int yylex();
 
-FILE * yyin;
+/* FILE * yyin; */
 
 int yyerror (char*);
 
@@ -531,7 +531,7 @@ static const char *const yytname[] =
   "exp_multiplicativa", "exp_unaria", "exp_sufijo",
   "listaArgumentosOpcional", "exp_primaria", "constante", "declaracion",
   "declaracionVariablesSimples", "listaVariablesSimples", "variableSimple",
-  "opcionInicializacion", "declaracionFunciones",
+  "inicializacionOpcional", "declaracionFunciones",
   "opcionArgumentosConTipo", "argumentosConTipo", "definicionFunciones", 0
 };
 #endif
@@ -1599,13 +1599,6 @@ yyreduce:
     {printf("\nSe encontro una sentencia de salto.");;}
     break;
 
-  case 86:
-
-/* Line 1455 of yacc.c  */
-#line 239 "tp4.y"
-    {printf(" de tipo %s.", (yyvsp[(1) - (3)].strval));;}
-    break;
-
   case 87:
 
 /* Line 1455 of yacc.c  */
@@ -1618,13 +1611,6 @@ yyreduce:
 /* Line 1455 of yacc.c  */
 #line 244 "tp4.y"
     {printf(", y la variable %s", (yyvsp[(3) - (3)].strval));;}
-    break;
-
-  case 89:
-
-/* Line 1455 of yacc.c  */
-#line 248 "tp4.y"
-    {strcpy((yyval.strval), (yyvsp[(1) - (2)].strval));;}
     break;
 
   case 92:
@@ -1644,7 +1630,7 @@ yyreduce:
 
 
 /* Line 1455 of yacc.c  */
-#line 1648 "tp4.tab.c"
+#line 1634 "tp4.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1865,7 +1851,7 @@ int main(void){
         yydebug = 1;
     #endif   
 */
-    yyin = fopen("docDePrueba.c","r");
+  /*   yyin = fopen("docDePrueba.c","r"); */
     yyparse();
     puts("Sali del parse");
 

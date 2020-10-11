@@ -5,7 +5,7 @@
 
 int yylex();
 
-FILE * yyin;
+/* FILE * yyin; */
 
 int yyerror (char*);
 
@@ -236,7 +236,7 @@ declaracion: declaracionVariablesSimples
 ;
 
 declaracionVariablesSimples: 
-            TIPO_DATO listaVariablesSimples ';'  {printf(" de tipo %s.", $<strval>1);}
+            TIPO_DATO listaVariablesSimples ';' 
 ;
 
 listaVariablesSimples: 
@@ -245,11 +245,11 @@ listaVariablesSimples:
 ;
 
 variableSimple: 
-                        IDENTIFICADOR opcionInicializacion {strcpy($<strval>$, $<strval>1);}
+                        IDENTIFICADOR inicializacionOpcional
 ;
 
-opcionInicializacion:   /* vacio */
-                     | op_asignacion constante // ojo con constante revisar
+inicializacionOpcional:   /* vacio */
+                     | op_asignacion constante 
 ;
 
 declaracionFunciones: 
