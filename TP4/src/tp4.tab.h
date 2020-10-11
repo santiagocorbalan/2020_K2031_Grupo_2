@@ -75,7 +75,7 @@ typedef union YYSTYPE
 {
 
 /* Line 1676 of yacc.c  */
-#line 27 "tp4.y"
+#line 21 "tp4.y"
 
     int enteroval;
     char* strval;

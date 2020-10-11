@@ -6,8 +6,9 @@
 int yylex();
 
 
-FILE* yyin;
+/* FILE* yyin;
 FILE* yyout;
+ */
 int yyerror (char*);
 
 int yywrap(){
@@ -28,13 +29,13 @@ int yywrap(){
 %token <strval> INCREMENTO
 %token <strval> DECREMENTO                    //++ y --
 %token <strval> INCREMENTOASIGNACION
-%token <strval> DECREMENTOASIGNACION   // += y -=
+%token <strval> DECREMENTOASIGNACION                    // += y -=
 %token <strval> AND
 %token <strval> OR                                      // && y ||
 %token <strval> RELACIONALIGUAL 
-%token <strval> RELACIONALDIFERENTE         // == y !=
+%token <strval> RELACIONALDIFERENTE                       // == y !=
 %token <strval> MAYORIGUAL 
-%token <strval> MENORIGUAL                       // >= y <=
+%token <strval> MENORIGUAL                               // >= y <=
 %token <strval> ACCESOPUNTERO                               // -> 
 %token <enteroval> CONSTANTEDECIMAL
 %token <enteroval> CONSTANTEOCTAL 
@@ -82,8 +83,7 @@ input:    /* vacio */
         | input programa
 ;
 
-programa:    
-             sentencia '\n'
+programa:     sentencia '\n'
             | declaracion '\n'
 ;
 
@@ -125,14 +125,13 @@ sent_seleccion:
     IF '(' expresion ')' sentencia  
     | IF '(' expresion ')' sentencia ELSE sentencia  
     | SWITCH '(' expresion ')' sentencia  // en vez de sentencia SWITCH la cambiamos por sentencia para acortar
-    | error ';'
 ;
 
 sent_iteracion: 
     WHILE '(' expresion ')' sentencia  { printf("Se declaro correctamente una sentencia \"while\" \n");}
     | DO sentencia WHILE '(' expresion ')' ';'  {printf("Se declaro correctamente una sentencia \"do while\"\n"); }
     | FOR '(' expresionOpcional ';' expresionOpcional ';' expresionOpcional ')' sentencia  {printf("Se declaro correctamente una sentencia \"for\" \n");}
- // | error ';'
+ 
 ;
 
 sent_deSalto: RETURN expresionOpcional ';' {printf("\nSe encontro una sentencia de salto.");}
@@ -224,6 +223,13 @@ exp_primaria: IDENTIFICADOR
             | '(' expresion ')'
 ;
 
+constante: CONSTANTEDECIMAL
+        | CONSTANTEHEXADECIMAL
+        | CONSTANTEOCTAL
+        | CONSTANTEREAL
+        | CONSTANTECARACTER
+;
+
 //  DECLARACIONES
 
 declaracion: declaracionVariablesSimples 
@@ -232,7 +238,7 @@ declaracion: declaracionVariablesSimples
 ;
 
 declaracionVariablesSimples: 
-            TIPO_DATO listaVariablesSimples ';' {printf(" de tipo %s.", $<strval>1);}
+            TIPO_DATO listaVariablesSimples ';'  {printf(" de tipo %s.", $<strval>1);}
 ;
 
 listaVariablesSimples: 
@@ -249,7 +255,7 @@ opcionInicializacion:   /* vacio */
 ;
 
 declaracionFunciones: 
-TIPO_DATO IDENTIFICADOR '(' opcionArgumentosConTipo ')' ';' {printf("\n Se declara la funcion %s de tipo %s ", $<strval>2, $<strval>1);}
+                    TIPO_DATO IDENTIFICADOR '(' opcionArgumentosConTipo ')' ';' {printf("\n Se declara la funcion %s de tipo %s ", $<strval>2, $<strval>1);}
 ;
 
 opcionArgumentosConTipo:        /* vacio */ 
@@ -269,12 +275,7 @@ definicionFunciones:
                     TIPO_DATO IDENTIFICADOR '(' opcionArgumentosConTipo ')' sentencia {printf("\n Se define la funcion %s de tipo %s", $<strval>2, $<strval>1);}
 ;
 
-constante: CONSTANTEDECIMAL
-        | CONSTANTEHEXADECIMAL
-        | CONSTANTEOCTAL
-        | CONSTANTEREAL
-        | CONSTANTECARACTER
-;
+
 
 %%
 
@@ -285,9 +286,9 @@ int main(void){
         yydebug = 1;
     #endif   
 */
-    yyout = fopen ("docDePrueba.c","w");
+/*     yyout = fopen ("docDePrueba.c","w");
     yyin = fopen ("docDePrueba.c","r");
-    
+     */
     yyparse();
     puts("Sali del parse");
 
@@ -297,16 +298,3 @@ int main(void){
     return 2;
 
 }
-
-/*
-int yyerror (char *mensaje)  // Funcion de error //
-{
-  printf ("Error: %s\n", mensaje);
-}
-*/
-
-/*
-   #ifdef BISON_DEBUG
-        yydebug = 1;
-    #endif    
-*/    
