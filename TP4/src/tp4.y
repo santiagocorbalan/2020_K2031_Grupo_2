@@ -5,7 +5,7 @@
 
 int yylex();
 
-/* FILE * yyin; */
+FILE * yyin;
 
 int yyerror (char*);
 

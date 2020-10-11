@@ -76,7 +76,7 @@
 
 int yylex();
 
-/* FILE * yyin; */
+FILE * yyin;
 
 int yyerror (char*);
 
@@ -1851,7 +1851,7 @@ int main(void){
         yydebug = 1;
     #endif   
 */
-  /*   yyin = fopen("docDePrueba.c","r"); */
+    yyin = fopen("docDePrueba.c","r");
     yyparse();
     puts("Sali del parse");
 
