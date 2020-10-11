@@ -5,6 +5,7 @@
 
 int yylex();
 
+FILE * yyin;
 
 int yyerror (char*);
 
@@ -82,7 +83,8 @@ input:    /* vacio */
 
 programa:     sentencia '\n'
             | declaracion '\n'
-            | definicionFunciones 
+            | definicionFunciones '\n'
+            
 ;
 
 // SENTENCIAS 
@@ -283,6 +285,8 @@ int main(void){
         yydebug = 1;
     #endif   
 */
+
+    yyin = fopen("docDePrueba.c","r");
     yyparse();
     puts("Sali del parse");
 
