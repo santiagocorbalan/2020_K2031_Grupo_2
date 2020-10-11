@@ -15,7 +15,6 @@ int yywrap(){
 
 %}
  
-
 %union {
     int enteroval;
     char* strval;
@@ -257,9 +256,9 @@ declaracionFunciones:
                     TIPO_DATO IDENTIFICADOR '(' opcionArgumentosConTipo ')' ';' {printf("\n Se declara la funcion %s de tipo %s ", $<strval>2, $<strval>1);}
 ;
 
-opcionArgumentosConTipo:        /* vacio */ 
-                                | TIPO_DATO opcionReferencia IDENTIFICADOR
-                                | TIPO_DATO opcionReferencia IDENTIFICADOR ',' argumentosConTipo 
+opcionArgumentosConTipo: /* vacio */ 
+                        | TIPO_DATO opcionReferencia IDENTIFICADOR
+                        | TIPO_DATO opcionReferencia IDENTIFICADOR ',' argumentosConTipo 
 ;
 
 argumentosConTipo: TIPO_DATO opcionReferencia IDENTIFICADOR
