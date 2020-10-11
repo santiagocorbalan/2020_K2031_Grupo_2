@@ -14,7 +14,7 @@ int yywrap(){
 }
 
 %}
-
+ 
 
 %union {
     int enteroval;
@@ -25,16 +25,16 @@ int yywrap(){
 %token <strval> IDENTIFICADOR
 %token <strval> TIPO_DATO
 %token <strval> INCREMENTO
-%token <strval> DECREMENTO                    //++ y --
+%token <strval> DECREMENTO
 %token <strval> INCREMENTOASIGNACION
-%token <strval> DECREMENTOASIGNACION                    // += y -=
+%token <strval> DECREMENTOASIGNACION
 %token <strval> AND
-%token <strval> OR                                      // && y ||
+%token <strval> OR
 %token <strval> RELACIONALIGUAL 
-%token <strval> RELACIONALDIFERENTE                       // == y !=
+%token <strval> RELACIONALDIFERENTE
 %token <strval> MAYORIGUAL 
-%token <strval> MENORIGUAL                               // >= y <=
-%token <strval> ACCESOPUNTERO                               // -> 
+%token <strval> MENORIGUAL
+%token <strval> ACCESOPUNTERO
 %token <enteroval> CONSTANTEDECIMAL
 %token <enteroval> CONSTANTEOCTAL 
 %token <enteroval> CONSTANTEHEXADECIMAL 
@@ -77,11 +77,11 @@ int yywrap(){
  */
 %%
 
-input:    /* vacio */
+input:   /* vacio */
         | input programa
 ;
 
-programa:     sentencia '\n'
+programa:   sentencia '\n'
             | declaracion '\n'
             | definicionFunciones '\n'
             
@@ -273,25 +273,17 @@ opcionReferencia: /* vacio */
 definicionFunciones: 
                     TIPO_DATO IDENTIFICADOR '(' opcionArgumentosConTipo ')' sentencia {printf("\n Se define la funcion %s de tipo %s", $<strval>2, $<strval>1);}
 ;
-
-
-
 %%
 
 int main(void){
-
-      /*  
+/*  
      #ifdef BISON_DEBUG
         yydebug = 1;
     #endif   
 */
-
     yyin = fopen("docDePrueba.c","r");
     yyparse();
     puts("Sali del parse");
 
-
-
-    return 2;
-
+    return 1;
 }
