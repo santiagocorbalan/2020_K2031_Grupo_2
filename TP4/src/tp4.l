@@ -1,20 +1,11 @@
 %option noyywrap
-
 %{
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #include "tp4.tab.h" 
-
 %}
 
-DIGITO_DECIMAL          [0-9] 
-DIGITO_OCTAL            [0-7]
-DIGITO_HEXADECIMAL      [0-9A-Fa-f]
-LETRA                   [a-zA-Z]
-TIPO_DATO               char|int|float|double|long|short|signed|unsigned|void
-SIGNO                   [\+\-]
-EXPONENCIAL             [eE]
 
 %%
 
@@ -22,17 +13,7 @@ EXPONENCIAL             [eE]
 
 " "|"\t"
 
-"("        { return '('; }
-")"        { return ')'; }
-"["        { return '['; }
-"]"        { return '['; }
-","        { return ','; }
-"?"        { return '?';}
-":"        { return ':'; }
-";"        { return ';'; }
-"{"        { return '{'; }
-"}"        { return '}'; }
-"&"        { return '&'; }
+"("|")"|"["|"]"|","|"?"|":"|";"|"{"|"}"|"&" {return yytext[0];}
 
 if         { return IF;}
 switch     { return SWITCH;}
@@ -52,7 +33,7 @@ return     { return RETURN;}
 "&&"       { return AND; }
 "||"       { return OR; }
 
-TIPO_DATO {yylval.strval = strdup(yytext); return TIPO_DATO;}
+"char"|"int"|"float"|"double"|"long"|"short"|"signed"|"unsigned"|"void" {yylval.strval = strdup(yytext); return TIPO_DATO;}
 
 ">"        { return '>'; }
 "<"        { return '<'; }
@@ -65,17 +46,17 @@ TIPO_DATO {yylval.strval = strdup(yytext); return TIPO_DATO;}
 "-="       { return DECREMENTOASIGNACION; }
 "->"       { return ACCESOPUNTERO; }
 
-({LETRA}|_)({LETRA}|{DIGITO_DECIMAL}|_)* { yylval.strval = strdup(yytext); return IDENTIFICADOR; }
+[a-zA-Z_][a-zA-Z0-9_]* { yylval.strval = strdup(yytext); return IDENTIFICADOR; }
 
 \"[^\"]*\" {yylval.strval = strdup(yytext); return LITERALCADENA;}
 
-[1-9]{DIGITO_DECIMAL}* {yylval.enteroval = atoi(yytext);return CONSTANTEDECIMAL;}
+[1-9][0-9]* {yylval.enteroval = atoi(yytext);return CONSTANTEDECIMAL;}
 
-0{DIGITO_OCTAL}* {yylval.enteroval = strtol(yytext,NULL,0);return CONSTANTEOCTAL;}
+0[0-7]* {yylval.enteroval = strtol(yytext,NULL,0);return CONSTANTEOCTAL;}
 
-0[xX]{DIGITO_HEXADECIMAL}+ {yylval.enteroval = strtol(yytext,NULL,0);return CONSTANTEHEXADECIMAL;}
+0[xX][0-9a-fA-F]+ {yylval.enteroval = strtol(yytext,NULL,0);return CONSTANTEHEXADECIMAL;}
 
-{DIGITO_DECIMAL}*"."{DIGITO_DECIMAL}*(EXPONENCIAL(SIGNO)?{DIGITO_DECIMAL}+)? {yylval.dobleval = atof(yytext);return CONSTANTEREAL;}
+[0-9]+(\.)([eE][\+\-]?[0-9]+)? {yylval.dobleval = atof(yytext);return CONSTANTEREAL;}
 
 \'[^']\'   {yylval.strval = strdup(yytext);return CONSTANTECARACTER;}
 

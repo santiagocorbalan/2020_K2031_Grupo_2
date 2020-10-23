@@ -266,7 +266,7 @@ argumentosConTipo: TIPO_DATO  IDENTIFICADOR
 ;
 
 definicionFunciones: 
-                    TIPO_DATO IDENTIFICADOR '(' opcionArgumentosConTipo ')' sentencia {printf("\n Se define la funcion %s de tipo %s", $<strval>2, $<strval>1);}
+                    TIPO_DATO IDENTIFICADOR '(' opcionArgumentosConTipo ')' ';' {printf("\n Se define la funcion %s de tipo %s", $<strval>2, $<strval>1);}
 ;
 %%
 
