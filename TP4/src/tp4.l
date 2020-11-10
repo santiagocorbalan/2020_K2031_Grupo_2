@@ -1,10 +1,11 @@
-%option noyywrap
 %{
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include "tp4.tab.h" 
+    #include "tp4.tab.h"
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <string.h>
 %}
+
+option noyywrap
 
 
 %%
@@ -15,50 +16,55 @@
 
 "("|")"|"["|"]"|","|"?"|":"|";"|"{"|"}"|"&" {return yytext[0];}
 
-if         { return IF;}
-switch     { return SWITCH;}
-else       { return ELSE;}
-while      { return WHILE;}
-for        { return FOR;}
-do         { return DO;}
-return     { return RETURN;}
+"if" {return IF;}
 
-"++"       { return INCREMENTO; }
-"--"       { return DECREMENTO; }
-"*"        { return '*'; }
-"/"        { return '/'; }
-"%"        { return '%'; }
-"+"        { return '+'; }
-"-"        { return '-'; }
-"&&"       { return AND; }
-"||"       { return OR; }
+"switch" {return SWITCH;}
 
-"char"|"int"|"float"|"double"|"long"|"short"|"signed"|"unsigned"|"void" {yylval.strval = strdup(yytext); return TIPO_DATO;}
+"else" {return ELSE;}
 
-">"        { return '>'; }
-"<"        { return '<'; }
-">="       { return MAYORIGUAL; }
-"<="       { return MENORIGUAL; }
-"=="       { return RELACIONALIGUAL; }
-"!="       { return RELACIONALDIFERENTE; }
-"="        { return '='; }
-"+="       { return INCREMENTOASIGNACION; }
-"-="       { return DECREMENTOASIGNACION; }
-"->"       { return ACCESOPUNTERO; }
+"sizeof" {return OPER_SIZEOF;}
 
-[a-zA-Z_][a-zA-Z0-9_]* { yylval.strval = strdup(yytext); return IDENTIFICADOR; }
+"while" {return WHILE;}
 
-\"[^\"]*\" {yylval.strval = strdup(yytext); return LITERALCADENA;}
+"for" {return FOR;}
 
-[1-9][0-9]* {yylval.enteroval = atoi(yytext);return CONSTANTEDECIMAL;}
+"do" {return DO;}
 
-0[0-7]* {yylval.enteroval = strtol(yytext,NULL,0);return CONSTANTEOCTAL;}
+"return" {return RETURN;}
 
-0[xX][0-9a-fA-F]+ {yylval.enteroval = strtol(yytext,NULL,0);return CONSTANTEHEXADECIMAL;}
+"++"|"--" {return OPER_INCREMENTO;}
 
-[0-9]+(\.)([eE][\+\-]?[0-9]+)? {yylval.dobleval = atof(yytext);return CONSTANTEREAL;}
+"*"|"/"|"%" {return OPER_MULTIPLICATIVO;}
 
-\'[^']\'   {yylval.strval = strdup(yytext);return CONSTANTECARACTER;}
+"+"|"-" {return OPER_ADITIVO;}
+
+"&&" {return AND;}
+
+"||" {return OR;}
+
+"int"|"double"|"float"|"char"|"void" {strcpy(yylval.cadena, yytext); return TIPO_DATO;}
+
+">"|"<"|"<="|">=" {strcpy(yylval.cadena, yytext); return OPER_RELACIONAL;}
+
+"=="|"!=" {return OPER_IGUALDAD;}
+
+"="|"+="|"-=" {return OPER_ASIGNACION;}
+
+[a-zA-Z_][a-zA-Z0-9_]* {strcpy(yylval.cadena, yytext); return IDENTIFICADOR;}
+
+\"[^\"]*\" {strcpy(yylval.cadena, yytext); return LITERAL_CADENA;}
+
+[1-9][0-9]* {yylval.entero = atoi(yytext); return CONSTANTE_DECIMAL;}
+
+0[0-7]* {yylval.entero = atoi(yytext); return CONSTANTE_OCTAL;}
+
+0[xX][0-9a-fA-F]+ {yylval.entero = atoi(yytext); return CONSTANTE_HEXADECIMAL;}
+
+[0-9]+(\.)([eE][\+\-]?[0-9]+)? {yylval.real = strtol(yytext, NULL, 0); return CONSTANTE_REAL;}
+
+[0-9]*(\.)[0-9]+([eE]([\+\-]?)[0-9]+)? {yylval.real = strtol(yytext, NULL, 0); return CONSTANTE_REAL;}
+
+\'[^']*\' {yylval.entero = yytext[1]; return CONSTANTE_CARACTER;}
 
 . {printf("\nCaracter no reconocido: %c", yytext[0]);}
 
