@@ -12,27 +12,32 @@ int yywrap(){
 	return(1);
 }
 
-void yyerror (char* a) {}
+void yyerror (char* s) {}
 int linea = 1;
-
 %}
 
 %union {
-char cadena[50];
+char cadena[100];
 int entero;
 float real;
 }
 
-%token <cadena> TIPODATO
+%token <cadena> TIPO_DATO
 %token <cadena> IDENTIFICADOR
-%token <cadena> LITERALCADENA
-%token <entero> CONSTANTEDECIMAL
-%token <entero> CONSTANTEOCTAL
-%token <entero> CONSTANTEHEXADECIMAL
-%token <real>   CONSTANTEREAL
-%token <entero> CONSTANTECARACTER
-%token <cadena> INCREMENTO
-%token <cadena> DECREMENTO
+%token <cadena> LITERAL_CADENA
+%token <entero> CONSTANTE_DECIMAL
+%token <entero> CONSTANTE_OCTAL
+%token <entero> CONSTANTE_HEXADECIMAL
+%token <real>   CONSTANTE_REAL
+%token <entero> CONSTANTE_CARACTER
+%token <cadena> OPER_ADITIVO
+%token <cadena> OPER_MULTIPLICATIVO
+%token <cadena> OPER_RELACIONAL
+%token <cadena> OPER_UNARIO
+%token <cadena> OPER_IGUALDAD
+%token <cadena> OPER_ASIGNACION
+%token <cadena> OPER_INCREMENTO
+%token <cadena> OPER_SIZEOF
 %token <cadena> AND
 %token <cadena> OR
 %token <cadena> IF
@@ -42,8 +47,6 @@ float real;
 %token <cadena> WHILE
 %token <cadena> DO
 %token <cadena> RETURN
-
-%token <cadena> OPER_SIZEOF
 
 %type <cadena> unaVariableSimple
 %type <cadena> error
@@ -56,11 +59,13 @@ input:  /* vacio */
 
 line:   declaracion '\n'        {linea++;}
         | sentencia '\n'        {linea++;}
-        | definicionFunciones '\n'  {linea++;}
+        | definicionFunciones '\n'   {linea++;}
         | error '\n'            {printf("\nSe detecto un error sintactico en la linea %i.", linea); linea++;}     
 ;
 
-/* Expresiones */
+/* --------------------------------------------------------------------------------------
+   -----------------------------GRAMATICA DE LAS EXPRESIONES-----------------------------
+   -------------------------------------------------------------------------------------- */
 
 expresion:      expAsignacion
 ;
@@ -119,6 +124,54 @@ expPrimaria:    IDENTIFICADOR
                 | '(' expresion ')'
 ;
 
+/* Sentencia  */
+
+sentencia:      sentenciaCompuesta
+                | sentenciaExpresion
+                | sentenciaSeleccion
+                | sentenciaIteracion
+                | sentenciaSalto
+                
+;
+
+sentenciaCompuesta:     '{' opcionListaDeclaraciones opcionListaSentencias '}'  {printf("\nSe encontro una sentencia compuestas");}
+;
+
+opcionListaDeclaraciones:       /* vacio */
+                                | declaracion                           
+                                | opcionListaDeclaraciones declaracion  
+;
+
+listaSentencias:        sentencia                       
+                        | listaSentencias sentencia     
+;
+
+opcionListaSentencias:  /* vacio*/
+                        | sentencia                     
+                        | listaSentencias sentencia     
+;
+
+sentenciaExpresion:     ';'                     {printf("\nSe encontro una sentencia vacia.");}
+                        | expresion ';'         {printf("\nSe encontro una sentencia expresion.");}
+;
+
+sentenciaSeleccion:     IF '(' expresion ')' sentencia                  {printf("\nSe encontro una sentencia de seleccion If.");}
+                        | IF '(' expresion ')' sentencia ELSE sentencia {printf("\nSe encontro una sentencia de seleccion If y Else.");}
+                        | SWITCH '(' expresion ')' sentencia            {printf("\nSe encontro una sentencia de seleccion Switch.");}
+;
+
+sentenciaIteracion:     WHILE '(' expresion ')' sentencia                                               {printf("\nSe encontro una sentencia de iteracion While.");}
+                        | DO sentencia WHILE '(' expresion ')' ';'                                      {printf("\nSe encontro una sentencia de iteracion Do while.");}
+                        | FOR '(' opcionExpresion ';' opcionExpresion ';' opcionExpresion ')' sentencia {printf("\nSe encontro una sentencia de iteracion For.");}
+;
+
+sentenciaSalto: RETURN opcionExpresion ';'      {printf("\nSe encontro una sentencia de salto.");}
+;
+
+opcionExpresion:        /* vacio */
+                        | expresion
+;
+
 /* Declaracion y definiciones */
 
 declaracion:    declaracionVariablesSimples
@@ -142,7 +195,7 @@ opcionInicializacion:   /* vacio */
 
 
 
-declaracionFunciones:   TIPO_DATO IDENTIFICADOR '(' opcionArgumentosConTipo ')' ';' {printf("\nSe declara la funcion %s de tipo %s.", $<cadena>2, $<cadena>1);}
+declaracionFunciones:   TIPO_DATO IDENTIFICADOR '(' opcionArgumentosConTipo ')' ';' {printf("\nSe declara la funcion %s de tipo %s. ", $<cadena>2, $<cadena>1);}
 ;
 
 opcionArgumentosConTipo:        /* vacio */ 
@@ -158,57 +211,11 @@ opcionReferencia:       /* vacio */
                         | '&'
 ;
 
-definicionFunciones:    TIPO_DATO IDENTIFICADOR '(' opcionArgumentosConTipo ')' ';' {printf("\nSe define la funcion %s de tipo %s.", $<cadena>2, $<cadena>1);}
+definicionFunciones:    TIPO_DATO IDENTIFICADOR '(' opcionArgumentosConTipo ')' ';' {printf("\nSe define la funcion %s de tipo %s", $<cadena>2, $<cadena>1);}
 
 ;
 
-/* Sentencias */
-
-sentencia:      sentenciaCompuesta
-                | sentenciaExpresion
-                | sentenciaSeleccion
-                | sentenciaIteracion
-                | sentenciaSalto
-                
-;
-
-sentenciaCompuesta:     '{' opcionListaDeclaraciones opcionListaSentencias '}'  {printf("\nSe encontro una sentencia compuesta y otras sentencias.")}
-;
-
-opcionListaDeclaraciones:       /* vacio */
-                                | declaracion                           
-                                | opcionListaDeclaraciones declaracion  
-;
-
-listaSentencias:        sentencia                       
-                        | listaSentencias sentencia     
-;
-
-opcionListaSentencias:  /* vacio*/
-                        | sentencia                     
-                        | listaSentencias sentencia     
-;
-
-sentenciaExpresion:     ';'                     {printf("\nSe encontro una sentencia vacia.");}
-                        | expresion ';'         {printf("\nSe encontro una sentencia expresion.");}
-;
-
-sentenciaSeleccion:     IF '(' expresion ')' sentencia                  {printf("\nSe encontro una sentencia de seleccion (if).");}
-                        | IF '(' expresion ')' sentencia ELSE sentencia {printf("\nSe encontro una sentencia de seleccion (if y else).");}
-                        | SWITCH '(' expresion ')' sentencia            {printf("\nSe encontro una sentencia de seleccion (switch).");}
-;
-
-sentenciaIteracion:     WHILE '(' expresion ')' sentencia                                               {printf("\nSe encontro una sentencia de iteracion while.");}
-                        | DO sentencia WHILE '(' expresion ')' ';'                                      {printf("\nSe encontro una sentencia de iteracion do while.");}
-                        | FOR '(' opcionExpresion ';' opcionExpresion ';' opcionExpresion ')' sentencia {printf("\nSe encontro una sentencia de iteracion for.");}
-;
-
-sentenciaSalto: RETURN opcionExpresion ';'      {printf("\nSe encontro una sentencia de salto.");}
-;
-
-opcionExpresion:        /* vacio */
-                        | expresion
-;
+/* Constantes */
 
 constante:      CONSTANTE_DECIMAL             
                 | CONSTANTE_OCTAL               
