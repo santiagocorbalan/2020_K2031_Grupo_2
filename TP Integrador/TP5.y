@@ -19,7 +19,7 @@ int yywrap(){
     return(1);
 }
 
-Tabla *aux;
+Tabla *aux; // Tira error 
 char* tipo;
 
 %}
@@ -59,7 +59,8 @@ char caracter;
 %token RETURN
 %token error
 %token DO
-%type <entero> exp
+%token OPER_SIZEOF
+
 
 %%
 
@@ -152,7 +153,6 @@ opListaDeSentencias:       /* vacio */
 
 listaDeSentencias:              sentencia
                                 | listaDeSentencias sentencia	
-
 ;
 
 
@@ -172,14 +172,12 @@ sentenciaDeIteracion:  WHILE '(' exp ')' sentencia                              
                        | FOR '(' opExpresion ';' opExpresion ';' opExpresion ')' sentencia        {printf("Se encontro una sentencia FOR\n");}  
                        | FOR error opExpresion ';'                                                {agregarError("Error Sintactico: falta '(' en la sentencia FOR "); }
                        | FOR '(' opExpresion ';' opExpresion ';' opExpresion error sentencia      {agregarError("Error Sintactico: falta ')' en la sentencia FOR "); }
-                      
 ;
 
 
 sentenciaDeSalto:  CONTINUE ';'                   {printf("Se encontro la sentencia CONTINUE\n");}
                 | BREAK ';'                       {printf("Se encontro la sentencia BREAK\n");}
-                | RETURN opExpresion ';'          {printf("Se encontro la sentencia RETURN\n");}  
-            
+                | RETURN opExpresion ';'          {printf("Se encontro la sentencia RETURN\n");}              
 ;  
 
 /// ----------------- Declaraciones --------------
@@ -196,6 +194,7 @@ declaracionVariablesSimples: TIPO_DATO {tipo=$<cadena>1;} listaVariablesSimples 
 listaVariablesSimples:  unaVariableSimple      
                         | unaVariableSimple  ',' listaVariablesSimples
 ;
+
 // Validaciones semánticas sobre doble declaración de variables, cambia la validación según cómo sea la declaración de la variable
 unaVariableSimple:   IDENTIFICADOR                             {aux = buscarSimbolo($<cadena>1); if (aux) agregarError("Error Semantico : la variable ya esta declarada "); else agregarsimbolo($<cadena>1,tipo);} 
                     | IDENTIFICADOR '=' IDENTIFICADOR          {aux=buscarSimbolo($<cadena>1); if (aux) agregarError("Error Semantico : la variable ya esta declarada "); declararVariableConElIgual($<cadena>1,tipo,$<cadena>3);}
@@ -239,9 +238,10 @@ argumento:        /* vacio */
                 | LITERAL_CADENA      {agregoArgumento("char*");}
                 | CONSTANTE_DECIMAL   {agregoArgumento("int");} 
                 | CONSTANTE_CARACTER  {agregoArgumento("char");}
+;
 
 definicionFunciones: TIPO_DATO IDENTIFICADOR '(' TIPO_DATO IDENTIFICADOR ')' sentenciaCompuesta 
-
+;
 
 
 %%
