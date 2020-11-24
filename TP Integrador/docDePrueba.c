@@ -1,4 +1,4 @@
-int funcion(int uno, char dos, double tres); // funcion con multiples parametros
+int funcion(int parametro1, char parametro2); // funcion con multiples parametros
 
 int funcionSinParametros(); // funcion sin parametros
 

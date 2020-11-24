@@ -32,7 +32,6 @@
 
 "return" {return RETURN;}
 
-
 "("|")"|"["|"]"|","|"?"|":"|";"|"{"|"}"|"&" {return yytext[0];}
 
 "\n"    {return '\n';}

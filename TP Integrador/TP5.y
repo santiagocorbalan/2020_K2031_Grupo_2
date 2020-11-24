@@ -45,7 +45,7 @@ char caracter;
 %token <entero> CONSTANTE_OCTAL
 %token <entero> CONSTANTE_HEXADECIMAL
 %token <real>   CONSTANTE_REAL
-%token <caracter>CONSTANTE_CARACTER
+%token <caracter> CONSTANTE_CARACTER
 %token <cadena> LITERAL_CADENA  
 %token <cadena> TIPO_DATO 
 %token <cadena> IDENTIFICADOR
@@ -58,6 +58,9 @@ char caracter;
 %token FOR
 %token RETURN
 %token error
+
+%type <entero> exp
+
 %%
 
 input:    /* vacio */
@@ -72,16 +75,17 @@ line:   '\n'
         | invocacionDeFuncion '\n'          
 ;
 
-//------------------------ Expreciones ----------------------------
+//------------------------ Expresiones ----------------------------
 
 // Hace validación de tipos; le copia el tipo y el valor a la expresión
+
 exp:	
-      | CONSTANTE_CARACTER        {$<mystruct>$.tipo = $<mystruct>1.tipo; $<mystruct>$.valor_caracter = $<mystruct>1.valor_caracter;} } 
+      | CONSTANTE_CARACTER        {$<mystruct>$.tipo = $<mystruct>1.tipo; $<mystruct>$.valor_caracter = $<mystruct>1.valor_caracter;}  
 			| CONSTANTE_DECIMAL				  {$<mystruct>$.tipo = $<mystruct>1.tipo; $<mystruct>$.valor_entero=$<mystruct>1.valor_entero;}
 			| CONSTANTE_HEXADECIMAL     {$<mystruct>$.tipo = $<mystruct>1.tipo; $<mystruct>$.valor_entero=$<mystruct>1.valor_entero;}
 			| CONSTANTE_OCTAL					  {$<mystruct>$.tipo = $<mystruct>1.tipo; $<mystruct>$.valor_entero=$<mystruct>1.valor_entero;}
 			| CONSTANTE_REAL   				  {$<mystruct>$.tipo = $<mystruct>1.tipo; $<mystruct>$.valor_real=$<mystruct>1.valor_real;}
-			| exp '+' exp               {if($<mystruct>1.tipo == $<mystruct>3.tipo) // Validacion sobre operacion binaria de la suma
+			| exp '+' exp               {if($<mystruct>1.tipo == $<mystruct>3.tipo)} // Validacion sobre operacion binaria de la suma
  
     { 
         if($<mystruct>1.tipo == 1) {  // Si es de tipo entero
@@ -212,15 +216,15 @@ listaParametro: parametro
                | parametro ',' listaParametro
 ;
 
-parametro:   TIPO_DATO IDENTIFICADOR           {aux=buscarEnListaFunciones(id); if(aux) agregoParametros(aux->lista_parametros,$<cadena>1)                                                    
-            | TIPO_DE_DATO '*' IDENTIFICADOR   {aux=buscarEnListaFunciones(id); if(aux) agregoParametros(aux->lista_parametros,strcat($<cadena>1,"*")) 
+parametro:   TIPO_DATO IDENTIFICADOR           {aux=buscarEnListaFunciones(id); if(aux) agregoParametros(aux->lista_parametros,$<cadena>1)}                                                    
+            | TIPO_DATO '*' IDENTIFICADOR   {aux=buscarEnListaFunciones(id); if(aux) agregoParametros(aux->lista_parametros,strcat($<cadena>1,"*")) }
             | error IDENTIFICADOR              {agregarError("Error sintactico : falta tipo de dato del parametro")}
             | error '*' IDENTIFICADOR          {agregarError("Error sintactico : falta tipo de dato del puntero parametro")}
-            | TIPO_DE_DATO error               {agregarError("Error sintactico : falta indentificador del parametro")}
-            | TIPO_DE_DATO '*' error           {agregarError("Error sintactico : falta identificador del puntero del  parametro")}
+            | TIPO_DATO error               {agregarError("Error sintactico : falta indentificador del parametro")}
+            | TIPO_DATO '*' error           {agregarError("Error sintactico : falta identificador del puntero del  parametro")}
 ;
 // Control de cantidad y tipos de parámetros en la invocación a funciones
-invocacionDeFuncion:    IDENTIFICADOR '(' listaArgumentos ')'   {aux=buscarEnListaFuciones($<cadena>1); if (aux) verificarParametros(aux->lista_parametros) else listaArgumentosTemporal = NULL;
+invocacionDeFuncion:    IDENTIFICADOR '(' listaArgumentos ')'   {aux=buscarEnListaFuciones($<cadena>1); if (aux) verificarParametros(aux->lista_parametros) else listaArgumentosTemporal = NULL;}
                       // Falta completar funciones respecto a cantidad y tipos de parámetros
                      |  IDENTIFICADOR error listaArgumentos ')' {agregarError("Error Sintactico : falta '(' en la invocacion de la funcion"); }
                      |  IDENTIFICADOR '(' error ')'             {agregarError("Error Sintactico : argumentos no validos");}
