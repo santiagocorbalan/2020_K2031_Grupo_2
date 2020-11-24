@@ -57,7 +57,7 @@ char caracter;
 %token ELSE
 %token FOR
 %token RETURN
-
+%token error
 %%
 
 input:    /* vacio */
@@ -71,6 +71,8 @@ line:   '\n'
         | declaracion  '\n'  
         | invocacionDeFuncion '\n'          
 ;
+
+//------------------------ Expreciones ----------------------------
 
 // Hace validación de tipos; le copia el tipo y el valor a la expresión
 exp:	
@@ -99,6 +101,7 @@ exp:
     }
 
 }
+
 // Diferentes operaciones binarias, se repetiría el código anterior.
 | exp '-' exp        { $$ = $1 - $3;                    	}
 | exp '*' exp        { $$ = $1 * $3;                    	}
@@ -107,6 +110,9 @@ exp:
 | exp '^' exp        { $$ = pow ($1, $3);               	}
 | '(' exp ')'        { $$ = $2;                         	}
 ;
+
+// ------------- Sentencias ------------------------
+
 
 sentencia:       sentenciaExpresion                                                       
                 | sentenciaCompuesta                                                       
@@ -242,7 +248,7 @@ int main(){
 /*         #ifdef BISON_DEBUG
         yydebug = 1;
         #endif */
-        yyin = FOPEN("docDePrueba.c","r");
+        yyin = fopen("docDePrueba.c","r");
         printf("\n");
         yyparse();
         
