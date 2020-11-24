@@ -58,7 +58,7 @@ char caracter;
 %token FOR
 %token RETURN
 %token error
-
+%token DO
 %type <entero> exp
 
 %%
@@ -74,13 +74,12 @@ line:   '\n'
         | declaracion  '\n'  
         | invocacionDeFuncion '\n'          
 ;
-
+//
 //------------------------ Expresiones ----------------------------
 
 // Hace validación de tipos; le copia el tipo y el valor a la expresión
 
-exp:	
-      | CONSTANTE_CARACTER        {$<mystruct>$.tipo = $<mystruct>1.tipo; $<mystruct>$.valor_caracter = $<mystruct>1.valor_caracter;}  
+exp:	 CONSTANTE_CARACTER        {$<mystruct>$.tipo = $<mystruct>1.tipo; $<mystruct>$.valor_caracter = $<mystruct>1.valor_caracter;}  
 			| CONSTANTE_DECIMAL				  {$<mystruct>$.tipo = $<mystruct>1.tipo; $<mystruct>$.valor_entero=$<mystruct>1.valor_entero;}
 			| CONSTANTE_HEXADECIMAL     {$<mystruct>$.tipo = $<mystruct>1.tipo; $<mystruct>$.valor_entero=$<mystruct>1.valor_entero;}
 			| CONSTANTE_OCTAL					  {$<mystruct>$.tipo = $<mystruct>1.tipo; $<mystruct>$.valor_entero=$<mystruct>1.valor_entero;}
@@ -131,7 +130,7 @@ sentenciaExpresion: opExpresion ';'
 ;
 
 opExpresion: /* vacio */      {printf("Se encontro una sentencia vacia\n");}
-             | expresion      {printf("Se encontro una sentencia con una expresion\n");}    
+             | exp      {printf("Se encontro una sentencia con una expresion\n");}    
 ;
 
 sentenciaCompuesta:     '{' opListaDeclaraciones opListaDeSentencias '}'
@@ -157,19 +156,19 @@ listaDeSentencias:              sentencia
 ;
 
 
-sentenciaDeSeleccion:     IF '(' expresion ')' sentencia                                          {printf("Se encontro una sentencia IF");} 
-                        | IF '(' expresion ')' sentencia ELSE sentencia                           {printf("Se encontro una sentencia IF y ELSE\n");}   
-                        | IF error expresion                                                      {agregarError("Error Sintactico: falta '(' en la sentencia IF"); }
-                        | IF '(' expresion error sentencia                                        {agregarError("Error Sintactico: falta ')' en la sentencia IF"); }
-                        | SWITCH '(' expresion ')' sentencia                                      {printf("Se encontro una sentencia SWITCH\n");}   
-                        | SWITCH error expresion                                                  {agregarError("Error Sintactico: falta '(' en la sentencia SWITCH "); }
-                        | SWITCH '(' expresion error sentencia                                    {agregarError("Error Sintactico: falta ')' en la sentencia SWITCH "); }
+sentenciaDeSeleccion:     IF '(' exp ')' sentencia                                          {printf("Se encontro una sentencia IF");} 
+                        | IF '(' exp ')' sentencia ELSE sentencia                           {printf("Se encontro una sentencia IF y ELSE\n");}   
+                        | IF error exp                                                      {agregarError("Error Sintactico: falta '(' en la sentencia IF"); }
+                        | IF '(' exp error sentencia                                        {agregarError("Error Sintactico: falta ')' en la sentencia IF"); }
+                        | SWITCH '(' exp ')' sentencia                                      {printf("Se encontro una sentencia SWITCH\n");}   
+                        | SWITCH error exp                                                  {agregarError("Error Sintactico: falta '(' en la sentencia SWITCH "); }
+                        | SWITCH '(' exp error sentencia                                    {agregarError("Error Sintactico: falta ')' en la sentencia SWITCH "); }
 ;
  
-sentenciaDeIteracion:  WHILE '(' expresion ')' sentencia                                          {printf("Se encontro la sentencia WHILE\n");}   
-                       | WHILE error expresion ')'                                                {agregarError("Error Sintactico: falta '(' en la sentencia WHILE "); }
-                       | WHILE '(' expresion error sentencia                                      {agregarError("Error Sintactico: falta ')' en la sentencia WHILE "); }
-                       | DO sentencia WHILE '(' expresion ')' ';'                                 {printf("Se encontro una sentencia DO\n");}   
+sentenciaDeIteracion:  WHILE '(' exp ')' sentencia                                          {printf("Se encontro la sentencia WHILE\n");}   
+                       | WHILE error exp ')'                                                {agregarError("Error Sintactico: falta '(' en la sentencia WHILE "); }
+                       | WHILE '(' exp error sentencia                                      {agregarError("Error Sintactico: falta ')' en la sentencia WHILE "); }
+                       | DO sentencia WHILE '(' exp ')' ';'                                 {printf("Se encontro una sentencia DO\n");}   
                        | FOR '(' opExpresion ';' opExpresion ';' opExpresion ')' sentencia        {printf("Se encontro una sentencia FOR\n");}  
                        | FOR error opExpresion ';'                                                {agregarError("Error Sintactico: falta '(' en la sentencia FOR "); }
                        | FOR '(' opExpresion ';' opExpresion ';' opExpresion error sentencia      {agregarError("Error Sintactico: falta ')' en la sentencia FOR "); }
@@ -208,8 +207,8 @@ unaVariableSimple:   IDENTIFICADOR                             {aux = buscarSimb
                     | error '='                                {agregarError("Error Sintactico : identificador incorrecto");}
 ;
 
-declaracionFuncion:    TIPO_DATO {tipo = $<cadena>1; }  IDENTIFICADOR {id = $<cadena>2;}  '(' listaParametro ')' ';' {aux=buscarSimbolo($<cadena>2); if (aux) agregarError("Error Semantico : el identificador ya esta declarado");  else declararFuncion(id, tipo); }
-                      | error cuerpoParametros { agregarError("Error Sintactico : identificador incorrecto  en declaracion de funcion"); }
+declaracionFunciones:  TIPO_DATO {tipo = $<cadena>1; }  IDENTIFICADOR {id = $<cadena>2;}  '(' listaParametro ')' ';' {aux=buscarSimbolo($<cadena>2); if (aux) agregarError("Error Semantico : el identificador ya esta declarado");  else declararFuncion(id, tipo); }
+                      | error { agregarError("Error Sintactico : identificador incorrecto  en declaracion de funcion"); }
 ; 
                            
 listaParametro: parametro
@@ -241,7 +240,7 @@ argumento:        /* vacio */
                 | CONSTANTE_DECIMAL   {agregoArgumento("int");} 
                 | CONSTANTE_CARACTER  {agregoArgumento("char");}
 
-definicionFunciones: TIPO_DATO IDENTIFICADOR '(' opcionArgumentosConTipo ')' sentenciaCompuesta 
+definicionFunciones: TIPO_DATO IDENTIFICADOR '(' TIPO_DATO IDENTIFICADOR ')' sentenciaCompuesta 
 
 
 

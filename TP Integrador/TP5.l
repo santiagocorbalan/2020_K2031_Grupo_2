@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h> 
 #include <string.h>
-#include <TP5.tab.c>
+#include "TP5.tab.c"
 
 %}
 
