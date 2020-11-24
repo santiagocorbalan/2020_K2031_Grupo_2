@@ -191,12 +191,12 @@ unaVariableSimple:   IDENTIFICADOR                             {aux = buscarSimb
                     | IDENTIFICADOR '=' CONSTANTE_DECIMAL      {aux=buscarSimbolo($<cadena>1); if (aux) agregarError("Error Semantico : la variable ya esta declarada "); else declararVariable($<strval>1,tipo,$<entero>3);}
                     | IDENTIFICADOR '=' CONSTANTE_CARACTER     {aux=buscarSimbolo($<cadena>1); if (aux) agregarError("Error Semantico : la variable ya esta declarada "); else declararVariable($<strval>1,tipo,$<caracter>3);}
                     | IDENTIFICADOR '=' CONSTANTE_REAL         {aux=buscarSimbolo($<cadena>1); if (aux) agregarError("Error Semantico : la variable ya esta declarada "); else declararVariable($<strval>1,tipo,$<real>3);}
-                    | IDENTIFICADOR '=' error                  {agregarError("Error Sintactico: se inicializo con un valor incorrecto");}
-                    | error '='                                {agregarError("Error Sintactico: identificador incorrecto");}
+                    | IDENTIFICADOR '=' error                  {agregarError("Error Sintactico : se inicializo con un valor incorrecto");}
+                    | error '='                                {agregarError("Error Sintactico : identificador incorrecto");} 
 ;
 
 declaracionFuncion:    TIPO_DATO {tipo = $<cadena>1; }  IDENTIFICADOR {id = $<cadena>2;}  '(' listaParametro ')' ';' {aux=buscarSimbolo($<cadena>2); if (aux) agregarError("Error Semantico : el identificador ya esta declarado");  else declararFuncion(id, tipo); }
-                      | error cuerpoParametros { agregarError("Error Sintactico: identificador incorrecto  en declaracion de funcion"); }
+                      | error cuerpoParametros { agregarError("Error Sintactico : identificador incorrecto  en declaracion de funcion"); }
 ; 
                            
 listaParametro: parametro
@@ -205,16 +205,16 @@ listaParametro: parametro
 
 parametro:   TIPO_DATO IDENTIFICADOR           {aux=buscarEnListaFunciones(id); if(aux) agregoParametros(aux->lista_parametros,$<cadena>1)                                                    
             | TIPO_DE_DATO '*' IDENTIFICADOR   {aux=buscarEnListaFunciones(id); if(aux) agregoParametros(aux->lista_parametros,strcat($<cadena>1,"*")) 
-            | error IDENTIFICADOR              {agregarError("Error sintactico: falta tipo de dato del parametro")}
-            | error '*' IDENTIFICADOR          {agregarError("Error sintactico: falta tipo de dato del puntero parametro")}
-            | TIPO_DE_DATO error               {agregarError("Error sintactico: falta indentificador del parametro")}
-            | TIPO_DE_DATO '*' error           {agregarError("Error sintactico: falta identificador del puntero del  parametro")}
+            | error IDENTIFICADOR              {agregarError("Error sintactico : falta tipo de dato del parametro")}
+            | error '*' IDENTIFICADOR          {agregarError("Error sintactico : falta tipo de dato del puntero parametro")}
+            | TIPO_DE_DATO error               {agregarError("Error sintactico : falta indentificador del parametro")}
+            | TIPO_DE_DATO '*' error           {agregarError("Error sintactico : falta identificador del puntero del  parametro")}
 ;
 
 invocacionDeFuncion:    IDENTIFICADOR '(' listaArgumentos ')'   {aux=buscarEnListaFuciones($<cadena>1); if (aux) verificarParametros(aux->lista_parametros) else listaArgumentosTemporal = NULL;
-                     |  IDENTIFICADOR error listaArgumentos ')' {agregarError("Error Sintactico: falta '(' en la invocacion de la funcion"); }
-                     |  IDENTIFICADOR '(' error ')'             {agregarError("Error Sintactico: argumentos no validos");}
-                     |  IDENTIFICADOR '(' listaArgumentos error {agregarError("Error Sintactico: falta ')' en la invocacion de la funcion"); }
+                     |  IDENTIFICADOR error listaArgumentos ')' {agregarError("Error Sintactico : falta '(' en la invocacion de la funcion"); }
+                     |  IDENTIFICADOR '(' error ')'             {agregarError("Error Sintactico : argumentos no validos");}
+                     |  IDENTIFICADOR '(' listaArgumentos error {agregarError("Error Sintactico : falta ')' en la invocacion de la funcion"); }
 ;
 
 listaArgumentos:   argumento                           
