@@ -1,47 +1,18 @@
-void declararVariableSinInicializar(char* nombre,char* tipo){
-    aux = ; 
-    aux->tipo = tipo;
-    strcpy(aux->value.valor,"");
-    printf("\n\tSe declara la variable %s de tipo %s sin valor inicial\n\n",aux->name, aux->tipo);
-}
 
-typedef struct argu{
-    char*  tipoArgumento;
-    struct argu* sig;
-} Argu;
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-
-Argu *listaArgumentosTemporal = NULL;
-void agregoArgumento(char* tipoArgumentooo);
-
-void agregoArgumento(char* tipoArgumentooo){
-    
-    Argu *nuevo_nodo = (Argu *)malloc(sizeof(Argu));
-     nuevo_nodo->tipoArgumento = (char *) malloc (strlen (tipoArgumentooo) + 1);
-     strcpy (nuevo_nodo->tipoArgumento,tipoArgumentooo);
-    nuevo_nodo->sig = NULL;
-
-    if(listaArgumentosTemporal == NULL){
-        listaArgumentosTemporal  = nuevo_nodo;
-    }
-    else{
-        Argu *aux;
-        aux = listaArgumentosTemporal ;
-
-        while(aux->sig != NULL){
-            aux = aux->sig;
-        }
-        aux->sig = nuevo_nodo;
-    }
-  
-}
 
 typedef struct errorres{
 	char*  cadenaDeErrores;
 	struct errorres* sig;		
 }Errores;
 
-Errorres *listaErrores = NULL;
+Errores *listaErrores = NULL;
+
+void agregarError(char* cadenaError);
+void mostrarErrores( Errores*listaDeErrores);
 
 
 void agregarError(char* cadenaError){  
@@ -66,23 +37,55 @@ void agregarError(char* cadenaError){
   
 }
 
+
+void mostrarErrores( Errores*listaDeErrores){
+
+if(listaDeErrores == NULL){
+   printf("No se encontro ningun Error\n");
+}
+
+else {
+     while (listaDeErrores != NULL) {
+   printf( "%s" , listaDeErrores->cadenaDeErrores);
+    listaDeErrores = listaDeErrores->sig;
+ }
+}
+}
+
+
+
 typedef struct tabla{
     	char*  nombre;
         char*  tipo;
-    struct tabla* sig;
+        int variableOfuncion;
+        struct parametro* tiposParametros;
+        union
+        {
+         int      valEnt; 
+         double   valReal;
+         char     valChar;
+         char*    valString;
+        } value;
+        struct tabla* sig;
 } Tabla;
 
 
 Tabla *listaSimbolos = NULL;
-void agregoSimbolo(char* name , char* type);
 
-void agregoSimbolo(char* name , char* type){
+
+void agregoSimbolo(char* name , char* type, int nuevaVariableOfuncion);
+
+void agregoSimbolo(char* name , char* type, int nuevaVariableOfuncion){
     
     Tabla *nuevo_nodo = (Tabla *)malloc(sizeof(Tabla));
      nuevo_nodo->nombre = (char *) malloc (strlen (name) + 1);
      strcpy (nuevo_nodo->nombre,name);
-          nuevo_nodo->tipo = (char *) malloc (strlen (type) + 1);
+     nuevo_nodo->tipo = (char *) malloc (strlen (type) + 1);
      strcpy (nuevo_nodo->tipo,type);
+
+nuevo_nodo->variableOfuncion = nuevaVariableOfuncion; 
+nuevo_nodo->tiposParametros = NULL;
+
     nuevo_nodo->sig = NULL;
 
     if(listaSimbolos == NULL){
@@ -100,17 +103,8 @@ void agregoSimbolo(char* name , char* type){
   
 }
 
-typedef struct tabla{
-    	char*  nombre;
-        char*  tipo;
-    struct tabla* sig;
-} Tabla;
-
-
-Tabla *listaSimbolos = NULL;
 
 Tabla *buscarSimbolo(char *name);
-
 
 Tabla *buscarSimbolo(char *name)
 {
@@ -121,99 +115,66 @@ Tabla *buscarSimbolo(char *name)
         return 0;
 }
 
-typedef struct parametro
-{
-    char* tipoParam;
+
+
+
+
+Tabla *agregoSimbolo2(char* name2 , char* type2, int nuevaVariableOfuncion2){
+    
+    Tabla *nuevo_nodo = (Tabla *)malloc(sizeof(Tabla));
+     nuevo_nodo->nombre = (char *) malloc (strlen (name2) + 1);
+     strcpy (nuevo_nodo->nombre,name2);
+     nuevo_nodo->tipo = (char *) malloc (strlen (type2) + 1);
+     strcpy (nuevo_nodo->tipo,type2);
+
+nuevo_nodo->variableOfuncion = nuevaVariableOfuncion2; 
+nuevo_nodo->tiposParametros = NULL;
+
+    nuevo_nodo->sig = NULL;
+
+    if(listaSimbolos == NULL){
+        listaSimbolos  = nuevo_nodo;
+    }
+    else{
+        Tabla *aux;
+        aux = listaSimbolos ;
+
+        while(aux->sig != NULL){
+            aux = aux->sig;
+        }
+        aux->sig = nuevo_nodo;
+    }
+  
+return listaSimbolos;
+}
+
+
+
+
+
+typedef struct parametro{
+    char*  tipoParametro;
     struct parametro* sig;
-}parametro;
+} Parametro;
 
 
-typedef struct funciones{
-    	char*  nombre;
-        char*  tipo;
-     struct parametro* lista_parametros; 
-    struct funciones* sig;
-} Funciones;
-
-
-Funciones *listadefunciones = NULL;
-
-
-void agregoFunciones(char* name , char* type);
-void agregoFunciones(char* name , char* type){
-    
-    Funciones *nuevo_nodo = (Funciones *)malloc(sizeof(Funciones));
-     nuevo_nodo->nombre = (char *) malloc (strlen (name) + 1);
-     strcpy (nuevo_nodo->nombre,name);
-          nuevo_nodo->tipo = (char *) malloc (strlen (type) + 1);
-     strcpy (nuevo_nodo->tipo,type);
-    nuevo_nodo->lista_parametros = NULL ;
-    nuevo_nodo->sig = NULL;
-
-    if(listadefunciones == NULL){
-        (listadefunciones = nuevo_nodo;
-    }
-    else{
-        Funciones *aux;
-        aux = listadefunciones ;
-
-        while(aux->sig != NULL){
-            aux = aux->sig;
-        }
-        aux->sig = nuevo_nodo;
-    }
-  
-}
-
-void agregoFunciones(char* name , char* type){
-    
-    Funciones *nuevo_nodo = (Funciones *)malloc(sizeof(Funciones));
-     nuevo_nodo->nombre = (char *) malloc (strlen (name) + 1);
-     strcpy (nuevo_nodo->nombre,name);
-          nuevo_nodo->tipo = (char *) malloc (strlen (type) + 1);
-     strcpy (nuevo_nodo->tipo,type);
-    nuevo_nodo->lista_parametros = NULL ;
-    nuevo_nodo->sig = NULL;
-
-    if(listadefunciones == NULL){
-        (listadefunciones = nuevo_nodo;
-    }
-    else{
-        Funciones *aux;
-        aux = listadefunciones ;
-
-        while(aux->sig != NULL){
-            aux = aux->sig;
-        }
-        aux->sig = nuevo_nodo;
-    }
-  
-}
-
-typedef struct argu{
-    char*  tipoArgumento;
-    struct argu* sig;
-} Argu;
-
-
-Argu *listaArgumentosTemporal = NULL;
+Parametro *listaParametrosAux = NULL;
 void agregoParametro(char* tipoArgumentooo);
 
 
-
-void agregoParamtero(char* tipoArgumentooo){
+void agregoParametro(char* tipoArgumentooo){
     
-    Argu *nuevo_nodo = (Argu *)malloc(sizeof(Argu));
-     nuevo_nodo->tipoArgumento = (char *) malloc (strlen (tipoArgumentooo) + 1);
-     strcpy (nuevo_nodo->tipoArgumento,tipoArgumentooo);
+    Parametro *nuevo_nodo = (Parametro *)malloc(sizeof(Parametro));
+    nuevo_nodo->tipoParametro = (char *) malloc (strlen (tipoArgumentooo) + 1);
+    strcpy (nuevo_nodo->tipoParametro,tipoArgumentooo);
     nuevo_nodo->sig = NULL;
 
-    if(listaArgumentosTemporal == NULL){
-        listaArgumentosTemporal  = nuevo_nodo;
+    if(listaParametrosAux == NULL){
+        listaParametrosAux  = nuevo_nodo;
     }
     else{
-        Argu *aux;
-        aux = listaArgumentosTemporal ;
+        Parametro *aux;
+        aux = listaParametrosAux ;
 
         while(aux->sig != NULL){
             aux = aux->sig;
@@ -224,65 +185,125 @@ void agregoParamtero(char* tipoArgumentooo){
 }
 
 
-void declararVariableConElIgual(char * nombre1,char* tipo,char * nombre2){
-    auxiliar = getsym(nombre2,TYP_VAR);
- 
-    if(auxiliar && mismoTipo(tipo, auxiliar->tipo)){
 
-        aux = putsym(strdup(nombre1),TYP_VAR);
-        strcpy(aux->value.valor,aux2->value.valor);
-        aux->tipo = tipo;  
-        printf("Se declara la variable %s de tipo %s con valor inicial %s\n", aux->name, aux->tipo, aux->value.valor);
+
+int compararParametros(Parametro* lista1, Parametro* lista2) {
+    int retorna = 0;    
+    if (cantidadParametros(lista1) != cantidadParametros(lista2)) {
+        retorna = 1;
     }
-    if(auxiliar && !mismoTipo(tipo, auxiliar->tipo))
-    {
-        agregarError("Error Semantico: en control de tipos de datos en la asignacion");
-    }
-    if(auxiliar = NULL){
-
-        agregarError("no existe la variable que quiere asignarse" );
-    }
-    
-};
-
-
-
-int mismoTipo(char* tipo, char* tipo2){
-    
-    if(strcmp(tipo,tipo2) == 0)
-        return 1;
-    else 
-        return 0;
-};
-
-
-
-void declararVariable(char* nombre,char* tipo,char* valor){
-    
-    aux = putsym(strdup(nombre),TYP_VAR);
-    aux->tipo = tipo;
-    strcpy(aux->value.valor,valor);
-    printf("\n\tSe declara la variable %s de tipo %s con valor inicial %s\n\n",aux->name, aux->tipo, aux->value.valor);
-}
-
-
-
-void verificarParametros(Simbolo* unaFuncion, Funcion* unaListaDeParam) {
-    Funcion* parametros = aux->lista_parametros;
-
-    if(cantidadDeParametros(parametros) != cantidadDeParametros(unaListaDeParam)){
-
-agregarError("La cantidad de parametros ingresados no coinciden en la funcion");
-
-  
-    } 
-    else
-        for(Funcion* aux = parametros; aux != NULL; aux = aux -> sig){
-            if(strcmp(unaListaDeParam -> tipoDatoParam, aux -> tipoDatoParam)){
-               agregarError("El tipo de dato de los argumentos ingresados no coinciden con los esperados por la funcion");
-
-                break;
-            }   
-            unaListaDeParam = unaListaDeParam -> sig;
+    else {
+        Parametro* aux1 = lista1;
+        Parametro* aux2 = lista2;
+        while (aux1 != NULL) {
+            if (strcmp(aux1->tipoParametro, aux2->tipoParametro) != 0) {
+                retorna = 1;
+            }
+            aux1 = aux1->sig;
+            aux2 = aux2->sig;
         }
+    }
+    return retorna;
 }
+
+
+
+int cantidadParametros(Parametro* listaAuxiliar) {
+    Parametro* aux = listaAuxiliar;
+    int cantidad = 0;
+    while (aux != NULL) {
+        cantidad++;
+        aux = aux->sig;
+    }
+    return cantidad;
+}
+
+
+
+void agregoArgumento(char* tipoArgumentooo){
+    
+    Parametro *nuevo_nodo = (Parametro *)malloc(sizeof(Parametro));
+    nuevo_nodo->tipoParametro = (char *) malloc (strlen (tipoArgumentooo) + 1);
+    strcpy (nuevo_nodo->tipoParametro,tipoArgumentooo);
+    nuevo_nodo->sig = NULL;
+
+    if(listaParametrosAux == NULL){
+        listaParametrosAux  = nuevo_nodo;
+    }
+    else{
+        Parametro *aux;
+        aux = listaParametrosAux ;
+
+        while(aux->sig != NULL){
+            aux = aux->sig;
+        }
+        aux->sig = nuevo_nodo;
+    }
+  
+}
+
+
+
+
+void mostrarErrores( Errores*listaDeErrores){
+
+if(listaDeErrores == NULL){
+   printf("No se encontro ningun Error\n");
+}
+
+else {
+     while (listaDeErrores != NULL) {
+   printf( "%s" , listaDeErrores->cadenaDeErrores);
+    listaDeErrores = listaDeErrores->sig;
+ }
+}
+}
+
+
+
+void mostrarParametros( Parametro*listaParametros){
+
+if(listaParametros == NULL){
+   printf("Lista de Parametros Vacia\n");
+}
+
+else
+{
+   while (listaParametros != NULL) {
+   printf("Tipo de parametro: %s\n" , listaParametros->tipoParametro);
+    listaParametros = listaParametros->sig;
+ }
+}
+}
+
+
+
+void mostrarSimbolos(Tabla* lista){
+
+if(lista == NULL){
+   printf("Tabla de Simbolos Vacia\n");
+}
+
+else
+{
+
+while (lista != NULL) {
+
+   switch (lista->variableOfuncion) {
+        case 1:
+            printf("Nombre de la variable: %s , Tipo: %s", lista->nombre, lista->tipo);
+            break;
+    
+        case 2:
+            printf("Nombre de la funcion: %s , Tipo: %s", lista->nombre, lista->tipo);
+            printf("Cantidad de parametros: %i", cantidadParametros(lista->tiposParametros));
+            mostrarParametros(lista->tiposParametros);
+            break;
+    }
+    lista = lista->sig;
+
+ }
+}
+}
+
+
