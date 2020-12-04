@@ -42,7 +42,7 @@
 
 \"[^\"]*\" {strcpy(yylval.cadena, yytext); return LITERAL_CADENA;}
 
-[1-9][0-9]* {yylval.mystruct.valor_entero=atoi(yytext); yylval.mystruct.tipo=1;yylval.entero = atoi(yytext); return CONSTANTE_DECIMAL;}
+[1-9][0-9]* {yylval.mystruct.valor_entero=atoi(yytext); yylval.mystruct.tipo=1;yylval.entero = atoi(yytext); return CONSTANTE_ENTERA;}
 
 0[0-7]* {yylval.mystruct.valor_entero=atoi(yytext); yylval.mystruct.tipo=1; yylval.entero = atoi(yytext); return CONSTANTE_OCTAL;}
 

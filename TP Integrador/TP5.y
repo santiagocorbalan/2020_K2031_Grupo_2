@@ -58,8 +58,8 @@ struct yylval_struct
 %token RETURN
 
 %type <mystruct> expresion
-
-
+%type <mystruct> declaracionDefinicionFuncion
+// token error? 
 %% 
 
 input:    /* vacio */
@@ -150,11 +150,14 @@ sentenciaDeSalto:  CONTINUE ';'                                                 
 declaracion:      TIPO_DE_DATO          {tipo = $<cadena>1;} declaraciones
                 | TIPO_DE_DATO '*'      {tipo = strcat($<cadena>1,"*");} declaraciones                 
                 | VOID                  {tipo = "void";} declaracionDefinicionFuncion  
-
 ;
 
-declaraciones:      declaracionDefinicionFuncion          
-                 | declaracionVariables ';'                      
+declaracionDefinicionFuncion: IDENTIFICADOR parametrosCuerpoFuncion {aux=buscarSimbolo($<cadena>1); if (aux) agregarError("Error Semantico : el identificador ya esta declarado");  else aux2 = agregoSimbolo2($<cadena>1 , tipo, 2) ;   aux->tiposParametros = listaParametrosAux;  listaParametrosAux = NULL; }
+                              | error parametrosCuerpoFuncion { agregarError("Error Sintactico : nombre de la funcion incorrecto"); }
+;
+
+declaraciones:  declaracionDefinicionFuncion          
+                | declaracionVariables ';'                      
 ;
 
 declaracionVariables:   listaVariables 
@@ -165,7 +168,7 @@ listaVariables:   unaVariableSimple
 ;
 
 
-unaVariableSimple:      IDENTIFICADOR                     {aux=buscarSimbolo($<cadena>1); if (aux) agregarError("Error Semantico: la variable ya esta declarada\n"); else aux2 = agregoSimbolo2($<cadena>1 , tipo, 1);
+unaVariableSimple: IDENTIFICADOR  {aux=buscarSimbolo($<cadena>1); if (aux) agregarError("Error Semantico: la variable ya esta declarada\n"); else aux2 = agregoSimbolo2( $<cadena>1 , tipo, 1);
 
 
                                                                                                         switch (aux2->tipo) {
@@ -215,7 +218,7 @@ unaVariableSimple:      IDENTIFICADOR                     {aux=buscarSimbolo($<c
                                                                                                                     agregarError("Error Semantico : las variables son de distinto tipo\n");
                                                                                                                     };
                                                                                                                     
-                                                                                                                    }
+                                                                                                                    }}
                   
                      | IDENTIFICADOR '=' CONSTANTE_ENTERA      {aux=buscarSimbolo($<cadena>1); if (aux) agregarError("Error Semantico : la variable ya esta declarada "); else if (strcmp(tipo,"int") == 0) aux2 = agregoSimbolo2($<cadena>1 , tipo, 1) ;  aux2->value.valEnt = $<mystruct>3.valor_entero; else agregarError("Error Semantico : son de distinto tipo"); }
 
@@ -229,22 +232,11 @@ unaVariableSimple:      IDENTIFICADOR                     {aux=buscarSimbolo($<c
                     | IDENTIFICADOR '=' error                {agregarError("Error Sintactico : se inicializo con un valor incorrecto"); }
 
                     | error '='                         {agregarError("Error Sintactico : identificador incorrecto"); }
-
 ;
 
-
-
-declaracionDefinicionFuncion:     IDENTIFICADOR parametrosCuerpoFuncion {aux=buscarSimbolo($<cadena>1); if (aux) agregarError("Error Semantico : el identificador ya esta declarado");  else aux2 = agregoSimbolo2($<cadena>1 , tipo, 2) ;   aux->tiposParametros = listaParametrosAux;}  listaParametrosAux = NULL; }
-
-
-                                | error parametrosCuerpoFuncion { agregarError("Error Sintactico : nombre de la funcion incorrecto"); }
-;
-
-              
+             
 parametrosCuerpoFuncion:      '(' listaParametros ')' sentenciaCompuesta    
                             | '(' listaParametros ')' ';'                    
-
-
 ;
 
 listaParametros:         /* vacio */  { agregarParametro("void");} 
@@ -264,7 +256,7 @@ parametros:       TIPO_DE_DATO IDENTIFICADOR       { agregarParametro($<strval>1
 
 expresion:                CONSTANTE_ENTERA    {$<mystruct>$.tipo = $<mystruct>1.tipo;  $<mystruct>$.valor_entero = $<mystruct>1.valor_entero;}
 	  		| CONSTANTE_REAL       {$<mystruct>$.tipo = $<mystruct>1.tipo;  $<mystruct>$.valor_real = $<mystruct>1.valor_real;}
-                        | ID                 { aux=buscarSimbolo($<cadena>1); if (aux) {  switch (aux->tipo) {
+                        | IDENTIFICADOR                 { aux=buscarSimbolo($<cadena>1); if (aux) {  switch (aux->tipo) {
                                                                                                                 case "int":
                                                                                                                             $<mystruct>$.valor_entero = aux->value.valEnt; $<mystruct>$.tipo = 1;
                           
@@ -313,8 +305,7 @@ expresion:                CONSTANTE_ENTERA    {$<mystruct>$.tipo = $<mystruct>1.
 
 
 
-invocacionDeFuncion:    IDENTIFICADOR '(' listaArgumentos ')'  {aux=buscarSimbolo($<cadena>1);   if (aux) { if(aux -> variableOfuncion == 1)   agregarError ("Error semantico : El IDENTIFICADOR esta declarado como variable");  else (compararParametros(aux->tiposParametros, listaAuxParametros) == 1) agregarError ("Error semantico : cantidad o tipos de parametros incorrectos"); } else agregarError ("Error semantico : No esta declarada la funcion") ;} listaParametrosAux = NULL;}
-
+invocacionDeFuncion:   IDENTIFICADOR '(' listaArgumentos ')'  {aux=buscarSimbolo($<cadena>1);   if (aux) { if(aux -> variableOfuncion == 1)   agregarError ("Error semantico : El IDENTIFICADOR esta declarado como variable");  else (compararParametros(aux->tiposParametros, listaAuxParametros) == 1) agregarError ("Error semantico : cantidad o tipos de parametros incorrectos"); } else {agregarError ("Error semantico : No esta declarada la funcion") ;} listaParametrosAux = NULL;}
                      |  IDENTIFICADOR error listaArgumentos ')' {agregarError("Error Sintactico : falta '(' en la invocacion de la funcion"); }
                      |  IDENTIFICADOR '(' listaArgumentos error {agregarError("Error Sintactico : falta ')' en la invocacion de la funcion"); }
 ;
@@ -327,7 +318,7 @@ listaArgumentos:   argumento
 argumento:        /* vacio */         {agregoArgumento("void");}
                 | IDENTIFICADOR       {aux=buscarSimbolo($<cadena>1);    if (aux) agregarArgumento(aux->tipo); else  agregarError("Error Semantico : la variable no esta declarada\n");}
                 | LITERAL_CADENA      {agregoArgumento("char*");}
-                | CONSTANTE_DECIMAL   {agregoArgumento("int");} 
+                | CONSTANTE_ENTERA   {agregoArgumento("int");} 
                 | CONSTANTE_CARACTER  {agregoArgumento("char");}
                 | CONSTANTE_REAL      {agregoArgumento("real");}
 ;

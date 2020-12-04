@@ -39,24 +39,22 @@
    /* Put the tokens into the symbol table, so that GDB and other debuggers
       know about them.  */
    enum yytokentype {
-     CONSTANTE_DECIMAL = 258,
-     CONSTANTE_OCTAL = 259,
-     CONSTANTE_HEXADECIMAL = 260,
-     CONSTANTE_REAL = 261,
-     CONSTANTE_CARACTER = 262,
-     LITERAL_CADENA = 263,
-     TIPO_DATO = 264,
-     IDENTIFICADOR = 265,
-     SWITCH = 266,
-     BREAK = 267,
-     CONTINUE = 268,
-     WHILE = 269,
-     IF = 270,
-     ELSE = 271,
-     FOR = 272,
-     RETURN = 273,
-     DO = 274,
-     NEG = 275
+     TIPO_DE_DATO = 258,
+     VOID = 259,
+     IDENTIFICADOR = 260,
+     LITERAL_CADENA = 261,
+     CONSTANTE_ENTERA = 262,
+     CONSTANTE_REAL = 263,
+     CONSTANTE_CARACTER = 264,
+     SWITCH = 265,
+     DO = 266,
+     WHILE = 267,
+     IF = 268,
+     ELSE = 269,
+     FOR = 270,
+     BREAK = 271,
+     CONTINUE = 272,
+     RETURN = 273
    };
 #endif
 
@@ -67,15 +65,14 @@ typedef union YYSTYPE
 {
 
 /* Line 1676 of yacc.c  */
-#line 27 "TP5.y"
+#line 25 "TP5.y"
 
+    int entero; 
+    float real;
+    char caracter;
+    char* cadena;
 
-char* cadena;
-int entero;
-float real;
-char caracter;
-
- struct yylval_struct
+struct yylval_struct
   {
       int tipo;
       int valor_entero;
@@ -85,9 +82,8 @@ char caracter;
 
 
 
-
 /* Line 1676 of yacc.c  */
-#line 91 "TP5.tab.h"
+#line 87 "TP5.tab.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
