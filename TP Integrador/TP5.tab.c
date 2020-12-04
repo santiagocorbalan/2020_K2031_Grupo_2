@@ -75,7 +75,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
-
+#include "Funciones.c"
 
 int yylex();
 
@@ -500,16 +500,16 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint16 yyrline[] =
 {
-       0,    65,    65,    66,    70,    71,    72,    73,    74,    79,
-      80,    81,    82,    83,    87,    91,    92,    95,    99,   100,
-     103,   104,   108,   109,   112,   113,   118,   119,   120,   121,
-     122,   123,   124,   129,   130,   131,   132,   133,   134,   135,
-     141,   142,   143,   150,   150,   151,   151,   152,   152,   155,
-     156,   159,   160,   163,   166,   167,   171,   196,   223,   225,
-     227,   229,   232,   234,   238,   239,   242,   243,   244,   247,
-     248,   249,   250,   251,   252,   257,   258,   259,   280,   296,
-     297,   298,   299,   300,   308,   309,   310,   314,   315,   318,
-     319,   320,   321,   322,   323
+       0,    66,    66,    67,    70,    71,    72,    73,    74,    77,
+      78,    79,    80,    81,    84,    87,    88,    91,    95,    96,
+      99,   100,   103,   104,   107,   108,   112,   113,   114,   115,
+     116,   117,   118,   121,   122,   123,   124,   125,   126,   127,
+     131,   132,   133,   137,   137,   138,   138,   139,   139,   142,
+     143,   146,   147,   150,   153,   154,   158,   183,   210,   212,
+     214,   216,   219,   221,   225,   226,   229,   230,   231,   234,
+     235,   236,   237,   238,   239,   244,   245,   246,   267,   283,
+     284,   285,   286,   287,   290,   291,   292,   295,   296,   299,
+     300,   301,   302,   303,   304
 };
 #endif
 
@@ -1535,189 +1535,189 @@ yyreduce:
         case 15:
 
 /* Line 1455 of yacc.c  */
-#line 91 "TP5.y"
+#line 87 "TP5.y"
     {printf("Se encontro una sentencia vacia\n");;}
     break;
 
   case 16:
 
 /* Line 1455 of yacc.c  */
-#line 92 "TP5.y"
+#line 88 "TP5.y"
     {printf("Se encontro una sentencia con una expresion\n");;}
     break;
 
   case 19:
 
 /* Line 1455 of yacc.c  */
-#line 100 "TP5.y"
+#line 96 "TP5.y"
     {printf("Se encontro una sentencia compuesta con una lista de declaraciones\n");;}
     break;
 
   case 23:
 
 /* Line 1455 of yacc.c  */
-#line 109 "TP5.y"
+#line 104 "TP5.y"
     {printf("Se encontro una sentencia compuesta con una lista de sentencias\n");;}
     break;
 
   case 26:
 
 /* Line 1455 of yacc.c  */
-#line 118 "TP5.y"
+#line 112 "TP5.y"
     {printf("Se encontro una sentencia IF\n");;}
     break;
 
   case 27:
 
 /* Line 1455 of yacc.c  */
-#line 119 "TP5.y"
+#line 113 "TP5.y"
     {printf("Se encontro una sentencia IF y ELSE\n");;}
     break;
 
   case 28:
 
 /* Line 1455 of yacc.c  */
-#line 120 "TP5.y"
+#line 114 "TP5.y"
     {agregarError("Error Sintactico: Despues del IF se espera un '('\n"); ;}
     break;
 
   case 29:
 
 /* Line 1455 of yacc.c  */
-#line 121 "TP5.y"
+#line 115 "TP5.y"
     {agregarError("Error Sintactico: falta ')' en la sentencia IF\n"); ;}
     break;
 
   case 30:
 
 /* Line 1455 of yacc.c  */
-#line 122 "TP5.y"
+#line 116 "TP5.y"
     {printf("Se encontro una sentencia SWITCH\n");;}
     break;
 
   case 31:
 
 /* Line 1455 of yacc.c  */
-#line 123 "TP5.y"
+#line 117 "TP5.y"
     {agregarError("Error Sintactico: Despues del SWITCH se espera un '('\n"); ;}
     break;
 
   case 32:
 
 /* Line 1455 of yacc.c  */
-#line 124 "TP5.y"
+#line 118 "TP5.y"
     {agregarError("Error Sintactico: falta ')' en la sentencia SWITCH\n"); ;}
     break;
 
   case 33:
 
 /* Line 1455 of yacc.c  */
-#line 129 "TP5.y"
+#line 121 "TP5.y"
     {printf("Se encontro la sentencia WHILE\n");;}
     break;
 
   case 34:
 
 /* Line 1455 of yacc.c  */
-#line 130 "TP5.y"
+#line 122 "TP5.y"
     {agregarError("Error Sintactico: Despues del WHILE se espera un '('\n"); ;}
     break;
 
   case 35:
 
 /* Line 1455 of yacc.c  */
-#line 131 "TP5.y"
+#line 123 "TP5.y"
     {agregarError("Error Sintactico: falta ')' en la sentencia WHILE\n"); ;}
     break;
 
   case 36:
 
 /* Line 1455 of yacc.c  */
-#line 132 "TP5.y"
+#line 124 "TP5.y"
     {printf("Se encontro una sentencia DO\n");;}
     break;
 
   case 37:
 
 /* Line 1455 of yacc.c  */
-#line 133 "TP5.y"
+#line 125 "TP5.y"
     {printf("Se encontro una sentencia FOR\n");;}
     break;
 
   case 38:
 
 /* Line 1455 of yacc.c  */
-#line 134 "TP5.y"
+#line 126 "TP5.y"
     {agregarError("Error Sintactico: Despues del FOR se espera un '('\n"); ;}
     break;
 
   case 39:
 
 /* Line 1455 of yacc.c  */
-#line 135 "TP5.y"
+#line 127 "TP5.y"
     {agregarError("Error Sintactico: falta ')' en la sentencia FOR\n"); ;}
     break;
 
   case 40:
 
 /* Line 1455 of yacc.c  */
-#line 141 "TP5.y"
+#line 131 "TP5.y"
     {printf("Se encontro la sentencia CONTINUE\n");;}
     break;
 
   case 41:
 
 /* Line 1455 of yacc.c  */
-#line 142 "TP5.y"
+#line 132 "TP5.y"
     {printf("Se encontro la sentencia BREAK\n");;}
     break;
 
   case 42:
 
 /* Line 1455 of yacc.c  */
-#line 143 "TP5.y"
+#line 133 "TP5.y"
     {printf("Se encontro la sentencia RETURN\n");;}
     break;
 
   case 43:
 
 /* Line 1455 of yacc.c  */
-#line 150 "TP5.y"
+#line 137 "TP5.y"
     {tipo = (yyvsp[(1) - (1)].cadena);;}
     break;
 
   case 45:
 
 /* Line 1455 of yacc.c  */
-#line 151 "TP5.y"
+#line 138 "TP5.y"
     {tipo = strcat((yyvsp[(1) - (2)].cadena),"*");;}
     break;
 
   case 47:
 
 /* Line 1455 of yacc.c  */
-#line 152 "TP5.y"
+#line 139 "TP5.y"
     {tipo = "void";;}
     break;
 
   case 49:
 
 /* Line 1455 of yacc.c  */
-#line 155 "TP5.y"
+#line 142 "TP5.y"
     {aux=buscarSimbolo((yyvsp[(1) - (2)].cadena)); if (aux) agregarError("Error Semantico : el identificador ya esta declarado");  else aux2 = agregoSimbolo2((yyvsp[(1) - (2)].cadena) , tipo, 2) ;   aux->tiposParametros = listaParametrosAux;  listaParametrosAux = NULL; ;}
     break;
 
   case 50:
 
 /* Line 1455 of yacc.c  */
-#line 156 "TP5.y"
+#line 143 "TP5.y"
     { agregarError("Error Sintactico : nombre de la funcion incorrecto"); ;}
     break;
 
   case 56:
 
 /* Line 1455 of yacc.c  */
-#line 171 "TP5.y"
+#line 158 "TP5.y"
     {aux=buscarSimbolo((yyvsp[(1) - (1)].cadena)); if (aux) agregarError("Error Semantico: la variable ya esta declarada\n"); else aux2 = agregoSimbolo2( (yyvsp[(1) - (1)].cadena) , tipo, 1);
 
 
@@ -1746,7 +1746,7 @@ yyreduce:
   case 57:
 
 /* Line 1455 of yacc.c  */
-#line 196 "TP5.y"
+#line 183 "TP5.y"
     {aux=buscarSimbolo((yyvsp[(1) - (3)].cadena)); if (aux) agregarError("Error Semantico : la variable ya esta declarada\n"); else aux2=buscarSimbolo((yyvsp[(3) - (3)].cadena)); if(aux2 && (strcmp(tipo, aux2->tipo) == 0)){ aux3 = agregoSimbolo2((yyvsp[(1) - (3)].cadena) , tipo, 1) switch (aux3->tipo) {
                                                                                                                 case "int":
                                                                                                                              aux2->value.valEnt = (yyvsp[(3) - (3)].entero);
@@ -1778,112 +1778,112 @@ yyreduce:
   case 58:
 
 /* Line 1455 of yacc.c  */
-#line 223 "TP5.y"
+#line 210 "TP5.y"
     {aux=buscarSimbolo((yyvsp[(1) - (3)].cadena)); if (aux) agregarError("Error Semantico : la variable ya esta declarada "); else if (strcmp(tipo,"int") == 0) aux2 = agregoSimbolo2((yyvsp[(1) - (3)].cadena) , tipo, 1) ;  aux2->value.valEnt = (yyvsp[(3) - (3)].mystruct).valor_entero; else agregarError("Error Semantico : son de distinto tipo"); ;}
     break;
 
   case 59:
 
 /* Line 1455 of yacc.c  */
-#line 225 "TP5.y"
+#line 212 "TP5.y"
     {aux=buscarSimbolo((yyvsp[(1) - (3)].cadena)); if (aux) agregarError("Error Semantico : la variable ya esta declarada "); else if (strcmp(tipo, "char") == 0) aux2 = agregoSimbolo2((yyvsp[(1) - (3)].cadena) , tipo, 1) ;  aux2->value.valChar = (yyvsp[(3) - (3)].caracter); else agregarError("Error Semantico : son de distinto tipo");;}
     break;
 
   case 60:
 
 /* Line 1455 of yacc.c  */
-#line 227 "TP5.y"
+#line 214 "TP5.y"
     {aux=buscarSimbolo((yyvsp[(1) - (3)].cadena)); if (aux) agregarError("Error Semantico : la variable ya esta declarada "); else if (strcmp(tipo, "double") == 0) aux2 = agregoSimbolo2((yyvsp[(1) - (3)].cadena) , tipo, 1) ;  aux2->value.valReal = (yyvsp[(3) - (3)].mystruct).valor_real; else agregarError("Error Semantico : son de distinto tipo "); ;}
     break;
 
   case 61:
 
 /* Line 1455 of yacc.c  */
-#line 229 "TP5.y"
+#line 216 "TP5.y"
     {aux=buscarSimbolo((yyvsp[(1) - (3)].cadena)); if (aux) agregarError("Error Semantico : la variable ya esta declarada "); else if (strcmp(tipo, "char*") == 0) aux2 = agregoSimbolo2((yyvsp[(1) - (3)].cadena) , tipo, 1) ;  aux2->value.valString = (yyvsp[(3) - (3)].cadena); else agregarError("Error Semantico : son de distinto tipo ");;}
     break;
 
   case 62:
 
 /* Line 1455 of yacc.c  */
-#line 232 "TP5.y"
+#line 219 "TP5.y"
     {agregarError("Error Sintactico : se inicializo con un valor incorrecto"); ;}
     break;
 
   case 63:
 
 /* Line 1455 of yacc.c  */
-#line 234 "TP5.y"
+#line 221 "TP5.y"
     {agregarError("Error Sintactico : identificador incorrecto"); ;}
     break;
 
   case 66:
 
 /* Line 1455 of yacc.c  */
-#line 242 "TP5.y"
+#line 229 "TP5.y"
     { agregarParametro("void");;}
     break;
 
   case 69:
 
 /* Line 1455 of yacc.c  */
-#line 247 "TP5.y"
+#line 234 "TP5.y"
     { agregarParametro((yyvsp[(1) - (2)].strval));;}
     break;
 
   case 70:
 
 /* Line 1455 of yacc.c  */
-#line 248 "TP5.y"
+#line 235 "TP5.y"
     { agregarParametro(strcat((yyvsp[(1) - (3)].strval),"*"));;}
     break;
 
   case 71:
 
 /* Line 1455 of yacc.c  */
-#line 249 "TP5.y"
+#line 236 "TP5.y"
     {insertarErrorSintactico("ERROR SINTACTICO : falta tipo de dato del parametro"); ;}
     break;
 
   case 72:
 
 /* Line 1455 of yacc.c  */
-#line 250 "TP5.y"
+#line 237 "TP5.y"
     {insertarErrorSintactico("ERROR SINTACTICO : falta tipo de dato del puntero parametro"); ;}
     break;
 
   case 73:
 
 /* Line 1455 of yacc.c  */
-#line 251 "TP5.y"
+#line 238 "TP5.y"
     {insertarErrorSintactico("ERROR SINTACTICO : falta identificador en parametro"); ;}
     break;
 
   case 74:
 
 /* Line 1455 of yacc.c  */
-#line 252 "TP5.y"
+#line 239 "TP5.y"
     {insertarErrorSintactico("ERROR SINTACTICO : falta identificador del puntero parametro"); ;}
     break;
 
   case 75:
 
 /* Line 1455 of yacc.c  */
-#line 257 "TP5.y"
+#line 244 "TP5.y"
     {(yyval.mystruct).tipo = (yyvsp[(1) - (1)].mystruct).tipo;  (yyval.mystruct).valor_entero = (yyvsp[(1) - (1)].mystruct).valor_entero;;}
     break;
 
   case 76:
 
 /* Line 1455 of yacc.c  */
-#line 258 "TP5.y"
+#line 245 "TP5.y"
     {(yyval.mystruct).tipo = (yyvsp[(1) - (1)].mystruct).tipo;  (yyval.mystruct).valor_real = (yyvsp[(1) - (1)].mystruct).valor_real;;}
     break;
 
   case 77:
 
 /* Line 1455 of yacc.c  */
-#line 259 "TP5.y"
+#line 246 "TP5.y"
     { aux=buscarSimbolo((yyvsp[(1) - (1)].cadena)); if (aux) {  switch (aux->tipo) {
                                                                                                                 case "int":
                                                                                                                             (yyval.mystruct).valor_entero = aux->value.valEnt; (yyval.mystruct).tipo = 1;
@@ -1906,7 +1906,7 @@ yyreduce:
   case 78:
 
 /* Line 1455 of yacc.c  */
-#line 280 "TP5.y"
+#line 267 "TP5.y"
     { if((yyvsp[(1) - (3)].mystruct).tipo==(yyvsp[(3) - (3)].mystruct).tipo) { 
         
                                                                    if((yyvsp[(1) - (3)].mystruct).tipo==1) { 
@@ -1927,98 +1927,98 @@ yyreduce:
   case 79:
 
 /* Line 1455 of yacc.c  */
-#line 296 "TP5.y"
+#line 283 "TP5.y"
     { (yyval.mystruct) = (yyvsp[(1) - (3)].mystruct) - (yyvsp[(3) - (3)].mystruct);                  ;}
     break;
 
   case 80:
 
 /* Line 1455 of yacc.c  */
-#line 297 "TP5.y"
+#line 284 "TP5.y"
     { (yyval.mystruct) = (yyvsp[(1) - (3)].mystruct) * (yyvsp[(3) - (3)].mystruct);                   ;}
     break;
 
   case 81:
 
 /* Line 1455 of yacc.c  */
-#line 298 "TP5.y"
+#line 285 "TP5.y"
     { (yyval.mystruct) = (yyvsp[(1) - (3)].mystruct) / (yyvsp[(3) - (3)].mystruct);                    ;}
     break;
 
   case 82:
 
 /* Line 1455 of yacc.c  */
-#line 299 "TP5.y"
+#line 286 "TP5.y"
     { (yyval.mystruct) = pow ((yyvsp[(1) - (3)].mystruct), (yyvsp[(3) - (3)].mystruct));               ;}
     break;
 
   case 83:
 
 /* Line 1455 of yacc.c  */
-#line 300 "TP5.y"
+#line 287 "TP5.y"
     { (yyval.mystruct) = (yyvsp[(2) - (3)].mystruct);                         	;}
     break;
 
   case 84:
 
 /* Line 1455 of yacc.c  */
-#line 308 "TP5.y"
+#line 290 "TP5.y"
     {aux=buscarSimbolo((yyvsp[(1) - (4)].cadena));   if (aux) { if(aux -> variableOfuncion == 1)   agregarError ("Error semantico : El IDENTIFICADOR esta declarado como variable");  else (compararParametros(aux->tiposParametros, listaAuxParametros) == 1) agregarError ("Error semantico : cantidad o tipos de parametros incorrectos"); } else {agregarError ("Error semantico : No esta declarada la funcion") ;} listaParametrosAux = NULL;;}
     break;
 
   case 85:
 
 /* Line 1455 of yacc.c  */
-#line 309 "TP5.y"
-    {agregarError("Error Sintactico : falta '(' en la invocacion de la funcion"); ;}
+#line 291 "TP5.y"
+    {(agregarError("Error Sintactico : falta '(' en la invocacion de la funcion"); ;}
     break;
 
   case 86:
 
 /* Line 1455 of yacc.c  */
-#line 310 "TP5.y"
-    {agregarError("Error Sintactico : falta ')' en la invocacion de la funcion"); ;}
+#line 292 "TP5.y"
+    {(agregarError("Error Sintactico : falta ')' en la invocacion de la funcion"); ;}
     break;
 
   case 89:
 
 /* Line 1455 of yacc.c  */
-#line 318 "TP5.y"
+#line 299 "TP5.y"
     {agregoArgumento("void");;}
     break;
 
   case 90:
 
 /* Line 1455 of yacc.c  */
-#line 319 "TP5.y"
+#line 300 "TP5.y"
     {aux=buscarSimbolo((yyvsp[(1) - (1)].cadena));    if (aux) agregarArgumento(aux->tipo); else  agregarError("Error Semantico : la variable no esta declarada\n");;}
     break;
 
   case 91:
 
 /* Line 1455 of yacc.c  */
-#line 320 "TP5.y"
+#line 301 "TP5.y"
     {agregoArgumento("char*");;}
     break;
 
   case 92:
 
 /* Line 1455 of yacc.c  */
-#line 321 "TP5.y"
+#line 302 "TP5.y"
     {agregoArgumento("int");;}
     break;
 
   case 93:
 
 /* Line 1455 of yacc.c  */
-#line 322 "TP5.y"
+#line 303 "TP5.y"
     {agregoArgumento("char");;}
     break;
 
   case 94:
 
 /* Line 1455 of yacc.c  */
-#line 323 "TP5.y"
+#line 304 "TP5.y"
     {agregoArgumento("real");;}
     break;
 
@@ -2237,7 +2237,7 @@ yyreturn:
 
 
 /* Line 1675 of yacc.c  */
-#line 327 "TP5.y"
+#line 307 "TP5.y"
 
 
 Tabla *listaSimbolos;

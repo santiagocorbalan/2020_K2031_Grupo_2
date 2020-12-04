@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
-
+#include "Funciones.c"
 
 int yylex();
 
@@ -56,16 +56,17 @@ struct yylval_struct
 %token BREAK
 %token CONTINUE
 %token RETURN
+%token error // agrego token error
 
 %type <mystruct> expresion
 %type <mystruct> declaracionDefinicionFuncion
-// token error? 
+ 
+
 %% 
 
 input:    /* vacio */
         | input line
 ;
-
 
 line:   '\n'
         | expresion  '\n'                 
@@ -74,18 +75,14 @@ line:   '\n'
         | invocacionDeFuncion '\n'       
 ;
 
-
-
 sentencia:       sentenciaExpresion                                                       
                 | sentenciaCompuesta                                                       
                 | sentenciaDeSeleccion                                     
                 | sentenciaDeIteracion           
-                | sentenciaDeSalto                
-
+                | sentenciaDeSalto 
 ;
 
-sentenciaExpresion:    opExpresion ';'                   
-                                   
+sentenciaExpresion:    opExpresion ';'                                  
 ;
 
 opExpresion: /* vacio */      {printf("Se encontro una sentencia vacia\n");}
@@ -96,24 +93,22 @@ sentenciaCompuesta:     '{' opListaDeclaraciones opListaDeSentencias '}'
                       
 ;
 
-opListaDeclaraciones:       /* vacio */                   
-                            | listaDeclaraciones          {printf("Se encontro una sentencia compuesta con una lista de declaraciones\n");}
+opListaDeclaraciones: /* vacio */                   
+                      | listaDeclaraciones          {printf("Se encontro una sentencia compuesta con una lista de declaraciones\n");}
 ;
 
-listaDeclaraciones:               declaracion                           
-                                | listaDeclaraciones declaracion  
+listaDeclaraciones: declaracion                           
+                | listaDeclaraciones declaracion  
 ;
-
 
 opListaDeSentencias:       /* vacio */
                          | listaDeSentencias                {printf("Se encontro una sentencia compuesta con una lista de sentencias\n");}
 ;
 
-listaDeSentencias:              sentencia
-                                | listaDeSentencias sentencia	
+listaDeSentencias: sentencia
+                     | listaDeSentencias sentencia	
 
 ;
-
 
 sentenciaDeSeleccion:     IF '(' expresion ')' sentencia                                          {printf("Se encontro una sentencia IF\n");} 
                         | IF '(' expresion ')' sentencia ELSE sentencia                           {printf("Se encontro una sentencia IF y ELSE\n");}   
@@ -121,9 +116,7 @@ sentenciaDeSeleccion:     IF '(' expresion ')' sentencia                        
                         | IF '(' expresion error sentencia                                        {agregarError("Error Sintactico: falta ')' en la sentencia IF\n"); }
                         | SWITCH '(' expresion ')' sentencia                                      {printf("Se encontro una sentencia SWITCH\n");}   
                         | SWITCH error expresion                                                  {agregarError("Error Sintactico: Despues del SWITCH se espera un '('\n"); }
-                        | SWITCH '(' expresion error sentencia                                    {agregarError("Error Sintactico: falta ')' en la sentencia SWITCH\n"); }
-                        
-                          
+                        | SWITCH '(' expresion error sentencia                                    {agregarError("Error Sintactico: falta ')' en la sentencia SWITCH\n"); }                          
 ;
  
 sentenciaDeIteracion:     WHILE '(' expresion ')' sentencia                                       {printf("Se encontro la sentencia WHILE\n");}   
@@ -133,8 +126,6 @@ sentenciaDeIteracion:     WHILE '(' expresion ')' sentencia                     
                         | FOR '(' opExpresion ';' opExpresion ';' opExpresion ')' sentencia       {printf("Se encontro una sentencia FOR\n");}  
                         | FOR error opExpresion                                                   {agregarError("Error Sintactico: Despues del FOR se espera un '('\n"); }
                         | FOR '(' opExpresion ';' opExpresion ';' opExpresion error sentencia     {agregarError("Error Sintactico: falta ')' en la sentencia FOR\n"); }
-
-                      
 ;
 
 
@@ -144,12 +135,9 @@ sentenciaDeSalto:  CONTINUE ';'                                                 
             
 ;  
 
-
-
-
-declaracion:      TIPO_DE_DATO          {tipo = $<cadena>1;} declaraciones
-                | TIPO_DE_DATO '*'      {tipo = strcat($<cadena>1,"*");} declaraciones                 
-                | VOID                  {tipo = "void";} declaracionDefinicionFuncion  
+declaracion: TIPO_DE_DATO          {tipo = $<cadena>1;} declaraciones
+             | TIPO_DE_DATO '*'      {tipo = strcat($<cadena>1,"*");} declaraciones                 
+             | VOID                  {tipo = "void";} declaracionDefinicionFuncion  
 ;
 
 declaracionDefinicionFuncion: IDENTIFICADOR parametrosCuerpoFuncion {aux=buscarSimbolo($<cadena>1); if (aux) agregarError("Error Semantico : el identificador ya esta declarado");  else aux2 = agregoSimbolo2($<cadena>1 , tipo, 2) ;   aux->tiposParametros = listaParametrosAux;  listaParametrosAux = NULL; }
@@ -235,8 +223,8 @@ unaVariableSimple: IDENTIFICADOR  {aux=buscarSimbolo($<cadena>1); if (aux) agreg
 ;
 
              
-parametrosCuerpoFuncion:      '(' listaParametros ')' sentenciaCompuesta    
-                            | '(' listaParametros ')' ';'                    
+parametrosCuerpoFuncion: '(' listaParametros ')' sentenciaCompuesta    
+                           | '(' listaParametros ')' ';'                    
 ;
 
 listaParametros:         /* vacio */  { agregarParametro("void");} 
@@ -252,11 +240,9 @@ parametros:       TIPO_DE_DATO IDENTIFICADOR       { agregarParametro($<strval>1
                 | TIPO_DE_DATO '*' error           {insertarErrorSintactico("ERROR SINTACTICO : falta identificador del puntero parametro"); }
 ;
 
-
-
-expresion:                CONSTANTE_ENTERA    {$<mystruct>$.tipo = $<mystruct>1.tipo;  $<mystruct>$.valor_entero = $<mystruct>1.valor_entero;}
-	  		| CONSTANTE_REAL       {$<mystruct>$.tipo = $<mystruct>1.tipo;  $<mystruct>$.valor_real = $<mystruct>1.valor_real;}
-                        | IDENTIFICADOR                 { aux=buscarSimbolo($<cadena>1); if (aux) {  switch (aux->tipo) {
+expresion: CONSTANTE_ENTERA    {$<mystruct>$.tipo = $<mystruct>1.tipo;  $<mystruct>$.valor_entero = $<mystruct>1.valor_entero;}
+        | CONSTANTE_REAL      {$<mystruct>$.tipo = $<mystruct>1.tipo;  $<mystruct>$.valor_real = $<mystruct>1.valor_real;}
+        | IDENTIFICADOR       {aux=buscarSimbolo($<cadena>1); if (aux) {  switch (aux->tipo) {
                                                                                                                 case "int":
                                                                                                                             $<mystruct>$.valor_entero = aux->value.valEnt; $<mystruct>$.tipo = 1;
                           
@@ -300,29 +286,22 @@ expresion:                CONSTANTE_ENTERA    {$<mystruct>$.tipo = $<mystruct>1.
                         | '(' expresion ')'         { $$ = $2;                         	}
 ;
 
-
-
-
-
-
-invocacionDeFuncion:   IDENTIFICADOR '(' listaArgumentos ')'  {aux=buscarSimbolo($<cadena>1);   if (aux) { if(aux -> variableOfuncion == 1)   agregarError ("Error semantico : El IDENTIFICADOR esta declarado como variable");  else (compararParametros(aux->tiposParametros, listaAuxParametros) == 1) agregarError ("Error semantico : cantidad o tipos de parametros incorrectos"); } else {agregarError ("Error semantico : No esta declarada la funcion") ;} listaParametrosAux = NULL;}
-                     |  IDENTIFICADOR error listaArgumentos ')' {agregarError("Error Sintactico : falta '(' en la invocacion de la funcion"); }
-                     |  IDENTIFICADOR '(' listaArgumentos error {agregarError("Error Sintactico : falta ')' en la invocacion de la funcion"); }
+invocacionDeFuncion:  IDENTIFICADOR '(' listaArgumentos ')'  {aux=buscarSimbolo($<cadena>1);   if (aux) { if(aux -> variableOfuncion == 1)   agregarError ("Error semantico : El IDENTIFICADOR esta declarado como variable");  else (compararParametros(aux->tiposParametros, listaAuxParametros) == 1) agregarError ("Error semantico : cantidad o tipos de parametros incorrectos"); } else {agregarError ("Error semantico : No esta declarada la funcion") ;} listaParametrosAux = NULL;}
+                     | IDENTIFICADOR error listaArgumentos ')' {(agregarError("Error Sintactico : falta '(' en la invocacion de la funcion"); }
+                     | IDENTIFICADOR '(' listaArgumentos error {(agregarError("Error Sintactico : falta ')' en la invocacion de la funcion"); }
 ;
 
-
-listaArgumentos:   argumento                           
-                 | argumento ',' listaArgumentos      
+listaArgumentos: argumento                           
+                | argumento ',' listaArgumentos      
 ;
 
-argumento:        /* vacio */         {agregoArgumento("void");}
-                | IDENTIFICADOR       {aux=buscarSimbolo($<cadena>1);    if (aux) agregarArgumento(aux->tipo); else  agregarError("Error Semantico : la variable no esta declarada\n");}
-                | LITERAL_CADENA      {agregoArgumento("char*");}
-                | CONSTANTE_ENTERA   {agregoArgumento("int");} 
-                | CONSTANTE_CARACTER  {agregoArgumento("char");}
-                | CONSTANTE_REAL      {agregoArgumento("real");}
+argumento: /* vacio */ {agregoArgumento("void");}
+        | IDENTIFICADOR       {aux=buscarSimbolo($<cadena>1);    if (aux) agregarArgumento(aux->tipo); else  agregarError("Error Semantico : la variable no esta declarada\n");}
+        | LITERAL_CADENA      {agregoArgumento("char*");}
+        | CONSTANTE_ENTERA   {agregoArgumento("int");} 
+        | CONSTANTE_CARACTER  {agregoArgumento("char");}
+        | CONSTANTE_REAL      {agregoArgumento("real");}
 ;
-
 
 %%
 

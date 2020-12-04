@@ -748,7 +748,7 @@ YY_RULE_SETUP
 case 16:
 YY_RULE_SETUP
 #line 45 "TP5.l"
-{yylval.mystruct.valor_entero=atoi(yytext); yylval.mystruct.tipo=1;yylval.entero = atoi(yytext); return CONSTANTE_DECIMAL;}
+{yylval.mystruct.valor_entero=atoi(yytext); yylval.mystruct.tipo=1;yylval.entero = atoi(yytext); return CONSTANTE_ENTERA;}
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
