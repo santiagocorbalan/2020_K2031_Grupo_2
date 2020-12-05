@@ -2166,11 +2166,10 @@ yyreturn:
 Tabla *listaSimbolos;
 
 int main(){
-
         yyin = fopen("docDePrueba.c","r");
         printf("\n");
         yyparse();
+
         mostrarSimbolos(listaSimbolos);
         mostrarErrores(listaErrores);
-        
 }

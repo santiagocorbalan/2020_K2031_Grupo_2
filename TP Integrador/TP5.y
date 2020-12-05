@@ -140,7 +140,7 @@ sentenciaDeSalto:  CONTINUE ';'                                                 
 ;  
 
 declaracion: TIPO_DE_DATO            { tipo = $<cadena>1; } declaraciones
-             | TIPO_DE_DATO '*'      { tipo = strcat($<cadena>1,"*"); } declaraciones                 
+             | TIPO_DE_DATO '*'      { tipo = concatenar($<cadena>1, "*"); } declaraciones                  
              | VOID                  { tipo = "void"; } declaracionDefinicionFuncion  
 ;
 
@@ -293,8 +293,8 @@ listaParametros: /* vacio */  {agregoParametro("void");} // cambio nombre de la 
                 | parametros ',' listaParametros 
 ;
 
-parametros: TIPO_DE_DATO IDENTIFICADOR       { agregoParametro($<cadena>1);} 
-                | TIPO_DE_DATO '*' IDENTIFICADOR   { agregoParametro(strcat($<cadena>1,"*"));} 
+parametros: TIPO_DE_DATO IDENTIFICADOR             { agregoParametro($<cadena>1); } 
+                | TIPO_DE_DATO '*' IDENTIFICADOR   { agregoParametro(concatenar($<cadena>1, "*")); } 
                 | error IDENTIFICADOR              { agregarError("ERROR SINTACTICO : falta tipo de dato del parametro"); }
                 | error '*' IDENTIFICADOR          { agregarError("ERROR SINTACTICO : falta tipo de dato del puntero parametro"); }
                 | TIPO_DE_DATO error               { agregarError("ERROR SINTACTICO : falta identificador en parametro"); }
