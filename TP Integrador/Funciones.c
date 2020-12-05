@@ -1,13 +1,14 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
+// ---------------- Declaración de estructuras ----------------- //
 
 typedef struct errorres{
 	char*  cadenaDeErrores;
 	struct errorres* sig;		
 }Errores;
+
 Errores *listaErrores = NULL;
 
 typedef struct tabla{
@@ -35,6 +36,7 @@ typedef struct parametro{
 Parametro *listaParametrosAux = NULL;
 
 // ---------------- Declaración de funciones ----------------- //
+
 void agregarError(char* cadenaError);
 void mostrarErrores( Errores*listaDeErrores);
 void agregoSimbolo(char* name , char* type, int nuevaVariableOfuncion);
