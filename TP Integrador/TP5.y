@@ -324,24 +324,21 @@ expresion:      CONSTANTE_ENTERA      { $<mystruct>$.tipo = $<mystruct>1.tipo;  
 	        | expresion '+' expresion { 
                                                 if($<mystruct>1.tipo == $<mystruct>3.tipo) { 
         
-                                                        if($<mystruct>1.tipo==1) { 
-                                                                $<mystruct>$.valor_entero=$<mystruct>1.valor_entero+$<mystruct>3.valor_entero; 
+                                                        if ($<mystruct>1.tipo == 1) { 
+                                                                $<mystruct>$.valor_entero=$<mystruct>1.valor_entero + $<mystruct>3.valor_entero; 
+                                                        } else {
+                                                                $<mystruct>$.valor_real = $<mystruct>1.valor_real + $<mystruct>3.valor_real; 
                                                         }
-                                                        else
-                                                        {
-                                                        $<mystruct>$.valor_real=$<mystruct>1.valor_real+$<mystruct>3.valor_real; }
-                                                }
-                                                else 
-                                                { 
+                                                } else { 
                                                         agregarError("Los operandos son de distinto tipo \n"); }
         
                                         }
 
-	  		| expresion '-' expresion      { $$ = $1 - $3;}
-	  		| expresion '*' expresion      { $$ = $1 * $3;}
-                        | expresion '/' expresion      { $$ = $1 / $3;}
-                        | expresion '^' expresion      { $$ = pow ($1, $3);}
-                        | '(' expresion ')'            { $$ = $2;}
+	  		//| expresion '-' expresion      { $$ = $1 - $3;}
+	  		//| expresion '*' expresion      { $$ = $1 * $3;}
+                        //| expresion '/' expresion      { $$ = $1 / $3;}
+                        //| expresion '^' expresion      { $$ = pow ($1, $3);}
+                        //| '(' expresion ')'            { $$ = $2;}
 ;
 
 invocacionDeFuncion:  IDENTIFICADOR '(' listaArgumentos ')'     {
