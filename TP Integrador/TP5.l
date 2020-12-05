@@ -18,8 +18,6 @@
 
 "else" {return ELSE;}
 
-"sizeof" {return OPER_SIZEOF;}
-
 "while" {return WHILE;}
 
 "for" {return FOR;}
@@ -36,7 +34,7 @@
 
 "\n"    {return '\n';}
 
-"int"|"double"|"float"|"char"|"void" {strcpy(yylval.cadena, yytext); return TIPO_DATO;}
+"int"|"double"|"float"|"char"|"void" {strcpy(yylval.cadena, yytext); return TIPO_DE_DATO;}
 
 [a-zA-Z_][a-zA-Z0-9_]* {strcpy(yylval.cadena, yytext); return IDENTIFICADOR;}
 
@@ -44,9 +42,9 @@
 
 [1-9][0-9]* {yylval.mystruct.valor_entero=atoi(yytext); yylval.mystruct.tipo=1;yylval.entero = atoi(yytext); return CONSTANTE_ENTERA;}
 
-0[0-7]* {yylval.mystruct.valor_entero=atoi(yytext); yylval.mystruct.tipo=1; yylval.entero = atoi(yytext); return CONSTANTE_OCTAL;}
+0[0-7]* {yylval.mystruct.valor_entero=atoi(yytext); yylval.mystruct.tipo=1; yylval.entero = atoi(yytext); return CONSTANTE_ENTERA;}
 
-0[xX][0-9a-fA-F]+ {yylval.mystruct.valor_entero=atoi(yytext); yylval.mystruct.tipo=1; yylval.entero = atoi(yytext); return CONSTANTE_HEXADECIMAL;}
+0[xX][0-9a-fA-F]+ {yylval.mystruct.valor_entero=atoi(yytext); yylval.mystruct.tipo=1; yylval.entero = atoi(yytext); return CONSTANTE_ENTERA;}
 
 [0-9]+\.[0-9]+ {yylval.mystruct.valor_real=atof(yytext); yylval.mystruct.tipo=2; yylval.real = strtol(yytext, NULL, 0); return CONSTANTE_REAL;}
 

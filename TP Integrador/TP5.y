@@ -300,12 +300,12 @@ listaParametros:         /* vacio */  { agregarParametro("void");}
                 | parametros ',' listaParametros 
 ;
 
-parametros:       TIPO_DE_DATO IDENTIFICADOR       { agregarParametro($<strval>1);} 
-                | TIPO_DE_DATO '*' IDENTIFICADOR   { agregarParametro(strcat($<strval>1,"*"));} 
-                | error IDENTIFICADOR              { insertarErrorSintactico("ERROR SINTACTICO : falta tipo de dato del parametro"); }
-                | error '*' IDENTIFICADOR          { insertarErrorSintactico("ERROR SINTACTICO : falta tipo de dato del puntero parametro"); }
-                | TIPO_DE_DATO error               { insertarErrorSintactico("ERROR SINTACTICO : falta identificador en parametro"); }
-                | TIPO_DE_DATO '*' error           { insertarErrorSintactico("ERROR SINTACTICO : falta identificador del puntero parametro"); }
+parametros:       TIPO_DE_DATO IDENTIFICADOR       { agregarParametro($<cadena>1);} 
+                | TIPO_DE_DATO '*' IDENTIFICADOR   { agregarParametro(strcat($<cadena>1,"*"));} 
+                | error IDENTIFICADOR              { agregarError("ERROR SINTACTICO : falta tipo de dato del parametro"); }
+                | error '*' IDENTIFICADOR          { agregarError("ERROR SINTACTICO : falta tipo de dato del puntero parametro"); }
+                | TIPO_DE_DATO error               { agregarError("ERROR SINTACTICO : falta identificador en parametro"); }
+                | TIPO_DE_DATO '*' error           { agregarError("ERROR SINTACTICO : falta identificador del puntero parametro"); }
 ;
 
 expresion:      CONSTANTE_ENTERA      { $<mystruct>$.tipo = $<mystruct>1.tipo;  $<mystruct>$.valor_entero = $<mystruct>1.valor_entero;}
@@ -400,7 +400,7 @@ int main(){
         yyin = fopen("","r");
         printf("\n");
         yyparse();
-        mostrarSimbolos(Tabla* listaSimbolos);
-        mostrarErrores( Errores*listaDeErrores);
+        mostrarSimbolos(listaSimbolos);
+        mostrarErrores(listaErrores);
         
 }

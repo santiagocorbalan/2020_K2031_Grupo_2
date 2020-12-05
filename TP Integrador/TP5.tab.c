@@ -1829,32 +1829,32 @@ yyreduce:
 
   case 69:
 #line 303 "TP5.y"
-    { agregarParametro((yyvsp[(1) - (2)].strval));;}
+    { agregarParametro((yyvsp[(1) - (2)].cadena));;}
     break;
 
   case 70:
 #line 304 "TP5.y"
-    { agregarParametro(strcat((yyvsp[(1) - (3)].strval),"*"));;}
+    { agregarParametro(strcat((yyvsp[(1) - (3)].cadena),"*"));;}
     break;
 
   case 71:
 #line 305 "TP5.y"
-    { insertarErrorSintactico("ERROR SINTACTICO : falta tipo de dato del parametro"); ;}
+    { agregarError("ERROR SINTACTICO : falta tipo de dato del parametro"); ;}
     break;
 
   case 72:
 #line 306 "TP5.y"
-    { insertarErrorSintactico("ERROR SINTACTICO : falta tipo de dato del puntero parametro"); ;}
+    { agregarError("ERROR SINTACTICO : falta tipo de dato del puntero parametro"); ;}
     break;
 
   case 73:
 #line 307 "TP5.y"
-    { insertarErrorSintactico("ERROR SINTACTICO : falta identificador en parametro"); ;}
+    { agregarError("ERROR SINTACTICO : falta identificador en parametro"); ;}
     break;
 
   case 74:
 #line 308 "TP5.y"
-    { insertarErrorSintactico("ERROR SINTACTICO : falta identificador del puntero parametro"); ;}
+    { agregarError("ERROR SINTACTICO : falta identificador del puntero parametro"); ;}
     break;
 
   case 75:
@@ -2226,7 +2226,7 @@ int main(){
         yyin = fopen("","r");
         printf("\n");
         yyparse();
-        mostrarSimbolos(Tabla* listaSimbolos);
-        mostrarErrores( Errores*listaDeErrores);
+        mostrarSimbolos(listaSimbolos);
+        mostrarErrores(listaDeErrores);
         
 }
