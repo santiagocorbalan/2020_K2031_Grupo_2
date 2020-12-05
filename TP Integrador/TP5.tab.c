@@ -1964,7 +1964,7 @@ yyreduce:
                                                         }
 
                                                 else if (aux-> tipo == "float"){
-                                                        (yyval.mystruct).valor_float = aux->value.valReal; 
+                                                        (yyval.mystruct).valor_real = aux->value.valReal;  // cambio valor_float por valor_real
                                                         (yyval.mystruct).tipo = 2;
                                                 }
                                         } 
@@ -1999,35 +1999,35 @@ yyreduce:
 
 /* Line 1455 of yacc.c  */
 #line 350 "TP5.y"
-    { (yyval.mystruct) = (yyvsp[(1) - (3)].mystruct) - (yyvsp[(3) - (3)].mystruct);        ;}
+    { (yyval.mystruct) = (yyvsp[(1) - (3)].mystruct) - (yyvsp[(3) - (3)].mystruct);;}
     break;
 
   case 80:
 
 /* Line 1455 of yacc.c  */
 #line 351 "TP5.y"
-    { (yyval.mystruct) = (yyvsp[(1) - (3)].mystruct) * (yyvsp[(3) - (3)].mystruct);        ;}
+    { (yyval.mystruct) = (yyvsp[(1) - (3)].mystruct) * (yyvsp[(3) - (3)].mystruct);;}
     break;
 
   case 81:
 
 /* Line 1455 of yacc.c  */
 #line 352 "TP5.y"
-    { (yyval.mystruct) = (yyvsp[(1) - (3)].mystruct) / (yyvsp[(3) - (3)].mystruct);        ;}
+    { (yyval.mystruct) = (yyvsp[(1) - (3)].mystruct) / (yyvsp[(3) - (3)].mystruct);;}
     break;
 
   case 82:
 
 /* Line 1455 of yacc.c  */
 #line 353 "TP5.y"
-    { (yyval.mystruct) = pow ((yyvsp[(1) - (3)].mystruct), (yyvsp[(3) - (3)].mystruct));   ;}
+    { (yyval.mystruct) = pow ((yyvsp[(1) - (3)].mystruct), (yyvsp[(3) - (3)].mystruct));;}
     break;
 
   case 83:
 
 /* Line 1455 of yacc.c  */
 #line 354 "TP5.y"
-    { (yyval.mystruct) = (yyvsp[(2) - (3)].mystruct);             ;}
+    { (yyval.mystruct) = (yyvsp[(2) - (3)].mystruct);;}
     break;
 
   case 84:

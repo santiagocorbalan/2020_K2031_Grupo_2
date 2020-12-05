@@ -162,6 +162,17 @@ void agregoParametro(char* tipoArgumentooo){
     }
   
 }
+int cantidadParametros(Parametro* listaAuxiliar);
+
+int cantidadParametros(Parametro* listaAuxiliar) {
+    Parametro* aux = listaAuxiliar;
+    int cantidad = 0;
+    while (aux != NULL) {
+        cantidad++;
+        aux = aux->sig;
+    }
+    return cantidad;
+}
 
 int compararParametros(Parametro* lista1, Parametro* lista2);
 
@@ -184,17 +195,6 @@ int compararParametros(Parametro* lista1, Parametro* lista2) {
     return retorna;
 }
 
-int cantidadParametros(Parametro* listaAuxiliar);
-
-int cantidadParametros(Parametro* listaAuxiliar) {
-    Parametro* aux = listaAuxiliar;
-    int cantidad = 0;
-    while (aux != NULL) {
-        cantidad++;
-        aux = aux->sig;
-    }
-    return cantidad;
-}
 
 
 void agregoArgumento(char* tipoArgumentooo);
