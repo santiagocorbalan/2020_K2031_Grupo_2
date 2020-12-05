@@ -14,6 +14,10 @@ int yywrap(){
 	return(1);
 }
 
+void yyerror (char const *s) {          //Con yyerror se detecta el error sintáctico 
+   fprintf (stderr, "%s\n", s);
+} 
+
 //Parametro* listaParametrosAux = NULL;
 char* tipo;
 Tabla *aux;
@@ -295,7 +299,7 @@ parametrosCuerpoFuncion: '(' listaParametros ')' sentenciaCompuesta
                            | '(' listaParametros ')' ';'                    
 ;
 
-listaParametros:         /* vacio */  { agregarParametro("void");} 
+listaParametros: /* vacio */  {agregoParametro("void");} // cambio nombre de la funcion
                 | parametros
                 | parametros ',' listaParametros 
 ;
@@ -369,8 +373,8 @@ invocacionDeFuncion:  IDENTIFICADOR '(' listaArgumentos ')'     {
                                                                 }
                                                                 listaParametrosAux = NULL;
                                                                 }
-                     | IDENTIFICADOR error listaArgumentos ')' {(agregarError("Error Sintactico : falta '(' en la invocacion de la funcion")); }
-                     | IDENTIFICADOR '(' listaArgumentos error {(agregarError("Error Sintactico : falta ')' en la invocacion de la funcion"); }
+                     | IDENTIFICADOR error listaArgumentos ')' {agregarError("Error Sintactico : falta '(' en la invocacion de la funcion"); }
+                     | IDENTIFICADOR '(' listaArgumentos error {agregarError("Error Sintactico : falta ')' en la invocacion de la funcion"); }
 ;
 
 listaArgumentos: argumento                           
@@ -381,7 +385,7 @@ argumento: /* vacio */ {agregoArgumento("void");}
         | IDENTIFICADOR        {        
                                         aux=buscarSimbolo($<cadena>1);    
                                         if (aux) 
-                                                agregarArgumento(aux->tipo); 
+                                                agregoArgumento(aux->tipo); 
                                         else 
                                                 agregarError("Error Semantico : la variable no esta declarada\n");
                                 }
