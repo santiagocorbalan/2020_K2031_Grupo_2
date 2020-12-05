@@ -187,7 +187,7 @@ unaVariableSimple: IDENTIFICADOR
 
                                                         }
                                                 
-                                                        else (aux2 -> tipo == "char*"){
+                                                        else if (aux2 -> tipo == "char*"){
                                                                 aux2->value.valString = NULL;
 
                                                         }
@@ -241,10 +241,10 @@ unaVariableSimple: IDENTIFICADOR
                                                                 if (aux) 
                                                                         agregarError("Error Semantico : la variable ya esta declarada "); 
                                                                         else {
-                                                                                if (strcmp(tipo,"int") == 0) 
-                                                                                        aux2 = agregoSimbolo2($<cadena>1 , tipo, 1) ;  
-                                                                                        aux2->value.valEnt = $<mystruct>3.valor_entero; 
-                                                                                else 
+                                                                                if(strcmp(tipo,"int") == 0){ 
+                                                                                        aux2 = agregoSimbolo2($<cadena>1 , tipo, 1);  
+                                                                                        aux2->value.valEnt = $<mystruct>3.valor_entero;}
+                                                                                else
                                                                                         agregarError("Error Semantico : son de distinto tipo"); 
                                                                         }
                                                         }
@@ -267,12 +267,12 @@ unaVariableSimple: IDENTIFICADOR
                                                                 aux=buscarSimbolo($<cadena>1); 
                                                                 if (aux) 
                                                                         agregarError("Error Semantico : la variable ya esta declarada "); 
-                                                                else 
-                                                                        if (strcmp(tipo, "double") == 0) 
+                                                                else
+                                                                        if (strcmp(tipo, "double") == 0){ // si borro "0" me toma el if
                                                                                 aux2 = agregoSimbolo2($<cadena>1 , tipo, 1);  
-                                                                                aux2->value.valReal = $<mystruct>3.valor_real; 
-                                                                        else 
-                                                                                agregarError("Error Semantico : son de distinto tipo "); 
+                                                                                aux2->value.valReal = $<mystruct>3.valor_real;} 
+                                                                        else{
+                                                                                agregarError("Error Semantico : son de distinto tipo "); }
                                                         }
 
                 | IDENTIFICADOR '=' LITERAL_CADENA      {
@@ -303,8 +303,8 @@ listaParametros: /* vacio */  {agregoParametro("void");} // cambio nombre de la 
                 | parametros ',' listaParametros 
 ;
 
-parametros:       TIPO_DE_DATO IDENTIFICADOR       { agregarParametro($<cadena>1);} 
-                | TIPO_DE_DATO '*' IDENTIFICADOR   { agregarParametro(strcat($<cadena>1,"*"));} 
+parametros: TIPO_DE_DATO IDENTIFICADOR       { agregoParametro($<cadena>1);} 
+                | TIPO_DE_DATO '*' IDENTIFICADOR   { agregoParametro(strcat($<cadena>1,"*"));} 
                 | error IDENTIFICADOR              { agregarError("ERROR SINTACTICO : falta tipo de dato del parametro"); }
                 | error '*' IDENTIFICADOR          { agregarError("ERROR SINTACTICO : falta tipo de dato del puntero parametro"); }
                 | TIPO_DE_DATO error               { agregarError("ERROR SINTACTICO : falta identificador en parametro"); }
@@ -359,7 +359,7 @@ invocacionDeFuncion:  IDENTIFICADOR '(' listaArgumentos ')'     {
                                                                 if (aux) { 
                                                                         if(aux -> variableOfuncion == 1)
                                                                                 agregarError ("Error semantico : El IDENTIFICADOR esta declarado como variable");  
-                                                                        else (compararParametros(aux->tiposParametros, listaParametrosAux) == 1) 
+                                                                        else (compararParametros(aux->tiposParametros, listaParametrosAux) == 1) //error
                                                                                 agregarError ("Error semantico : cantidad o tipos de parametros incorrectos"); 
                                                                 } 
                                                                 else 

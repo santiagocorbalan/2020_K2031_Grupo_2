@@ -1749,7 +1749,7 @@ yyreduce:
 
                                                         }
                                                 
-                                                        else (aux2 -> tipo == "char*"){
+                                                        else if (aux2 -> tipo == "char*"){
                                                                 aux2->value.valString = NULL;
 
                                                         }
@@ -1812,10 +1812,10 @@ yyreduce:
                                                                 if (aux) 
                                                                         agregarError("Error Semantico : la variable ya esta declarada "); 
                                                                         else {
-                                                                                if (strcmp(tipo,"int") == 0) 
-                                                                                        aux2 = agregoSimbolo2((yyvsp[(1) - (3)].cadena) , tipo, 1) ;  
-                                                                                        aux2->value.valEnt = (yyvsp[(3) - (3)].mystruct).valor_entero; 
-                                                                                else 
+                                                                                if(strcmp(tipo,"int") == 0){ 
+                                                                                        aux2 = agregoSimbolo2((yyvsp[(1) - (3)].cadena) , tipo, 1);  
+                                                                                        aux2->value.valEnt = (yyvsp[(3) - (3)].mystruct).valor_entero;}
+                                                                                else
                                                                                         agregarError("Error Semantico : son de distinto tipo"); 
                                                                         }
                                                         ;}
@@ -1848,12 +1848,12 @@ yyreduce:
                                                                 aux=buscarSimbolo((yyvsp[(1) - (3)].cadena)); 
                                                                 if (aux) 
                                                                         agregarError("Error Semantico : la variable ya esta declarada "); 
-                                                                else 
-                                                                        if (strcmp(tipo, "double") == 0) 
+                                                                else
+                                                                        if (strcmp(tipo, "double") == 0){ // si borro "0" me toma el if
                                                                                 aux2 = agregoSimbolo2((yyvsp[(1) - (3)].cadena) , tipo, 1);  
-                                                                                aux2->value.valReal = (yyvsp[(3) - (3)].mystruct).valor_real; 
-                                                                        else 
-                                                                                agregarError("Error Semantico : son de distinto tipo "); 
+                                                                                aux2->value.valReal = (yyvsp[(3) - (3)].mystruct).valor_real;} 
+                                                                        else{
+                                                                                agregarError("Error Semantico : son de distinto tipo "); }
                                                         ;}
     break;
 
@@ -1899,14 +1899,14 @@ yyreduce:
 
 /* Line 1455 of yacc.c  */
 #line 306 "TP5.y"
-    { agregarParametro((yyvsp[(1) - (2)].cadena));;}
+    { agregoParametro((yyvsp[(1) - (2)].cadena));;}
     break;
 
   case 70:
 
 /* Line 1455 of yacc.c  */
 #line 307 "TP5.y"
-    { agregarParametro(strcat((yyvsp[(1) - (3)].cadena),"*"));;}
+    { agregoParametro(strcat((yyvsp[(1) - (3)].cadena),"*"));;}
     break;
 
   case 71:
