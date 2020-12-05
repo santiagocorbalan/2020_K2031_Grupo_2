@@ -509,11 +509,11 @@ static const yytype_uint16 yyrline[] =
      104,   105,   108,   109,   112,   113,   117,   118,   119,   120,
      121,   122,   123,   126,   127,   128,   129,   130,   131,   132,
      136,   137,   138,   142,   142,   143,   143,   144,   144,   147,
-     156,   159,   160,   163,   166,   167,   170,   201,   240,   253,
-     267,   279,   292,   294,   298,   299,   302,   303,   304,   307,
-     308,   309,   310,   311,   312,   315,   316,   317,   338,   355,
-     356,   357,   358,   359,   362,   376,   377,   380,   381,   384,
-     385,   392,   393,   394,   395
+     156,   159,   160,   163,   166,   167,   170,   199,   239,   252,
+     266,   278,   291,   293,   297,   298,   301,   302,   303,   306,
+     307,   308,   309,   310,   311,   314,   315,   316,   334,   350,
+     351,   352,   353,   354,   357,   371,   372,   375,   376,   379,
+     380,   387,   388,   389,   390
 };
 #endif
 
@@ -1738,23 +1738,22 @@ yyreduce:
                                         {
                                                 aux2 = agregoSimbolo2( (yyvsp[(1) - (1)].cadena) , tipo, 1);
 
-                                                switch (aux2->tipo) {
-                                                        case "int":
-                                                        aux2->value.valEnt = 0;
-                                                        break;
+                                                        if (aux2-> tipo == "int") {
+                                                                aux2->value.valEnt = 0;
+                                                        
+                                                        } else if (aux2 -> tipo == "float"){
+                                                                aux2->value.valReal = 0.0;
 
-                                                        case "float":
-                                                        aux2->value.valReal = 0.0;
-                                                        break;
+                                                        } else if (aux2 -> tipo == "char") {
+                                                                aux2->value.valChar = '\0';
+
+                                                        }
                                                 
-                                                        case "char":
-                                                        aux2->value.valChar = '\0';
-                                                        break;
+                                                        else (aux2 -> tipo == "char*"){
+                                                                aux2->value.valString = NULL;
 
-                                                        case "char*":
-                                                        aux2->value.valString = NULL;
-                                                        break;
-                                                };
+                                                        }
+                                                        
                                         }
                                                                                                             
                                 ;}
@@ -1763,7 +1762,7 @@ yyreduce:
   case 57:
 
 /* Line 1455 of yacc.c  */
-#line 202 "TP5.y"
+#line 200 "TP5.y"
     {
                                 aux=buscarSimbolo((yyvsp[(1) - (3)].cadena)); 
                                 if (aux) 
@@ -1774,24 +1773,25 @@ yyreduce:
                                         if(aux2 && (strcmp(tipo, aux2->tipo) == 0)) { 
                                                 aux3 = agregoSimbolo2((yyvsp[(1) - (3)].cadena) , tipo, 1); 
 
-                                                switch (aux3->tipo) {
-                                                        case "int":
+                                                if (aux3->tipo == "int") {
                                                         aux2->value.valEnt = (yyvsp[(3) - (3)].entero);
-                                                        break;
-    
-                                                        case "float":
+                                                }
+
+                                                else if (aux3 -> tipo == "float"){
                                                         aux2->value.valReal = (yyvsp[(3) - (3)].real);
-                                                        break;
 
-                                                        case "char":
+                                                }
+
+                                                else if (aux3 -> tipo == "char"){
                                                         aux2->value.valChar = (yyvsp[(3) - (3)].caracter);
-                                                        break;
-    
-                                                        case "char*":
-                                                        aux2->value.valString = (yyvsp[(3) - (3)].cadena);
-                                                        break;
 
-                                                }                                                                                  
+
+                                                }
+                                                else if (aux3 -> tipo == "char*"){
+                                                        aux2->value.valString = (yyvsp[(3) - (3)].cadena);
+
+                                                }            
+                                                                                                                                                                                 
                                         if (aux2 == NULL)
                                                 agregarError("Error Semantico : la variable no esta declarada\n");
 
@@ -1806,7 +1806,7 @@ yyreduce:
   case 58:
 
 /* Line 1455 of yacc.c  */
-#line 240 "TP5.y"
+#line 239 "TP5.y"
     { 
                                                                 aux=buscarSimbolo((yyvsp[(1) - (3)].cadena)); 
                                                                 if (aux) 
@@ -1824,7 +1824,7 @@ yyreduce:
   case 59:
 
 /* Line 1455 of yacc.c  */
-#line 253 "TP5.y"
+#line 252 "TP5.y"
     {
                                                                 aux=buscarSimbolo((yyvsp[(1) - (3)].cadena)); 
                                                                 if (aux) 
@@ -1843,7 +1843,7 @@ yyreduce:
   case 60:
 
 /* Line 1455 of yacc.c  */
-#line 267 "TP5.y"
+#line 266 "TP5.y"
     { 
                                                                 aux=buscarSimbolo((yyvsp[(1) - (3)].cadena)); 
                                                                 if (aux) 
@@ -1860,7 +1860,7 @@ yyreduce:
   case 61:
 
 /* Line 1455 of yacc.c  */
-#line 279 "TP5.y"
+#line 278 "TP5.y"
     {
                                                                 aux=buscarSimbolo((yyvsp[(1) - (3)].cadena)); 
                                                                 if (aux) 
@@ -1877,99 +1877,96 @@ yyreduce:
   case 62:
 
 /* Line 1455 of yacc.c  */
-#line 292 "TP5.y"
+#line 291 "TP5.y"
     { agregarError("Error Sintactico : se inicializo con un valor incorrecto"); ;}
     break;
 
   case 63:
 
 /* Line 1455 of yacc.c  */
-#line 294 "TP5.y"
+#line 293 "TP5.y"
     { agregarError("Error Sintactico : identificador incorrecto"); ;}
     break;
 
   case 66:
 
 /* Line 1455 of yacc.c  */
-#line 302 "TP5.y"
+#line 301 "TP5.y"
     {agregoParametro("void");;}
     break;
 
   case 69:
 
 /* Line 1455 of yacc.c  */
-#line 307 "TP5.y"
+#line 306 "TP5.y"
     { agregarParametro((yyvsp[(1) - (2)].cadena));;}
     break;
 
   case 70:
 
 /* Line 1455 of yacc.c  */
-#line 308 "TP5.y"
+#line 307 "TP5.y"
     { agregarParametro(strcat((yyvsp[(1) - (3)].cadena),"*"));;}
     break;
 
   case 71:
 
 /* Line 1455 of yacc.c  */
-#line 309 "TP5.y"
+#line 308 "TP5.y"
     { agregarError("ERROR SINTACTICO : falta tipo de dato del parametro"); ;}
     break;
 
   case 72:
 
 /* Line 1455 of yacc.c  */
-#line 310 "TP5.y"
+#line 309 "TP5.y"
     { agregarError("ERROR SINTACTICO : falta tipo de dato del puntero parametro"); ;}
     break;
 
   case 73:
 
 /* Line 1455 of yacc.c  */
-#line 311 "TP5.y"
+#line 310 "TP5.y"
     { agregarError("ERROR SINTACTICO : falta identificador en parametro"); ;}
     break;
 
   case 74:
 
 /* Line 1455 of yacc.c  */
-#line 312 "TP5.y"
+#line 311 "TP5.y"
     { agregarError("ERROR SINTACTICO : falta identificador del puntero parametro"); ;}
     break;
 
   case 75:
 
 /* Line 1455 of yacc.c  */
-#line 315 "TP5.y"
+#line 314 "TP5.y"
     { (yyval.mystruct).tipo = (yyvsp[(1) - (1)].mystruct).tipo;  (yyval.mystruct).valor_entero = (yyvsp[(1) - (1)].mystruct).valor_entero;;}
     break;
 
   case 76:
 
 /* Line 1455 of yacc.c  */
-#line 316 "TP5.y"
+#line 315 "TP5.y"
     { (yyval.mystruct).tipo = (yyvsp[(1) - (1)].mystruct).tipo;  (yyval.mystruct).valor_real = (yyvsp[(1) - (1)].mystruct).valor_real;;}
     break;
 
   case 77:
 
 /* Line 1455 of yacc.c  */
-#line 317 "TP5.y"
+#line 316 "TP5.y"
     { 
                                         aux=buscarSimbolo((yyvsp[(1) - (1)].cadena)); 
                                         if (aux) {  
-                                                switch (aux->tipo) {
-                                                        case "int":
+                                                if (aux->tipo == "int") {
                                                         (yyval.mystruct).valor_entero = aux->value.valEnt; 
                                                         (yyval.mystruct).tipo = 1;
-                                                        break;
-    
-                                                        case "float":
+                                                        }
+
+                                                else if (aux-> tipo == "float"){
                                                         (yyval.mystruct).valor_float = aux->value.valReal; 
                                                         (yyval.mystruct).tipo = 2;
-                                                        break;
-
-                                                };
+                                                }
                                         } 
                                         else 
                                         { 
@@ -1980,7 +1977,7 @@ yyreduce:
   case 78:
 
 /* Line 1455 of yacc.c  */
-#line 338 "TP5.y"
+#line 334 "TP5.y"
     { 
                                                 if((yyvsp[(1) - (3)].mystruct).tipo == (yyvsp[(3) - (3)].mystruct).tipo) { 
         
@@ -1992,9 +1989,8 @@ yyreduce:
                                                         (yyval.mystruct).valor_real=(yyvsp[(1) - (3)].mystruct).valor_real+(yyvsp[(3) - (3)].mystruct).valor_real; }
                                                 }
                                                 else 
-                                                {
-        
-                                                agregarError("Los operandos son de distinto tipo \n"); }
+                                                { 
+                                                        agregarError("Los operandos son de distinto tipo \n"); }
         
                                         ;}
     break;
@@ -2002,42 +1998,42 @@ yyreduce:
   case 79:
 
 /* Line 1455 of yacc.c  */
-#line 355 "TP5.y"
+#line 350 "TP5.y"
     { (yyval.mystruct) = (yyvsp[(1) - (3)].mystruct) - (yyvsp[(3) - (3)].mystruct);        ;}
     break;
 
   case 80:
 
 /* Line 1455 of yacc.c  */
-#line 356 "TP5.y"
+#line 351 "TP5.y"
     { (yyval.mystruct) = (yyvsp[(1) - (3)].mystruct) * (yyvsp[(3) - (3)].mystruct);        ;}
     break;
 
   case 81:
 
 /* Line 1455 of yacc.c  */
-#line 357 "TP5.y"
+#line 352 "TP5.y"
     { (yyval.mystruct) = (yyvsp[(1) - (3)].mystruct) / (yyvsp[(3) - (3)].mystruct);        ;}
     break;
 
   case 82:
 
 /* Line 1455 of yacc.c  */
-#line 358 "TP5.y"
+#line 353 "TP5.y"
     { (yyval.mystruct) = pow ((yyvsp[(1) - (3)].mystruct), (yyvsp[(3) - (3)].mystruct));   ;}
     break;
 
   case 83:
 
 /* Line 1455 of yacc.c  */
-#line 359 "TP5.y"
+#line 354 "TP5.y"
     { (yyval.mystruct) = (yyvsp[(2) - (3)].mystruct);             ;}
     break;
 
   case 84:
 
 /* Line 1455 of yacc.c  */
-#line 362 "TP5.y"
+#line 357 "TP5.y"
     {
                                                                 aux=buscarSimbolo((yyvsp[(1) - (4)].cadena));   
                                                                 if (aux) { 
@@ -2057,28 +2053,28 @@ yyreduce:
   case 85:
 
 /* Line 1455 of yacc.c  */
-#line 376 "TP5.y"
+#line 371 "TP5.y"
     {agregarError("Error Sintactico : falta '(' en la invocacion de la funcion"); ;}
     break;
 
   case 86:
 
 /* Line 1455 of yacc.c  */
-#line 377 "TP5.y"
+#line 372 "TP5.y"
     {agregarError("Error Sintactico : falta ')' en la invocacion de la funcion"); ;}
     break;
 
   case 89:
 
 /* Line 1455 of yacc.c  */
-#line 384 "TP5.y"
+#line 379 "TP5.y"
     {agregoArgumento("void");;}
     break;
 
   case 90:
 
 /* Line 1455 of yacc.c  */
-#line 385 "TP5.y"
+#line 380 "TP5.y"
     {        
                                         aux=buscarSimbolo((yyvsp[(1) - (1)].cadena));    
                                         if (aux) 
@@ -2091,35 +2087,35 @@ yyreduce:
   case 91:
 
 /* Line 1455 of yacc.c  */
-#line 392 "TP5.y"
+#line 387 "TP5.y"
     { agregoArgumento("char*"); ;}
     break;
 
   case 92:
 
 /* Line 1455 of yacc.c  */
-#line 393 "TP5.y"
+#line 388 "TP5.y"
     { agregoArgumento("int"); ;}
     break;
 
   case 93:
 
 /* Line 1455 of yacc.c  */
-#line 394 "TP5.y"
+#line 389 "TP5.y"
     { agregoArgumento("char"); ;}
     break;
 
   case 94:
 
 /* Line 1455 of yacc.c  */
-#line 395 "TP5.y"
+#line 390 "TP5.y"
     { agregoArgumento("real"); ;}
     break;
 
 
 
 /* Line 1455 of yacc.c  */
-#line 2123 "TP5.tab.c"
+#line 2119 "TP5.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -2331,7 +2327,7 @@ yyreturn:
 
 
 /* Line 1675 of yacc.c  */
-#line 398 "TP5.y"
+#line 393 "TP5.y"
 
 
 Tabla *listaSimbolos;

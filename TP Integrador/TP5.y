@@ -176,28 +176,26 @@ unaVariableSimple: IDENTIFICADOR
                                         {
                                                 aux2 = agregoSimbolo2( $<cadena>1 , tipo, 1);
 
-                                                switch (aux2->tipo) {
-                                                        case "int":
-                                                        aux2->value.valEnt = 0;
-                                                        break;
+                                                        if (aux2-> tipo == "int") {
+                                                                aux2->value.valEnt = 0;
+                                                        
+                                                        } else if (aux2 -> tipo == "float"){
+                                                                aux2->value.valReal = 0.0;
 
-                                                        case "float":
-                                                        aux2->value.valReal = 0.0;
-                                                        break;
+                                                        } else if (aux2 -> tipo == "char") {
+                                                                aux2->value.valChar = '\0';
+
+                                                        }
                                                 
-                                                        case "char":
-                                                        aux2->value.valChar = '\0';
-                                                        break;
+                                                        else (aux2 -> tipo == "char*"){
+                                                                aux2->value.valString = NULL;
 
-                                                        case "char*":
-                                                        aux2->value.valString = NULL;
-                                                        break;
-                                                };
+                                                        }
+                                                        
                                         }
                                                                                                             
                                 }
 
-                                                                                                                
                 | IDENTIFICADOR '=' IDENTIFICADOR         
                         {
                                 aux=buscarSimbolo($<cadena>1); 
@@ -209,24 +207,25 @@ unaVariableSimple: IDENTIFICADOR
                                         if(aux2 && (strcmp(tipo, aux2->tipo) == 0)) { 
                                                 aux3 = agregoSimbolo2($<cadena>1 , tipo, 1); 
 
-                                                switch (aux3->tipo) {
-                                                        case "int":
+                                                if (aux3->tipo == "int") {
                                                         aux2->value.valEnt = $<entero>3;
-                                                        break;
-    
-                                                        case "float":
+                                                }
+
+                                                else if (aux3 -> tipo == "float"){
                                                         aux2->value.valReal = $<real>3;
-                                                        break;
 
-                                                        case "char":
+                                                }
+
+                                                else if (aux3 -> tipo == "char"){
                                                         aux2->value.valChar = $<caracter>3;
-                                                        break;
-    
-                                                        case "char*":
-                                                        aux2->value.valString = $<cadena>3;
-                                                        break;
 
-                                                }                                                                                  
+
+                                                }
+                                                else if (aux3 -> tipo == "char*"){
+                                                        aux2->value.valString = $<cadena>3;
+
+                                                }            
+                                                                                                                                                                                 
                                         if (aux2 == NULL)
                                                 agregarError("Error Semantico : la variable no esta declarada\n");
 
@@ -317,25 +316,22 @@ expresion:      CONSTANTE_ENTERA      { $<mystruct>$.tipo = $<mystruct>1.tipo;  
                 | IDENTIFICADOR       { 
                                         aux=buscarSimbolo($<cadena>1); 
                                         if (aux) {  
-                                                switch (aux->tipo) {
-                                                        case "int":
+                                                if (aux->tipo == "int") {
                                                         $<mystruct>$.valor_entero = aux->value.valEnt; 
                                                         $<mystruct>$.tipo = 1;
-                                                        break;
-    
-                                                        case "float":
+                                                        }
+
+                                                else if (aux-> tipo == "float"){
                                                         $<mystruct>$.valor_float = aux->value.valReal; 
                                                         $<mystruct>$.tipo = 2;
-                                                        break;
-
-                                                };
+                                                }
                                         } 
                                         else 
                                         { 
                                                 agregarError("La variable no esta declarada\n");  } 
                                         }
 
-	  	| expresion '+' expresion { 
+	        | expresion '+' expresion { 
                                                 if($<mystruct>1.tipo == $<mystruct>3.tipo) { 
         
                                                         if($<mystruct>1.tipo==1) { 
@@ -346,9 +342,8 @@ expresion:      CONSTANTE_ENTERA      { $<mystruct>$.tipo = $<mystruct>1.tipo;  
                                                         $<mystruct>$.valor_real=$<mystruct>1.valor_real+$<mystruct>3.valor_real; }
                                                 }
                                                 else 
-                                                {
-        
-                                                agregarError("Los operandos son de distinto tipo \n"); }
+                                                { 
+                                                        agregarError("Los operandos son de distinto tipo \n"); }
         
                                         }
 
