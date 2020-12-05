@@ -1866,9 +1866,9 @@ yyreduce:
                                                                 if (aux) 
                                                                         agregarError("Error Semantico : la variable ya esta declarada "); 
                                                                 else 
-                                                                        if (strcmp(tipo, "char*") == 0) 
+                                                                        if (strcmp(tipo, "char*") == 0){
                                                                                 aux2 = agregoSimbolo2((yyvsp[(1) - (3)].cadena) , tipo, 1);  
-                                                                                aux2->value.valString = (yyvsp[(3) - (3)].cadena); 
+                                                                                aux2->value.valString = (yyvsp[(3) - (3)].cadena);}  
                                                                         else 
                                                                                 agregarError("Error Semantico : son de distinto tipo ");
                                                         ;}
@@ -2037,10 +2037,10 @@ yyreduce:
     {
                                                                 aux=buscarSimbolo((yyvsp[(1) - (4)].cadena));   
                                                                 if (aux) { 
-                                                                        if(aux -> variableOfuncion == 1)
-                                                                                agregarError ("Error semantico : El IDENTIFICADOR esta declarado como variable");  
-                                                                        else (compararParametros(aux->tiposParametros, listaParametrosAux) == 1) 
-                                                                                agregarError ("Error semantico : cantidad o tipos de parametros incorrectos"); 
+                                                                        if(aux -> variableOfuncion == 1){
+                                                                                agregarError ("Error semantico : El IDENTIFICADOR esta declarado como variable");} 
+                                                                        else if (compararParametros(aux->tiposParametros, listaParametrosAux) == 1){
+                                                                                agregarError ("Error semantico : cantidad o tipos de parametros incorrectos");} 
                                                                 } 
                                                                 else 
                                                                 {

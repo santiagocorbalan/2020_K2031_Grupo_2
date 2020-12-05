@@ -280,9 +280,9 @@ unaVariableSimple: IDENTIFICADOR
                                                                 if (aux) 
                                                                         agregarError("Error Semantico : la variable ya esta declarada "); 
                                                                 else 
-                                                                        if (strcmp(tipo, "char*") == 0) 
+                                                                        if (strcmp(tipo, "char*") == 0){
                                                                                 aux2 = agregoSimbolo2($<cadena>1 , tipo, 1);  
-                                                                                aux2->value.valString = $<cadena>3; 
+                                                                                aux2->value.valString = $<cadena>3;}  
                                                                         else 
                                                                                 agregarError("Error Semantico : son de distinto tipo ");
                                                         }
@@ -322,7 +322,7 @@ expresion:      CONSTANTE_ENTERA      { $<mystruct>$.tipo = $<mystruct>1.tipo;  
                                                         }
 
                                                 else if (aux-> tipo == "float"){
-                                                        $<mystruct>$.valor_float = aux->value.valReal; 
+                                                        $<mystruct>$.valor_real = aux->value.valReal;  // cambio valor_float por valor_real
                                                         $<mystruct>$.tipo = 2;
                                                 }
                                         } 
@@ -347,20 +347,20 @@ expresion:      CONSTANTE_ENTERA      { $<mystruct>$.tipo = $<mystruct>1.tipo;  
         
                                         }
 
-	  		| expresion '-' expresion      { $$ = $1 - $3;        }
-	  		| expresion '*' expresion      { $$ = $1 * $3;        }
-                        | expresion '/' expresion      { $$ = $1 / $3;        }
-                        | expresion '^' expresion      { $$ = pow ($1, $3);   }
-                        | '(' expresion ')'            { $$ = $2;             }
+	  		| expresion '-' expresion      { $$ = $1 - $3;}
+	  		| expresion '*' expresion      { $$ = $1 * $3;}
+                        | expresion '/' expresion      { $$ = $1 / $3;}
+                        | expresion '^' expresion      { $$ = pow ($1, $3);}
+                        | '(' expresion ')'            { $$ = $2;}
 ;
 
 invocacionDeFuncion:  IDENTIFICADOR '(' listaArgumentos ')'     {
                                                                 aux=buscarSimbolo($<cadena>1);   
                                                                 if (aux) { 
-                                                                        if(aux -> variableOfuncion == 1)
-                                                                                agregarError ("Error semantico : El IDENTIFICADOR esta declarado como variable");  
-                                                                        else (compararParametros(aux->tiposParametros, listaParametrosAux) == 1) //error
-                                                                                agregarError ("Error semantico : cantidad o tipos de parametros incorrectos"); 
+                                                                        if(aux -> variableOfuncion == 1){
+                                                                                agregarError ("Error semantico : El IDENTIFICADOR esta declarado como variable");} 
+                                                                        else if (compararParametros(aux->tiposParametros, listaParametrosAux) == 1){
+                                                                                agregarError ("Error semantico : cantidad o tipos de parametros incorrectos");} 
                                                                 } 
                                                                 else 
                                                                 {
