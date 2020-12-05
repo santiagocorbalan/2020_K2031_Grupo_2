@@ -1636,7 +1636,7 @@ yyreduce:
 
   case 45:
 #line 143 "TP5.y"
-    { tipo = strcat((yyvsp[(1) - (2)].cadena),"*"); ;}
+    { tipo = concatenar((yyvsp[(1) - (2)].cadena), "*"); ;}
     break;
 
   case 47:
@@ -1805,12 +1805,12 @@ yyreduce:
 
   case 69:
 #line 296 "TP5.y"
-    { agregoParametro((yyvsp[(1) - (2)].cadena));;}
+    { agregoParametro((yyvsp[(1) - (2)].cadena)); ;}
     break;
 
   case 70:
 #line 297 "TP5.y"
-    { agregoParametro(strcat((yyvsp[(1) - (3)].cadena),"*"));;}
+    { agregoParametro(concatenar((yyvsp[(1) - (3)].cadena), "*")); ;}
     break;
 
   case 71:

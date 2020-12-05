@@ -112,7 +112,7 @@ Tabla *agregoSimbolo2 (char  *sym_name,char  *sym_name2, int nuevaVariableOfunci
   ptr->tipo = (char *) malloc (strlen(sym_name2) + 1);
   strcpy(ptr->tipo,sym_name2);
   ptr->variableOfuncion = nuevaVariableOfuncion2;
-  ptr->sig = (struct Tabla *)listaSimbolos;
+  ptr->sig = (struct tabla *)listaSimbolos;
   listaSimbolos = ptr;
   return ptr;
 }
