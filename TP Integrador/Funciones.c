@@ -38,22 +38,6 @@ void agregarError(char* cadenaError){
 }
 
 
-void mostrarErrores( Errores*listaDeErrores){
-
-if(listaDeErrores == NULL){
-   printf("No se encontro ningun Error\n");
-}
-
-else {
-     while (listaDeErrores != NULL) {
-   printf( "%s" , listaDeErrores->cadenaDeErrores);
-    listaDeErrores = listaDeErrores->sig;
- }
-}
-}
-
-
-
 typedef struct tabla{
     	char*  nombre;
         char*  tipo;
@@ -117,7 +101,7 @@ Tabla *buscarSimbolo(char *name)
 
 
 
-
+Tabla *agregoSimbolo2(char* name2 , char* type2, int nuevaVariableOfuncion2);
 
 Tabla *agregoSimbolo2(char* name2 , char* type2, int nuevaVariableOfuncion2){
     
@@ -148,10 +132,6 @@ nuevo_nodo->tiposParametros = NULL;
 return listaSimbolos;
 }
 
-
-
-
-
 typedef struct parametro{
     char*  tipoParametro;
     struct parametro* sig;
@@ -160,7 +140,6 @@ typedef struct parametro{
 
 Parametro *listaParametrosAux = NULL;
 void agregoParametro(char* tipoArgumentooo);
-
 
 void agregoParametro(char* tipoArgumentooo){
     
@@ -184,8 +163,7 @@ void agregoParametro(char* tipoArgumentooo){
   
 }
 
-
-
+int compararParametros(Parametro* lista1, Parametro* lista2);
 
 int compararParametros(Parametro* lista1, Parametro* lista2) {
     int retorna = 0;    
@@ -206,7 +184,7 @@ int compararParametros(Parametro* lista1, Parametro* lista2) {
     return retorna;
 }
 
-
+int cantidadParametros(Parametro* listaAuxiliar);
 
 int cantidadParametros(Parametro* listaAuxiliar) {
     Parametro* aux = listaAuxiliar;
@@ -219,7 +197,7 @@ int cantidadParametros(Parametro* listaAuxiliar) {
 }
 
 
-
+void agregoArgumento(char* tipoArgumentooo);
 void agregoArgumento(char* tipoArgumentooo){
     
     Parametro *nuevo_nodo = (Parametro *)malloc(sizeof(Parametro));
@@ -259,7 +237,7 @@ else {
 }
 }
 
-
+void mostrarParametros( Parametro*listaParametros);
 
 void mostrarParametros( Parametro*listaParametros){
 
@@ -277,6 +255,7 @@ else
 }
 
 
+void mostrarSimbolos(Tabla* lista);
 
 void mostrarSimbolos(Tabla* lista){
 
