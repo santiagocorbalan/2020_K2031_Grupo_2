@@ -1,5 +1,4 @@
 %{
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -11,18 +10,16 @@ int yylex();
 FILE* yyin;
 
 int yywrap(){
-	return(1);
+        return(1);
 }
 
 void yyerror (char const *s) {          //Con yyerror se detecta el error sintáctico 
    fprintf (stderr, "%s\n", s);
 } 
 
-//Parametro* listaParametrosAux = NULL;
 char* tipo;
 Tabla *aux;
 Tabla *aux2;
-Tabla *aux3;
 
 %}
 
@@ -41,7 +38,6 @@ struct yylval_struct
   } mystruct;
 }
 
-
 %token <cadena> TIPO_DE_DATO 
 %token <cadena> VOID
 %token <cadena> IDENTIFICADOR     
@@ -49,7 +45,6 @@ struct yylval_struct
 %token <mystruct> CONSTANTE_ENTERA
 %token <mystruct> CONSTANTE_REAL   
 %token <caracter> CONSTANTE_CARACTER 
-
 
 %token SWITCH
 %token DO
@@ -64,7 +59,6 @@ struct yylval_struct
 
 %type <mystruct> expresion
 %type <mystruct> declaracionDefinicionFuncion
- 
 
 %% 
 
@@ -86,19 +80,18 @@ sentencia:       sentenciaExpresion
                 | sentenciaDeSalto 
 ;
 
-sentenciaExpresion:    opExpresion ';'                                  
+sentenciaExpresion:     opExpresion ';'                                  
 ;
 
-opExpresion: /* vacio */      {printf("Se encontro una sentencia vacia\n");}
-             | expresion      {printf("Se encontro una sentencia con una expresion\n");}    
+opExpresion:    /* vacio */                                                                        { printf("Se encontro una sentencia vacia\n"); }
+                | expresion                                                                        { printf("Se encontro una sentencia con una expresion\n"); }    
 ;
 
 sentenciaCompuesta:     '{' opListaDeclaraciones opListaDeSentencias '}'
-                      
 ;
 
 opListaDeclaraciones: /* vacio */                   
-                      | listaDeclaraciones          {printf("Se encontro una sentencia compuesta con una lista de declaraciones\n");}
+                | listaDeclaraciones                                                               { printf("Se encontro una sentencia compuesta con una lista de declaraciones\n"); }
 ;
 
 listaDeclaraciones: declaracion                           
@@ -106,7 +99,7 @@ listaDeclaraciones: declaracion
 ;
 
 opListaDeSentencias:       /* vacio */
-                         | listaDeSentencias                {printf("Se encontro una sentencia compuesta con una lista de sentencias\n");}
+                         | listaDeSentencias                                                      { printf("Se encontro una sentencia compuesta con una lista de sentencias\n"); }
 ;
 
 listaDeSentencias: sentencia
@@ -114,34 +107,34 @@ listaDeSentencias: sentencia
 
 ;
 
-sentenciaDeSeleccion:     IF '(' expresion ')' sentencia                                          {printf("Se encontro una sentencia IF\n");} 
-                        | IF '(' expresion ')' sentencia ELSE sentencia                           {printf("Se encontro una sentencia IF y ELSE\n");}   
-                        | IF error expresion                                                      {agregarError("Error Sintactico: Despues del IF se espera un '('\n"); }
-                        | IF '(' expresion error sentencia                                        {agregarError("Error Sintactico: falta ')' en la sentencia IF\n"); }
-                        | SWITCH '(' expresion ')' sentencia                                      {printf("Se encontro una sentencia SWITCH\n");}   
-                        | SWITCH error expresion                                                  {agregarError("Error Sintactico: Despues del SWITCH se espera un '('\n"); }
-                        | SWITCH '(' expresion error sentencia                                    {agregarError("Error Sintactico: falta ')' en la sentencia SWITCH\n"); }                          
+sentenciaDeSeleccion:     IF '(' expresion ')' sentencia                                          { printf("Se encontro una sentencia IF\n"); } 
+                        | IF '(' expresion ')' sentencia ELSE sentencia                           { printf("Se encontro una sentencia IF y ELSE\n"); }   
+                        | IF error expresion                                                      { agregarError("Error Sintactico: Despues del IF se espera un '('\n"); }
+                        | IF '(' expresion error sentencia                                        { agregarError("Error Sintactico: falta ')' en la sentencia IF\n"); }
+                        | SWITCH '(' expresion ')' sentencia                                      { printf("Se encontro una sentencia SWITCH\n"); }   
+                        | SWITCH error expresion                                                  { agregarError("Error Sintactico: Despues del SWITCH se espera un '('\n"); }
+                        | SWITCH '(' expresion error sentencia                                    { agregarError("Error Sintactico: falta ')' en la sentencia SWITCH\n"); }                          
 ;
  
-sentenciaDeIteracion:     WHILE '(' expresion ')' sentencia                                       {printf("Se encontro la sentencia WHILE\n");}   
-                        | WHILE error expresion                                                   {agregarError("Error Sintactico: Despues del WHILE se espera un '('\n"); }
-                        | WHILE '(' expresion error sentencia                                     {agregarError("Error Sintactico: falta ')' en la sentencia WHILE\n"); }
-                        | DO sentencia WHILE '(' expresion ')' ';'                                {printf("Se encontro una sentencia DO\n");}   
-                        | FOR '(' opExpresion ';' opExpresion ';' opExpresion ')' sentencia       {printf("Se encontro una sentencia FOR\n");}  
-                        | FOR error opExpresion                                                   {agregarError("Error Sintactico: Despues del FOR se espera un '('\n"); }
-                        | FOR '(' opExpresion ';' opExpresion ';' opExpresion error sentencia     {agregarError("Error Sintactico: falta ')' en la sentencia FOR\n"); }
+sentenciaDeIteracion:     WHILE '(' expresion ')' sentencia                                       { printf("Se encontro la sentencia WHILE\n"); }   
+                        | WHILE error expresion                                                   { agregarError("Error Sintactico: Despues del WHILE se espera un '('\n"); }
+                        | WHILE '(' expresion error sentencia                                     { agregarError("Error Sintactico: falta ')' en la sentencia WHILE\n"); }
+                        | DO sentencia WHILE '(' expresion ')' ';'                                { printf("Se encontro una sentencia DO\n"); }   
+                        | FOR '(' opExpresion ';' opExpresion ';' opExpresion ')' sentencia       { printf("Se encontro una sentencia FOR\n"); }  
+                        | FOR error opExpresion                                                   { agregarError("Error Sintactico: Despues del FOR se espera un '('\n"); }
+                        | FOR '(' opExpresion ';' opExpresion ';' opExpresion error sentencia     { agregarError("Error Sintactico: falta ')' en la sentencia FOR\n"); }
 ;
 
 
-sentenciaDeSalto:  CONTINUE ';'                                                                  {printf("Se encontro la sentencia CONTINUE\n");}
-                  | BREAK ';'                                                                    {printf("Se encontro la sentencia BREAK\n");}
-                  | RETURN opExpresion ';'                                                       {printf("Se encontro la sentencia RETURN\n");}  
+sentenciaDeSalto:  CONTINUE ';'                                                                   { printf("Se encontro la sentencia CONTINUE\n"); }
+                  | BREAK ';'                                                                     { printf("Se encontro la sentencia BREAK\n"); }
+                  | RETURN opExpresion ';'                                                        { printf("Se encontro la sentencia RETURN\n"); }  
             
 ;  
 
-declaracion: TIPO_DE_DATO            { tipo = $<cadena>1; } declaraciones
-             | TIPO_DE_DATO '*'      { tipo = concatenar($<cadena>1, "*"); } declaraciones                  
-             | VOID                  { tipo = "void"; } declaracionDefinicionFuncion  
+declaracion: TIPO_DE_DATO                                                                         { tipo = $<cadena>1; } declaraciones
+             | TIPO_DE_DATO '*'                                                                   { tipo = concatenar($<cadena>1, "*"); } declaraciones                  
+             | VOID                                                                               { tipo = "void"; } declaracionDefinicionFuncion  
 ;
 
 declaracionDefinicionFuncion: IDENTIFICADOR parametrosCuerpoFuncion { 
@@ -160,11 +153,11 @@ declaraciones:  declaracionDefinicionFuncion
                 | declaracionVariables ';'                      
 ;
 
-declaracionVariables:   listaVariables 
+declaracionVariables:  listaVariables 
 ;
 
 listaVariables:   unaVariableSimple                          
-                      | unaVariableSimple ',' listaVariables 
+                | unaVariableSimple ',' listaVariables 
 ;
 
 unaVariableSimple: IDENTIFICADOR 
@@ -174,19 +167,19 @@ unaVariableSimple: IDENTIFICADOR
                                                 agregarError("Error Semantico: la variable ya esta declarada\n"); 
                                         else 
                                         {
-                                                aux2 = agregoSimbolo2( $<cadena>1 , tipo, 1);
+                                                aux = agregoSimbolo2($<cadena>1, tipo, 1);
 
-                                                        if (strcmp(aux2-> tipo, "int") == 0) {
-                                                                aux2->value.valEnt = 0;
+                                                        if (strcmp(aux-> tipo, "int") == 0) {
+                                                                aux->value.valEnt = 0;
                                                         
-                                                        } else if (strcmp(aux2 -> tipo, "float") == 0) {
-                                                                aux2->value.valReal = 0.0;
+                                                        } else if (strcmp(aux -> tipo, "float") == 0) {
+                                                                aux->value.valReal = 0.0;
 
-                                                        } else if (strcmp(aux2 -> tipo, "char") == 0) {
-                                                                aux2->value.valChar = '\0';
+                                                        } else if (strcmp(aux -> tipo, "char") == 0) {
+                                                                aux->value.valChar = '\0';
 
-                                                        } else if (strcmp(aux2 -> tipo, "char*") == 0){
-                                                                aux2->value.valString = NULL;
+                                                        } else if (strcmp(aux -> tipo, "char*") == 0){
+                                                                aux->value.valString = NULL;
                                                         }
                                                         
                                         }
@@ -202,18 +195,18 @@ unaVariableSimple: IDENTIFICADOR
                                 {
                                         aux2=buscarSimbolo($<cadena>3); 
                                         if(aux2 && (strcmp(tipo, aux2->tipo) == 0)) { 
-                                                aux3 = agregoSimbolo2($<cadena>1 , tipo, 1); 
+                                                aux = agregoSimbolo2($<cadena>1 , tipo, 1); 
 
-                                                if (strcmp(aux3-> tipo, "int") == 0) {
+                                                if (strcmp(aux-> tipo, "int") == 0) {
                                                         aux2->value.valEnt = $<entero>3;
 
-                                                } else if (strcmp(aux3 -> tipo, "float") == 0) {
+                                                } else if (strcmp(aux -> tipo, "float") == 0) {
                                                         aux2->value.valReal = $<real>3;
 
-                                                } else if (strcmp(aux3 -> tipo, "char") == 0){
+                                                } else if (strcmp(aux -> tipo, "char") == 0){
                                                         aux2->value.valChar = $<caracter>3;
 
-                                                } else if (strcmp(aux3 -> tipo, "char*") == 0) {
+                                                } else if (strcmp(aux -> tipo, "char*") == 0) {
                                                         aux2->value.valString = $<cadena>3;
                                                 }
                                         }            
@@ -227,13 +220,13 @@ unaVariableSimple: IDENTIFICADOR
                         }
                   
                 | IDENTIFICADOR '=' CONSTANTE_ENTERA    { 
-                                                                aux=buscarSimbolo($<cadena>1); 
+                                                                aux = buscarSimbolo($<cadena>1); 
                                                                 if (aux) 
                                                                         agregarError("Error Semantico : la variable ya esta declarada "); 
                                                                         else {
                                                                                 if(strcmp(tipo,"int") == 0){ 
-                                                                                        aux2 = agregoSimbolo2($<cadena>1 , tipo, 1);  
-                                                                                        aux2->value.valEnt = $<mystruct>3.valor_entero;}
+                                                                                        aux = agregoSimbolo2($<cadena>1 , tipo, 1);  
+                                                                                        aux->value.valEnt = $<mystruct>3.valor_entero;}
                                                                                 else
                                                                                         agregarError("Error Semantico : son de distinto tipo"); 
                                                                         }
@@ -245,8 +238,8 @@ unaVariableSimple: IDENTIFICADOR
                                                                         agregarError("Error Semantico : la variable ya esta declarada "); 
                                                                 else {
                                                                         if (strcmp(tipo, "char") == 0) {
-                                                                                aux2 = agregoSimbolo2($<cadena>1 , tipo, 1);  
-                                                                                aux2->value.valChar = $<caracter>3; 
+                                                                                aux = agregoSimbolo2($<cadena>1 , tipo, 1);  
+                                                                                aux->value.valChar = $<caracter>3; 
                                                                         }
                                                                         else 
                                                                                 agregarError("Error Semantico : son de distinto tipo");
@@ -259,8 +252,8 @@ unaVariableSimple: IDENTIFICADOR
                                                                         agregarError("Error Semantico : la variable ya esta declarada "); 
                                                                 else
                                                                         if (strcmp(tipo, "double") == 0){ // si borro "0" me toma el if
-                                                                                aux2 = agregoSimbolo2($<cadena>1 , tipo, 1);  
-                                                                                aux2->value.valReal = $<mystruct>3.valor_real;} 
+                                                                                aux = agregoSimbolo2($<cadena>1 , tipo, 1);  
+                                                                                aux->value.valReal = $<mystruct>3.valor_real;} 
                                                                         else{
                                                                                 agregarError("Error Semantico : son de distinto tipo "); }
                                                         }
@@ -271,38 +264,37 @@ unaVariableSimple: IDENTIFICADOR
                                                                         agregarError("Error Semantico : la variable ya esta declarada "); 
                                                                 else 
                                                                         if (strcmp(tipo, "char*") == 0){
-                                                                                aux2 = agregoSimbolo2($<cadena>1 , tipo, 1);  
-                                                                                aux2->value.valString = $<cadena>3;}  
+                                                                                aux = agregoSimbolo2($<cadena>1 , tipo, 1);  
+                                                                                aux->value.valString = $<cadena>3;}  
                                                                         else 
                                                                                 agregarError("Error Semantico : son de distinto tipo ");
                                                         }
 
 
                 | IDENTIFICADOR '=' error               { agregarError("Error Sintactico : se inicializo con un valor incorrecto"); }
-
                 | error '='                             { agregarError("Error Sintactico : identificador incorrecto"); }
 ;
 
              
 parametrosCuerpoFuncion: '(' listaParametros ')' sentenciaCompuesta    
-                           | '(' listaParametros ')' ';'                    
+                        | '(' listaParametros ')' ';'                    
 ;
 
-listaParametros: /* vacio */  {agregoParametro("void");} // cambio nombre de la funcion
+listaParametros: /* vacio */  {agregoParametro("void");} 
                 | parametros
                 | parametros ',' listaParametros 
 ;
 
-parametros: TIPO_DE_DATO IDENTIFICADOR             { agregoParametro($<cadena>1); } 
-                | TIPO_DE_DATO '*' IDENTIFICADOR   { agregoParametro(concatenar($<cadena>1, "*")); } 
-                | error IDENTIFICADOR              { agregarError("ERROR SINTACTICO : falta tipo de dato del parametro"); }
-                | error '*' IDENTIFICADOR          { agregarError("ERROR SINTACTICO : falta tipo de dato del puntero parametro"); }
-                | TIPO_DE_DATO error               { agregarError("ERROR SINTACTICO : falta identificador en parametro"); }
-                | TIPO_DE_DATO '*' error           { agregarError("ERROR SINTACTICO : falta identificador del puntero parametro"); }
+parametros:     TIPO_DE_DATO IDENTIFICADOR              { agregoParametro($<cadena>1); } 
+                | TIPO_DE_DATO '*' IDENTIFICADOR        { agregoParametro(concatenar($<cadena>1, "*")); } 
+                | error IDENTIFICADOR                   { agregarError("ERROR SINTACTICO : falta tipo de dato del parametro"); }
+                | error '*' IDENTIFICADOR               { agregarError("ERROR SINTACTICO : falta tipo de dato del puntero parametro"); }
+                | TIPO_DE_DATO error                    { agregarError("ERROR SINTACTICO : falta identificador en parametro"); }
+                | TIPO_DE_DATO '*' error                { agregarError("ERROR SINTACTICO : falta identificador del puntero parametro"); }
 ;
 
-expresion:      CONSTANTE_ENTERA      { $<mystruct>$.tipo = $<mystruct>1.tipo;  $<mystruct>$.valor_entero = $<mystruct>1.valor_entero;}
-                | CONSTANTE_REAL      { $<mystruct>$.tipo = $<mystruct>1.tipo;  $<mystruct>$.valor_real = $<mystruct>1.valor_real;}
+expresion:      CONSTANTE_ENTERA                        { $<mystruct>$.tipo = $<mystruct>1.tipo;  $<mystruct>$.valor_entero = $<mystruct>1.valor_entero;}
+                | CONSTANTE_REAL                        { $<mystruct>$.tipo = $<mystruct>1.tipo;  $<mystruct>$.valor_real = $<mystruct>1.valor_real;}
                 | IDENTIFICADOR       { 
                                         aux=buscarSimbolo($<cadena>1); 
                                         if (aux) {  
@@ -318,8 +310,9 @@ expresion:      CONSTANTE_ENTERA      { $<mystruct>$.tipo = $<mystruct>1.tipo;  
                                         } 
                                         else 
                                         { 
-                                                agregarError("La variable no esta declarada\n");  } 
-                                        }
+                                                agregarError("La variable no esta declarada\n");  
+                                        } 
+                                }
 
 	        | expresion '+' expresion { 
                                                 if($<mystruct>1.tipo == $<mystruct>3.tipo) { 
@@ -330,7 +323,8 @@ expresion:      CONSTANTE_ENTERA      { $<mystruct>$.tipo = $<mystruct>1.tipo;  
                                                                 $<mystruct>$.valor_real = $<mystruct>1.valor_real + $<mystruct>3.valor_real; 
                                                         }
                                                 } else { 
-                                                        agregarError("Los operandos son de distinto tipo \n"); }
+                                                        agregarError("Los operandos son de distinto tipo \n"); 
+                                                }
         
                                         }
 
@@ -342,15 +336,14 @@ expresion:      CONSTANTE_ENTERA      { $<mystruct>$.tipo = $<mystruct>1.tipo;  
 ;
 
 invocacionDeFuncion:  IDENTIFICADOR '(' listaArgumentos ')'     {
-                                                                aux=buscarSimbolo($<cadena>1);   
+                                                                aux = buscarSimbolo($<cadena>1);   
                                                                 if (aux) { 
                                                                         if(aux -> variableOfuncion == 1){
                                                                                 agregarError ("Error semantico : El IDENTIFICADOR esta declarado como variable");} 
                                                                         else if (compararParametros(aux->tiposParametros, listaParametrosAux) == 1){
                                                                                 agregarError ("Error semantico : cantidad o tipos de parametros incorrectos");} 
                                                                 } 
-                                                                else 
-                                                                {
+                                                                else {
                                                                         agregarError ("Error semantico : No esta declarada la funcion"); 
                                                                 }
                                                                 listaParametrosAux = NULL;

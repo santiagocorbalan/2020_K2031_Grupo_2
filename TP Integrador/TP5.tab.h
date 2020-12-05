@@ -80,7 +80,7 @@
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 29 "TP5.y"
+#line 27 "TP5.y"
 {
     int entero; 
     float real;
