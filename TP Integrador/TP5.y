@@ -382,11 +382,10 @@ argumento: /* vacio */ {agregoArgumento("void");}
 Tabla *listaSimbolos;
 
 int main(){
-
-        yyin = fopen("","r");
+        yyin = fopen("docDePrueba.c","r");
         printf("\n");
         yyparse();
+
         mostrarSimbolos(listaSimbolos);
         mostrarErrores(listaErrores);
-        
 }

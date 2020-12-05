@@ -510,13 +510,11 @@ int yy_flex_debug = 0;
 char *yytext;
 #line 1 "TP5.l"
 #line 4 "TP5.l"
-   
 #include <stdio.h>
 #include <stdlib.h> 
 #include <string.h>
-#include "TP5.tab.c"
-
-#line 520 "lex.yy.c"
+#include "TP5.tab.h"
+#line 518 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -698,10 +696,10 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 13 "TP5.l"
+#line 10 "TP5.l"
 
 
-#line 705 "lex.yy.c"
+#line 703 "lex.yy.c"
 
 	if ( !(yy_init) )
 		{
@@ -786,113 +784,113 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 15 "TP5.l"
+#line 12 "TP5.l"
 {return IF;}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 17 "TP5.l"
+#line 14 "TP5.l"
 {return SWITCH;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 19 "TP5.l"
+#line 16 "TP5.l"
 {return ELSE;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 21 "TP5.l"
+#line 18 "TP5.l"
 {return WHILE;}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 23 "TP5.l"
+#line 20 "TP5.l"
 {return FOR;}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 25 "TP5.l"
+#line 22 "TP5.l"
 {return DO;}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 27 "TP5.l"
+#line 24 "TP5.l"
 {return BREAK;}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 29 "TP5.l"
+#line 26 "TP5.l"
 {return CONTINUE;}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 31 "TP5.l"
+#line 28 "TP5.l"
 {return RETURN;}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 33 "TP5.l"
+#line 30 "TP5.l"
 {return yytext[0];}
 	YY_BREAK
 case 11:
 /* rule 11 can match eol */
 YY_RULE_SETUP
-#line 35 "TP5.l"
+#line 32 "TP5.l"
 {return '\n';}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 37 "TP5.l"
+#line 34 "TP5.l"
 {strcpy(yylval.cadena, yytext); return TIPO_DE_DATO;}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 39 "TP5.l"
+#line 36 "TP5.l"
 {strcpy(yylval.cadena, yytext); return IDENTIFICADOR;}
 	YY_BREAK
 case 14:
 /* rule 14 can match eol */
 YY_RULE_SETUP
-#line 41 "TP5.l"
+#line 38 "TP5.l"
 {strcpy(yylval.cadena, yytext); return LITERAL_CADENA;}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 43 "TP5.l"
+#line 40 "TP5.l"
 {yylval.mystruct.valor_entero=atoi(yytext); yylval.mystruct.tipo=1;yylval.entero = atoi(yytext); return CONSTANTE_ENTERA;}
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 45 "TP5.l"
+#line 42 "TP5.l"
 {yylval.mystruct.valor_entero=atoi(yytext); yylval.mystruct.tipo=1; yylval.entero = atoi(yytext); return CONSTANTE_ENTERA;}
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 47 "TP5.l"
+#line 44 "TP5.l"
 {yylval.mystruct.valor_entero=atoi(yytext); yylval.mystruct.tipo=1; yylval.entero = atoi(yytext); return CONSTANTE_ENTERA;}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 49 "TP5.l"
+#line 46 "TP5.l"
 {yylval.mystruct.valor_real=atof(yytext); yylval.mystruct.tipo=2; yylval.real = strtol(yytext, NULL, 0); return CONSTANTE_REAL;}
 	YY_BREAK
 case 19:
 /* rule 19 can match eol */
 YY_RULE_SETUP
-#line 51 "TP5.l"
+#line 48 "TP5.l"
 {yylval.mystruct.valor_caracter=atof(yytext); yylval.mystruct.tipo=3; yylval.caracter = yytext[1]; return CONSTANTE_CARACTER;}
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 53 "TP5.l"
+#line 50 "TP5.l"
 {printf("Caracter no reconocido: %c", yytext[0]);}
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 55 "TP5.l"
+#line 52 "TP5.l"
 ECHO;
 	YY_BREAK
-#line 896 "lex.yy.c"
+#line 894 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1889,6 +1887,6 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 55 "TP5.l"
+#line 52 "TP5.l"
 
 

@@ -511,8 +511,8 @@ static const yytype_uint16 yyrline[] =
      136,   137,   138,   142,   142,   143,   143,   144,   144,   147,
      156,   159,   160,   163,   166,   167,   170,   196,   229,   242,
      256,   268,   281,   283,   287,   288,   291,   292,   293,   296,
-     297,   298,   299,   300,   301,   304,   305,   306,   324,   338,
-     352,   353,   356,   357,   360,   361,   368,   369,   370,   371
+     297,   298,   299,   300,   301,   304,   305,   306,   324,   344,
+     358,   359,   362,   363,   366,   367,   374,   375,   376,   377
 };
 #endif
 
@@ -1881,7 +1881,7 @@ yyreduce:
     break;
 
   case 79:
-#line 338 "TP5.y"
+#line 344 "TP5.y"
     {
                                                                 aux=buscarSimbolo((yyvsp[(1) - (4)].cadena));   
                                                                 if (aux) { 
@@ -1899,22 +1899,22 @@ yyreduce:
     break;
 
   case 80:
-#line 352 "TP5.y"
+#line 358 "TP5.y"
     {agregarError("Error Sintactico : falta '(' en la invocacion de la funcion"); ;}
     break;
 
   case 81:
-#line 353 "TP5.y"
+#line 359 "TP5.y"
     {agregarError("Error Sintactico : falta ')' en la invocacion de la funcion"); ;}
     break;
 
   case 84:
-#line 360 "TP5.y"
+#line 366 "TP5.y"
     {agregoArgumento("void");;}
     break;
 
   case 85:
-#line 361 "TP5.y"
+#line 367 "TP5.y"
     {        
                                         aux=buscarSimbolo((yyvsp[(1) - (1)].cadena));    
                                         if (aux) 
@@ -1925,22 +1925,22 @@ yyreduce:
     break;
 
   case 86:
-#line 368 "TP5.y"
+#line 374 "TP5.y"
     { agregoArgumento("char*"); ;}
     break;
 
   case 87:
-#line 369 "TP5.y"
+#line 375 "TP5.y"
     { agregoArgumento("int"); ;}
     break;
 
   case 88:
-#line 370 "TP5.y"
+#line 376 "TP5.y"
     { agregoArgumento("char"); ;}
     break;
 
   case 89:
-#line 371 "TP5.y"
+#line 377 "TP5.y"
     { agregoArgumento("real"); ;}
     break;
 
@@ -2160,14 +2160,14 @@ yyreturn:
 }
 
 
-#line 374 "TP5.y"
+#line 380 "TP5.y"
 
 
 Tabla *listaSimbolos;
 
 int main(){
 
-        yyin = fopen("","r");
+        yyin = fopen("docDePrueba.c","r");
         printf("\n");
         yyparse();
         mostrarSimbolos(listaSimbolos);
