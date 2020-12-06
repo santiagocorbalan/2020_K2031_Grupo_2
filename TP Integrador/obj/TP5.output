@@ -1,0 +1,1881 @@
+Estado 51 conflictos: 3 desplazamiento(s)/reducción(ones)
+Estado 95 conflictos: 1 desplazamiento(s)/reducción(ones)
+Estado 137 conflictos: 1 desplazamiento(s)/reducción(ones)
+
+
+Gramática
+
+    0 $accept: input $end
+
+    1 input: /* vacío */
+    2      | input line
+
+    3 line: '\n'
+    4     | expresion '\n'
+    5     | sentencia '\n'
+    6     | declaracion '\n'
+    7     | invocacionDeFuncion '\n'
+
+    8 sentencia: sentenciaExpresion
+    9          | sentenciaCompuesta
+   10          | sentenciaDeSeleccion
+   11          | sentenciaDeIteracion
+   12          | sentenciaDeSalto
+
+   13 sentenciaExpresion: opExpresion ';'
+
+   14 opExpresion: /* vacío */
+   15            | expresion
+
+   16 sentenciaCompuesta: '{' opListaDeclaraciones opListaDeSentencias '}'
+
+   17 opListaDeclaraciones: /* vacío */
+   18                     | listaDeclaraciones
+
+   19 listaDeclaraciones: declaracion
+   20                   | listaDeclaraciones declaracion
+
+   21 opListaDeSentencias: /* vacío */
+   22                    | listaDeSentencias
+
+   23 listaDeSentencias: sentencia
+   24                  | listaDeSentencias sentencia
+
+   25 sentenciaDeSeleccion: IF '(' expresion ')' sentencia
+   26                     | IF '(' expresion ')' sentencia ELSE sentencia
+   27                     | IF error expresion
+   28                     | IF '(' expresion error sentencia
+   29                     | SWITCH '(' expresion ')' sentencia
+   30                     | SWITCH error expresion
+   31                     | SWITCH '(' expresion error sentencia
+
+   32 sentenciaDeIteracion: WHILE '(' expresion ')' sentencia
+   33                     | WHILE error expresion
+   34                     | WHILE '(' expresion error sentencia
+   35                     | DO sentencia WHILE '(' expresion ')' ';'
+   36                     | FOR '(' opExpresion ';' opExpresion ';' opExpresion ')' sentencia
+   37                     | FOR error opExpresion
+   38                     | FOR '(' opExpresion ';' opExpresion ';' opExpresion error sentencia
+
+   39 sentenciaDeSalto: CONTINUE ';'
+   40                 | BREAK ';'
+   41                 | RETURN opExpresion ';'
+
+   42 declaracion: TIPO_DE_DATO declaraciones
+   43            | TIPO_DE_DATO '*' declaraciones
+   44            | VOID declaracionDefinicionFuncion
+
+   45 declaraciones: declaracionDefinicionFuncion
+   46              | declaracionVariables ';'
+
+   47 declaracionDefinicionFuncion: IDENTIFICADOR parametrosCuerpoFuncion
+   48                             | error parametrosCuerpoFuncion
+
+   49 declaracionVariables: listaVariables
+
+   50 listaVariables: unaVariableSimple
+   51               | unaVariableSimple ',' listaVariables
+
+   52 unaVariableSimple: IDENTIFICADOR
+   53                  | IDENTIFICADOR '=' IDENTIFICADOR
+   54                  | IDENTIFICADOR '=' CONSTANTE_ENTERA
+   55                  | IDENTIFICADOR '=' CONSTANTE_CARACTER
+   56                  | IDENTIFICADOR '=' CONSTANTE_REAL
+   57                  | IDENTIFICADOR '=' LITERAL_CADENA
+   58                  | IDENTIFICADOR '=' error
+   59                  | error '='
+
+   60 parametrosCuerpoFuncion: '(' listaParametros ')' sentenciaCompuesta
+   61                        | '(' listaParametros ')' ';'
+
+   62 listaParametros: /* vacío */
+   63                | parametros
+   64                | parametros ',' listaParametros
+
+   65 parametros: TIPO_DE_DATO IDENTIFICADOR
+   66           | TIPO_DE_DATO '*' IDENTIFICADOR
+   67           | error IDENTIFICADOR
+   68           | error '*' IDENTIFICADOR
+   69           | TIPO_DE_DATO error
+   70           | TIPO_DE_DATO '*' error
+
+   71 expresion: CONSTANTE_ENTERA
+   72          | CONSTANTE_REAL
+   73          | IDENTIFICADOR
+   74          | expresion '+' expresion
+
+   75 invocacionDeFuncion: IDENTIFICADOR '(' listaArgumentos ')'
+   76                    | IDENTIFICADOR error listaArgumentos ')'
+   77                    | IDENTIFICADOR '(' listaArgumentos error
+
+   78 listaArgumentos: argumento
+   79                | argumento ',' listaArgumentos
+
+   80 argumento: /* vacío */
+   81          | IDENTIFICADOR
+   82          | LITERAL_CADENA
+   83          | CONSTANTE_ENTERA
+   84          | CONSTANTE_CARACTER
+   85          | CONSTANTE_REAL
+
+
+Terminales con las reglas donde aparecen
+
+$end (0) 0
+'\n' (10) 3 4 5 6 7
+'(' (40) 25 26 28 29 31 32 34 35 36 38 60 61 75 77
+')' (41) 25 26 29 32 35 36 60 61 75 76
+'*' (42) 43 66 68 70
+'+' (43) 74
+',' (44) 51 64 79
+';' (59) 13 35 36 38 39 40 41 46 61
+'=' (61) 53 54 55 56 57 58 59
+'{' (123) 16
+'}' (125) 16
+error (256) 27 28 30 31 33 34 37 38 48 58 59 67 68 69 70 76 77
+TIPO_DE_DATO (258) 42 43 65 66 69 70
+VOID (259) 44
+IDENTIFICADOR (260) 47 52 53 54 55 56 57 58 65 66 67 68 73 75 76 77
+    81
+LITERAL_CADENA (261) 57 82
+CONSTANTE_ENTERA (262) 54 71 83
+CONSTANTE_REAL (263) 56 72 85
+CONSTANTE_CARACTER (264) 55 84
+SWITCH (265) 29 30 31
+DO (266) 35
+WHILE (267) 32 33 34 35
+IF (268) 25 26 27 28
+ELSE (269) 26
+FOR (270) 36 37 38
+BREAK (271) 40
+CONTINUE (272) 39
+RETURN (273) 41
+
+
+No terminales con las reglas donde aparecen
+
+$accept (29)
+    en la izquierda: 0
+input (30)
+    en la izquierda: 1 2, en la derecha: 0 2
+line (31)
+    en la izquierda: 3 4 5 6 7, en la derecha: 2
+sentencia (32)
+    en la izquierda: 8 9 10 11 12, en la derecha: 5 23 24 25 26 28
+    29 31 32 34 35 36 38
+sentenciaExpresion (33)
+    en la izquierda: 13, en la derecha: 8
+opExpresion (34)
+    en la izquierda: 14 15, en la derecha: 13 36 37 38 41
+sentenciaCompuesta (35)
+    en la izquierda: 16, en la derecha: 9 60
+opListaDeclaraciones (36)
+    en la izquierda: 17 18, en la derecha: 16
+listaDeclaraciones (37)
+    en la izquierda: 19 20, en la derecha: 18 20
+opListaDeSentencias (38)
+    en la izquierda: 21 22, en la derecha: 16
+listaDeSentencias (39)
+    en la izquierda: 23 24, en la derecha: 22 24
+sentenciaDeSeleccion (40)
+    en la izquierda: 25 26 27 28 29 30 31, en la derecha: 10
+sentenciaDeIteracion (41)
+    en la izquierda: 32 33 34 35 36 37 38, en la derecha: 11
+sentenciaDeSalto (42)
+    en la izquierda: 39 40 41, en la derecha: 12
+declaracion (43)
+    en la izquierda: 42 43 44, en la derecha: 6 19 20
+declaraciones (44)
+    en la izquierda: 45 46, en la derecha: 42 43
+declaracionDefinicionFuncion (45)
+    en la izquierda: 47 48, en la derecha: 44 45
+declaracionVariables (46)
+    en la izquierda: 49, en la derecha: 46
+listaVariables (47)
+    en la izquierda: 50 51, en la derecha: 49 51
+unaVariableSimple (48)
+    en la izquierda: 52 53 54 55 56 57 58 59, en la derecha: 50 51
+parametrosCuerpoFuncion (49)
+    en la izquierda: 60 61, en la derecha: 47 48
+listaParametros (50)
+    en la izquierda: 62 63 64, en la derecha: 60 61 64
+parametros (51)
+    en la izquierda: 65 66 67 68 69 70, en la derecha: 63 64
+expresion (52)
+    en la izquierda: 71 72 73 74, en la derecha: 4 15 25 26 27 28 29
+    30 31 32 33 34 35 74
+invocacionDeFuncion (53)
+    en la izquierda: 75 76 77, en la derecha: 7
+listaArgumentos (54)
+    en la izquierda: 78 79, en la derecha: 75 76 77 79
+argumento (55)
+    en la izquierda: 80 81 82 83 84 85, en la derecha: 78 79
+
+
+estado 0
+
+    0 $accept: . input $end
+
+    $default  reduce usando la regla 1 (input)
+
+    input  ir al estado 1
+
+
+estado 1
+
+    0 $accept: input . $end
+    2 input: input . line
+
+    $end              desplazar e ir al estado 2
+    TIPO_DE_DATO      desplazar e ir al estado 3
+    VOID              desplazar e ir al estado 4
+    IDENTIFICADOR     desplazar e ir al estado 5
+    CONSTANTE_ENTERA  desplazar e ir al estado 6
+    CONSTANTE_REAL    desplazar e ir al estado 7
+    SWITCH            desplazar e ir al estado 8
+    DO                desplazar e ir al estado 9
+    WHILE             desplazar e ir al estado 10
+    IF                desplazar e ir al estado 11
+    FOR               desplazar e ir al estado 12
+    BREAK             desplazar e ir al estado 13
+    CONTINUE          desplazar e ir al estado 14
+    RETURN            desplazar e ir al estado 15
+    '\n'              desplazar e ir al estado 16
+    '{'               desplazar e ir al estado 17
+
+    $default  reduce usando la regla 14 (opExpresion)
+
+    line                  ir al estado 18
+    sentencia             ir al estado 19
+    sentenciaExpresion    ir al estado 20
+    opExpresion           ir al estado 21
+    sentenciaCompuesta    ir al estado 22
+    sentenciaDeSeleccion  ir al estado 23
+    sentenciaDeIteracion  ir al estado 24
+    sentenciaDeSalto      ir al estado 25
+    declaracion           ir al estado 26
+    expresion             ir al estado 27
+    invocacionDeFuncion   ir al estado 28
+
+
+estado 2
+
+    0 $accept: input $end .
+
+    $default  aceptar
+
+
+estado 3
+
+   42 declaracion: TIPO_DE_DATO . declaraciones
+   43            | TIPO_DE_DATO . '*' declaraciones
+
+    error          desplazar e ir al estado 29
+    IDENTIFICADOR  desplazar e ir al estado 30
+    '*'            desplazar e ir al estado 31
+
+    declaraciones                 ir al estado 32
+    declaracionDefinicionFuncion  ir al estado 33
+    declaracionVariables          ir al estado 34
+    listaVariables                ir al estado 35
+    unaVariableSimple             ir al estado 36
+
+
+estado 4
+
+   44 declaracion: VOID . declaracionDefinicionFuncion
+
+    error          desplazar e ir al estado 37
+    IDENTIFICADOR  desplazar e ir al estado 38
+
+    declaracionDefinicionFuncion  ir al estado 39
+
+
+estado 5
+
+   73 expresion: IDENTIFICADOR .
+   75 invocacionDeFuncion: IDENTIFICADOR . '(' listaArgumentos ')'
+   76                    | IDENTIFICADOR . error listaArgumentos ')'
+   77                    | IDENTIFICADOR . '(' listaArgumentos error
+
+    error  desplazar e ir al estado 40
+    '('    desplazar e ir al estado 41
+
+    '\n'  reduce usando la regla 73 (expresion)
+    ';'   reduce usando la regla 73 (expresion)
+    '+'   reduce usando la regla 73 (expresion)
+
+
+estado 6
+
+   71 expresion: CONSTANTE_ENTERA .
+
+    $default  reduce usando la regla 71 (expresion)
+
+
+estado 7
+
+   72 expresion: CONSTANTE_REAL .
+
+    $default  reduce usando la regla 72 (expresion)
+
+
+estado 8
+
+   29 sentenciaDeSeleccion: SWITCH . '(' expresion ')' sentencia
+   30                     | SWITCH . error expresion
+   31                     | SWITCH . '(' expresion error sentencia
+
+    error  desplazar e ir al estado 42
+    '('    desplazar e ir al estado 43
+
+
+estado 9
+
+   35 sentenciaDeIteracion: DO . sentencia WHILE '(' expresion ')' ';'
+
+    IDENTIFICADOR     desplazar e ir al estado 44
+    CONSTANTE_ENTERA  desplazar e ir al estado 6
+    CONSTANTE_REAL    desplazar e ir al estado 7
+    SWITCH            desplazar e ir al estado 8
+    DO                desplazar e ir al estado 9
+    WHILE             desplazar e ir al estado 10
+    IF                desplazar e ir al estado 11
+    FOR               desplazar e ir al estado 12
+    BREAK             desplazar e ir al estado 13
+    CONTINUE          desplazar e ir al estado 14
+    RETURN            desplazar e ir al estado 15
+    '{'               desplazar e ir al estado 17
+
+    $default  reduce usando la regla 14 (opExpresion)
+
+    sentencia             ir al estado 45
+    sentenciaExpresion    ir al estado 20
+    opExpresion           ir al estado 21
+    sentenciaCompuesta    ir al estado 22
+    sentenciaDeSeleccion  ir al estado 23
+    sentenciaDeIteracion  ir al estado 24
+    sentenciaDeSalto      ir al estado 25
+    expresion             ir al estado 46
+
+
+estado 10
+
+   32 sentenciaDeIteracion: WHILE . '(' expresion ')' sentencia
+   33                     | WHILE . error expresion
+   34                     | WHILE . '(' expresion error sentencia
+
+    error  desplazar e ir al estado 47
+    '('    desplazar e ir al estado 48
+
+
+estado 11
+
+   25 sentenciaDeSeleccion: IF . '(' expresion ')' sentencia
+   26                     | IF . '(' expresion ')' sentencia ELSE sentencia
+   27                     | IF . error expresion
+   28                     | IF . '(' expresion error sentencia
+
+    error  desplazar e ir al estado 49
+    '('    desplazar e ir al estado 50
+
+
+estado 12
+
+   36 sentenciaDeIteracion: FOR . '(' opExpresion ';' opExpresion ';' opExpresion ')' sentencia
+   37                     | FOR . error opExpresion
+   38                     | FOR . '(' opExpresion ';' opExpresion ';' opExpresion error sentencia
+
+    error  desplazar e ir al estado 51
+    '('    desplazar e ir al estado 52
+
+
+estado 13
+
+   40 sentenciaDeSalto: BREAK . ';'
+
+    ';'  desplazar e ir al estado 53
+
+
+estado 14
+
+   39 sentenciaDeSalto: CONTINUE . ';'
+
+    ';'  desplazar e ir al estado 54
+
+
+estado 15
+
+   41 sentenciaDeSalto: RETURN . opExpresion ';'
+
+    IDENTIFICADOR     desplazar e ir al estado 44
+    CONSTANTE_ENTERA  desplazar e ir al estado 6
+    CONSTANTE_REAL    desplazar e ir al estado 7
+
+    $default  reduce usando la regla 14 (opExpresion)
+
+    opExpresion  ir al estado 55
+    expresion    ir al estado 46
+
+
+estado 16
+
+    3 line: '\n' .
+
+    $default  reduce usando la regla 3 (line)
+
+
+estado 17
+
+   16 sentenciaCompuesta: '{' . opListaDeclaraciones opListaDeSentencias '}'
+
+    TIPO_DE_DATO  desplazar e ir al estado 3
+    VOID          desplazar e ir al estado 4
+
+    $default  reduce usando la regla 17 (opListaDeclaraciones)
+
+    opListaDeclaraciones  ir al estado 56
+    listaDeclaraciones    ir al estado 57
+    declaracion           ir al estado 58
+
+
+estado 18
+
+    2 input: input line .
+
+    $default  reduce usando la regla 2 (input)
+
+
+estado 19
+
+    5 line: sentencia . '\n'
+
+    '\n'  desplazar e ir al estado 59
+
+
+estado 20
+
+    8 sentencia: sentenciaExpresion .
+
+    $default  reduce usando la regla 8 (sentencia)
+
+
+estado 21
+
+   13 sentenciaExpresion: opExpresion . ';'
+
+    ';'  desplazar e ir al estado 60
+
+
+estado 22
+
+    9 sentencia: sentenciaCompuesta .
+
+    $default  reduce usando la regla 9 (sentencia)
+
+
+estado 23
+
+   10 sentencia: sentenciaDeSeleccion .
+
+    $default  reduce usando la regla 10 (sentencia)
+
+
+estado 24
+
+   11 sentencia: sentenciaDeIteracion .
+
+    $default  reduce usando la regla 11 (sentencia)
+
+
+estado 25
+
+   12 sentencia: sentenciaDeSalto .
+
+    $default  reduce usando la regla 12 (sentencia)
+
+
+estado 26
+
+    6 line: declaracion . '\n'
+
+    '\n'  desplazar e ir al estado 61
+
+
+estado 27
+
+    4 line: expresion . '\n'
+   15 opExpresion: expresion .
+   74 expresion: expresion . '+' expresion
+
+    '\n'  desplazar e ir al estado 62
+    '+'   desplazar e ir al estado 63
+
+    $default  reduce usando la regla 15 (opExpresion)
+
+
+estado 28
+
+    7 line: invocacionDeFuncion . '\n'
+
+    '\n'  desplazar e ir al estado 64
+
+
+estado 29
+
+   48 declaracionDefinicionFuncion: error . parametrosCuerpoFuncion
+   59 unaVariableSimple: error . '='
+
+    '('  desplazar e ir al estado 65
+    '='  desplazar e ir al estado 66
+
+    parametrosCuerpoFuncion  ir al estado 67
+
+
+estado 30
+
+   47 declaracionDefinicionFuncion: IDENTIFICADOR . parametrosCuerpoFuncion
+   52 unaVariableSimple: IDENTIFICADOR .
+   53                  | IDENTIFICADOR . '=' IDENTIFICADOR
+   54                  | IDENTIFICADOR . '=' CONSTANTE_ENTERA
+   55                  | IDENTIFICADOR . '=' CONSTANTE_CARACTER
+   56                  | IDENTIFICADOR . '=' CONSTANTE_REAL
+   57                  | IDENTIFICADOR . '=' LITERAL_CADENA
+   58                  | IDENTIFICADOR . '=' error
+
+    '('  desplazar e ir al estado 65
+    '='  desplazar e ir al estado 68
+
+    $default  reduce usando la regla 52 (unaVariableSimple)
+
+    parametrosCuerpoFuncion  ir al estado 69
+
+
+estado 31
+
+   43 declaracion: TIPO_DE_DATO '*' . declaraciones
+
+    error          desplazar e ir al estado 29
+    IDENTIFICADOR  desplazar e ir al estado 30
+
+    declaraciones                 ir al estado 70
+    declaracionDefinicionFuncion  ir al estado 33
+    declaracionVariables          ir al estado 34
+    listaVariables                ir al estado 35
+    unaVariableSimple             ir al estado 36
+
+
+estado 32
+
+   42 declaracion: TIPO_DE_DATO declaraciones .
+
+    $default  reduce usando la regla 42 (declaracion)
+
+
+estado 33
+
+   45 declaraciones: declaracionDefinicionFuncion .
+
+    $default  reduce usando la regla 45 (declaraciones)
+
+
+estado 34
+
+   46 declaraciones: declaracionVariables . ';'
+
+    ';'  desplazar e ir al estado 71
+
+
+estado 35
+
+   49 declaracionVariables: listaVariables .
+
+    $default  reduce usando la regla 49 (declaracionVariables)
+
+
+estado 36
+
+   50 listaVariables: unaVariableSimple .
+   51               | unaVariableSimple . ',' listaVariables
+
+    ','  desplazar e ir al estado 72
+
+    $default  reduce usando la regla 50 (listaVariables)
+
+
+estado 37
+
+   48 declaracionDefinicionFuncion: error . parametrosCuerpoFuncion
+
+    '('  desplazar e ir al estado 65
+
+    parametrosCuerpoFuncion  ir al estado 67
+
+
+estado 38
+
+   47 declaracionDefinicionFuncion: IDENTIFICADOR . parametrosCuerpoFuncion
+
+    '('  desplazar e ir al estado 65
+
+    parametrosCuerpoFuncion  ir al estado 69
+
+
+estado 39
+
+   44 declaracion: VOID declaracionDefinicionFuncion .
+
+    $default  reduce usando la regla 44 (declaracion)
+
+
+estado 40
+
+   76 invocacionDeFuncion: IDENTIFICADOR error . listaArgumentos ')'
+
+    IDENTIFICADOR       desplazar e ir al estado 73
+    LITERAL_CADENA      desplazar e ir al estado 74
+    CONSTANTE_ENTERA    desplazar e ir al estado 75
+    CONSTANTE_REAL      desplazar e ir al estado 76
+    CONSTANTE_CARACTER  desplazar e ir al estado 77
+
+    $default  reduce usando la regla 80 (argumento)
+
+    listaArgumentos  ir al estado 78
+    argumento        ir al estado 79
+
+
+estado 41
+
+   75 invocacionDeFuncion: IDENTIFICADOR '(' . listaArgumentos ')'
+   77                    | IDENTIFICADOR '(' . listaArgumentos error
+
+    IDENTIFICADOR       desplazar e ir al estado 73
+    LITERAL_CADENA      desplazar e ir al estado 74
+    CONSTANTE_ENTERA    desplazar e ir al estado 75
+    CONSTANTE_REAL      desplazar e ir al estado 76
+    CONSTANTE_CARACTER  desplazar e ir al estado 77
+
+    $default  reduce usando la regla 80 (argumento)
+
+    listaArgumentos  ir al estado 80
+    argumento        ir al estado 79
+
+
+estado 42
+
+   30 sentenciaDeSeleccion: SWITCH error . expresion
+
+    IDENTIFICADOR     desplazar e ir al estado 44
+    CONSTANTE_ENTERA  desplazar e ir al estado 6
+    CONSTANTE_REAL    desplazar e ir al estado 7
+
+    expresion  ir al estado 81
+
+
+estado 43
+
+   29 sentenciaDeSeleccion: SWITCH '(' . expresion ')' sentencia
+   31                     | SWITCH '(' . expresion error sentencia
+
+    IDENTIFICADOR     desplazar e ir al estado 44
+    CONSTANTE_ENTERA  desplazar e ir al estado 6
+    CONSTANTE_REAL    desplazar e ir al estado 7
+
+    expresion  ir al estado 82
+
+
+estado 44
+
+   73 expresion: IDENTIFICADOR .
+
+    $default  reduce usando la regla 73 (expresion)
+
+
+estado 45
+
+   35 sentenciaDeIteracion: DO sentencia . WHILE '(' expresion ')' ';'
+
+    WHILE  desplazar e ir al estado 83
+
+
+estado 46
+
+   15 opExpresion: expresion .
+   74 expresion: expresion . '+' expresion
+
+    '+'  desplazar e ir al estado 63
+
+    $default  reduce usando la regla 15 (opExpresion)
+
+
+estado 47
+
+   33 sentenciaDeIteracion: WHILE error . expresion
+
+    IDENTIFICADOR     desplazar e ir al estado 44
+    CONSTANTE_ENTERA  desplazar e ir al estado 6
+    CONSTANTE_REAL    desplazar e ir al estado 7
+
+    expresion  ir al estado 84
+
+
+estado 48
+
+   32 sentenciaDeIteracion: WHILE '(' . expresion ')' sentencia
+   34                     | WHILE '(' . expresion error sentencia
+
+    IDENTIFICADOR     desplazar e ir al estado 44
+    CONSTANTE_ENTERA  desplazar e ir al estado 6
+    CONSTANTE_REAL    desplazar e ir al estado 7
+
+    expresion  ir al estado 85
+
+
+estado 49
+
+   27 sentenciaDeSeleccion: IF error . expresion
+
+    IDENTIFICADOR     desplazar e ir al estado 44
+    CONSTANTE_ENTERA  desplazar e ir al estado 6
+    CONSTANTE_REAL    desplazar e ir al estado 7
+
+    expresion  ir al estado 86
+
+
+estado 50
+
+   25 sentenciaDeSeleccion: IF '(' . expresion ')' sentencia
+   26                     | IF '(' . expresion ')' sentencia ELSE sentencia
+   28                     | IF '(' . expresion error sentencia
+
+    IDENTIFICADOR     desplazar e ir al estado 44
+    CONSTANTE_ENTERA  desplazar e ir al estado 6
+    CONSTANTE_REAL    desplazar e ir al estado 7
+
+    expresion  ir al estado 87
+
+
+estado 51
+
+   37 sentenciaDeIteracion: FOR error . opExpresion
+
+    IDENTIFICADOR     desplazar e ir al estado 44
+    CONSTANTE_ENTERA  desplazar e ir al estado 6
+    CONSTANTE_REAL    desplazar e ir al estado 7
+
+    IDENTIFICADOR     [reduce usando la regla 14 (opExpresion)]
+    CONSTANTE_ENTERA  [reduce usando la regla 14 (opExpresion)]
+    CONSTANTE_REAL    [reduce usando la regla 14 (opExpresion)]
+    $default          reduce usando la regla 14 (opExpresion)
+
+    opExpresion  ir al estado 88
+    expresion    ir al estado 46
+
+
+estado 52
+
+   36 sentenciaDeIteracion: FOR '(' . opExpresion ';' opExpresion ';' opExpresion ')' sentencia
+   38                     | FOR '(' . opExpresion ';' opExpresion ';' opExpresion error sentencia
+
+    IDENTIFICADOR     desplazar e ir al estado 44
+    CONSTANTE_ENTERA  desplazar e ir al estado 6
+    CONSTANTE_REAL    desplazar e ir al estado 7
+
+    $default  reduce usando la regla 14 (opExpresion)
+
+    opExpresion  ir al estado 89
+    expresion    ir al estado 46
+
+
+estado 53
+
+   40 sentenciaDeSalto: BREAK ';' .
+
+    $default  reduce usando la regla 40 (sentenciaDeSalto)
+
+
+estado 54
+
+   39 sentenciaDeSalto: CONTINUE ';' .
+
+    $default  reduce usando la regla 39 (sentenciaDeSalto)
+
+
+estado 55
+
+   41 sentenciaDeSalto: RETURN opExpresion . ';'
+
+    ';'  desplazar e ir al estado 90
+
+
+estado 56
+
+   16 sentenciaCompuesta: '{' opListaDeclaraciones . opListaDeSentencias '}'
+
+    IDENTIFICADOR     desplazar e ir al estado 44
+    CONSTANTE_ENTERA  desplazar e ir al estado 6
+    CONSTANTE_REAL    desplazar e ir al estado 7
+    SWITCH            desplazar e ir al estado 8
+    DO                desplazar e ir al estado 9
+    WHILE             desplazar e ir al estado 10
+    IF                desplazar e ir al estado 11
+    FOR               desplazar e ir al estado 12
+    BREAK             desplazar e ir al estado 13
+    CONTINUE          desplazar e ir al estado 14
+    RETURN            desplazar e ir al estado 15
+    '{'               desplazar e ir al estado 17
+
+    '}'       reduce usando la regla 21 (opListaDeSentencias)
+    $default  reduce usando la regla 14 (opExpresion)
+
+    sentencia             ir al estado 91
+    sentenciaExpresion    ir al estado 20
+    opExpresion           ir al estado 21
+    sentenciaCompuesta    ir al estado 22
+    opListaDeSentencias   ir al estado 92
+    listaDeSentencias     ir al estado 93
+    sentenciaDeSeleccion  ir al estado 23
+    sentenciaDeIteracion  ir al estado 24
+    sentenciaDeSalto      ir al estado 25
+    expresion             ir al estado 46
+
+
+estado 57
+
+   18 opListaDeclaraciones: listaDeclaraciones .
+   20 listaDeclaraciones: listaDeclaraciones . declaracion
+
+    TIPO_DE_DATO  desplazar e ir al estado 3
+    VOID          desplazar e ir al estado 4
+
+    $default  reduce usando la regla 18 (opListaDeclaraciones)
+
+    declaracion  ir al estado 94
+
+
+estado 58
+
+   19 listaDeclaraciones: declaracion .
+
+    $default  reduce usando la regla 19 (listaDeclaraciones)
+
+
+estado 59
+
+    5 line: sentencia '\n' .
+
+    $default  reduce usando la regla 5 (line)
+
+
+estado 60
+
+   13 sentenciaExpresion: opExpresion ';' .
+
+    $default  reduce usando la regla 13 (sentenciaExpresion)
+
+
+estado 61
+
+    6 line: declaracion '\n' .
+
+    $default  reduce usando la regla 6 (line)
+
+
+estado 62
+
+    4 line: expresion '\n' .
+
+    $default  reduce usando la regla 4 (line)
+
+
+estado 63
+
+   74 expresion: expresion '+' . expresion
+
+    IDENTIFICADOR     desplazar e ir al estado 44
+    CONSTANTE_ENTERA  desplazar e ir al estado 6
+    CONSTANTE_REAL    desplazar e ir al estado 7
+
+    expresion  ir al estado 95
+
+
+estado 64
+
+    7 line: invocacionDeFuncion '\n' .
+
+    $default  reduce usando la regla 7 (line)
+
+
+estado 65
+
+   60 parametrosCuerpoFuncion: '(' . listaParametros ')' sentenciaCompuesta
+   61                        | '(' . listaParametros ')' ';'
+
+    error         desplazar e ir al estado 96
+    TIPO_DE_DATO  desplazar e ir al estado 97
+
+    ')'  reduce usando la regla 62 (listaParametros)
+
+    listaParametros  ir al estado 98
+    parametros       ir al estado 99
+
+
+estado 66
+
+   59 unaVariableSimple: error '=' .
+
+    $default  reduce usando la regla 59 (unaVariableSimple)
+
+
+estado 67
+
+   48 declaracionDefinicionFuncion: error parametrosCuerpoFuncion .
+
+    $default  reduce usando la regla 48 (declaracionDefinicionFuncion)
+
+
+estado 68
+
+   53 unaVariableSimple: IDENTIFICADOR '=' . IDENTIFICADOR
+   54                  | IDENTIFICADOR '=' . CONSTANTE_ENTERA
+   55                  | IDENTIFICADOR '=' . CONSTANTE_CARACTER
+   56                  | IDENTIFICADOR '=' . CONSTANTE_REAL
+   57                  | IDENTIFICADOR '=' . LITERAL_CADENA
+   58                  | IDENTIFICADOR '=' . error
+
+    error               desplazar e ir al estado 100
+    IDENTIFICADOR       desplazar e ir al estado 101
+    LITERAL_CADENA      desplazar e ir al estado 102
+    CONSTANTE_ENTERA    desplazar e ir al estado 103
+    CONSTANTE_REAL      desplazar e ir al estado 104
+    CONSTANTE_CARACTER  desplazar e ir al estado 105
+
+
+estado 69
+
+   47 declaracionDefinicionFuncion: IDENTIFICADOR parametrosCuerpoFuncion .
+
+    $default  reduce usando la regla 47 (declaracionDefinicionFuncion)
+
+
+estado 70
+
+   43 declaracion: TIPO_DE_DATO '*' declaraciones .
+
+    $default  reduce usando la regla 43 (declaracion)
+
+
+estado 71
+
+   46 declaraciones: declaracionVariables ';' .
+
+    $default  reduce usando la regla 46 (declaraciones)
+
+
+estado 72
+
+   51 listaVariables: unaVariableSimple ',' . listaVariables
+
+    error          desplazar e ir al estado 106
+    IDENTIFICADOR  desplazar e ir al estado 107
+
+    listaVariables     ir al estado 108
+    unaVariableSimple  ir al estado 36
+
+
+estado 73
+
+   81 argumento: IDENTIFICADOR .
+
+    $default  reduce usando la regla 81 (argumento)
+
+
+estado 74
+
+   82 argumento: LITERAL_CADENA .
+
+    $default  reduce usando la regla 82 (argumento)
+
+
+estado 75
+
+   83 argumento: CONSTANTE_ENTERA .
+
+    $default  reduce usando la regla 83 (argumento)
+
+
+estado 76
+
+   85 argumento: CONSTANTE_REAL .
+
+    $default  reduce usando la regla 85 (argumento)
+
+
+estado 77
+
+   84 argumento: CONSTANTE_CARACTER .
+
+    $default  reduce usando la regla 84 (argumento)
+
+
+estado 78
+
+   76 invocacionDeFuncion: IDENTIFICADOR error listaArgumentos . ')'
+
+    ')'  desplazar e ir al estado 109
+
+
+estado 79
+
+   78 listaArgumentos: argumento .
+   79                | argumento . ',' listaArgumentos
+
+    ','  desplazar e ir al estado 110
+
+    $default  reduce usando la regla 78 (listaArgumentos)
+
+
+estado 80
+
+   75 invocacionDeFuncion: IDENTIFICADOR '(' listaArgumentos . ')'
+   77                    | IDENTIFICADOR '(' listaArgumentos . error
+
+    error  desplazar e ir al estado 111
+    ')'    desplazar e ir al estado 112
+
+
+estado 81
+
+   30 sentenciaDeSeleccion: SWITCH error expresion .
+   74 expresion: expresion . '+' expresion
+
+    '+'  desplazar e ir al estado 63
+
+    $default  reduce usando la regla 30 (sentenciaDeSeleccion)
+
+
+estado 82
+
+   29 sentenciaDeSeleccion: SWITCH '(' expresion . ')' sentencia
+   31                     | SWITCH '(' expresion . error sentencia
+   74 expresion: expresion . '+' expresion
+
+    error  desplazar e ir al estado 113
+    ')'    desplazar e ir al estado 114
+    '+'    desplazar e ir al estado 63
+
+
+estado 83
+
+   35 sentenciaDeIteracion: DO sentencia WHILE . '(' expresion ')' ';'
+
+    '('  desplazar e ir al estado 115
+
+
+estado 84
+
+   33 sentenciaDeIteracion: WHILE error expresion .
+   74 expresion: expresion . '+' expresion
+
+    '+'  desplazar e ir al estado 63
+
+    $default  reduce usando la regla 33 (sentenciaDeIteracion)
+
+
+estado 85
+
+   32 sentenciaDeIteracion: WHILE '(' expresion . ')' sentencia
+   34                     | WHILE '(' expresion . error sentencia
+   74 expresion: expresion . '+' expresion
+
+    error  desplazar e ir al estado 116
+    ')'    desplazar e ir al estado 117
+    '+'    desplazar e ir al estado 63
+
+
+estado 86
+
+   27 sentenciaDeSeleccion: IF error expresion .
+   74 expresion: expresion . '+' expresion
+
+    '+'  desplazar e ir al estado 63
+
+    $default  reduce usando la regla 27 (sentenciaDeSeleccion)
+
+
+estado 87
+
+   25 sentenciaDeSeleccion: IF '(' expresion . ')' sentencia
+   26                     | IF '(' expresion . ')' sentencia ELSE sentencia
+   28                     | IF '(' expresion . error sentencia
+   74 expresion: expresion . '+' expresion
+
+    error  desplazar e ir al estado 118
+    ')'    desplazar e ir al estado 119
+    '+'    desplazar e ir al estado 63
+
+
+estado 88
+
+   37 sentenciaDeIteracion: FOR error opExpresion .
+
+    $default  reduce usando la regla 37 (sentenciaDeIteracion)
+
+
+estado 89
+
+   36 sentenciaDeIteracion: FOR '(' opExpresion . ';' opExpresion ';' opExpresion ')' sentencia
+   38                     | FOR '(' opExpresion . ';' opExpresion ';' opExpresion error sentencia
+
+    ';'  desplazar e ir al estado 120
+
+
+estado 90
+
+   41 sentenciaDeSalto: RETURN opExpresion ';' .
+
+    $default  reduce usando la regla 41 (sentenciaDeSalto)
+
+
+estado 91
+
+   23 listaDeSentencias: sentencia .
+
+    $default  reduce usando la regla 23 (listaDeSentencias)
+
+
+estado 92
+
+   16 sentenciaCompuesta: '{' opListaDeclaraciones opListaDeSentencias . '}'
+
+    '}'  desplazar e ir al estado 121
+
+
+estado 93
+
+   22 opListaDeSentencias: listaDeSentencias .
+   24 listaDeSentencias: listaDeSentencias . sentencia
+
+    IDENTIFICADOR     desplazar e ir al estado 44
+    CONSTANTE_ENTERA  desplazar e ir al estado 6
+    CONSTANTE_REAL    desplazar e ir al estado 7
+    SWITCH            desplazar e ir al estado 8
+    DO                desplazar e ir al estado 9
+    WHILE             desplazar e ir al estado 10
+    IF                desplazar e ir al estado 11
+    FOR               desplazar e ir al estado 12
+    BREAK             desplazar e ir al estado 13
+    CONTINUE          desplazar e ir al estado 14
+    RETURN            desplazar e ir al estado 15
+    '{'               desplazar e ir al estado 17
+
+    '}'       reduce usando la regla 22 (opListaDeSentencias)
+    $default  reduce usando la regla 14 (opExpresion)
+
+    sentencia             ir al estado 122
+    sentenciaExpresion    ir al estado 20
+    opExpresion           ir al estado 21
+    sentenciaCompuesta    ir al estado 22
+    sentenciaDeSeleccion  ir al estado 23
+    sentenciaDeIteracion  ir al estado 24
+    sentenciaDeSalto      ir al estado 25
+    expresion             ir al estado 46
+
+
+estado 94
+
+   20 listaDeclaraciones: listaDeclaraciones declaracion .
+
+    $default  reduce usando la regla 20 (listaDeclaraciones)
+
+
+estado 95
+
+   74 expresion: expresion . '+' expresion
+   74          | expresion '+' expresion .
+
+    '+'  desplazar e ir al estado 63
+
+    '+'       [reduce usando la regla 74 (expresion)]
+    $default  reduce usando la regla 74 (expresion)
+
+
+estado 96
+
+   67 parametros: error . IDENTIFICADOR
+   68           | error . '*' IDENTIFICADOR
+
+    IDENTIFICADOR  desplazar e ir al estado 123
+    '*'            desplazar e ir al estado 124
+
+
+estado 97
+
+   65 parametros: TIPO_DE_DATO . IDENTIFICADOR
+   66           | TIPO_DE_DATO . '*' IDENTIFICADOR
+   69           | TIPO_DE_DATO . error
+   70           | TIPO_DE_DATO . '*' error
+
+    error          desplazar e ir al estado 125
+    IDENTIFICADOR  desplazar e ir al estado 126
+    '*'            desplazar e ir al estado 127
+
+
+estado 98
+
+   60 parametrosCuerpoFuncion: '(' listaParametros . ')' sentenciaCompuesta
+   61                        | '(' listaParametros . ')' ';'
+
+    ')'  desplazar e ir al estado 128
+
+
+estado 99
+
+   63 listaParametros: parametros .
+   64                | parametros . ',' listaParametros
+
+    ','  desplazar e ir al estado 129
+
+    $default  reduce usando la regla 63 (listaParametros)
+
+
+estado 100
+
+   58 unaVariableSimple: IDENTIFICADOR '=' error .
+
+    $default  reduce usando la regla 58 (unaVariableSimple)
+
+
+estado 101
+
+   53 unaVariableSimple: IDENTIFICADOR '=' IDENTIFICADOR .
+
+    $default  reduce usando la regla 53 (unaVariableSimple)
+
+
+estado 102
+
+   57 unaVariableSimple: IDENTIFICADOR '=' LITERAL_CADENA .
+
+    $default  reduce usando la regla 57 (unaVariableSimple)
+
+
+estado 103
+
+   54 unaVariableSimple: IDENTIFICADOR '=' CONSTANTE_ENTERA .
+
+    $default  reduce usando la regla 54 (unaVariableSimple)
+
+
+estado 104
+
+   56 unaVariableSimple: IDENTIFICADOR '=' CONSTANTE_REAL .
+
+    $default  reduce usando la regla 56 (unaVariableSimple)
+
+
+estado 105
+
+   55 unaVariableSimple: IDENTIFICADOR '=' CONSTANTE_CARACTER .
+
+    $default  reduce usando la regla 55 (unaVariableSimple)
+
+
+estado 106
+
+   59 unaVariableSimple: error . '='
+
+    '='  desplazar e ir al estado 66
+
+
+estado 107
+
+   52 unaVariableSimple: IDENTIFICADOR .
+   53                  | IDENTIFICADOR . '=' IDENTIFICADOR
+   54                  | IDENTIFICADOR . '=' CONSTANTE_ENTERA
+   55                  | IDENTIFICADOR . '=' CONSTANTE_CARACTER
+   56                  | IDENTIFICADOR . '=' CONSTANTE_REAL
+   57                  | IDENTIFICADOR . '=' LITERAL_CADENA
+   58                  | IDENTIFICADOR . '=' error
+
+    '='  desplazar e ir al estado 68
+
+    $default  reduce usando la regla 52 (unaVariableSimple)
+
+
+estado 108
+
+   51 listaVariables: unaVariableSimple ',' listaVariables .
+
+    $default  reduce usando la regla 51 (listaVariables)
+
+
+estado 109
+
+   76 invocacionDeFuncion: IDENTIFICADOR error listaArgumentos ')' .
+
+    $default  reduce usando la regla 76 (invocacionDeFuncion)
+
+
+estado 110
+
+   79 listaArgumentos: argumento ',' . listaArgumentos
+
+    IDENTIFICADOR       desplazar e ir al estado 73
+    LITERAL_CADENA      desplazar e ir al estado 74
+    CONSTANTE_ENTERA    desplazar e ir al estado 75
+    CONSTANTE_REAL      desplazar e ir al estado 76
+    CONSTANTE_CARACTER  desplazar e ir al estado 77
+
+    $default  reduce usando la regla 80 (argumento)
+
+    listaArgumentos  ir al estado 130
+    argumento        ir al estado 79
+
+
+estado 111
+
+   77 invocacionDeFuncion: IDENTIFICADOR '(' listaArgumentos error .
+
+    $default  reduce usando la regla 77 (invocacionDeFuncion)
+
+
+estado 112
+
+   75 invocacionDeFuncion: IDENTIFICADOR '(' listaArgumentos ')' .
+
+    $default  reduce usando la regla 75 (invocacionDeFuncion)
+
+
+estado 113
+
+   31 sentenciaDeSeleccion: SWITCH '(' expresion error . sentencia
+
+    IDENTIFICADOR     desplazar e ir al estado 44
+    CONSTANTE_ENTERA  desplazar e ir al estado 6
+    CONSTANTE_REAL    desplazar e ir al estado 7
+    SWITCH            desplazar e ir al estado 8
+    DO                desplazar e ir al estado 9
+    WHILE             desplazar e ir al estado 10
+    IF                desplazar e ir al estado 11
+    FOR               desplazar e ir al estado 12
+    BREAK             desplazar e ir al estado 13
+    CONTINUE          desplazar e ir al estado 14
+    RETURN            desplazar e ir al estado 15
+    '{'               desplazar e ir al estado 17
+
+    $default  reduce usando la regla 14 (opExpresion)
+
+    sentencia             ir al estado 131
+    sentenciaExpresion    ir al estado 20
+    opExpresion           ir al estado 21
+    sentenciaCompuesta    ir al estado 22
+    sentenciaDeSeleccion  ir al estado 23
+    sentenciaDeIteracion  ir al estado 24
+    sentenciaDeSalto      ir al estado 25
+    expresion             ir al estado 46
+
+
+estado 114
+
+   29 sentenciaDeSeleccion: SWITCH '(' expresion ')' . sentencia
+
+    IDENTIFICADOR     desplazar e ir al estado 44
+    CONSTANTE_ENTERA  desplazar e ir al estado 6
+    CONSTANTE_REAL    desplazar e ir al estado 7
+    SWITCH            desplazar e ir al estado 8
+    DO                desplazar e ir al estado 9
+    WHILE             desplazar e ir al estado 10
+    IF                desplazar e ir al estado 11
+    FOR               desplazar e ir al estado 12
+    BREAK             desplazar e ir al estado 13
+    CONTINUE          desplazar e ir al estado 14
+    RETURN            desplazar e ir al estado 15
+    '{'               desplazar e ir al estado 17
+
+    $default  reduce usando la regla 14 (opExpresion)
+
+    sentencia             ir al estado 132
+    sentenciaExpresion    ir al estado 20
+    opExpresion           ir al estado 21
+    sentenciaCompuesta    ir al estado 22
+    sentenciaDeSeleccion  ir al estado 23
+    sentenciaDeIteracion  ir al estado 24
+    sentenciaDeSalto      ir al estado 25
+    expresion             ir al estado 46
+
+
+estado 115
+
+   35 sentenciaDeIteracion: DO sentencia WHILE '(' . expresion ')' ';'
+
+    IDENTIFICADOR     desplazar e ir al estado 44
+    CONSTANTE_ENTERA  desplazar e ir al estado 6
+    CONSTANTE_REAL    desplazar e ir al estado 7
+
+    expresion  ir al estado 133
+
+
+estado 116
+
+   34 sentenciaDeIteracion: WHILE '(' expresion error . sentencia
+
+    IDENTIFICADOR     desplazar e ir al estado 44
+    CONSTANTE_ENTERA  desplazar e ir al estado 6
+    CONSTANTE_REAL    desplazar e ir al estado 7
+    SWITCH            desplazar e ir al estado 8
+    DO                desplazar e ir al estado 9
+    WHILE             desplazar e ir al estado 10
+    IF                desplazar e ir al estado 11
+    FOR               desplazar e ir al estado 12
+    BREAK             desplazar e ir al estado 13
+    CONTINUE          desplazar e ir al estado 14
+    RETURN            desplazar e ir al estado 15
+    '{'               desplazar e ir al estado 17
+
+    $default  reduce usando la regla 14 (opExpresion)
+
+    sentencia             ir al estado 134
+    sentenciaExpresion    ir al estado 20
+    opExpresion           ir al estado 21
+    sentenciaCompuesta    ir al estado 22
+    sentenciaDeSeleccion  ir al estado 23
+    sentenciaDeIteracion  ir al estado 24
+    sentenciaDeSalto      ir al estado 25
+    expresion             ir al estado 46
+
+
+estado 117
+
+   32 sentenciaDeIteracion: WHILE '(' expresion ')' . sentencia
+
+    IDENTIFICADOR     desplazar e ir al estado 44
+    CONSTANTE_ENTERA  desplazar e ir al estado 6
+    CONSTANTE_REAL    desplazar e ir al estado 7
+    SWITCH            desplazar e ir al estado 8
+    DO                desplazar e ir al estado 9
+    WHILE             desplazar e ir al estado 10
+    IF                desplazar e ir al estado 11
+    FOR               desplazar e ir al estado 12
+    BREAK             desplazar e ir al estado 13
+    CONTINUE          desplazar e ir al estado 14
+    RETURN            desplazar e ir al estado 15
+    '{'               desplazar e ir al estado 17
+
+    $default  reduce usando la regla 14 (opExpresion)
+
+    sentencia             ir al estado 135
+    sentenciaExpresion    ir al estado 20
+    opExpresion           ir al estado 21
+    sentenciaCompuesta    ir al estado 22
+    sentenciaDeSeleccion  ir al estado 23
+    sentenciaDeIteracion  ir al estado 24
+    sentenciaDeSalto      ir al estado 25
+    expresion             ir al estado 46
+
+
+estado 118
+
+   28 sentenciaDeSeleccion: IF '(' expresion error . sentencia
+
+    IDENTIFICADOR     desplazar e ir al estado 44
+    CONSTANTE_ENTERA  desplazar e ir al estado 6
+    CONSTANTE_REAL    desplazar e ir al estado 7
+    SWITCH            desplazar e ir al estado 8
+    DO                desplazar e ir al estado 9
+    WHILE             desplazar e ir al estado 10
+    IF                desplazar e ir al estado 11
+    FOR               desplazar e ir al estado 12
+    BREAK             desplazar e ir al estado 13
+    CONTINUE          desplazar e ir al estado 14
+    RETURN            desplazar e ir al estado 15
+    '{'               desplazar e ir al estado 17
+
+    $default  reduce usando la regla 14 (opExpresion)
+
+    sentencia             ir al estado 136
+    sentenciaExpresion    ir al estado 20
+    opExpresion           ir al estado 21
+    sentenciaCompuesta    ir al estado 22
+    sentenciaDeSeleccion  ir al estado 23
+    sentenciaDeIteracion  ir al estado 24
+    sentenciaDeSalto      ir al estado 25
+    expresion             ir al estado 46
+
+
+estado 119
+
+   25 sentenciaDeSeleccion: IF '(' expresion ')' . sentencia
+   26                     | IF '(' expresion ')' . sentencia ELSE sentencia
+
+    IDENTIFICADOR     desplazar e ir al estado 44
+    CONSTANTE_ENTERA  desplazar e ir al estado 6
+    CONSTANTE_REAL    desplazar e ir al estado 7
+    SWITCH            desplazar e ir al estado 8
+    DO                desplazar e ir al estado 9
+    WHILE             desplazar e ir al estado 10
+    IF                desplazar e ir al estado 11
+    FOR               desplazar e ir al estado 12
+    BREAK             desplazar e ir al estado 13
+    CONTINUE          desplazar e ir al estado 14
+    RETURN            desplazar e ir al estado 15
+    '{'               desplazar e ir al estado 17
+
+    $default  reduce usando la regla 14 (opExpresion)
+
+    sentencia             ir al estado 137
+    sentenciaExpresion    ir al estado 20
+    opExpresion           ir al estado 21
+    sentenciaCompuesta    ir al estado 22
+    sentenciaDeSeleccion  ir al estado 23
+    sentenciaDeIteracion  ir al estado 24
+    sentenciaDeSalto      ir al estado 25
+    expresion             ir al estado 46
+
+
+estado 120
+
+   36 sentenciaDeIteracion: FOR '(' opExpresion ';' . opExpresion ';' opExpresion ')' sentencia
+   38                     | FOR '(' opExpresion ';' . opExpresion ';' opExpresion error sentencia
+
+    IDENTIFICADOR     desplazar e ir al estado 44
+    CONSTANTE_ENTERA  desplazar e ir al estado 6
+    CONSTANTE_REAL    desplazar e ir al estado 7
+
+    $default  reduce usando la regla 14 (opExpresion)
+
+    opExpresion  ir al estado 138
+    expresion    ir al estado 46
+
+
+estado 121
+
+   16 sentenciaCompuesta: '{' opListaDeclaraciones opListaDeSentencias '}' .
+
+    $default  reduce usando la regla 16 (sentenciaCompuesta)
+
+
+estado 122
+
+   24 listaDeSentencias: listaDeSentencias sentencia .
+
+    $default  reduce usando la regla 24 (listaDeSentencias)
+
+
+estado 123
+
+   67 parametros: error IDENTIFICADOR .
+
+    $default  reduce usando la regla 67 (parametros)
+
+
+estado 124
+
+   68 parametros: error '*' . IDENTIFICADOR
+
+    IDENTIFICADOR  desplazar e ir al estado 139
+
+
+estado 125
+
+   69 parametros: TIPO_DE_DATO error .
+
+    $default  reduce usando la regla 69 (parametros)
+
+
+estado 126
+
+   65 parametros: TIPO_DE_DATO IDENTIFICADOR .
+
+    $default  reduce usando la regla 65 (parametros)
+
+
+estado 127
+
+   66 parametros: TIPO_DE_DATO '*' . IDENTIFICADOR
+   70           | TIPO_DE_DATO '*' . error
+
+    error          desplazar e ir al estado 140
+    IDENTIFICADOR  desplazar e ir al estado 141
+
+
+estado 128
+
+   60 parametrosCuerpoFuncion: '(' listaParametros ')' . sentenciaCompuesta
+   61                        | '(' listaParametros ')' . ';'
+
+    ';'  desplazar e ir al estado 142
+    '{'  desplazar e ir al estado 17
+
+    sentenciaCompuesta  ir al estado 143
+
+
+estado 129
+
+   64 listaParametros: parametros ',' . listaParametros
+
+    error         desplazar e ir al estado 96
+    TIPO_DE_DATO  desplazar e ir al estado 97
+
+    ')'  reduce usando la regla 62 (listaParametros)
+
+    listaParametros  ir al estado 144
+    parametros       ir al estado 99
+
+
+estado 130
+
+   79 listaArgumentos: argumento ',' listaArgumentos .
+
+    $default  reduce usando la regla 79 (listaArgumentos)
+
+
+estado 131
+
+   31 sentenciaDeSeleccion: SWITCH '(' expresion error sentencia .
+
+    $default  reduce usando la regla 31 (sentenciaDeSeleccion)
+
+
+estado 132
+
+   29 sentenciaDeSeleccion: SWITCH '(' expresion ')' sentencia .
+
+    $default  reduce usando la regla 29 (sentenciaDeSeleccion)
+
+
+estado 133
+
+   35 sentenciaDeIteracion: DO sentencia WHILE '(' expresion . ')' ';'
+   74 expresion: expresion . '+' expresion
+
+    ')'  desplazar e ir al estado 145
+    '+'  desplazar e ir al estado 63
+
+
+estado 134
+
+   34 sentenciaDeIteracion: WHILE '(' expresion error sentencia .
+
+    $default  reduce usando la regla 34 (sentenciaDeIteracion)
+
+
+estado 135
+
+   32 sentenciaDeIteracion: WHILE '(' expresion ')' sentencia .
+
+    $default  reduce usando la regla 32 (sentenciaDeIteracion)
+
+
+estado 136
+
+   28 sentenciaDeSeleccion: IF '(' expresion error sentencia .
+
+    $default  reduce usando la regla 28 (sentenciaDeSeleccion)
+
+
+estado 137
+
+   25 sentenciaDeSeleccion: IF '(' expresion ')' sentencia .
+   26                     | IF '(' expresion ')' sentencia . ELSE sentencia
+
+    ELSE  desplazar e ir al estado 146
+
+    ELSE      [reduce usando la regla 25 (sentenciaDeSeleccion)]
+    $default  reduce usando la regla 25 (sentenciaDeSeleccion)
+
+
+estado 138
+
+   36 sentenciaDeIteracion: FOR '(' opExpresion ';' opExpresion . ';' opExpresion ')' sentencia
+   38                     | FOR '(' opExpresion ';' opExpresion . ';' opExpresion error sentencia
+
+    ';'  desplazar e ir al estado 147
+
+
+estado 139
+
+   68 parametros: error '*' IDENTIFICADOR .
+
+    $default  reduce usando la regla 68 (parametros)
+
+
+estado 140
+
+   70 parametros: TIPO_DE_DATO '*' error .
+
+    $default  reduce usando la regla 70 (parametros)
+
+
+estado 141
+
+   66 parametros: TIPO_DE_DATO '*' IDENTIFICADOR .
+
+    $default  reduce usando la regla 66 (parametros)
+
+
+estado 142
+
+   61 parametrosCuerpoFuncion: '(' listaParametros ')' ';' .
+
+    $default  reduce usando la regla 61 (parametrosCuerpoFuncion)
+
+
+estado 143
+
+   60 parametrosCuerpoFuncion: '(' listaParametros ')' sentenciaCompuesta .
+
+    $default  reduce usando la regla 60 (parametrosCuerpoFuncion)
+
+
+estado 144
+
+   64 listaParametros: parametros ',' listaParametros .
+
+    $default  reduce usando la regla 64 (listaParametros)
+
+
+estado 145
+
+   35 sentenciaDeIteracion: DO sentencia WHILE '(' expresion ')' . ';'
+
+    ';'  desplazar e ir al estado 148
+
+
+estado 146
+
+   26 sentenciaDeSeleccion: IF '(' expresion ')' sentencia ELSE . sentencia
+
+    IDENTIFICADOR     desplazar e ir al estado 44
+    CONSTANTE_ENTERA  desplazar e ir al estado 6
+    CONSTANTE_REAL    desplazar e ir al estado 7
+    SWITCH            desplazar e ir al estado 8
+    DO                desplazar e ir al estado 9
+    WHILE             desplazar e ir al estado 10
+    IF                desplazar e ir al estado 11
+    FOR               desplazar e ir al estado 12
+    BREAK             desplazar e ir al estado 13
+    CONTINUE          desplazar e ir al estado 14
+    RETURN            desplazar e ir al estado 15
+    '{'               desplazar e ir al estado 17
+
+    $default  reduce usando la regla 14 (opExpresion)
+
+    sentencia             ir al estado 149
+    sentenciaExpresion    ir al estado 20
+    opExpresion           ir al estado 21
+    sentenciaCompuesta    ir al estado 22
+    sentenciaDeSeleccion  ir al estado 23
+    sentenciaDeIteracion  ir al estado 24
+    sentenciaDeSalto      ir al estado 25
+    expresion             ir al estado 46
+
+
+estado 147
+
+   36 sentenciaDeIteracion: FOR '(' opExpresion ';' opExpresion ';' . opExpresion ')' sentencia
+   38                     | FOR '(' opExpresion ';' opExpresion ';' . opExpresion error sentencia
+
+    IDENTIFICADOR     desplazar e ir al estado 44
+    CONSTANTE_ENTERA  desplazar e ir al estado 6
+    CONSTANTE_REAL    desplazar e ir al estado 7
+
+    $default  reduce usando la regla 14 (opExpresion)
+
+    opExpresion  ir al estado 150
+    expresion    ir al estado 46
+
+
+estado 148
+
+   35 sentenciaDeIteracion: DO sentencia WHILE '(' expresion ')' ';' .
+
+    $default  reduce usando la regla 35 (sentenciaDeIteracion)
+
+
+estado 149
+
+   26 sentenciaDeSeleccion: IF '(' expresion ')' sentencia ELSE sentencia .
+
+    $default  reduce usando la regla 26 (sentenciaDeSeleccion)
+
+
+estado 150
+
+   36 sentenciaDeIteracion: FOR '(' opExpresion ';' opExpresion ';' opExpresion . ')' sentencia
+   38                     | FOR '(' opExpresion ';' opExpresion ';' opExpresion . error sentencia
+
+    error  desplazar e ir al estado 151
+    ')'    desplazar e ir al estado 152
+
+
+estado 151
+
+   38 sentenciaDeIteracion: FOR '(' opExpresion ';' opExpresion ';' opExpresion error . sentencia
+
+    IDENTIFICADOR     desplazar e ir al estado 44
+    CONSTANTE_ENTERA  desplazar e ir al estado 6
+    CONSTANTE_REAL    desplazar e ir al estado 7
+    SWITCH            desplazar e ir al estado 8
+    DO                desplazar e ir al estado 9
+    WHILE             desplazar e ir al estado 10
+    IF                desplazar e ir al estado 11
+    FOR               desplazar e ir al estado 12
+    BREAK             desplazar e ir al estado 13
+    CONTINUE          desplazar e ir al estado 14
+    RETURN            desplazar e ir al estado 15
+    '{'               desplazar e ir al estado 17
+
+    $default  reduce usando la regla 14 (opExpresion)
+
+    sentencia             ir al estado 153
+    sentenciaExpresion    ir al estado 20
+    opExpresion           ir al estado 21
+    sentenciaCompuesta    ir al estado 22
+    sentenciaDeSeleccion  ir al estado 23
+    sentenciaDeIteracion  ir al estado 24
+    sentenciaDeSalto      ir al estado 25
+    expresion             ir al estado 46
+
+
+estado 152
+
+   36 sentenciaDeIteracion: FOR '(' opExpresion ';' opExpresion ';' opExpresion ')' . sentencia
+
+    IDENTIFICADOR     desplazar e ir al estado 44
+    CONSTANTE_ENTERA  desplazar e ir al estado 6
+    CONSTANTE_REAL    desplazar e ir al estado 7
+    SWITCH            desplazar e ir al estado 8
+    DO                desplazar e ir al estado 9
+    WHILE             desplazar e ir al estado 10
+    IF                desplazar e ir al estado 11
+    FOR               desplazar e ir al estado 12
+    BREAK             desplazar e ir al estado 13
+    CONTINUE          desplazar e ir al estado 14
+    RETURN            desplazar e ir al estado 15
+    '{'               desplazar e ir al estado 17
+
+    $default  reduce usando la regla 14 (opExpresion)
+
+    sentencia             ir al estado 154
+    sentenciaExpresion    ir al estado 20
+    opExpresion           ir al estado 21
+    sentenciaCompuesta    ir al estado 22
+    sentenciaDeSeleccion  ir al estado 23
+    sentenciaDeIteracion  ir al estado 24
+    sentenciaDeSalto      ir al estado 25
+    expresion             ir al estado 46
+
+
+estado 153
+
+   38 sentenciaDeIteracion: FOR '(' opExpresion ';' opExpresion ';' opExpresion error sentencia .
+
+    $default  reduce usando la regla 38 (sentenciaDeIteracion)
+
+
+estado 154
+
+   36 sentenciaDeIteracion: FOR '(' opExpresion ';' opExpresion ';' opExpresion ')' sentencia .
+
+    $default  reduce usando la regla 36 (sentenciaDeIteracion)
