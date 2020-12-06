@@ -8,6 +8,11 @@
 %}
 
 %%
+"\n"    {return '\n';}
+
+" "|"\t"
+
+"("|")"|"["|"]"|","|"?"|":"|";"|"{"|"}"|"&"|"*"|"=" {return yytext[0];}
 
 "if" {return IF;}
 
@@ -27,17 +32,13 @@
 
 "return" {return RETURN;}
 
-"("|")"|"["|"]"|","|"?"|":"|";"|"{"|"}"|"&"|"*"|"=" {return yytext[0];}
+"int"|"double"|"float"|"char"|"void" {printf("encontre un tipodedato \n");strcpy(yylval.cadena, yytext); return TIPO_DE_DATO;}
 
-"\n"    {return '\n';}
-
-"int"|"double"|"float"|"char"|"void" {strcpy(yylval.cadena, yytext); return TIPO_DE_DATO;}
-
-[a-zA-Z_][a-zA-Z0-9_]* {strcpy(yylval.cadena, yytext); return IDENTIFICADOR;}
+[a-zA-Z_][a-zA-Z0-9_]* {printf("Encontre un identificador /n"); strcpy(yylval.cadena, yytext); return IDENTIFICADOR;}
 
 \"[^\"]*\" {strcpy(yylval.cadena, yytext); return LITERAL_CADENA;}
 
-[1-9][0-9]* {yylval.mystruct.valor_entero=atoi(yytext); yylval.mystruct.tipo=1;yylval.entero = atoi(yytext); return CONSTANTE_ENTERA;}
+[1-9][0-9]* {printf("encontre un entero"); yylval.mystruct.valor_entero=atoi(yytext); yylval.mystruct.tipo=1;yylval.entero = atoi(yytext); return CONSTANTE_ENTERA;}
 
 0[0-7]* {yylval.mystruct.valor_entero=atoi(yytext); yylval.mystruct.tipo=1; yylval.entero = atoi(yytext); return CONSTANTE_ENTERA;}
 

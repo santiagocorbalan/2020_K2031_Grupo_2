@@ -57,7 +57,7 @@ char *concatenar(char *a, char *b);
 // ---------------- Funciones ----------------- //
 
 void agregarError(char* cadenaError){  
-     
+    printf("agregarError pase por aca \n");
     Errores *nuevo_nodo = (Errores *)malloc(sizeof(Errores));
     nuevo_nodo->cadenaDeErrores = (char *) malloc (strlen (cadenaError) + 1);
     strcpy (nuevo_nodo->cadenaDeErrores,cadenaError);
@@ -66,7 +66,7 @@ void agregarError(char* cadenaError){
     if (listaErrores == NULL) {
         listaErrores  = nuevo_nodo;
     } else {
-        Errores *aux;
+        Errores *aux = NULL;
         aux = listaErrores ;
 
         while(aux->sig != NULL){
@@ -76,8 +76,8 @@ void agregarError(char* cadenaError){
     }
 }
 
-void agregoSimbolo(char* name , char* type, int nuevaVariableOfuncion){
-    
+void agregoSimbolo(char* name , char* type, int nuevaVariableOfuncion) {
+    printf("agregoSimbolo pase por aca \n");
     Tabla *nuevo_nodo = (Tabla *)malloc(sizeof(Tabla));
     nuevo_nodo->nombre = (char *) malloc (strlen (name) + 1);
     strcpy (nuevo_nodo->nombre,name);
@@ -94,7 +94,7 @@ void agregoSimbolo(char* name , char* type, int nuevaVariableOfuncion){
     }
 
     else {
-        Tabla *aux;
+        Tabla *aux = NULL;
         aux = listaSimbolos ;
 
         while(aux->sig != NULL){
@@ -102,30 +102,34 @@ void agregoSimbolo(char* name , char* type, int nuevaVariableOfuncion){
         }
         aux->sig = nuevo_nodo;
     }
-  
 }
 
 Tabla *agregoSimbolo2 (char  *sym_name,char  *sym_name2, int nuevaVariableOfuncion2) {
-  Tabla *ptr = (Tabla *) malloc (sizeof(Tabla));
-  ptr->nombre = (char *) malloc (strlen(sym_name) + 1);
-  strcpy (ptr->nombre,sym_name);
-  ptr->tipo = (char *) malloc (strlen(sym_name2) + 1);
-  strcpy(ptr->tipo,sym_name2);
-  ptr->variableOfuncion = nuevaVariableOfuncion2;
-  ptr->sig = (struct tabla *)listaSimbolos;
-  listaSimbolos = ptr;
-  return ptr;
+    printf("agregoSimbolo2 pase por aca \n");
+    Tabla *ptr = (Tabla *) malloc (sizeof(Tabla));
+    ptr->nombre = (char *) malloc (strlen(sym_name) + 1);
+    strcpy (ptr->nombre,sym_name);
+    ptr->tipo = (char *) malloc (strlen(sym_name2) + 1);
+    strcpy(ptr->tipo,sym_name2);
+    ptr->variableOfuncion = nuevaVariableOfuncion2;
+    ptr->sig = (struct tabla *)listaSimbolos;
+    listaSimbolos = ptr;
+    return ptr;
 }
 
 Tabla *buscarSimbolo(char *name) {
-    Tabla *ptr;
+    printf("buscarSimbolo pase por acá \n");
+    Tabla *ptr = NULL;
+    printf("me estoy por romper \n");
     for (ptr = listaSimbolos; ptr != (Tabla *) 0; ptr = (Tabla *)ptr->sig)
+        printf("Buscando simbolo \n"); 
         if (strcmp(ptr->nombre, name) == 0)
             return ptr;
-        return 0;
+        return NULL;
 }
 
 void agregoParametro(char* tipoArgumento){
+    printf("agregoParametro Pase por acá \n");
     Parametro *nuevo_nodo = (Parametro *)malloc(sizeof(Parametro));
     nuevo_nodo->tipoParametro = (char *) malloc (strlen(tipoArgumento) + 1);
     strcpy (nuevo_nodo->tipoParametro, tipoArgumento);
@@ -134,7 +138,7 @@ void agregoParametro(char* tipoArgumento){
     if (listaParametrosAux == NULL){
         listaParametrosAux  = nuevo_nodo;
     } else {
-        Parametro *aux;
+        Parametro *aux = NULL;
         aux = listaParametrosAux;
 
         while (aux->sig != NULL) {
@@ -145,6 +149,7 @@ void agregoParametro(char* tipoArgumento){
 }
 
 int cantidadParametros(Parametro* listaAuxiliar) {
+    printf("cantidadParametros Pase por acá \n");
     Parametro* aux = listaAuxiliar;
     int cantidad = 0;
     while (aux != NULL) {
@@ -155,6 +160,7 @@ int cantidadParametros(Parametro* listaAuxiliar) {
 }
 
 int compararParametros(Parametro* lista1, Parametro* lista2) {
+    printf("compararParametros Pase por acá \n");
     int retorna = 0;    
     if (cantidadParametros(lista1) != cantidadParametros(lista2)) {
         retorna = 1;
@@ -173,7 +179,7 @@ int compararParametros(Parametro* lista1, Parametro* lista2) {
 }
 
 void agregoArgumento(char* tipoArgumento){
-    
+    printf("agregoArgumento Pase por acá \n");
     Parametro *nuevo_nodo = (Parametro *)malloc(sizeof(Parametro));
     nuevo_nodo->tipoParametro = (char *) malloc (strlen (tipoArgumento) + 1);
     strcpy (nuevo_nodo->tipoParametro,tipoArgumento);
@@ -182,7 +188,7 @@ void agregoArgumento(char* tipoArgumento){
     if(listaParametrosAux == NULL){
         listaParametrosAux  = nuevo_nodo;
     } else {
-        Parametro *aux;
+        Parametro *aux = NULL;
         aux = listaParametrosAux ;
 
         while(aux->sig != NULL){
@@ -193,9 +199,9 @@ void agregoArgumento(char* tipoArgumento){
 }
 
 void mostrarErrores( Errores*listaDeErrores){
-
+    printf("mostrarErrores Pase por acá \n");
     if(listaDeErrores == NULL) {
-        printf("No se encontro ningun Error\n");
+        printf("No se encontro ningun Error \n");
     }
 
     else {
@@ -207,6 +213,7 @@ void mostrarErrores( Errores*listaDeErrores){
 }
 
 char *concatenar(char *a, char *b) { 
+    printf("concatenar Pase por acá \n");
     int size = strlen(a) + strlen(b) + 1; 
     char *str = (char*) malloc(size); 
     strcpy (str, a); 
@@ -215,8 +222,9 @@ char *concatenar(char *a, char *b) {
 } 
 
 void mostrarParametros( Parametro*listaParametros){
-    if(listaParametros == NULL){
-        printf("Lista de Parametros Vacia\n");
+    printf("mostrarParametros Pase por acá \n");
+    if (listaParametros == NULL) {
+        printf("Lista de Parametros Vacia \n");
     } else {
         while (listaParametros != NULL) {
             printf("Tipo de parametro: %s\n" , listaParametros->tipoParametro);
@@ -226,9 +234,9 @@ void mostrarParametros( Parametro*listaParametros){
 }
 
 void mostrarSimbolos(Tabla* lista){
-
+    printf("mostrarSimbolos Pase por acá \n");
     if (lista == NULL){
-        printf("Tabla de Simbolos Vacia\n");
+        printf("Tabla de Simbolos Vacia \n");
     } else {
 
         while (lista != NULL) {

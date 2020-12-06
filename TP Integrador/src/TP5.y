@@ -18,18 +18,18 @@ void yyerror (char const *s) {          //Con yyerror se detecta el error sintá
    fprintf (stderr, "%s\n", s);
 } 
 
-char* tipo;
-Tabla *aux;
-Tabla *aux2;
-Tabla *listaSimbolos;
+char* tipo = NULL;
+Tabla *aux = NULL;
+Tabla *aux2 = NULL;
+//Tabla *listaSimbolos = NULL;
 
 %}
 
-%union{
+%union {
     int entero; 
     float real;
     char caracter;
-    char* cadena;
+    char cadena[100];
 
 struct yylval_struct
   {
@@ -72,7 +72,8 @@ line:   '\n'
         | expresion           '\n'                 
         | sentencia           '\n'                 
         | declaracion         '\n'  
-        | invocacionDeFuncion '\n'       
+        | invocacionDeFuncion '\n'
+        | error '\n'        
 ;
 
 sentencia:       sentenciaExpresion                                                       
@@ -85,23 +86,26 @@ sentencia:       sentenciaExpresion
 sentenciaExpresion:     opExpresion ';'                                  
 ;
 
-opExpresion:    /* vacio */                                                                        { printf("Se encontro una sentencia vacia\n"); }
-                | expresion                                                                        { printf("Se encontro una sentencia con una expresion\n"); }    
+opExpresion:    
+                /* vacio */                                                                        { printf("1 pase por aca \n"); printf("Se encontro una sentencia vacia\n"); }
+                | expresion                                                                        { printf("2 pase por aca \n"); printf("Se encontro una sentencia con una expresion\n"); }    
 ;
 
 sentenciaCompuesta:     '{' opListaDeclaraciones opListaDeSentencias '}'
 ;
 
-opListaDeclaraciones: /* vacio */                   
-                | listaDeclaraciones                                                               { printf("Se encontro una sentencia compuesta con una lista de declaraciones\n"); }
+opListaDeclaraciones: 
+                /* vacio */                   
+                | listaDeclaraciones                                                               { printf("3 pase por aca \n"); printf("Se encontro una sentencia compuesta con una lista de declaraciones\n"); }
 ;
 
-listaDeclaraciones: declaracion                           
+listaDeclaraciones: 
+                declaracion                           
                 | listaDeclaraciones declaracion  
 ;
 
 opListaDeSentencias:       /* vacio */
-                         | listaDeSentencias                                                      { printf("Se encontro una sentencia compuesta con una lista de sentencias\n"); }
+                         | listaDeSentencias                                                      { printf("4 pase por aca \n");printf("Se encontro una sentencia compuesta con una lista de sentencias\n"); }
 ;
 
 listaDeSentencias: sentencia
@@ -109,34 +113,34 @@ listaDeSentencias: sentencia
 
 ;
 
-sentenciaDeSeleccion:     IF '(' expresion ')' sentencia                                          { printf("Se encontro una sentencia IF\n"); } 
-                        | IF '(' expresion ')' sentencia ELSE sentencia                           { printf("Se encontro una sentencia IF y ELSE\n"); }   
-                        | IF error expresion                                                      { agregarError("Error Sintactico: Despues del IF se espera un '('\n"); }
-                        | IF '(' expresion error sentencia                                        { agregarError("Error Sintactico: falta ')' en la sentencia IF\n"); }
-                        | SWITCH '(' expresion ')' sentencia                                      { printf("Se encontro una sentencia SWITCH\n"); }   
-                        | SWITCH error expresion                                                  { agregarError("Error Sintactico: Despues del SWITCH se espera un '('\n"); }
-                        | SWITCH '(' expresion error sentencia                                    { agregarError("Error Sintactico: falta ')' en la sentencia SWITCH\n"); }                          
+sentenciaDeSeleccion:     IF '(' expresion ')' sentencia                                          { printf("5 pase por aca");printf("Se encontro una sentencia IF \n"); } 
+                        | IF '(' expresion ')' sentencia ELSE sentencia                           { printf("6 pase por aca");printf("Se encontro una sentencia IF y ELSE \n"); }   
+                        | IF error expresion                                                      { printf("7 pase por aca");agregarError("Error Sintactico: Despues del IF se espera un '('\n"); }
+                        | IF '(' expresion error sentencia                                        { printf("8 pase por aca");agregarError("Error Sintactico: falta ')' en la sentencia IF\n"); }
+                        | SWITCH '(' expresion ')' sentencia                                      { printf("9 pase por aca");printf("Se encontro una sentencia SWITCH \n"); }   
+                        | SWITCH error expresion                                                  { printf("10 pase por aca");agregarError("Error Sintactico: Despues del SWITCH se espera un '('\n"); }
+                        | SWITCH '(' expresion error sentencia                                    { printf("11 pase por aca");agregarError("Error Sintactico: falta ')' en la sentencia SWITCH\n"); }                          
 ;
  
-sentenciaDeIteracion:     WHILE '(' expresion ')' sentencia                                       { printf("Se encontro la sentencia WHILE\n"); }   
-                        | WHILE error expresion                                                   { agregarError("Error Sintactico: Despues del WHILE se espera un '('\n"); }
-                        | WHILE '(' expresion error sentencia                                     { agregarError("Error Sintactico: falta ')' en la sentencia WHILE\n"); }
-                        | DO sentencia WHILE '(' expresion ')' ';'                                { printf("Se encontro una sentencia DO\n"); }   
-                        | FOR '(' opExpresion ';' opExpresion ';' opExpresion ')' sentencia       { printf("Se encontro una sentencia FOR\n"); }  
-                        | FOR error opExpresion                                                   { agregarError("Error Sintactico: Despues del FOR se espera un '('\n"); }
-                        | FOR '(' opExpresion ';' opExpresion ';' opExpresion error sentencia     { agregarError("Error Sintactico: falta ')' en la sentencia FOR\n"); }
+sentenciaDeIteracion:     WHILE '(' expresion ')' sentencia                                       { printf("12 pase por aca");printf("Se encontro la sentencia WHILE\n"); }   
+                        | WHILE error expresion                                                   { printf("13 pase por aca");agregarError("Error Sintactico: Despues del WHILE se espera un '('\n"); }
+                        | WHILE '(' expresion error sentencia                                     { printf("14 pase por aca");agregarError("Error Sintactico: falta ')' en la sentencia WHILE\n"); }
+                        | DO sentencia WHILE '(' expresion ')' ';'                                { printf("15 pase por aca");printf("Se encontro una sentencia DO\n"); }   
+                        | FOR '(' opExpresion ';' opExpresion ';' opExpresion ')' sentencia       { printf("16 pase por aca");printf("Se encontro una sentencia FOR\n"); }  
+                        | FOR error opExpresion                                                   { printf("17 pase por aca");agregarError("Error Sintactico: Despues del FOR se espera un '('\n"); }
+                        | FOR '(' opExpresion ';' opExpresion ';' opExpresion error sentencia     { printf("18 pase por aca");agregarError("Error Sintactico: falta ')' en la sentencia FOR\n"); }
 ;
 
 
-sentenciaDeSalto:  CONTINUE ';'                                                                   { printf("Se encontro la sentencia CONTINUE\n"); }
-                  | BREAK ';'                                                                     { printf("Se encontro la sentencia BREAK\n"); }
-                  | RETURN opExpresion ';'                                                        { printf("Se encontro la sentencia RETURN\n"); }  
+sentenciaDeSalto:  CONTINUE ';'                                                                   { printf("19 pase por aca");printf("Se encontro la sentencia CONTINUE\n"); }
+                  | BREAK ';'                                                                     { printf("20 pase por aca");printf("Se encontro la sentencia BREAK\n"); }
+                  | RETURN opExpresion ';'                                                        { printf("21 pase por aca");printf("Se encontro la sentencia RETURN\n"); }  
 ;  
 
 declaracion:  
-               TIPO_DE_DATO declaraciones              { tipo = $<cadena>1;} 
-             | TIPO_DE_DATO '*' declaraciones          { tipo = concatenar($<cadena>1, "*");}                   
-             | VOID declaracionDefinicionFuncion       { tipo = "void";}   
+               TIPO_DE_DATO declaraciones              { printf("22 pase por aca \n");tipo = $<cadena>1;} 
+             | TIPO_DE_DATO '*' declaraciones          { printf("23 pase por aca \n");tipo = concatenar($<cadena>1, "*");}                   
+             | VOID declaracionDefinicionFuncion       { printf("24 pase por aca \n");tipo = "void";}   
 ;
 
 declaraciones:  declaracionDefinicionFuncion          
@@ -145,13 +149,15 @@ declaraciones:  declaracionDefinicionFuncion
 
 
 declaracionDefinicionFuncion: IDENTIFICADOR parametrosCuerpoFuncion { 
-                                                                        aux=buscarSimbolo($<cadena>1); 
+                                                                        printf("25 pase por aca \n");
+                                                                        aux = buscarSimbolo($<cadena>1); 
                                                                         if (aux) 
                                                                                 agregarError("Error Semantico : el identificador ya esta declarado");  
-                                                                        else 
+                                                                        else {
                                                                                 aux2 = agregoSimbolo2($<cadena>1 , tipo, 2);   
                                                                                 aux->tiposParametros = listaParametrosAux; 
                                                                                 listaParametrosAux = NULL; 
+                                                                        }
                                                                 }
                               | error parametrosCuerpoFuncion { agregarError("Error Sintactico : nombre de la funcion incorrecto"); }
 ;
@@ -165,6 +171,7 @@ listaVariables:   unaVariableSimple
 
 unaVariableSimple: IDENTIFICADOR 
                                 {
+                                        printf("26 pase por aca \n");
                                         aux=buscarSimbolo($<cadena>1); 
                                         if (aux) 
                                                 agregarError("Error Semantico: la variable ya esta declarada\n"); 
@@ -185,18 +192,19 @@ unaVariableSimple: IDENTIFICADOR
                                                                 aux->value.valString = NULL;
                                                         }
                                                         
-                                        }
-                                                                                                            
+                                        }                                                              
                                 }
 
                 | IDENTIFICADOR '=' IDENTIFICADOR         
                         {
+                                printf("27 pase por aca");
                                 aux=buscarSimbolo($<cadena>1); 
-                                if (aux) 
+                                if (aux) {
                                         agregarError("Error Semantico : la variable ya esta declarada\n"); 
+                                } 
                                 else 
                                 {
-                                        aux2=buscarSimbolo($<cadena>3); 
+                                        aux2 = buscarSimbolo($<cadena>3); 
                                         if(aux2 && (strcmp(tipo, aux2->tipo) == 0)) { 
                                                 aux = agregoSimbolo2($<cadena>1 , tipo, 1); 
 
@@ -223,19 +231,21 @@ unaVariableSimple: IDENTIFICADOR
                         }
                   
                 | IDENTIFICADOR '=' CONSTANTE_ENTERA    { 
-                                                                aux = buscarSimbolo($<cadena>1); 
-                                                                if (aux) 
-                                                                        agregarError("Error Semantico : la variable ya esta declarada "); 
-                                                                        else {
+                                                        printf("28 pase por aca");
+                                                                //aux = buscarSimbolo($<cadena>1); 
+                                                                //if (aux) 
+                                                                //        agregarError("Error Semantico : la variable ya esta declarada "); 
+                                                                //else {
                                                                                 if(strcmp(tipo,"int") == 0){ 
                                                                                         aux = agregoSimbolo2($<cadena>1 , tipo, 1);  
                                                                                         aux->value.valEnt = $<mystruct>3.valor_entero;}
                                                                                 else
                                                                                         agregarError("Error Semantico : son de distinto tipo"); 
-                                                                        }
+                                                                 //       }
                                                         }
 
                 | IDENTIFICADOR '=' CONSTANTE_CARACTER  {
+                                                                printf("29 pase por aca");
                                                                 aux=buscarSimbolo($<cadena>1); 
                                                                 if (aux) 
                                                                         agregarError("Error Semantico : la variable ya esta declarada "); 
@@ -250,6 +260,7 @@ unaVariableSimple: IDENTIFICADOR
                                                         }
                      
                 | IDENTIFICADOR '=' CONSTANTE_REAL     { 
+                        printf("30 pase por aca");       
                                                                 aux=buscarSimbolo($<cadena>1); 
                                                                 if (aux) 
                                                                         agregarError("Error Semantico : la variable ya esta declarada "); 
@@ -262,6 +273,7 @@ unaVariableSimple: IDENTIFICADOR
                                                         }
 
                 | IDENTIFICADOR '=' LITERAL_CADENA      {
+                        printf("31 pase por aca");
                                                                 aux=buscarSimbolo($<cadena>1); 
                                                                 if (aux) 
                                                                         agregarError("Error Semantico : la variable ya esta declarada "); 
@@ -283,14 +295,14 @@ parametrosCuerpoFuncion: '(' listaParametros ')' sentenciaCompuesta
                         | '(' listaParametros ')' ';'                    
 ;
 
-listaParametros: /* vacio */  {agregoParametro("void");} 
+listaParametros: /* vacio */  { printf("31 pase por aca");agregoParametro("void"); } 
                 | parametros
                 | parametros ',' listaParametros 
 ;
 
 parametros:     
-                TIPO_DE_DATO IDENTIFICADOR              { agregoParametro($<cadena>1); } 
-                | TIPO_DE_DATO '*' IDENTIFICADOR        { agregoParametro(concatenar($<cadena>1, "*")); } 
+                TIPO_DE_DATO IDENTIFICADOR              { printf("33 pase por aca");agregoParametro($<cadena>1); } 
+                | TIPO_DE_DATO '*' IDENTIFICADOR        { printf("34 pase por aca");agregoParametro(concatenar($<cadena>1, "*")); } 
                 | error IDENTIFICADOR                   { agregarError("ERROR SINTACTICO : falta tipo de dato del parametro"); }
                 | error '*' IDENTIFICADOR               { agregarError("ERROR SINTACTICO : falta tipo de dato del puntero parametro"); }
                 | TIPO_DE_DATO error                    { agregarError("ERROR SINTACTICO : falta identificador en parametro"); }
@@ -298,9 +310,10 @@ parametros:
 ;
 
 expresion:      
-                CONSTANTE_ENTERA                        { $<mystruct>$.tipo = $<mystruct>1.tipo;  $<mystruct>$.valor_entero = $<mystruct>1.valor_entero;}
-                | CONSTANTE_REAL                        { $<mystruct>$.tipo = $<mystruct>1.tipo;  $<mystruct>$.valor_real = $<mystruct>1.valor_real;}
+                CONSTANTE_ENTERA                        { printf("constante entera exp pase por aca");$<mystruct>$.tipo = $<mystruct>1.tipo;  $<mystruct>$.valor_entero = $<mystruct>1.valor_entero;}
+                | CONSTANTE_REAL                        {printf("constante real exp pase por aca"); $<mystruct>$.tipo = $<mystruct>1.tipo;  $<mystruct>$.valor_real = $<mystruct>1.valor_real;}
                 | IDENTIFICADOR       { 
+                        printf("35 pase por aca");
                                         aux=buscarSimbolo($<cadena>1); 
                                         if (aux) {  
                                                 if (strcmp(aux->tipo, "int") == 0) {
@@ -320,6 +333,7 @@ expresion:
                                 }
 
 	        | expresion '+' expresion { 
+                        printf("36 pase por aca");
                                                 if($<mystruct>1.tipo == $<mystruct>3.tipo) { 
         
                                                         if ($<mystruct>1.tipo == 1) { 
@@ -341,6 +355,7 @@ expresion:
 ;
 
 invocacionDeFuncion:  IDENTIFICADOR '(' listaArgumentos ')'     {
+        printf("37 pase por aca");
                                                                 aux = buscarSimbolo($<cadena>1);   
                                                                 if (aux) { 
                                                                         if(aux -> variableOfuncion == 1){
@@ -361,7 +376,8 @@ listaArgumentos: argumento
                 | argumento ',' listaArgumentos      
 ;
 
-argumento: /* vacio */ {agregoArgumento("void");}
+argumento: /* vacio */ { printf("38 pase por aca");
+        agregoArgumento("void"); }
         | IDENTIFICADOR        {        
                                         aux=buscarSimbolo($<cadena>1);    
                                         if (aux) 
@@ -382,7 +398,7 @@ int main(){
         yyin = fopen("docDePrueba.c","r");
         printf("\n");
         yyparse();
-
+        printf("main pase por aca");
         mostrarSimbolos(listaSimbolos);
         mostrarErrores(listaErrores);
 }
