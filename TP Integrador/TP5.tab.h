@@ -1,24 +1,23 @@
-/* A Bison parser, made by GNU Bison 2.3.  */
+
+/* A Bison parser, made by GNU Bison 2.4.1.  */
 
 /* Skeleton interface for Bison's Yacc-like parsers in C
-
-   Copyright (C) 1984, 1989, 1990, 2000, 2001, 2002, 2003, 2004, 2005, 2006
+   
+      Copyright (C) 1984, 1989, 1990, 2000, 2001, 2002, 2003, 2004, 2005, 2006
    Free Software Foundation, Inc.
-
-   This program is free software; you can redistribute it and/or modify
+   
+   This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2, or (at your option)
-   any later version.
-
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+   
    This program is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
    GNU General Public License for more details.
-
+   
    You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software
-   Foundation, Inc., 51 Franklin Street, Fifth Floor,
-   Boston, MA 02110-1301, USA.  */
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
 
 /* As a special exception, you may create a larger work that contains
    part or all of the Bison parser skeleton and distribute that work
@@ -29,9 +28,10 @@
    special exception, which will cause the skeleton and the resulting
    Bison output files to be licensed under the GNU General Public
    License without this special exception.
-
+   
    This special exception was added by the Free Software Foundation in
    version 2.2 of Bison.  */
+
 
 /* Tokens.  */
 #ifndef YYTOKENTYPE
@@ -40,68 +40,56 @@
       know about them.  */
    enum yytokentype {
      TIPO_DE_DATO = 258,
-     VOID = 259,
+     CONSTANTE_CARACTER = 259,
      IDENTIFICADOR = 260,
      LITERAL_CADENA = 261,
-     CONSTANTE_ENTERA = 262,
-     CONSTANTE_REAL = 263,
-     CONSTANTE_CARACTER = 264,
-     SWITCH = 265,
-     DO = 266,
-     WHILE = 267,
-     IF = 268,
-     ELSE = 269,
-     FOR = 270,
-     BREAK = 271,
-     CONTINUE = 272,
-     RETURN = 273
+     TKN_VOID = 262,
+     CONSTANTE_ENTERA = 263,
+     CONSTANTE_REAL = 264,
+     BREAK = 265,
+     CONTINUE = 266,
+     RETURN = 267,
+     FOR = 268,
+     DO = 269,
+     WHILE = 270,
+     SWITCH = 271,
+     IF = 272,
+     ELSE = 273
    };
 #endif
-/* Tokens.  */
-#define TIPO_DE_DATO 258
-#define VOID 259
-#define IDENTIFICADOR 260
-#define LITERAL_CADENA 261
-#define CONSTANTE_ENTERA 262
-#define CONSTANTE_REAL 263
-#define CONSTANTE_CARACTER 264
-#define SWITCH 265
-#define DO 266
-#define WHILE 267
-#define IF 268
-#define ELSE 269
-#define FOR 270
-#define BREAK 271
-#define CONTINUE 272
-#define RETURN 273
-
 
 
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 28 "TP5.y"
 {
-    int entero; 
-    float real;
-    char caracter;
-    char cadena[100];
 
-struct yylval_struct
-  {
+/* Line 1676 of yacc.c  */
+#line 37 "TP5.y"
+
+    struct yylval_struct
+      {
       int tipo;
       int valor_entero;
       float valor_real;
-      char valor_caracter;
-  } mystruct;
-}
-/* Line 1529 of yacc.c.  */
-#line 100 "TP5.tab.h"
-	YYSTYPE;
+      } mystruct;
+
+          char* cadena;
+         char caracter;
+          int entero;
+          float real;
+
+
+
+
+/* Line 1676 of yacc.c  */
+#line 87 "TP5.tab.h"
+} YYSTYPE;
+# define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
-# define YYSTYPE_IS_TRIVIAL 1
 #endif
 
 extern YYSTYPE yylval;
+
 
