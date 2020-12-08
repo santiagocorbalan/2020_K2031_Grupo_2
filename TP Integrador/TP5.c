@@ -30,10 +30,8 @@ symrec *buscoSimbolo (char const *sym_name)
         return 0;
 }
 
-
 // Definicion de las funciones para agregar variables a la TS
 void mostrarListaVar();
-
 
 void declararVariable1(char* nombre,char* tipo){
     aux = agregoSimbolo(nombre,tipo,1);
@@ -57,8 +55,6 @@ void declararVariable1(char* nombre,char* tipo){
                                                 
                                                 
 }
-
-
 
 void agregoParametro(char* tipoArgumentooo){
     

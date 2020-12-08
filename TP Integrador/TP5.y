@@ -11,11 +11,7 @@
 
 extern int yylineno;
 
-
-
 char* tipo;
-
-
 
 void yyerror (char const *s) {          
 //   fprintf (stderr, "%s\n", s);
@@ -52,9 +48,7 @@ symrec *aux;
 
 %start input
 
-
 %type <mystruct> expresion
-
 
 %token <cadena> TIPO_DE_DATO 
 %token <caracter> CONSTANTE_CARACTER 
@@ -91,14 +85,12 @@ line:   '\n'
        
 ;
 
-
 sentencia:       sentenciaExpresion                                                       
                 | sentenciaCompuesta                                                                                           
                 | sentenciaDeIteracion   
                 | sentenciaDeSeleccion        
                 | sentenciaDeSalto 
 ;
-
 
 sentenciaExpresion:    opExpresion ';'                                  
 ;
@@ -129,12 +121,10 @@ listaDeSentencias: sentencia
 
 ;
 
-
 sentenciaDeSeleccion:     IF '(' expresion ')'  sentencia                                          {printf("Se encontro una sentencia IF\n");} 
                         | SWITCH '(' expresion ')' sentencia                                      {printf("Se encontro una sentencia SWITCH\n");}   
                                      
 ;
-
 
 sentenciaDeIteracion:     WHILE '(' expresion ')' sentencia                                       {printf("Se encontro la sentencia WHILE\n");}   
                         | DO sentencia WHILE '(' expresion ')' ';'                                {printf("Se encontro una sentencia DO\n");}   
@@ -142,13 +132,10 @@ sentenciaDeIteracion:     WHILE '(' expresion ')' sentencia                     
                         
 ;
 
-
 sentenciaDeSalto:  CONTINUE ';'                                                                  {printf("Se encontro la sentencia CONTINUE\n");}
                   | BREAK ';'                                                                    {printf("Se encontro la sentencia BREAK\n");}
                   | RETURN opExpresion ';'                                                       {printf("Se encontro la sentencia RETURN\n");} 
 ;
-
-
 
 declaracion:      
                 TIPO_DE_DATO          {tipo = $<cadena>1;} declaraciones
@@ -156,11 +143,9 @@ declaracion:
                 | TKN_VOID                  {tipo = "void"; } declaracionDefinicionFuncion                    
 ;
 
-
 declaraciones:  declaracionDefinicionFuncion          
                 | declaracionVariables ';'                      
 ;
-
 
 declaracionVariables:   listaVariables 
 ;
@@ -168,7 +153,6 @@ declaracionVariables:   listaVariables
 listaVariables:   unaVariableSimple                          
                       | unaVariableSimple ',' listaVariables 
 ;
-
 
 unaVariableSimple: IDENTIFICADOR   {
                                        aux=buscoSimbolo($<cadena>1); if (aux) agregarErrorSemantico("ERROR: La Variable Ya Esta Declarada",yylineno); 
@@ -318,7 +302,6 @@ parametros:
 
 ;
 
-
 invocacionDeFuncion:  IDENTIFICADOR '(' listaArgumentos ')'     {
                                                                aux=buscoSimbolo($<cadena>1);  
                                                                if (aux) { 
@@ -365,8 +348,6 @@ argumento: /* vacio */ {agregoArgumento("void");}
         
 ;
 
-
-
 expresion:               CONSTANTE_ENTERA  {$<mystruct>$.tipo=$<mystruct>1.tipo;$<mystruct>$.valor_entero=$<mystruct>1.valor_entero;}
 	  		| CONSTANTE_REAL   {$<mystruct>$.tipo=$<mystruct>1.tipo;$<mystruct>$.valor_real=$<mystruct>1.valor_real;}	
 	  		| expresion '+' expresion { if($<mystruct>1.tipo==$<mystruct>3.tipo)  { 
@@ -409,11 +390,9 @@ expresion:               CONSTANTE_ENTERA  {$<mystruct>$.tipo=$<mystruct>1.tipo;
 
 ;
 
-
 %%
 
-// puntero que apunta a la tabla de símbolos
-
+// Puntero que apunta a la tabla de símbolos
 symrec *sym_table;
 
 int main(){
@@ -429,7 +408,4 @@ int main(){
         mostrarListaFunciones();
         mostrarErrorSintactico();
         mostrarErrorSemantico();
-
-
-
 }
