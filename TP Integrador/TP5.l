@@ -24,9 +24,9 @@ CONSTANTE_REAL      {DIGITO_DECIMAL}+\.{DIGITO_DECIMAL}+
 %%  
 
 " "|"\t"
-"\n"        { return '\n';     }
+"\n"        { return '\n';}
    
-"void"      { return TKN_VOID; }
+"void"      {return TKN_VOID; }
 
 "continue"  { return CONTINUE; }
 "break"     { return BREAK;    }

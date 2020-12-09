@@ -137,8 +137,8 @@ sentenciaDeSalto:  CONTINUE ';'                                                 
                   | RETURN opExpresion ';'                                                       {printf("Se encontro la sentencia RETURN\n");} 
 ;
 
-declaracion:      
-                TIPO_DE_DATO          {tipo = $<cadena>1;} declaraciones
+declaracion: 
+                TIPO_DE_DATO          {tipo = $<cadena>1;} declaraciones 
                 | TIPO_DE_DATO '*'      {tipo = strcat($<cadena>1,"*");}  declaraciones  
                 | TKN_VOID                  {tipo = "void"; } declaracionDefinicionFuncion                    
 ;
@@ -326,7 +326,7 @@ invocacionDeFuncion:  IDENTIFICADOR '(' listaArgumentos ')'     {
                                                                                          
                                                                
                                                                                                                                                               
-                     | IDENTIFICADOR error listaArgumentos ')' {agregarErrorSemantico("ERROR : 1falta '(' en la invocacion de la funcion",yylineno);}
+                     | IDENTIFICADOR error listaArgumentos ')' {agregarErrorSemantico("ERROR : falta '(' en la invocacion de la funcion",yylineno);}
                      | IDENTIFICADOR '(' listaArgumentos error {agregarErrorSemantico("ERROR : falta ')' en la invocacion de la funcion",yylineno);}
 ;
 
