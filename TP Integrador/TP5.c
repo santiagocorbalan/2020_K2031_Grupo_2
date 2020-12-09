@@ -140,7 +140,7 @@ void mostrarListaVariables(){
     
      printf("\nVARIABLES DECLARADAS:\n\n");
     if(auxTabla == NULL)
-        printf("No se encontraron variables\n");
+        printf("No se encontraron variables.\n");
     else
         while(auxTabla != NULL){
             if(auxTabla->type == 1){
@@ -174,7 +174,7 @@ void mostrarListaFunciones(){
     
     printf("\nFUNCIONES DECLARADAS:\n\n");
     if(auxTabla == NULL)
-        printf("No se encontraron Funciones\n");
+        printf("No se encontraron funciones.\n");
     else
         while(auxTabla != NULL){
             if(auxTabla->type == 2){
@@ -219,9 +219,9 @@ void agregarErrorSintactico(char* cadenaError,int linea){
 
 void mostrarErrorSintactico(){ 
     
-    printf("\nERRORES SINTACTICOS:\n\n");
+    printf("\nERRORES SINTÁCTICOS:\n\n");
     if(listaErrorSintactico == NULL)
-        printf("\nNo Se Encontraron Errores Sintacticos\n\n");
+        printf("\nNo Se Encontraron Errores Sintácticos.\n\n");
     else{
         struct Errores* aux;
         aux = listaErrorSintactico;
@@ -231,8 +231,6 @@ void mostrarErrorSintactico(){
         }
     }
 }
-
-
 
 struct Errores *listaErrorSemantico = NULL;
 
@@ -258,9 +256,9 @@ void agregarErrorSemantico(char* cadenaError,int linea){
 }
 
 void mostrarErrorSemantico(){
-    printf("\nERRORES SEMANTICOS:\n\n");
+    printf("\nERRORES SEMÁNTICOS:\n\n");
     if(listaErrorSemantico == NULL)
-        printf("\nNo Se Encontraron Errores Semanticos\n\n");
+        printf("\nNo Se Encontraron Errores Semánticos.\n\n");
     else{
         struct Errores* aux;
         aux = listaErrorSemantico;

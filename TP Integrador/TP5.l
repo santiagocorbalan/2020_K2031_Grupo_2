@@ -72,6 +72,6 @@ CONSTANTE_REAL      {DIGITO_DECIMAL}+\.{DIGITO_DECIMAL}+
 {CONSTANTE_DECIMAL}	  { yylval.mystruct.valor_entero=atoi(yytext); yylval.mystruct.tipo=1; return CONSTANTE_ENTERA;              }
 {CONSTANTE_REAL}      { yylval.mystruct.valor_real=atof(yytext); yylval.mystruct.tipo=2; return CONSTANTE_REAL;                  }
 
-.                     { printf("\nEl caracter %c no fue reconocido.", yytext[0]); }
+.                     { printf("\nERROR LÉXICO: \n\nEl caracter %c no fue reconocido.\n\n", yytext[0]); }
 
 %%
