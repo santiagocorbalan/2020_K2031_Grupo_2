@@ -79,9 +79,10 @@ input:    /* vacio */
 ;
 
 line:   '\n'
-        | declaracion   
-        | sentencia
-        | invocacionDeFuncion   
+        | declaracion   '\n'  {yylineno++; }
+        | sentencia '\n'  {yylineno++; }
+        | invocacionDeFuncion '\n'  {yylineno++; }
+        | error '\n' { agregarErrorSintactico("\nSe detecto un error sintactico en la linea",yylineno);yylineno++}    
 ;
 
 sentencia:       sentenciaExpresion                                                       
@@ -361,16 +362,19 @@ argumento: /* vacio */ { agregoArgumento("void"); }
                 | CONSTANTE_CARACTER  { agregoArgumento("char");  }       
 ;
 
-expresion:               CONSTANTE_ENTERA  {$<mystruct>$.tipo=$<mystruct>1.tipo;$<mystruct>$.valor_entero=$<mystruct>1.valor_entero;}
-	  		| CONSTANTE_REAL   {$<mystruct>$.tipo=$<mystruct>1.tipo;$<mystruct>$.valor_real=$<mystruct>1.valor_real;}	
+expresion:               
+                        CONSTANTE_ENTERA  {$<mystruct>$.tipo=$<mystruct>1.tipo;
+                                            $<mystruct>$.valor_entero=$<mystruct>1.valor_entero;}
+	  		| CONSTANTE_REAL   {$<mystruct>$.tipo=$<mystruct>1.tipo;
+                                            $<mystruct>$.valor_real=$<mystruct>1.valor_real;}	
 	  		
-                          | expresion '+' expresion 
+                        | expresion '+' expresion 
                                                 { 
-                                                        if ($<mystruct>1.tipo == $<mystruct>3.tipo)  { 
+                                                        if ($<mystruct>1.tipo == $<mystruct>3.tipo)  { // Verifico que los tipos de constantes sean iguales
 
-                                                        if($<mystruct>1.tipo == 1)  { $<mystruct>$.valor_entero=$<mystruct>1.valor_entero+$<mystruct>3.valor_entero; }
+                                                        if($<mystruct>1.tipo == 1)  { $<mystruct>$.valor_entero=$<mystruct>1.valor_entero+$<mystruct>3.valor_entero; } // si son enteros , sumo las expresiones y asigno el valor.
         
-                                                        else { $<mystruct>$.valor_real=$<mystruct>1.valor_real+$<mystruct>3.valor_real; }
+                                                        else { $<mystruct>$.valor_real=$<mystruct>1.valor_real+$<mystruct>3.valor_real; } // si son constantes reales , sumo las expresiones y asigno el valor.
                                                         }
         
                                                         else { agregarErrorSemantico("Los operandos son de distinto tipo, no se puede realizar la operación.",yylineno); }
@@ -406,6 +410,8 @@ expresion:               CONSTANTE_ENTERA  {$<mystruct>$.tipo=$<mystruct>1.tipo;
                         | expresion '/' expresion
 
                         | '(' expresion ')' { $<mystruct>$.valor_entero = $<mystruct>2.valor_entero ; }
+                        
+                        
 ;
 
 %%

@@ -499,15 +499,15 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint16 yyrline[] =
 {
-       0,    77,    77,    78,    81,    82,    83,    84,    88,    89,
-      90,    91,    92,    95,    98,    99,   103,   107,   108,   111,
-     112,   115,   116,   119,   120,   124,   125,   129,   130,   131,
-     135,   136,   137,   141,   141,   142,   142,   143,   143,   146,
-     147,   150,   153,   154,   157,   160,   202,   217,   235,   248,
-     267,   269,   272,   283,   286,   290,   291,   292,   296,   297,
-     298,   299,   300,   301,   305,   329,   330,   333,   334,   337,
-     338,   345,   346,   347,   351,   352,   353,   364,   375,   386,
-     388
+       0,    77,    77,    78,    81,    82,    83,    84,    87,    88,
+      89,    90,    91,    94,    97,    98,   101,   104,   105,   108,
+     109,   112,   113,   116,   117,   121,   122,   126,   127,   128,
+     132,   133,   134,   138,   138,   139,   139,   140,   140,   143,
+     144,   147,   150,   151,   155,   163,   211,   227,   245,   261,
+     281,   282,   285,   298,   301,   304,   305,   306,   310,   311,
+     312,   313,   314,   315,   318,   343,   344,   347,   348,   351,
+     352,   359,   360,   361,   365,   367,   370,   383,   396,   409,
+     411
 };
 #endif
 
@@ -1515,480 +1515,494 @@ yyreduce:
         case 14:
 
 /* Line 1455 of yacc.c  */
-#line 98 "TP5.y"
-    {printf("Se encontro una sentencia vacia\n");;}
+#line 97 "TP5.y"
+    { printf("Se encontro una sentencia vacia\n"); ;}
     break;
 
   case 18:
 
 /* Line 1455 of yacc.c  */
-#line 108 "TP5.y"
-    {printf("Se encontro una sentencia compuesta con una lista de declaraciones\n");;}
+#line 105 "TP5.y"
+    { printf("Se encontro una sentencia compuesta con una lista de declaraciones\n"); ;}
     break;
 
   case 22:
 
 /* Line 1455 of yacc.c  */
-#line 116 "TP5.y"
-    {printf("Se encontro una sentencia compuesta con una lista de sentencias\n");;}
+#line 113 "TP5.y"
+    { printf("Se encontro una sentencia compuesta con una lista de sentencias\n"); ;}
     break;
 
   case 25:
 
 /* Line 1455 of yacc.c  */
-#line 124 "TP5.y"
-    {printf("Se encontro una sentencia IF\n");;}
+#line 121 "TP5.y"
+    { printf("Se encontro una sentencia IF\n"); ;}
     break;
 
   case 26:
 
 /* Line 1455 of yacc.c  */
-#line 125 "TP5.y"
-    {printf("Se encontro una sentencia SWITCH\n");;}
+#line 122 "TP5.y"
+    { printf("Se encontro una sentencia SWITCH\n"); ;}
     break;
 
   case 27:
 
 /* Line 1455 of yacc.c  */
-#line 129 "TP5.y"
-    {printf("Se encontro la sentencia WHILE\n");;}
+#line 126 "TP5.y"
+    { printf("Se encontro la sentencia WHILE\n"); ;}
     break;
 
   case 28:
 
 /* Line 1455 of yacc.c  */
-#line 130 "TP5.y"
-    {printf("Se encontro una sentencia DO\n");;}
+#line 127 "TP5.y"
+    { printf("Se encontro una sentencia DO\n");   ;}
     break;
 
   case 29:
 
 /* Line 1455 of yacc.c  */
-#line 131 "TP5.y"
-    {printf("Se encontro una sentencia FOR\n");;}
+#line 128 "TP5.y"
+    { printf("Se encontro una sentencia FOR\n");  ;}
     break;
 
   case 30:
 
 /* Line 1455 of yacc.c  */
-#line 135 "TP5.y"
-    {printf("Se encontro la sentencia CONTINUE\n");;}
+#line 132 "TP5.y"
+    { printf("Se encontro la sentencia CONTINUE\n"); ;}
     break;
 
   case 31:
 
 /* Line 1455 of yacc.c  */
-#line 136 "TP5.y"
-    {printf("Se encontro la sentencia BREAK\n");;}
+#line 133 "TP5.y"
+    { printf("Se encontro la sentencia BREAK\n");    ;}
     break;
 
   case 32:
 
 /* Line 1455 of yacc.c  */
-#line 137 "TP5.y"
-    {printf("Se encontro la sentencia RETURN\n");;}
+#line 134 "TP5.y"
+    { printf("Se encontro la sentencia RETURN\n");   ;}
     break;
 
   case 33:
 
 /* Line 1455 of yacc.c  */
-#line 141 "TP5.y"
-    {tipo = (yyvsp[(1) - (1)].cadena);;}
+#line 138 "TP5.y"
+    { tipo = (yyvsp[(1) - (1)].cadena);             ;}
     break;
 
   case 35:
 
 /* Line 1455 of yacc.c  */
-#line 142 "TP5.y"
-    {tipo = strcat((yyvsp[(1) - (2)].cadena),"*");;}
+#line 139 "TP5.y"
+    { tipo = strcat((yyvsp[(1) - (2)].cadena),"*"); ;}
     break;
 
   case 37:
 
 /* Line 1455 of yacc.c  */
-#line 143 "TP5.y"
-    {tipo = "void"; ;}
+#line 140 "TP5.y"
+    { tipo = "void";                 ;}
     break;
 
   case 44:
 
 /* Line 1455 of yacc.c  */
-#line 157 "TP5.y"
+#line 156 "TP5.y"
     {
-                                       aux=buscoSimbolo((yyvsp[(1) - (1)].cadena)); if (aux) agregarErrorSemantico("ERROR: La Variable Ya Esta Declarada",yylineno); 
-                                                            else declararVariable1((yyvsp[(1) - (1)].cadena),tipo);;}
+                        aux = buscoSimbolo((yyvsp[(1) - (1)].cadena)); 
+                        if (aux) agregarErrorSemantico("ERROR: La variable ya fue declarada.",yylineno); 
+                        else 
+                        declararVariable1((yyvsp[(1) - (1)].cadena),tipo);
+                ;}
     break;
 
   case 45:
 
 /* Line 1455 of yacc.c  */
-#line 160 "TP5.y"
+#line 164 "TP5.y"
     {
-                                        aux=buscoSimbolo((yyvsp[(1) - (3)].cadena)); if (aux) agregarErrorSemantico("ERROR: La Variable Ya Esta Declarada",yylineno);
-                                                            else  {
-                                        symrec *aux2=buscoSimbolo((yyvsp[(3) - (3)].cadena)); 
-                                        if(aux2 && (strcmp(tipo, aux2->tipo) == 0)) { 
+                        aux = buscoSimbolo((yyvsp[(1) - (3)].cadena)); 
+                        if (aux) 
+                        agregarErrorSemantico("ERROR: La variable ya fue declarada.",yylineno);
+                        else  
+                        {
+                                symrec *aux2 = buscoSimbolo((yyvsp[(3) - (3)].cadena)); 
+                                if (aux2 && (strcmp(tipo, aux2->tipo) == 0)) { 
 
-                                                aux = agregoSimbolo((yyvsp[(1) - (3)].cadena) , tipo, 1); 
+                                        aux = agregoSimbolo((yyvsp[(1) - (3)].cadena) , tipo, 1); 
 
-                                                if(strcmp("int", aux->tipo) == 0)  {
-                                                    aux->value.valEnt = aux2->value.valEnt; 
-                                                    printf("\nSe declara la variable %s de tipo %s con valor %i\n\n",aux->nombre,aux->tipo, aux->value.valEnt);    
-                                                }
-                                                 if(strcmp("float", aux->tipo) == 0)  {
-                                                    aux->value.valReal = aux2->value.valReal; 
-                                                    printf("\nSe declara la variable %s de tipo %s con valor %f\n\n",aux->nombre,aux->tipo, aux->value.valReal);
-                                                }
+                                        if (strcmp("int", aux->tipo) == 0)  {
+                                                aux->value.valEnt = aux2->value.valEnt; 
+                                                printf("\nSe declara la variable %s de tipo %s con valor %i\n\n",aux->nombre,aux->tipo, aux->value.valEnt);    
+                                        }
+                                        
+                                        if (strcmp("float", aux->tipo) == 0)  {
+                                                aux->value.valReal = aux2->value.valReal; 
+                                                printf("\nSe declara la variable %s de tipo %s con valor %f\n\n",aux->nombre,aux->tipo, aux->value.valReal);
+                                        }
 
-                                                 if(strcmp("char", aux->tipo) == 0)  {
-                                                    aux->value.valChar = aux2->value.valChar ;
-                                                    printf("\nSe declara la variable %s de tipo %s con valor %c\n\n",aux->nombre,aux->tipo, aux->value.valChar);
-                                                }
-                                                 if(strcmp("char*", aux->tipo) == 0)  {
-                                                    aux->value.valString = aux2->value.valString;
-                                                    printf("\nSe declara la variable %s de tipo %s con valor %s\n\n",aux->nombre,aux->tipo, aux->value.valString);
-                                                }
+                                        if (strcmp("char", aux->tipo) == 0)  {
+                                                aux->value.valChar = aux2->value.valChar;
+                                                printf("\nSe declara la variable %s de tipo %s con valor %c\n\n",aux->nombre,aux->tipo, aux->value.valChar);
+                                        }
+                                        
+                                        if (strcmp("char*", aux->tipo) == 0)  {
+                                                aux->value.valString = aux2->value.valString;
+                                                printf("\nSe declara la variable %s de tipo %s con valor %s\n\n",aux->nombre,aux->tipo, aux->value.valString);
+                                        }
                                                        
 
-                                                }   
+                                }   
 
                                         
-                                        if (aux2 && (strcmp(tipo, aux2->tipo) != 0))
-                                                agregarErrorSemantico("ERROR: Las Variables Son De Distinto Tipo",yylineno);
+                                if (aux2 && (strcmp(tipo, aux2->tipo) != 0))
+                                        agregarErrorSemantico("ERROR: Las variables son de distinto tipo.",yylineno);
 
-                                        if (aux2 == NULL) 
-                                                agregarErrorSemantico("ERROR : La Variable que esta a la derecha de la asignacion NO Esta Declarada",yylineno);
+                                if (aux2 == NULL) 
+                                        agregarErrorSemantico("ERROR : La variable que se encuentra a la derecha de la asignación NO está declarada.",yylineno);
 
                                                                                                                     
                                        
-                                }
-                        ;}
+                        }
+                ;}
     break;
 
   case 46:
 
 /* Line 1455 of yacc.c  */
-#line 202 "TP5.y"
+#line 212 "TP5.y"
     {
-                                                                aux=buscoSimbolo((yyvsp[(1) - (3)].cadena)); 
-                                                                if (aux) 
-                                                                        agregarErrorSemantico("ERROR : La Variable Ya Esta Declarada", yylineno); 
-                                                                else {
-                                                                        if (strcmp(tipo, "char") == 0) {
-                                                                                aux = agregoSimbolo(strdup((yyvsp[(1) - (3)].cadena)), tipo, 1);  
-                                                                                aux->value.valChar = (yyvsp[(3) - (3)].caracter); 
-                                                                                printf("\nSe declara la variable %s de tipo %s con valor %c\n\n",aux->nombre,aux->tipo, aux->value.valChar);
-                                                                        }
-                                                                        else 
-                                                                                agregarErrorSemantico("ERROR : Son De Distinto Tipo",yylineno);
-                                                                }
-                                                        ;}
+                        aux = buscoSimbolo((yyvsp[(1) - (3)].cadena)); 
+                        if (aux) 
+                                agregarErrorSemantico("ERROR : La variable ya fue declarada.", yylineno); 
+                        else {
+                                if (strcmp(tipo, "char") == 0) {
+                                        aux = agregoSimbolo(strdup((yyvsp[(1) - (3)].cadena)), tipo, 1);  
+                                        aux->value.valChar = (yyvsp[(3) - (3)].caracter); 
+                                        printf("\nSe declara la variable %s de tipo %s con valor %c\n\n",aux->nombre,aux->tipo, aux->value.valChar);
+                                }
+                                else 
+                                agregarErrorSemantico("ERROR : No coincide el tipo de la variable con el asignado.",yylineno);
+                        }
+                ;}
     break;
 
   case 47:
 
 /* Line 1455 of yacc.c  */
-#line 217 "TP5.y"
+#line 228 "TP5.y"
     {
-                                                                aux=buscoSimbolo((yyvsp[(1) - (3)].cadena)); 
-                                                                if (aux) 
-                                                                        agregarErrorSemantico("Error : la variable ya esta declarada ",yylineno); 
-                                                                        else  {
+                        aux = buscoSimbolo((yyvsp[(1) - (3)].cadena)); 
+                        if (aux) 
+                        agregarErrorSemantico("Error : La variable ya fue declarada.",yylineno); 
+                        else  {
                                                                                 
-                                                                                if (strcmp(tipo,"int") == 0)  {
-                                                                                        aux = agregoSimbolo(strdup((yyvsp[(1) - (3)].cadena)) , tipo, 1) ;  
-                                                                                        aux->value.valEnt = (yyvsp[(3) - (3)].mystruct).valor_entero; 
-                                                                                        printf("\nSe declara la variable %s de tipo %s con valor %i\n\n",aux->nombre,aux->tipo, aux->value.valEnt);
-                                                                                        } 
-                                                                                else 
-                                                                                        agregarErrorSemantico("Error : son de distinto tipo",yylineno);
+                                if (strcmp(tipo,"int") == 0)  {
+                                        aux = agregoSimbolo(strdup((yyvsp[(1) - (3)].cadena)) , tipo, 1);  
+                                        aux->value.valEnt = (yyvsp[(3) - (3)].mystruct).valor_entero; 
+                                        printf("\nSe declara la variable %s de tipo %s con valor %i\n\n",aux->nombre,aux->tipo, aux->value.valEnt);
+                                } 
+                                else 
+                                        agregarErrorSemantico("Error : No coincide el tipo de la variable con el asignado.",yylineno);
                                                                         
-                                                                           }
-
-                                                        ;}
+                        }
+                ;}
     break;
 
   case 48:
 
 /* Line 1455 of yacc.c  */
-#line 235 "TP5.y"
+#line 246 "TP5.y"
     { 
-                                                                aux=buscoSimbolo((yyvsp[(1) - (3)].cadena)); 
-                                                                if (aux) 
-                                                                        agregarErrorSemantico("Error  : la variable ya esta declarada ",yylineno); 
-                                                                else 
-                                                                        if (strcmp(tipo, "float") == 0) {
-                                                                                aux=agregoSimbolo((yyvsp[(1) - (3)].cadena) , tipo, 1);  
-                                                                                aux->value.valReal = (yyvsp[(3) - (3)].mystruct).valor_real; 
-                                                                                 printf("\nSe declara la variable %s de tipo %s con valor %f\n\n",aux->nombre,aux->tipo, aux->value.valReal);
-                                                                                        } 
-                                                                        else 
-                                                                                agregarErrorSemantico("Error : son de distinto tipo ",yylineno);
-                                                        ;}
+                        aux = buscoSimbolo((yyvsp[(1) - (3)].cadena)); 
+                        if (aux) 
+                                agregarErrorSemantico("Error  : La variable ya fue declarada.",yylineno); 
+                        else {
+                                if (strcmp(tipo, "float") == 0) {
+                                        aux = agregoSimbolo((yyvsp[(1) - (3)].cadena) , tipo, 1);  
+                                        aux->value.valReal = (yyvsp[(3) - (3)].mystruct).valor_real; 
+                                        printf("\nSe declara la variable %s de tipo %s con valor %f\n\n",aux->nombre,aux->tipo, aux->value.valReal);
+                                } 
+                                else 
+                                        agregarErrorSemantico("Error : No coincide el tipo de la variable con el asignado.",yylineno);
+                        }
+                ;}
     break;
 
   case 49:
 
 /* Line 1455 of yacc.c  */
-#line 248 "TP5.y"
+#line 262 "TP5.y"
     {
-                                                                aux=buscoSimbolo((yyvsp[(1) - (3)].cadena)); 
-                                                                if (aux) 
-                                                                        agregarErrorSemantico("Error : la variable ya esta declarada ",yylineno);
-                                                                else {
-                                                                        if (strcmp(tipo, "char*") == 0) {
-                                                                                aux = agregoSimbolo(strdup((yyvsp[(1) - (3)].cadena)) , tipo, 1);  
-                                                                                aux->value.valString = (yyvsp[(3) - (3)].cadena); 
-                                                                           printf("\nSe declara la variable %s de tipo %s con valor %s\n\n",aux->nombre,aux->tipo, aux->value.valString);
-                                                                                        } 
-                                                                        else 
-                                                                                agregarErrorSemantico("Error : son de distinto tipo ",yylineno);
-                                                        }
+                        aux = buscoSimbolo((yyvsp[(1) - (3)].cadena)); 
+                        if (aux) 
+                                agregarErrorSemantico("Error : La variable ya fue declarada.",yylineno);
+                        else {
+                                if (strcmp(tipo, "char*") == 0) {
+                                        aux = agregoSimbolo(strdup((yyvsp[(1) - (3)].cadena)) , tipo, 1);  
+                                        aux->value.valString = (yyvsp[(3) - (3)].cadena); 
+                                        printf("\nSe declara la variable %s de tipo %s con valor %s\n\n",aux->nombre,aux->tipo, aux->value.valString);
+                                } 
+                                else 
+                                        agregarErrorSemantico("Error : No coincide el tipo de la variable con el asignado.",yylineno);
+                        }
 
 
-                                            ;}
+                ;}
     break;
 
   case 50:
 
 /* Line 1455 of yacc.c  */
-#line 267 "TP5.y"
-    { agregarErrorSemantico("Error  :  se inicializo con un valor incorrecto",yylineno); ;}
+#line 281 "TP5.y"
+    { agregarErrorSintactico("Error :  Falta el valor asignado.",yylineno); ;}
     break;
 
   case 51:
 
 /* Line 1455 of yacc.c  */
-#line 269 "TP5.y"
-    {   agregarErrorSemantico("Error  : identificador incorrecto ",yylineno);;}
+#line 282 "TP5.y"
+    { agregarErrorSintactico("Error : Identificador incorrecto.",yylineno); ;}
     break;
 
   case 52:
 
 /* Line 1455 of yacc.c  */
-#line 272 "TP5.y"
+#line 286 "TP5.y"
     { 
-                                                                        aux=buscoSimbolo((yyvsp[(1) - (2)].cadena)); 
-                                                                        if (aux)  agregarErrorSemantico("Error: el identificador ya esta declarado",yylineno); 
+                                                                        aux = buscoSimbolo((yyvsp[(1) - (2)].cadena)); 
+                                                                        if (aux)  
+                                                                        agregarErrorSemantico("Error: el identificador ya esta declarado",yylineno); 
                                                                         else {
-                                                                                aux=agregoSimbolo((yyvsp[(1) - (2)].cadena) , tipo, 2);   
+                                                                                aux=agregoSimbolo((yyvsp[(1) - (2)].cadena), tipo, 2);   
                                                                                 aux->tiposParametros = listaParametrosAux; 
-
-                                                                                 }
-                                                                       listaParametrosAux = NULL; ;}
+                                                                        }
+                                                                        listaParametrosAux = NULL; 
+                                                                ;}
     break;
 
   case 53:
 
 /* Line 1455 of yacc.c  */
-#line 283 "TP5.y"
+#line 298 "TP5.y"
     {  agregarErrorSemantico("Error: nombre de la funcion incorrecto",yylineno);;}
     break;
 
   case 55:
 
 /* Line 1455 of yacc.c  */
-#line 290 "TP5.y"
+#line 304 "TP5.y"
     { agregoParametro("void");;}
     break;
 
   case 58:
 
 /* Line 1455 of yacc.c  */
-#line 296 "TP5.y"
+#line 310 "TP5.y"
     { agregoParametro((yyvsp[(1) - (2)].cadena));;}
     break;
 
   case 59:
 
 /* Line 1455 of yacc.c  */
-#line 297 "TP5.y"
+#line 311 "TP5.y"
     { agregoParametro(strcat(tipo,"*"));;}
     break;
 
   case 60:
 
 /* Line 1455 of yacc.c  */
-#line 298 "TP5.y"
-    { agregarErrorSemantico("ERROR : falta tipo de dato del parametro",yylineno);;}
+#line 312 "TP5.y"
+    { agregarErrorSemantico("ERROR : Falta el tipo de dato del parametro.",yylineno);;}
     break;
 
   case 61:
 
 /* Line 1455 of yacc.c  */
-#line 299 "TP5.y"
-    { agregarErrorSemantico("ERROR : falta tipo de dato del puntero parametro",yylineno);;}
+#line 313 "TP5.y"
+    { agregarErrorSemantico("ERROR : Falta el tipo de dato del puntero parametro.",yylineno);;}
     break;
 
   case 62:
 
 /* Line 1455 of yacc.c  */
-#line 300 "TP5.y"
-    { agregarErrorSemantico("ERROR : falta identificador en parametro",yylineno);;}
+#line 314 "TP5.y"
+    { agregarErrorSemantico("ERROR : Falta el identificador en el parametro.",yylineno);;}
     break;
 
   case 63:
 
 /* Line 1455 of yacc.c  */
-#line 301 "TP5.y"
-    { agregarErrorSemantico("ERROR : falta identificador del puntero parametro",yylineno);;}
+#line 315 "TP5.y"
+    { agregarErrorSemantico("ERROR : Falta el identificador del puntero del parametro.",yylineno);;}
     break;
 
   case 64:
 
 /* Line 1455 of yacc.c  */
-#line 305 "TP5.y"
+#line 319 "TP5.y"
     {
-                                                               aux=buscoSimbolo((yyvsp[(1) - (4)].cadena));  
-                                                               if (aux) { 
-                              if(aux->type == 1){
-                                           printf ("Error: El IDENTIFICADOR esta declarado como variable");} 
+                                                                aux = buscoSimbolo((yyvsp[(1) - (4)].cadena));  
+                                                                if (aux) { 
+                                                                        if(aux->type == 1){
+                                                                                agregarErrorSemantico("Error: El IDENTIFICADOR esta declarado como variable.",yylineno);} 
                      
-                        if (compararParametros(aux->tiposParametros, listaParametrosAux) == 1){
-                        printf ("Error: cantidad o tipos de parametros incorrectos\n");} 
+                                                                        if (compararParametros(aux->tiposParametros, listaParametrosAux) == 1){
+                                                                                agregarErrorSemantico("Error: La cantidad o tipos de parametros son incorrectos.",yylineno);} 
                         
-                         if (compararParametros(aux->tiposParametros, listaParametrosAux) == 0){
-                        printf ("\nCantidad y tipos de parametros correctos\n");} 
+                                                                        if (compararParametros(aux->tiposParametros, listaParametrosAux) == 0){
+                                                                                agregarErrorSemantico("\nCantidad y tipos de parametros correctos",yylineno);} 
 
-                         } 
-                     else {
-                          printf ("Error: No esta declarada la funcion\n"); 
-                            }
+                                                                } 
+                                                                else {
+                                                                        agregarErrorSemantico("Error: No está declarada la función.",yylineno); 
+                                                                }
                                                                 
-                         listaParametrosAux = NULL;
+                                                                listaParametrosAux = NULL;
                          
-                        ;}
+                                                                ;}
     break;
 
   case 65:
 
 /* Line 1455 of yacc.c  */
-#line 329 "TP5.y"
-    {agregarErrorSemantico("ERROR : 1falta '(' en la invocacion de la funcion",yylineno);;}
+#line 343 "TP5.y"
+    { agregarErrorSintactico("ERROR : falta '(' en la invocacion de la función.",yylineno); ;}
     break;
 
   case 66:
 
 /* Line 1455 of yacc.c  */
-#line 330 "TP5.y"
-    {agregarErrorSemantico("ERROR : falta ')' en la invocacion de la funcion",yylineno);;}
+#line 344 "TP5.y"
+    { agregarErrorSintactico("ERROR : falta ')' en la invocacion de la función.",yylineno); ;}
     break;
 
   case 69:
 
 /* Line 1455 of yacc.c  */
-#line 337 "TP5.y"
-    {agregoArgumento("void");;}
+#line 351 "TP5.y"
+    { agregoArgumento("void"); ;}
     break;
 
   case 70:
 
 /* Line 1455 of yacc.c  */
-#line 338 "TP5.y"
+#line 352 "TP5.y"
     {        
-                                        aux=buscoSimbolo((yyvsp[(1) - (1)].cadena));    
+                                        aux = buscoSimbolo((yyvsp[(1) - (1)].cadena));    
                                         if (aux) 
                                                 agregoArgumento(aux->tipo); 
                                         else 
-                                                agregarErrorSemantico("ERROR : la variable no esta declarada\n",yylineno);
-                                ;}
+                                                agregarErrorSemantico("ERROR : La variable no está declarada.",yylineno);
+                                        ;}
     break;
 
   case 71:
 
 /* Line 1455 of yacc.c  */
-#line 345 "TP5.y"
+#line 359 "TP5.y"
     { agregoArgumento("char*"); ;}
     break;
 
   case 72:
 
 /* Line 1455 of yacc.c  */
-#line 346 "TP5.y"
-    { agregoArgumento("int"); ;}
+#line 360 "TP5.y"
+    { agregoArgumento("int");   ;}
     break;
 
   case 73:
 
 /* Line 1455 of yacc.c  */
-#line 347 "TP5.y"
-    { agregoArgumento("char"); ;}
+#line 361 "TP5.y"
+    { agregoArgumento("char");  ;}
     break;
 
   case 74:
 
 /* Line 1455 of yacc.c  */
-#line 351 "TP5.y"
-    {(yyval.mystruct).tipo=(yyvsp[(1) - (1)].mystruct).tipo;(yyval.mystruct).valor_entero=(yyvsp[(1) - (1)].mystruct).valor_entero;;}
+#line 365 "TP5.y"
+    {(yyval.mystruct).tipo=(yyvsp[(1) - (1)].mystruct).tipo;
+                                            (yyval.mystruct).valor_entero=(yyvsp[(1) - (1)].mystruct).valor_entero;;}
     break;
 
   case 75:
 
 /* Line 1455 of yacc.c  */
-#line 352 "TP5.y"
-    {(yyval.mystruct).tipo=(yyvsp[(1) - (1)].mystruct).tipo;(yyval.mystruct).valor_real=(yyvsp[(1) - (1)].mystruct).valor_real;;}
+#line 367 "TP5.y"
+    {(yyval.mystruct).tipo=(yyvsp[(1) - (1)].mystruct).tipo;
+                                            (yyval.mystruct).valor_real=(yyvsp[(1) - (1)].mystruct).valor_real;;}
     break;
 
   case 76:
 
 /* Line 1455 of yacc.c  */
-#line 353 "TP5.y"
-    { if((yyvsp[(1) - (3)].mystruct).tipo==(yyvsp[(3) - (3)].mystruct).tipo)  { 
+#line 371 "TP5.y"
+    { 
+                                                        if ((yyvsp[(1) - (3)].mystruct).tipo == (yyvsp[(3) - (3)].mystruct).tipo)  { // Verifico que los tipos de constantes sean iguales
 
-                                  if((yyvsp[(1) - (3)].mystruct).tipo==1)  {(yyval.mystruct).valor_entero=(yyvsp[(1) - (3)].mystruct).valor_entero+(yyvsp[(3) - (3)].mystruct).valor_entero;}
+                                                        if((yyvsp[(1) - (3)].mystruct).tipo == 1)  { (yyval.mystruct).valor_entero=(yyvsp[(1) - (3)].mystruct).valor_entero+(yyvsp[(3) - (3)].mystruct).valor_entero; } // si son enteros , sumo las expresiones y asigno el valor.
         
-                                  else { (yyval.mystruct).valor_real=(yyvsp[(1) - (3)].mystruct).valor_real+(yyvsp[(3) - (3)].mystruct).valor_real;}
-                         }
+                                                        else { (yyval.mystruct).valor_real=(yyvsp[(1) - (3)].mystruct).valor_real+(yyvsp[(3) - (3)].mystruct).valor_real; } // si son constantes reales , sumo las expresiones y asigno el valor.
+                                                        }
         
-                         else { printf("Los operandos son de distinto tipo no se realizo la operacion completa \n");}
+                                                        else { agregarErrorSemantico("Los operandos son de distinto tipo, no se puede realizar la operación.",yylineno); }
         
-                         ;}
+                                                ;}
     break;
 
   case 77:
 
 /* Line 1455 of yacc.c  */
-#line 364 "TP5.y"
-    { if((yyvsp[(1) - (3)].mystruct).tipo==(yyvsp[(3) - (3)].mystruct).tipo) { 
+#line 384 "TP5.y"
+    { 
+                                                        if ((yyvsp[(1) - (3)].mystruct).tipo == (yyvsp[(3) - (3)].mystruct).tipo) { 
        
-                                 if((yyvsp[(1) - (3)].mystruct).tipo==1) {(yyval.mystruct).valor_entero=(yyvsp[(1) - (3)].mystruct).valor_entero+(yyvsp[(3) - (3)].mystruct).valor_entero; }
+                                                        if ((yyvsp[(1) - (3)].mystruct).tipo == 1) { (yyval.mystruct).valor_entero=(yyvsp[(1) - (3)].mystruct).valor_entero+(yyvsp[(3) - (3)].mystruct).valor_entero; }
         
-                                  else   {(yyval.mystruct).valor_real=(yyvsp[(1) - (3)].mystruct).valor_real+(yyvsp[(3) - (3)].mystruct).valor_real;}
-                          }
+                                                        else { (yyval.mystruct).valor_real=(yyvsp[(1) - (3)].mystruct).valor_real+(yyvsp[(3) - (3)].mystruct).valor_real; }
+                                                        }
         
-                         else { printf("Los operandos son de distinto tipo no se realizo la operacion completa\n");}
+                                                        else { agregarErrorSemantico("Los operandos son de distinto tipo, no se puede realizar la operación.",yylineno);}
         
-                         ;}
+                                                ;}
     break;
 
   case 78:
 
 /* Line 1455 of yacc.c  */
-#line 375 "TP5.y"
-    { if((yyvsp[(1) - (3)].mystruct).tipo==(yyvsp[(3) - (3)].mystruct).tipo)  { 
+#line 397 "TP5.y"
+    { 
+                                                        if((yyvsp[(1) - (3)].mystruct).tipo == (yyvsp[(3) - (3)].mystruct).tipo)  { 
 
-                            if((yyvsp[(1) - (3)].mystruct).tipo==1) { (yyval.mystruct).valor_entero=(yyvsp[(1) - (3)].mystruct).valor_entero+(yyvsp[(3) - (3)].mystruct).valor_entero; }
+                                                        if((yyvsp[(1) - (3)].mystruct).tipo == 1) { (yyval.mystruct).valor_entero=(yyvsp[(1) - (3)].mystruct).valor_entero+(yyvsp[(3) - (3)].mystruct).valor_entero; }
         
-                            else  { (yyval.mystruct).valor_real=(yyvsp[(1) - (3)].mystruct).valor_real+(yyvsp[(3) - (3)].mystruct).valor_real; }
+                                                        else  { (yyval.mystruct).valor_real=(yyvsp[(1) - (3)].mystruct).valor_real+(yyvsp[(3) - (3)].mystruct).valor_real; }
 
-                         }
+                                                        }
         
-                        else  { printf("Los operandos son de distinto tipo no se realizo la operacion completa \n");}
+                                                        else  { agregarErrorSemantico("Los operandos son de distinto tipo, no se puede realizar la operación.",yylineno); }
         
-                         ;}
+                                                ;}
     break;
 
   case 80:
 
 /* Line 1455 of yacc.c  */
-#line 388 "TP5.y"
+#line 411 "TP5.y"
     { (yyval.mystruct).valor_entero = (yyvsp[(2) - (3)].mystruct).valor_entero ; ;}
     break;
 
 
 
 /* Line 1455 of yacc.c  */
-#line 1992 "TP5.tab.c"
+#line 2006 "TP5.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -2200,7 +2214,7 @@ yyreturn:
 
 
 /* Line 1675 of yacc.c  */
-#line 393 "TP5.y"
+#line 414 "TP5.y"
 
 
 // Puntero que apunta a la tabla de símbolos

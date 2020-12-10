@@ -51,8 +51,7 @@ void declararVariable1(char* nombre,char* tipo){
                                                  if(strcmp("char*", aux->tipo) == 0)  {
                                                     aux->value.valString = NULL;
                                                     printf("\nSe declara la variable %s de tipo %s con valor %s\n",aux->nombre,aux->tipo, aux->value.valString);
-                                                }
-                                                
+                                                }                                                
                                                 
 }
 

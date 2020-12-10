@@ -936,7 +936,7 @@ YY_RULE_SETUP
 case 43:
 YY_RULE_SETUP
 #line 75 "TP5.l"
-{ printf("\nEl caracter %c no fue reconocido.", yytext[0]); }
+{ printf("\nERROR LÉXICO: \n\nEl caracter %c no fue reconocido.\n\n", yytext[0]); }
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
