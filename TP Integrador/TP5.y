@@ -143,7 +143,8 @@ declaracion:
                 | TKN_VOID              { tipo = "void";                 } declaracionDefinicionFuncion                    
 ;
 
-declaraciones:  declaracionDefinicionFuncion          
+declaraciones:  
+          
                 | declaracionVariables ';'                      
 ;
 
@@ -170,8 +171,8 @@ unaVariableSimple:
                         agregarErrorSemantico("ERROR: La variable ya fue declarada.",yylineno);
                         else  
                         {
-                                symrec *aux2 = buscoSimbolo($<cadena>3); 
-                                if (aux2 && (strcmp(tipo, aux2->tipo) == 0)) { 
+                                symrec *aux2 = buscoSimbolo($<cadena>3); //busco el 2do identificador
+                                if (aux2 && (strcmp(tipo, aux2->tipo) == 0)) { // si existe el identificador y ademas su tipo coincide con el tipo actual 
 
                                         aux = agregoSimbolo($<cadena>1 , tipo, 1); 
 

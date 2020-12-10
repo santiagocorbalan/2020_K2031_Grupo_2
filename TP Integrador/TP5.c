@@ -218,9 +218,9 @@ void agregarErrorSintactico(char* cadenaError,int linea){
 
 void mostrarErrorSintactico(){ 
     
-    printf("\nERRORES SINTÁCTICOS:\n\n");
+    printf("\nERRORES SINTACTICOS:\n\n");
     if(listaErrorSintactico == NULL)
-        printf("\nNo Se Encontraron Errores Sintácticos.\n\n");
+        printf("\nNo Se Encontraron Errores Sintacticos.\n\n");
     else{
         struct Errores* aux;
         aux = listaErrorSintactico;
@@ -255,9 +255,9 @@ void agregarErrorSemantico(char* cadenaError,int linea){
 }
 
 void mostrarErrorSemantico(){
-    printf("\nERRORES SEMÁNTICOS:\n\n");
+    printf("\nERRORES SEMANTICOS:\n\n");
     if(listaErrorSemantico == NULL)
-        printf("\nNo Se Encontraron Errores Semánticos.\n\n");
+        printf("\nNo Se Encontraron Errores Semanticos.\n\n");
     else{
         struct Errores* aux;
         aux = listaErrorSemantico;
