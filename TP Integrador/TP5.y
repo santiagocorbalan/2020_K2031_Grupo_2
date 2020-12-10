@@ -92,7 +92,8 @@ sentencia:       sentenciaExpresion
                 | sentenciaDeSalto 
 ;
 
-sentenciaExpresion:    opExpresion ';'                                  
+sentenciaExpresion:    ';'
+                 | expresion ';'                                  
 ;
 
 opExpresion: /* vacio */      { printf("Se encontro una sentencia vacia\n"); }
@@ -120,6 +121,7 @@ listaDeSentencias: sentencia
 ;
 
 sentenciaDeSeleccion:     IF '(' expresion ')'  sentencia                                         { printf("Se encontro una sentencia IF\n"); } 
+                        | IF '(' expresion ')'  sentencia ELSE sentencia                          { printf("Se encontro una sentencia IF ELSE\n"); } 
                         | SWITCH '(' expresion ')' sentencia                                      { printf("Se encontro una sentencia SWITCH\n"); }   
                                      
 ;
