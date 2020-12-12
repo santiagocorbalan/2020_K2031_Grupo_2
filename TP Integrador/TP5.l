@@ -35,7 +35,7 @@ CONSTANTE_REAL      {DIGITO_DECIMAL}+\.{DIGITO_DECIMAL}+
 "do"        { return DO;       }
 "for"       { return FOR;      }
 "if"        { return IF;       }
-"else"      { return ELSE;     }
+"else"      { return TKN_ELSE; }
 "switch"    { return SWITCH;   }
 
 ";"         { return ';'; }
@@ -72,6 +72,6 @@ CONSTANTE_REAL      {DIGITO_DECIMAL}+\.{DIGITO_DECIMAL}+
 {CONSTANTE_DECIMAL}	  { yylval.mystruct.valor_entero=atoi(yytext); yylval.mystruct.tipo=1; return CONSTANTE_ENTERA;              }
 {CONSTANTE_REAL}      { yylval.mystruct.valor_real=atof(yytext); yylval.mystruct.tipo=2; return CONSTANTE_REAL;                  }
 
-.                     { printf("\nERROR LÉXICO: \n\nEl caracter %c no fue reconocido.\n\n", yytext[0]); }
+.                     { printf("\nERROR LEXICO: \n\nEl caracter %c no fue reconocido.\n\n\n\n", yytext[0]); }
 
 %%

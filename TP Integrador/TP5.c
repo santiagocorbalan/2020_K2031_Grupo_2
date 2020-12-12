@@ -30,30 +30,27 @@ symrec *buscoSimbolo (char const *sym_name)
         return 0;
 }
 
-// Definicion de las funciones para agregar variables a la TS
-void mostrarListaVar();
 
 void declararVariable1(char* nombre,char* tipo){
     aux = agregoSimbolo(nombre,tipo,1);
 
-     if(strcmp("int", aux->tipo) == 0)  {
+                                               if(strcmp("int", aux->tipo) == 0)  {
                                                     aux->value.valEnt = 0;
-                                                    printf("\nSe declara la variable %s de tipo %s con valor %i\n",aux->nombre,aux->tipo, aux->value.valEnt);
                                                 }
                                                  if(strcmp("float", aux->tipo) == 0)  {
                                                     aux->value.valReal = 0.0;
-                                                    printf("\nSe declara la variable %s de tipo %s con valor %f\n",aux->nombre,aux->tipo, aux->value.valReal);
                                                 }
                                                  if(strcmp("char", aux->tipo) == 0)  {
                                                     aux->value.valChar = '\0';
-                                                    printf("\nSe declara la variable %s de tipo %s con valor %c\n",aux->nombre,aux->tipo, aux->value.valChar);
                                                 }
                                                  if(strcmp("char*", aux->tipo) == 0)  {
                                                     aux->value.valString = NULL;
-                                                    printf("\nSe declara la variable %s de tipo %s con valor %s\n",aux->nombre,aux->tipo, aux->value.valString);
-                                                }                                                
+                                                }
+                                                
                                                 
 }
+
+
 
 void agregoParametro(char* tipoArgumentooo){
     
@@ -137,16 +134,29 @@ int compararParametros(Parametro* lista1, Parametro* lista2) {
 void mostrarListaVariables(){
     symrec * auxTabla = sym_table;
     
-     printf("\nVARIABLES DECLARADAS:\n\n");
+     printf("\nLISTA DE VARIABLES DECLARADAS:\n");
     if(auxTabla == NULL)
-        printf("No se encontraron variables.\n");
+        printf("NO Se Encontraron Variables\n");
     else
         while(auxTabla != NULL){
             if(auxTabla->type == 1){
-                printf("\t %s %s\n",auxTabla->tipo,auxTabla->nombre);
                 
-            }
-            auxTabla = auxTabla->next;
+                if(strcmp("int", auxTabla->tipo) == 0)  {
+                        printf("\nTipo De Dato:   %s   -   Nombre: %s   -   Valor: %i\n",auxTabla->tipo,auxTabla->nombre, auxTabla->value.valEnt);    
+                                                }
+                if(strcmp("float", auxTabla->tipo) == 0)  {
+                        printf("\nTipo De Dato:   %s   -   Nombre: %s   -   Valor: %f\n",auxTabla->tipo,auxTabla->nombre, auxTabla->value.valReal);
+                                                }
+
+                if(strcmp("char", auxTabla->tipo) == 0)  {
+                        printf("\nTipo De Dato:   %s   -   Nombre: %s   -   Valor: %c\n",auxTabla->tipo,auxTabla->nombre, auxTabla->value.valChar);
+                                                }
+                if(strcmp("char*", auxTabla->tipo) == 0)  {
+                        printf("\nTipo De Dato:   %s   -   Nombre: %s   -   Valor: %s\n",auxTabla->tipo,auxTabla->nombre, auxTabla->value.valString);
+                                                }
+                                                       
+                                      }
+                       auxTabla = auxTabla->next;
         }
         printf("\n");
     }
@@ -171,13 +181,13 @@ else
 void mostrarListaFunciones(){
     symrec * auxTabla = sym_table;
     
-    printf("\nFUNCIONES DECLARADAS:\n\n");
+    printf("\nLISTA DE FUNCIONES:\n");
     if(auxTabla == NULL)
-        printf("No se encontraron funciones.\n");
+        printf("NO Se Encontraron Funciones\n");
     else
         while(auxTabla != NULL){
             if(auxTabla->type == 2){
-                 printf("Nombre: %s , Tipo: %s\n", auxTabla->nombre, auxTabla->tipo);
+                 printf("\nRetorna: %s   -   Nombre: %s\n", auxTabla->tipo, auxTabla->nombre);
                  mostrarParametros(auxTabla->tiposParametros);
             }
             auxTabla = auxTabla->next;
@@ -218,18 +228,21 @@ void agregarErrorSintactico(char* cadenaError,int linea){
 
 void mostrarErrorSintactico(){ 
     
-    printf("\nERRORES SINTACTICOS:\n\n");
+    printf("\n\nERRORES SINTACTICOS:\n\n");
     if(listaErrorSintactico == NULL)
-        printf("\nNo Se Encontraron Errores Sintacticos.\n\n");
+        printf("No Se Encontraron Errores Sintacticos\n\n");
     else{
         struct Errores* aux;
         aux = listaErrorSintactico;
         while(aux != NULL){
-            printf("\t%s\n\tLinea: %d\n\n",aux->cadenaError,aux->linea);
+            
+            printf("Linea %d:  %s\n\n",aux->linea, aux->cadenaError);
             aux = aux->sig;
         }
     }
 }
+
+
 
 struct Errores *listaErrorSemantico = NULL;
 
@@ -255,14 +268,14 @@ void agregarErrorSemantico(char* cadenaError,int linea){
 }
 
 void mostrarErrorSemantico(){
-    printf("\nERRORES SEMANTICOS:\n\n");
+    printf("\n\nERRORES SEMANTICOS:\n\n");
     if(listaErrorSemantico == NULL)
-        printf("\nNo Se Encontraron Errores Semanticos.\n\n");
+        printf("No Se Encontraron Errores Semanticos\n\n");
     else{
         struct Errores* aux;
         aux = listaErrorSemantico;
         while(aux != NULL){
-            printf("%s\nLinea: %d\n\n",aux->cadenaError,aux->linea);
+            printf("Linea %d:  %s\n\n",aux->linea, aux->cadenaError);
             aux = aux->sig;
         }
     }
