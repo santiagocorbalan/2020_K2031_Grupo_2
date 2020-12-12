@@ -300,7 +300,7 @@ parametros:       TIPO_DE_DATO IDENTIFICADOR       { agregoParametro($<cadena>1)
 
 ;
 
-invocacionDeFuncion:  IDENTIFICADOR '(' listaArgumentos ')'     
+invocacionDeFuncion:  IDENTIFICADOR '(' listaArgumentos ')' ';'   
                                                                 {
                                                                         aux = buscoSimbolo($<cadena>1);  
                                                                         if (aux) { 

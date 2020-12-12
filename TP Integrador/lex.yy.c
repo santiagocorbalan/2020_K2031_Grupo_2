@@ -776,7 +776,7 @@ YY_RULE_SETUP
 case 11:
 YY_RULE_SETUP
 #line 38 "TP5.l"
-{ return ELSE;     }
+{ return TKN_ELSE; }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
@@ -936,7 +936,7 @@ YY_RULE_SETUP
 case 43:
 YY_RULE_SETUP
 #line 75 "TP5.l"
-{ printf("\nERROR LÉXICO: \n\nEl caracter %c no fue reconocido.\n\n", yytext[0]); }
+{ printf("\nERROR LEXICO: \n\nEl caracter %c no fue reconocido.\n\n\n\n", yytext[0]); }
 	YY_BREAK
 case 44:
 YY_RULE_SETUP

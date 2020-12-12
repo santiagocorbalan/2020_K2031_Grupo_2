@@ -70,7 +70,6 @@
 /* Line 189 of yacc.c  */
 #line 1 "TP5.y"
 
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -81,12 +80,9 @@
 #define YYDEBUG 1
 
 extern int yylineno;
-
 char* tipo;
 
-void yyerror (char const *s) {          
-//   fprintf (stderr, "%s\n", s);
-}  
+void yyerror (char const *s) { }  
 
 FILE* yyin;
 
@@ -101,7 +97,7 @@ symrec *aux;
 
 
 /* Line 189 of yacc.c  */
-#line 105 "TP5.tab.c"
+#line 101 "TP5.tab.c"
 
 /* Enabling traces.  */
 #ifndef YYDEBUG
@@ -143,7 +139,7 @@ symrec *aux;
      WHILE = 270,
      SWITCH = 271,
      IF = 272,
-     ELSE = 273
+     TKN_ELSE = 273
    };
 #endif
 
@@ -154,7 +150,7 @@ typedef union YYSTYPE
 {
 
 /* Line 214 of yacc.c  */
-#line 33 "TP5.y"
+#line 29 "TP5.y"
 
     struct yylval_struct
       {
@@ -172,7 +168,7 @@ typedef union YYSTYPE
 
 
 /* Line 214 of yacc.c  */
-#line 176 "TP5.tab.c"
+#line 172 "TP5.tab.c"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
@@ -184,7 +180,7 @@ typedef union YYSTYPE
 
 
 /* Line 264 of yacc.c  */
-#line 188 "TP5.tab.c"
+#line 184 "TP5.tab.c"
 
 #ifdef short
 # undef short
@@ -399,16 +395,16 @@ union yyalloc
 /* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  2
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   182
+#define YYLAST   226
 
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  31
 /* YYNNTS -- Number of nonterminals.  */
 #define YYNNTS  30
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  83
+#define YYNRULES  93
 /* YYNRULES -- Number of states.  */
-#define YYNSTATES  146
+#define YYNSTATES  174
 
 /* YYTRANSLATE(YYLEX) -- Bison symbol number corresponding to YYLEX.  */
 #define YYUNDEFTOK  2
@@ -421,18 +417,18 @@ union yyalloc
 static const yytype_uint8 yytranslate[] =
 {
        0,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-      25,     2,     2,     2,     2,     2,     2,     2,     2,     2,
+      26,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-      23,    24,    21,    19,    29,    20,     2,    22,     2,     2,
-       2,     2,     2,     2,     2,     2,     2,     2,     2,    26,
-       2,    30,     2,     2,     2,     2,     2,     2,     2,     2,
+      24,    25,    22,    20,    30,    21,     2,    23,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,    27,
+       2,    19,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,     2,    27,     2,    28,     2,     2,     2,     2,
+       2,     2,     2,    28,     2,    29,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
@@ -455,61 +451,68 @@ static const yytype_uint8 yytranslate[] =
    YYRHS.  */
 static const yytype_uint16 yyprhs[] =
 {
-       0,     0,     3,     4,     7,     9,    12,    15,    18,    21,
-      23,    25,    27,    29,    31,    33,    36,    37,    39,    44,
-      45,    47,    49,    52,    53,    55,    57,    60,    66,    74,
-      80,    86,    94,   104,   107,   110,   114,   115,   119,   120,
-     125,   126,   130,   131,   134,   136,   138,   142,   144,   148,
-     152,   156,   160,   164,   168,   171,   174,   177,   182,   183,
-     185,   189,   192,   196,   199,   203,   206,   210,   215,   220,
-     225,   227,   231,   232,   234,   236,   238,   240,   242,   244,
-     248,   252,   256,   260
+       0,     0,     3,     4,     7,     9,    11,    13,    15,    17,
+      19,    21,    23,    25,    28,    31,    32,    34,    39,    40,
+      42,    44,    47,    48,    50,    52,    55,    61,    67,    73,
+      79,    85,    91,    97,   105,   115,   125,   135,   138,   141,
+     144,   147,   151,   155,   156,   160,   161,   166,   167,   171,
+     173,   176,   179,   181,   183,   187,   189,   193,   197,   201,
+     205,   209,   213,   217,   220,   223,   228,   229,   231,   235,
+     238,   242,   245,   249,   252,   256,   262,   267,   272,   274,
+     278,   279,   281,   283,   285,   287,   289,   291,   293,   297,
+     301,   305,   309,   313
 };
 
 /* YYRHS -- A `-1'-separated list of the rules' RHS.  */
 static const yytype_int8 yyrhs[] =
 {
-      32,     0,    -1,    -1,    32,    33,    -1,    25,    -1,    45,
-      25,    -1,    34,    25,    -1,    57,    25,    -1,     1,    25,
-      -1,    35,    -1,    37,    -1,    43,    -1,    42,    -1,    44,
-      -1,    26,    -1,    60,    26,    -1,    -1,    60,    -1,    27,
-      38,    40,    28,    -1,    -1,    39,    -1,    45,    -1,    39,
-      45,    -1,    -1,    41,    -1,    34,    -1,    41,    34,    -1,
-      17,    23,    60,    24,    34,    -1,    17,    23,    60,    24,
-      34,    18,    34,    -1,    16,    23,    60,    24,    34,    -1,
-      15,    23,    60,    24,    34,    -1,    14,    34,    15,    23,
-      60,    24,    26,    -1,    13,    23,    36,    26,    36,    26,
-      36,    24,    34,    -1,    11,    26,    -1,    10,    26,    -1,
-      12,    36,    26,    -1,    -1,     3,    46,    49,    -1,    -1,
-       3,    21,    47,    49,    -1,    -1,     7,    48,    53,    -1,
-      -1,    50,    26,    -1,    51,    -1,    52,    -1,    52,    29,
-      51,    -1,     5,    -1,     5,    30,     5,    -1,     5,    30,
-       4,    -1,     5,    30,     8,    -1,     5,    30,     9,    -1,
-       5,    30,     6,    -1,     5,    30,     1,    -1,     1,    30,
-      -1,     5,    54,    -1,     1,    54,    -1,    23,    55,    24,
-      26,    -1,    -1,    56,    -1,    56,    29,    55,    -1,     3,
-       5,    -1,     3,    21,     5,    -1,     1,     5,    -1,     1,
-      21,     5,    -1,     3,     1,    -1,     3,    21,     1,    -1,
-       5,    23,    58,    24,    -1,     5,     1,    58,    24,    -1,
-       5,    23,    58,     1,    -1,    59,    -1,    59,    29,    58,
-      -1,    -1,     5,    -1,     6,    -1,     8,    -1,     4,    -1,
-       8,    -1,     9,    -1,    60,    19,    60,    -1,    60,    20,
-      60,    -1,    60,    21,    60,    -1,    60,    22,    60,    -1,
-      23,    60,    24,    -1
+      32,     0,    -1,    -1,    32,    33,    -1,    26,    -1,    45,
+      -1,    34,    -1,    57,    -1,    35,    -1,    37,    -1,    43,
+      -1,    42,    -1,    44,    -1,    36,    27,    -1,    36,     1,
+      -1,    -1,    60,    -1,    28,    38,    40,    29,    -1,    -1,
+      39,    -1,    45,    -1,    39,    45,    -1,    -1,    41,    -1,
+      34,    -1,    41,    34,    -1,    17,    24,    60,    25,    34,
+      -1,    17,     1,    60,    25,    34,    -1,    17,    24,    60,
+       1,    34,    -1,    16,    24,    60,    25,    34,    -1,    15,
+      24,    60,    25,    34,    -1,    15,     1,    60,    25,    34,
+      -1,    15,    24,    60,     1,    34,    -1,    14,    34,    15,
+      24,    60,    25,    27,    -1,    13,    24,    36,    27,    36,
+      27,    36,    25,    34,    -1,    13,     1,    36,    27,    36,
+      27,    36,    25,    34,    -1,    13,    24,    36,    27,    36,
+      27,    36,     1,    34,    -1,    11,    27,    -1,    11,     1,
+      -1,    10,    27,    -1,    10,     1,    -1,    12,    36,    27,
+      -1,    12,    36,     1,    -1,    -1,     3,    46,    49,    -1,
+      -1,     3,    22,    47,    49,    -1,    -1,     7,    48,    53,
+      -1,    53,    -1,    50,    27,    -1,    50,     1,    -1,    51,
+      -1,    52,    -1,    52,    30,    51,    -1,     5,    -1,     5,
+      19,     5,    -1,     5,    19,     4,    -1,     5,    19,     8,
+      -1,     5,    19,     9,    -1,     5,    19,     6,    -1,     5,
+      19,     1,    -1,     1,    19,     8,    -1,     5,    54,    -1,
+       1,    54,    -1,    24,    55,    25,    27,    -1,    -1,    56,
+      -1,    56,    30,    55,    -1,     3,     5,    -1,     3,    22,
+       5,    -1,     1,     5,    -1,     1,    22,     5,    -1,     3,
+       1,    -1,     3,    22,     1,    -1,     5,    24,    58,    25,
+      27,    -1,     5,     1,    58,    25,    -1,     5,    24,    58,
+       1,    -1,    59,    -1,    59,    30,    58,    -1,    -1,     5,
+      -1,     6,    -1,     8,    -1,     4,    -1,     9,    -1,     8,
+      -1,     9,    -1,     5,    19,    60,    -1,    60,    20,    60,
+      -1,    60,    21,    60,    -1,    60,    22,    60,    -1,    60,
+      23,    60,    -1,    24,    60,    25,    -1
 };
 
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint16 yyrline[] =
 {
-       0,    77,    77,    78,    81,    82,    83,    84,    85,    88,
-      89,    90,    91,    92,    95,    96,    99,   100,   103,   106,
-     107,   110,   111,   114,   115,   118,   119,   123,   124,   125,
-     129,   130,   131,   135,   136,   137,   141,   141,   142,   142,
-     143,   143,   146,   148,   151,   154,   155,   159,   167,   215,
-     231,   249,   265,   285,   286,   289,   302,   305,   308,   309,
-     310,   314,   315,   316,   317,   318,   319,   322,   347,   348,
-     351,   352,   355,   356,   363,   364,   365,   369,   371,   374,
-     387,   400,   413,   415
+       0,    72,    72,    73,    76,    77,    78,    79,    84,    85,
+      86,    87,    88,    92,    93,    97,    98,   101,   104,   105,
+     108,   109,   112,   113,   116,   117,   120,   121,   122,   123,
+     126,   127,   128,   129,   130,   131,   132,   135,   136,   137,
+     138,   139,   140,   143,   143,   144,   144,   145,   145,   148,
+     149,   150,   153,   156,   157,   160,   169,   206,   221,   236,
+     251,   267,   269,   273,   283,   286,   289,   290,   291,   294,
+     295,   296,   297,   298,   299,   303,   328,   329,   332,   333,
+     336,   338,   347,   348,   349,   350,   354,   355,   357,   381,
+     399,   416,   433,   434
 };
 #endif
 
@@ -521,16 +524,16 @@ static const char *const yytname[] =
   "$end", "error", "$undefined", "TIPO_DE_DATO", "CONSTANTE_CARACTER",
   "IDENTIFICADOR", "LITERAL_CADENA", "TKN_VOID", "CONSTANTE_ENTERA",
   "CONSTANTE_REAL", "BREAK", "CONTINUE", "RETURN", "FOR", "DO", "WHILE",
-  "SWITCH", "IF", "ELSE", "'+'", "'-'", "'*'", "'/'", "'('", "')'",
-  "'\\n'", "';'", "'{'", "'}'", "','", "'='", "$accept", "input", "line",
+  "SWITCH", "IF", "TKN_ELSE", "'='", "'+'", "'-'", "'*'", "'/'", "'('",
+  "')'", "'\\n'", "';'", "'{'", "'}'", "','", "$accept", "input", "line",
   "sentencia", "sentenciaExpresion", "opExpresion", "sentenciaCompuesta",
   "opListaDeclaraciones", "listaDeclaraciones", "opListaDeSentencias",
   "listaDeSentencias", "sentenciaDeSeleccion", "sentenciaDeIteracion",
   "sentenciaDeSalto", "declaracion", "$@1", "$@2", "$@3", "declaraciones",
   "declaracionVariables", "listaVariables", "unaVariableSimple",
-  "declaracionDefinicionFuncion", "parametrosCuerpoFuncion",
-  "listaParametros", "parametros", "invocacionDeFuncion",
-  "listaArgumentos", "argumento", "expresion", 0
+  "declaracionDefinicionFuncion", "parametrosFuncion", "listaParametros",
+  "parametros", "invocacionDeFuncion", "listaArgumentos", "argumento",
+  "expresion", 0
 };
 #endif
 
@@ -540,37 +543,39 @@ static const char *const yytname[] =
 static const yytype_uint16 yytoknum[] =
 {
        0,   256,   257,   258,   259,   260,   261,   262,   263,   264,
-     265,   266,   267,   268,   269,   270,   271,   272,   273,    43,
-      45,    42,    47,    40,    41,    10,    59,   123,   125,    44,
-      61
+     265,   266,   267,   268,   269,   270,   271,   272,   273,    61,
+      43,    45,    42,    47,    40,    41,    10,    59,   123,   125,
+      44
 };
 # endif
 
 /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
 static const yytype_uint8 yyr1[] =
 {
-       0,    31,    32,    32,    33,    33,    33,    33,    33,    34,
-      34,    34,    34,    34,    35,    35,    36,    36,    37,    38,
-      38,    39,    39,    40,    40,    41,    41,    42,    42,    42,
-      43,    43,    43,    44,    44,    44,    46,    45,    47,    45,
-      48,    45,    49,    49,    50,    51,    51,    52,    52,    52,
-      52,    52,    52,    52,    52,    53,    53,    54,    55,    55,
-      55,    56,    56,    56,    56,    56,    56,    57,    57,    57,
-      58,    58,    59,    59,    59,    59,    59,    60,    60,    60,
+       0,    31,    32,    32,    33,    33,    33,    33,    34,    34,
+      34,    34,    34,    35,    35,    36,    36,    37,    38,    38,
+      39,    39,    40,    40,    41,    41,    42,    42,    42,    42,
+      43,    43,    43,    43,    43,    43,    43,    44,    44,    44,
+      44,    44,    44,    46,    45,    47,    45,    48,    45,    49,
+      49,    49,    50,    51,    51,    52,    52,    52,    52,    52,
+      52,    52,    52,    53,    53,    54,    55,    55,    55,    56,
+      56,    56,    56,    56,    56,    57,    57,    57,    58,    58,
+      59,    59,    59,    59,    59,    59,    60,    60,    60,    60,
       60,    60,    60,    60
 };
 
 /* YYR2[YYN] -- Number of symbols composing right hand side of rule YYN.  */
 static const yytype_uint8 yyr2[] =
 {
-       0,     2,     0,     2,     1,     2,     2,     2,     2,     1,
-       1,     1,     1,     1,     1,     2,     0,     1,     4,     0,
-       1,     1,     2,     0,     1,     1,     2,     5,     7,     5,
-       5,     7,     9,     2,     2,     3,     0,     3,     0,     4,
-       0,     3,     0,     2,     1,     1,     3,     1,     3,     3,
-       3,     3,     3,     3,     2,     2,     2,     4,     0,     1,
-       3,     2,     3,     2,     3,     2,     3,     4,     4,     4,
-       1,     3,     0,     1,     1,     1,     1,     1,     1,     3,
+       0,     2,     0,     2,     1,     1,     1,     1,     1,     1,
+       1,     1,     1,     2,     2,     0,     1,     4,     0,     1,
+       1,     2,     0,     1,     1,     2,     5,     5,     5,     5,
+       5,     5,     5,     7,     9,     9,     9,     2,     2,     2,
+       2,     3,     3,     0,     3,     0,     4,     0,     3,     1,
+       2,     2,     1,     1,     3,     1,     3,     3,     3,     3,
+       3,     3,     3,     2,     2,     4,     0,     1,     3,     2,
+       3,     2,     3,     2,     3,     5,     4,     4,     1,     3,
+       0,     1,     1,     1,     1,     1,     1,     1,     3,     3,
        3,     3,     3,     3
 };
 
@@ -579,131 +584,148 @@ static const yytype_uint8 yyr2[] =
    means the default is an error.  */
 static const yytype_uint8 yydefact[] =
 {
-       2,     0,     1,     0,    36,     0,    40,    77,    78,     0,
-       0,    16,     0,     0,     0,     0,     0,     0,     4,    14,
-      19,     3,     0,     9,    10,    12,    11,    13,     0,     0,
-       0,     8,    38,     0,    72,    72,     0,    34,    33,     0,
-      17,    16,     0,     0,     0,     0,     0,    23,    20,    21,
-       6,     5,     7,     0,     0,     0,     0,    15,     0,     0,
-      47,    37,     0,    44,    45,    76,    73,    74,    75,     0,
-      70,     0,     0,     0,    41,    35,     0,     0,     0,     0,
-       0,    83,    25,     0,    24,    22,    79,    80,    81,    82,
-      39,    54,     0,    43,     0,    68,    72,    69,    67,     0,
-      56,    55,    16,     0,     0,     0,     0,    18,    26,    53,
-      49,    48,    52,    50,    51,    46,    71,     0,     0,     0,
-      59,     0,     0,    30,    29,    27,    63,     0,    65,    61,
-       0,     0,     0,    16,     0,     0,    64,    66,    62,    57,
-      60,     0,    31,    28,     0,    32
+       2,    15,     1,    43,     0,    47,    86,    87,     0,     0,
+      15,     0,    15,     0,     0,     0,     0,     4,    18,     3,
+       6,     8,     0,     9,    11,    10,    12,     5,     7,    16,
+      45,     0,    80,     0,    80,     0,    40,    39,    38,    37,
+       0,     0,    15,    15,     0,     0,     0,     0,     0,     0,
+       0,    15,    19,    20,    14,    13,     0,     0,     0,     0,
+       0,     0,    55,    44,     0,    52,    53,    49,    84,    81,
+      82,    83,    85,     0,    78,    88,     0,     0,     0,    48,
+      42,    41,     0,     0,     0,     0,     0,     0,     0,     0,
+      93,    24,     0,    15,    21,    89,    90,    91,    92,    46,
+       0,     0,    64,     0,    63,    51,    50,     0,    76,    80,
+      77,     0,    15,    15,     0,    15,    15,    15,    15,    15,
+      15,    15,    17,    25,    62,     0,     0,     0,    67,    61,
+      57,    56,    60,    58,    59,     0,    55,    54,    79,    75,
+       0,     0,     0,    31,    32,    30,    29,    27,    28,    26,
+      71,     0,    73,    69,     0,     0,     0,    15,    15,     0,
+      72,    74,    70,    65,    68,     0,     0,    33,    15,    15,
+      15,    35,    36,    34
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
-static const yytype_int8 yydefgoto[] =
+static const yytype_int16 yydefgoto[] =
 {
-      -1,     1,    21,    22,    23,    39,    24,    47,    48,    83,
-      84,    25,    26,    27,    28,    33,    58,    36,    61,    62,
-      63,    64,    74,   100,   119,   120,    29,    69,    70,    30
+      -1,     1,    19,    20,    21,    22,    23,    51,    52,    92,
+      93,    24,    25,    26,    27,    31,    60,    35,    63,    64,
+      65,    66,    67,   102,   127,   128,    28,    73,    74,    29
 };
 
 /* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
    STATE-NUM.  */
-#define YYPACT_NINF -38
+#define YYPACT_NINF -53
 static const yytype_int16 yypact[] =
 {
-     -38,   101,   -38,   -11,    -9,     9,   -38,   -38,   -38,    -4,
-       1,    17,    18,    41,    21,    46,    74,    17,   -38,   -38,
-      16,   -38,    51,   -38,   -38,   -38,   -38,   -38,    59,    73,
-      53,   -38,   -38,   129,    55,    55,    37,   -38,   -38,    64,
-      67,    17,    84,    17,    17,    17,    61,    41,    16,   -38,
-     -38,   -38,   -38,    17,    17,    17,    17,   -38,   129,    70,
-      75,   -38,    77,   -38,    78,   -38,   -38,   -38,   -38,    95,
-      91,     5,    98,    98,   -38,   -38,    97,   106,   139,   145,
-     151,   -38,   -38,   105,    41,   -38,    56,    56,   -38,   -38,
-     -38,   -38,    12,   -38,    38,   -38,    55,   -38,   -38,     4,
-     -38,   -38,    17,    17,    41,    41,    41,   -38,   -38,   -38,
-     -38,   -38,   -38,   -38,   -38,   -38,   -38,     3,    10,   111,
-     118,   122,   157,   -38,   -38,   131,   -38,   146,   -38,   -38,
-      65,   124,     4,    17,   127,    41,   -38,   -38,   -38,   -38,
-     -38,   138,   -38,   -38,    41,   -38
+     -53,   113,   -53,   -18,    22,   -53,   -53,   -53,     1,     4,
+      86,    19,   159,    23,    -9,    29,    86,   -53,    51,   -53,
+     -53,   -53,     5,   -53,   -53,   -53,   -53,   -53,   -53,   203,
+     -53,   139,   173,    86,   173,   179,   -53,   -53,   -53,   -53,
+     -10,     6,    86,    86,    12,    86,    86,    86,    86,    86,
+     168,    58,    51,   -53,   -53,   -53,    86,    86,    86,    86,
+     139,    -2,    60,   -53,     7,   -53,    -1,   -53,   -53,   -53,
+     -53,   -53,   -53,    -7,    27,   203,    13,    40,    40,   -53,
+     -53,   -53,    38,    53,    54,   174,    76,   180,   186,   111,
+     -53,   -53,    73,   137,   -53,    33,    33,   -53,   -53,   -53,
+     103,    10,   -53,    84,   -53,   -53,   -53,   215,   -53,   173,
+     -53,    92,    86,    86,    86,   159,   159,   159,   159,   159,
+     159,   159,   -53,   -53,   -53,    78,    20,   110,   108,   -53,
+     -53,   -53,   -53,   -53,   -53,   124,   136,   -53,   -53,   -53,
+     135,   158,   192,   -53,   -53,   -53,   -53,   -53,   -53,   -53,
+     -53,   181,   -53,   -53,   217,   165,    10,    86,    86,   171,
+     -53,   -53,   -53,   -53,   -53,   138,    15,   -53,   159,   159,
+     159,   -53,   -53,   -53
 };
 
 /* YYPGOTO[NTERM-NUM].  */
-static const yytype_int8 yypgoto[] =
+static const yytype_int16 yypgoto[] =
 {
-     -38,   -38,   -38,   -13,   -38,   -37,   -38,   -38,   -38,   -38,
-     -38,   -38,   -38,   -38,   -18,   -38,   -38,   -38,   110,   -38,
-      80,   -38,   -38,   107,    50,   -38,   -38,   -34,   -38,    -8
+     -53,   -53,   -53,   -12,   -53,     2,   -53,   -53,   -53,   -53,
+     -53,   -53,   -53,   -53,   -15,   -53,   -53,   -53,   144,   -53,
+     112,   -53,   175,   -52,    65,   -53,   -53,   -33,   -53,     3
 };
 
 /* YYTABLE[YYPACT[STATE-NUM]].  What to do in state STATE-NUM.  If
    positive, shift that token.  If negative, reduce the rule which
    number is the opposite.  If zero, do what YYDEFACT says.
    If YYTABLE_NINF, syntax error.  */
-#define YYTABLE_NINF -59
+#define YYTABLE_NINF -67
 static const yytype_int16 yytable[] =
 {
-      42,    71,    49,    40,    76,   117,    97,   118,   126,    46,
-      34,   128,    32,   109,    31,   129,   110,   111,   112,     4,
-     113,   114,    37,     6,   127,     7,     8,    38,   -58,    98,
-      85,   130,    35,    40,    82,    78,    79,    80,    72,    59,
-      17,    41,    73,    60,    43,    86,    87,    88,    89,     7,
-       8,     9,    10,    11,    12,    13,    14,    15,    16,    65,
-      66,    67,   116,    68,    17,   121,   137,    19,    20,    44,
-     138,   108,    53,    54,    55,    56,    50,    55,    56,    57,
-      53,    54,    55,    56,    51,    81,    53,    54,    55,    56,
-      75,   123,   124,   125,    40,   122,   141,    45,    52,    77,
-      91,     2,     3,    93,     4,    92,     5,    94,     6,     7,
-       8,     9,    10,    11,    12,    13,    14,    15,    16,    95,
-      96,    99,   143,   102,    17,    40,    18,    19,    20,   103,
-      59,   145,   -42,   107,    60,   131,   -42,   -42,   -42,   -42,
-     -42,   -42,   -42,   -42,   -42,   -42,   -42,   132,   133,   135,
-     139,   136,   -42,   142,   -42,   -42,   -42,   -42,    53,    54,
-      55,    56,   144,   104,    53,    54,    55,    56,    90,   105,
-      53,    54,    55,    56,   115,   106,    53,    54,    55,    56,
-     101,   134,   140
+      44,    76,    36,    53,    30,    38,    54,    80,   105,    33,
+     104,   125,    41,   126,   110,    47,   169,   100,   108,    50,
+      42,   152,   101,    32,    45,   153,   104,    84,    37,   107,
+      48,    39,    55,    81,   106,   -66,    75,    94,   111,    91,
+     170,    33,   154,    43,    82,    83,    34,    46,    85,    86,
+      87,    88,    89,    49,     3,    58,    59,   109,     5,    95,
+      96,    97,    98,    40,   101,   112,     6,     7,     8,     9,
+      10,    11,    12,    13,    14,    15,   138,   116,   114,   103,
+     113,   123,    16,   150,   101,   129,    18,   -22,   130,   131,
+     132,    40,   133,   134,     6,     7,    56,    57,    58,    59,
+     151,   117,   122,   143,   144,   145,   146,   147,   148,   149,
+      16,   124,   120,     2,   140,   141,     3,   142,     4,   139,
+       5,     6,     7,     8,     9,    10,    11,    12,    13,    14,
+      15,    56,    57,    58,    59,   155,   121,    16,   156,    17,
+      61,    18,    40,   100,    62,     6,     7,     8,     9,    10,
+      11,    12,    13,    14,    15,   103,   171,   172,   173,   165,
+     166,    16,   157,   168,    40,    18,   -23,     6,     7,     8,
+       9,    10,    11,    12,    13,    14,    15,    68,    69,    70,
+      77,    71,    72,    16,    78,   158,   160,    18,    56,    57,
+      58,    59,   163,    90,    56,    57,    58,    59,   167,   115,
+      56,    57,    58,    59,    99,   118,    56,    57,    58,    59,
+      79,   119,    56,    57,    58,    59,   135,   159,   161,   137,
+     136,   164,   162,    56,    57,    58,    59
 };
 
 static const yytype_uint8 yycheck[] =
 {
-      13,    35,    20,    11,    41,     1,     1,     3,     5,    17,
-       1,     1,    21,     1,    25,     5,     4,     5,     6,     3,
-       8,     9,    26,     7,    21,     8,     9,    26,    24,    24,
-      48,    21,    23,    41,    47,    43,    44,    45,     1,     1,
-      23,    23,     5,     5,    23,    53,    54,    55,    56,     8,
-       9,    10,    11,    12,    13,    14,    15,    16,    17,     4,
-       5,     6,    96,     8,    23,   102,     1,    26,    27,    23,
-       5,    84,    19,    20,    21,    22,    25,    21,    22,    26,
-      19,    20,    21,    22,    25,    24,    19,    20,    21,    22,
-      26,   104,   105,   106,   102,   103,   133,    23,    25,    15,
-      30,     0,     1,    26,     3,    30,     5,    29,     7,     8,
-       9,    10,    11,    12,    13,    14,    15,    16,    17,    24,
-      29,    23,   135,    26,    23,   133,    25,    26,    27,    23,
-       1,   144,     3,    28,     5,    24,     7,     8,     9,    10,
-      11,    12,    13,    14,    15,    16,    17,    29,    26,    18,
-      26,     5,    23,    26,    25,    26,    27,    28,    19,    20,
-      21,    22,    24,    24,    19,    20,    21,    22,    58,    24,
-      19,    20,    21,    22,    94,    24,    19,    20,    21,    22,
-      73,    24,   132
+      12,    34,     1,    18,    22,     1,     1,     1,     1,    19,
+      62,     1,    10,     3,     1,    24,     1,    19,    25,    16,
+       1,     1,    24,     1,     1,     5,    78,    15,    27,    30,
+       1,    27,    27,    27,    27,    25,    33,    52,    25,    51,
+      25,    19,    22,    24,    42,    43,    24,    24,    45,    46,
+      47,    48,    49,    24,     3,    22,    23,    30,     7,    56,
+      57,    58,    59,     5,    24,    27,     8,     9,    10,    11,
+      12,    13,    14,    15,    16,    17,   109,     1,    24,    19,
+      27,    93,    24,     5,    24,     1,    28,    29,     4,     5,
+       6,     5,     8,     9,     8,     9,    20,    21,    22,    23,
+      22,    25,    29,   115,   116,   117,   118,   119,   120,   121,
+      24,     8,     1,     0,   112,   113,     3,   114,     5,    27,
+       7,     8,     9,    10,    11,    12,    13,    14,    15,    16,
+      17,    20,    21,    22,    23,    25,    25,    24,    30,    26,
+       1,    28,     5,    19,     5,     8,     9,    10,    11,    12,
+      13,    14,    15,    16,    17,    19,   168,   169,   170,   157,
+     158,    24,    27,    25,     5,    28,    29,     8,     9,    10,
+      11,    12,    13,    14,    15,    16,    17,     4,     5,     6,
+       1,     8,     9,    24,     5,    27,     5,    28,    20,    21,
+      22,    23,    27,    25,    20,    21,    22,    23,    27,    25,
+      20,    21,    22,    23,    60,    25,    20,    21,    22,    23,
+      35,    25,    20,    21,    22,    23,     1,    25,     1,   107,
+       5,   156,     5,    20,    21,    22,    23
 };
 
 /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
    symbol of state STATE-NUM.  */
 static const yytype_uint8 yystos[] =
 {
-       0,    32,     0,     1,     3,     5,     7,     8,     9,    10,
-      11,    12,    13,    14,    15,    16,    17,    23,    25,    26,
-      27,    33,    34,    35,    37,    42,    43,    44,    45,    57,
-      60,    25,    21,    46,     1,    23,    48,    26,    26,    36,
-      60,    23,    34,    23,    23,    23,    60,    38,    39,    45,
-      25,    25,    25,    19,    20,    21,    22,    26,    47,     1,
-       5,    49,    50,    51,    52,     4,     5,     6,     8,    58,
-      59,    58,     1,     5,    53,    26,    36,    15,    60,    60,
-      60,    24,    34,    40,    41,    45,    60,    60,    60,    60,
-      49,    30,    30,    26,    29,    24,    29,     1,    24,    23,
-      54,    54,    26,    23,    24,    24,    24,    28,    34,     1,
-       4,     5,     6,     8,     9,    51,    58,     1,     3,    55,
-      56,    36,    60,    34,    34,    34,     5,    21,     1,     5,
-      21,    24,    29,    26,    24,    18,     5,     1,     5,    26,
-      55,    36,    26,    34,    24,    34
+       0,    32,     0,     3,     5,     7,     8,     9,    10,    11,
+      12,    13,    14,    15,    16,    17,    24,    26,    28,    33,
+      34,    35,    36,    37,    42,    43,    44,    45,    57,    60,
+      22,    46,     1,    19,    24,    48,     1,    27,     1,    27,
+       5,    36,     1,    24,    34,     1,    24,    24,     1,    24,
+      60,    38,    39,    45,     1,    27,    20,    21,    22,    23,
+      47,     1,     5,    49,    50,    51,    52,    53,     4,     5,
+       6,     8,     9,    58,    59,    60,    58,     1,     5,    53,
+       1,    27,    36,    36,    15,    60,    60,    60,    60,    60,
+      25,    34,    40,    41,    45,    60,    60,    60,    60,    49,
+      19,    24,    54,    19,    54,     1,    27,    30,    25,    30,
+       1,    25,    27,    27,    24,    25,     1,    25,    25,    25,
+       1,    25,    29,    34,     8,     1,     3,    55,    56,     1,
+       4,     5,     6,     8,     9,     1,     5,    51,    58,    27,
+      36,    36,    60,    34,    34,    34,    34,    34,    34,    34,
+       5,    22,     1,     5,    22,    25,    30,    27,    27,    25,
+       5,     1,     5,    27,    55,    36,    36,    27,    25,     1,
+      25,    34,    34,    34
 };
 
 #define yyerrok		(yyerrstatus = 0)
@@ -1514,532 +1536,598 @@ yyreduce:
   YY_REDUCE_PRINT (yyn);
   switch (yyn)
     {
-        case 5:
+        case 14:
 
 /* Line 1455 of yacc.c  */
-#line 82 "TP5.y"
-    {yylineno++; ;}
+#line 93 "TP5.y"
+    { agregarErrorSintactico("ERROR, Falta ';' al Final de la Linea",yylineno); ;}
     break;
 
-  case 6:
+  case 15:
 
 /* Line 1455 of yacc.c  */
-#line 83 "TP5.y"
-    {yylineno++; ;}
+#line 97 "TP5.y"
+    { printf("Linea %i:  Se encontro una sentencia vacia\n\n",yylineno); ;}
     break;
 
-  case 7:
+  case 19:
 
 /* Line 1455 of yacc.c  */
-#line 84 "TP5.y"
-    {yylineno++; ;}
+#line 105 "TP5.y"
+    { printf("Linea %i:  Se encontro una sentencia compuesta con una lista de declaraciones\n\n",yylineno); ;}
     break;
 
-  case 8:
+  case 23:
 
 /* Line 1455 of yacc.c  */
-#line 85 "TP5.y"
-    { agregarErrorSintactico("\nSe detecto un error sintactico en la linea",yylineno);yylineno++;}
+#line 113 "TP5.y"
+    { printf("Linea %i:  Se encontro una sentencia compuesta con una lista de sentencias\n\n",yylineno);    ;}
     break;
 
-  case 16:
+  case 26:
 
 /* Line 1455 of yacc.c  */
-#line 99 "TP5.y"
-    { printf("Se encontro una sentencia vacia\n"); ;}
-    break;
-
-  case 20:
-
-/* Line 1455 of yacc.c  */
-#line 107 "TP5.y"
-    { printf("Se encontro una sentencia compuesta con una lista de declaraciones\n"); ;}
-    break;
-
-  case 24:
-
-/* Line 1455 of yacc.c  */
-#line 115 "TP5.y"
-    { printf("Se encontro una sentencia compuesta con una lista de sentencias\n"); ;}
+#line 120 "TP5.y"
+    { printf("Linea %i:  Se encontro una sentencia IF\n\n",yylineno);            ;}
     break;
 
   case 27:
 
 /* Line 1455 of yacc.c  */
-#line 123 "TP5.y"
-    { printf("Se encontro una sentencia IF\n"); ;}
+#line 121 "TP5.y"
+    { agregarErrorSintactico("ERROR, Falta '(' en la sentencia IF",yylineno);    ;}
     break;
 
   case 28:
 
 /* Line 1455 of yacc.c  */
-#line 124 "TP5.y"
-    { printf("Se encontro una sentencia IF ELSE\n"); ;}
+#line 122 "TP5.y"
+    { agregarErrorSintactico("ERROR, Falta ')' en la sentencia IF",yylineno);    ;}
     break;
 
   case 29:
 
 /* Line 1455 of yacc.c  */
-#line 125 "TP5.y"
-    { printf("Se encontro una sentencia SWITCH\n"); ;}
+#line 123 "TP5.y"
+    { printf("Linea %i:  Se encontro una sentencia SWITCH\n\n",yylineno);        ;}
     break;
 
   case 30:
 
 /* Line 1455 of yacc.c  */
-#line 129 "TP5.y"
-    { printf("Se encontro la sentencia WHILE\n"); ;}
+#line 126 "TP5.y"
+    { printf("Linea %i:  Se encontro una sentencia WHILE\n\n",yylineno);         ;}
     break;
 
   case 31:
 
 /* Line 1455 of yacc.c  */
-#line 130 "TP5.y"
-    { printf("Se encontro una sentencia DO\n");   ;}
+#line 127 "TP5.y"
+    { agregarErrorSintactico("ERROR, Falta '(' en la sentencia WHILE",yylineno); ;}
     break;
 
   case 32:
 
 /* Line 1455 of yacc.c  */
-#line 131 "TP5.y"
-    { printf("Se encontro una sentencia FOR\n");  ;}
+#line 128 "TP5.y"
+    { agregarErrorSintactico("ERROR, Falta ')' en la sentencia WHILE",yylineno); ;}
     break;
 
   case 33:
 
 /* Line 1455 of yacc.c  */
-#line 135 "TP5.y"
-    { printf("Se encontro la sentencia CONTINUE\n"); ;}
+#line 129 "TP5.y"
+    { printf("Linea %i:  Se encontro una sentencia DO\n\n",yylineno);            ;}
     break;
 
   case 34:
 
 /* Line 1455 of yacc.c  */
-#line 136 "TP5.y"
-    { printf("Se encontro la sentencia BREAK\n");    ;}
+#line 130 "TP5.y"
+    { printf("Linea %i:  Se encontro una sentencia FOR\n\n",yylineno);           ;}
     break;
 
   case 35:
 
 /* Line 1455 of yacc.c  */
-#line 137 "TP5.y"
-    { printf("Se encontro la sentencia RETURN\n");   ;}
+#line 131 "TP5.y"
+    { agregarErrorSintactico("ERROR, Falta '(' en la sentencia FOR", yylineno);  ;}
     break;
 
   case 36:
 
 /* Line 1455 of yacc.c  */
-#line 141 "TP5.y"
-    { tipo = (yyvsp[(1) - (1)].cadena);             ;}
+#line 132 "TP5.y"
+    { agregarErrorSintactico("ERROR, Falta '(' en la sentencia FOR", yylineno);  ;}
+    break;
+
+  case 37:
+
+/* Line 1455 of yacc.c  */
+#line 135 "TP5.y"
+    { printf("Linea %i:  Se encontro la sentencia CONTINUE\n\n",yylineno);       ;}
     break;
 
   case 38:
 
 /* Line 1455 of yacc.c  */
-#line 142 "TP5.y"
-    { tipo = strcat((yyvsp[(1) - (2)].cadena),"*"); ;}
+#line 136 "TP5.y"
+    { agregarErrorSintactico("ERROR, Falta ';' al Final de la Linea",yylineno);  ;}
+    break;
+
+  case 39:
+
+/* Line 1455 of yacc.c  */
+#line 137 "TP5.y"
+    { printf("Linea %i:  Se encontro la sentencia BREAK\n\n",yylineno);          ;}
     break;
 
   case 40:
 
 /* Line 1455 of yacc.c  */
+#line 138 "TP5.y"
+    { agregarErrorSintactico("ERROR, Falta ';' al Final de la Linea",yylineno);  ;}
+    break;
+
+  case 41:
+
+/* Line 1455 of yacc.c  */
+#line 139 "TP5.y"
+    { printf("Linea %i:  Se encontro la sentencia RETURN\n\n",yylineno);         ;}
+    break;
+
+  case 42:
+
+/* Line 1455 of yacc.c  */
+#line 140 "TP5.y"
+    { agregarErrorSintactico("ERROR, Falta ';' al Final de la Linea",yylineno);  ;}
+    break;
+
+  case 43:
+
+/* Line 1455 of yacc.c  */
 #line 143 "TP5.y"
-    { tipo = "void";                 ;}
+    { tipo = (yyvsp[(1) - (1)].cadena);;}
+    break;
+
+  case 45:
+
+/* Line 1455 of yacc.c  */
+#line 144 "TP5.y"
+    { tipo = strcat((yyvsp[(1) - (2)].cadena),"*");;}
     break;
 
   case 47:
 
 /* Line 1455 of yacc.c  */
-#line 160 "TP5.y"
-    {
-                        aux = buscoSimbolo((yyvsp[(1) - (1)].cadena)); 
-                        if (aux) agregarErrorSemantico("ERROR: La variable ya fue declarada.",yylineno); 
-                        else 
-                        declararVariable1((yyvsp[(1) - (1)].cadena),tipo);
-                ;}
-    break;
-
-  case 48:
-
-/* Line 1455 of yacc.c  */
-#line 168 "TP5.y"
-    {
-                        aux = buscoSimbolo((yyvsp[(1) - (3)].cadena)); 
-                        if (aux) 
-                        agregarErrorSemantico("ERROR: La variable ya fue declarada.",yylineno);
-                        else  
-                        {
-                                symrec *aux2 = buscoSimbolo((yyvsp[(3) - (3)].cadena)); //busco el 2do identificador
-                                if (aux2 && (strcmp(tipo, aux2->tipo) == 0)) { // si existe el identificador y ademas su tipo coincide con el tipo actual 
-
-                                        aux = agregoSimbolo((yyvsp[(1) - (3)].cadena) , tipo, 1); 
-
-                                        if (strcmp("int", aux->tipo) == 0)  {
-                                                aux->value.valEnt = aux2->value.valEnt; 
-                                                printf("\nSe declara la variable %s de tipo %s con valor %i\n\n",aux->nombre,aux->tipo, aux->value.valEnt);    
-                                        }
-                                        
-                                        if (strcmp("float", aux->tipo) == 0)  {
-                                                aux->value.valReal = aux2->value.valReal; 
-                                                printf("\nSe declara la variable %s de tipo %s con valor %f\n\n",aux->nombre,aux->tipo, aux->value.valReal);
-                                        }
-
-                                        if (strcmp("char", aux->tipo) == 0)  {
-                                                aux->value.valChar = aux2->value.valChar;
-                                                printf("\nSe declara la variable %s de tipo %s con valor %c\n\n",aux->nombre,aux->tipo, aux->value.valChar);
-                                        }
-                                        
-                                        if (strcmp("char*", aux->tipo) == 0)  {
-                                                aux->value.valString = aux2->value.valString;
-                                                printf("\nSe declara la variable %s de tipo %s con valor %s\n\n",aux->nombre,aux->tipo, aux->value.valString);
-                                        }
-                                                       
-
-                                }   
-
-                                        
-                                if (aux2 && (strcmp(tipo, aux2->tipo) != 0))
-                                        agregarErrorSemantico("ERROR: Las variables son de distinto tipo.",yylineno);
-
-                                if (aux2 == NULL) 
-                                        agregarErrorSemantico("ERROR : La variable que se encuentra a la derecha de la asignación NO está declarada.",yylineno);
-
-                                                                                                                    
-                                       
-                        }
-                ;}
-    break;
-
-  case 49:
-
-/* Line 1455 of yacc.c  */
-#line 216 "TP5.y"
-    {
-                        aux = buscoSimbolo((yyvsp[(1) - (3)].cadena)); 
-                        if (aux) 
-                                agregarErrorSemantico("ERROR : La variable ya fue declarada.", yylineno); 
-                        else {
-                                if (strcmp(tipo, "char") == 0) {
-                                        aux = agregoSimbolo(strdup((yyvsp[(1) - (3)].cadena)), tipo, 1);  
-                                        aux->value.valChar = (yyvsp[(3) - (3)].caracter); 
-                                        printf("\nSe declara la variable %s de tipo %s con valor %c\n\n",aux->nombre,aux->tipo, aux->value.valChar);
-                                }
-                                else 
-                                agregarErrorSemantico("ERROR : No coincide el tipo de la variable con el asignado.",yylineno);
-                        }
-                ;}
-    break;
-
-  case 50:
-
-/* Line 1455 of yacc.c  */
-#line 232 "TP5.y"
-    {
-                        aux = buscoSimbolo((yyvsp[(1) - (3)].cadena)); 
-                        if (aux) 
-                        agregarErrorSemantico("Error : La variable ya fue declarada.",yylineno); 
-                        else  {
-                                                                                
-                                if (strcmp(tipo,"int") == 0)  {
-                                        aux = agregoSimbolo(strdup((yyvsp[(1) - (3)].cadena)) , tipo, 1);  
-                                        aux->value.valEnt = (yyvsp[(3) - (3)].mystruct).valor_entero; 
-                                        printf("\nSe declara la variable %s de tipo %s con valor %i\n\n",aux->nombre,aux->tipo, aux->value.valEnt);
-                                } 
-                                else 
-                                        agregarErrorSemantico("Error : No coincide el tipo de la variable con el asignado.",yylineno);
-                                                                        
-                        }
-                ;}
+#line 145 "TP5.y"
+    { tipo = "void"; ;}
     break;
 
   case 51:
 
 /* Line 1455 of yacc.c  */
-#line 250 "TP5.y"
-    { 
-                        aux = buscoSimbolo((yyvsp[(1) - (3)].cadena)); 
-                        if (aux) 
-                                agregarErrorSemantico("Error  : La variable ya fue declarada.",yylineno); 
-                        else {
-                                if (strcmp(tipo, "float") == 0) {
-                                        aux = agregoSimbolo((yyvsp[(1) - (3)].cadena) , tipo, 1);  
-                                        aux->value.valReal = (yyvsp[(3) - (3)].mystruct).valor_real; 
-                                        printf("\nSe declara la variable %s de tipo %s con valor %f\n\n",aux->nombre,aux->tipo, aux->value.valReal);
-                                } 
-                                else 
-                                        agregarErrorSemantico("Error : No coincide el tipo de la variable con el asignado.",yylineno);
-                        }
-                ;}
-    break;
-
-  case 52:
-
-/* Line 1455 of yacc.c  */
-#line 266 "TP5.y"
-    {
-                        aux = buscoSimbolo((yyvsp[(1) - (3)].cadena)); 
-                        if (aux) 
-                                agregarErrorSemantico("Error : La variable ya fue declarada.",yylineno);
-                        else {
-                                if (strcmp(tipo, "char*") == 0) {
-                                        aux = agregoSimbolo(strdup((yyvsp[(1) - (3)].cadena)) , tipo, 1);  
-                                        aux->value.valString = (yyvsp[(3) - (3)].cadena); 
-                                        printf("\nSe declara la variable %s de tipo %s con valor %s\n\n",aux->nombre,aux->tipo, aux->value.valString);
-                                } 
-                                else 
-                                        agregarErrorSemantico("Error : No coincide el tipo de la variable con el asignado.",yylineno);
-                        }
-
-
-                ;}
-    break;
-
-  case 53:
-
-/* Line 1455 of yacc.c  */
-#line 285 "TP5.y"
-    { agregarErrorSintactico("Error :  Falta el valor asignado.",yylineno); ;}
-    break;
-
-  case 54:
-
-/* Line 1455 of yacc.c  */
-#line 286 "TP5.y"
-    { agregarErrorSintactico("Error : Identificador incorrecto.",yylineno); ;}
+#line 150 "TP5.y"
+    { agregarErrorSintactico("ERROR, Falta ';' al Final de la Linea",yylineno); ;}
     break;
 
   case 55:
 
 /* Line 1455 of yacc.c  */
-#line 290 "TP5.y"
-    { 
-                                                                        aux = buscoSimbolo((yyvsp[(1) - (2)].cadena)); 
-                                                                        if (aux)  
-                                                                        agregarErrorSemantico("Error: el identificador ya esta declarado",yylineno); 
-                                                                        else {
-                                                                                aux=agregoSimbolo((yyvsp[(1) - (2)].cadena), tipo, 2);   
-                                                                                aux->tiposParametros = listaParametrosAux; 
-                                                                        }
-                                                                        listaParametrosAux = NULL; 
-                                                                ;}
+#line 161 "TP5.y"
+    {
+                                                aux = buscoSimbolo((yyvsp[(1) - (1)].cadena)); 
+                                                if (aux) 
+                                                        agregarErrorSemantico("ERROR, Doble Declaracion De Variables",yylineno); 
+                                                else 
+                                                        declararVariable1((yyvsp[(1) - (1)].cadena),tipo);
+                                        ;}
     break;
 
   case 56:
 
 /* Line 1455 of yacc.c  */
-#line 302 "TP5.y"
-    {  agregarErrorSemantico("Error: nombre de la funcion incorrecto",yylineno);;}
+#line 170 "TP5.y"
+    {
+                                                                        aux = buscoSimbolo((yyvsp[(1) - (3)].cadena)); 
+                                                                        if (aux) 
+                                                                                agregarErrorSemantico("ERROR, Doble Declaracion De Variables",yylineno);
+                                                                        else  {
+                                                                                symrec *aux2=buscoSimbolo((yyvsp[(3) - (3)].cadena)); 
+                                                        
+                                                                                if (aux2 && (strcmp(tipo, aux2->tipo) == 0)) { 
+                                                                                        aux = agregoSimbolo((yyvsp[(1) - (3)].cadena) , tipo, 1); 
+
+                                                                                        if (strcmp("int", aux->tipo) == 0) {
+                                                                                                aux->value.valEnt = aux2->value.valEnt;  
+                                                                                        }
+
+                                                                                        if (strcmp("float", aux->tipo) == 0) {
+                                                                                                aux->value.valReal = aux2->value.valReal; 
+                                                                                        }
+
+                                                                                        if (strcmp("char", aux->tipo) == 0) {
+                                                                                                aux->value.valChar = aux2->value.valChar ;  
+                                                                                        }       
+
+                                                                                        if (strcmp("char*", aux->tipo) == 0) {
+                                                                                                aux->value.valString = aux2->value.valString;  
+                                                                                        } 
+                                                                                }   
+                                        
+                                                                                if (aux2 && (strcmp(tipo, aux2->tipo) != 0))
+                                                                                        agregarErrorSemantico("ERROR, Las Variables Son De Distinto Tipo",yylineno);
+
+                                                                                if (aux2 == NULL) 
+                                                                                        agregarErrorSemantico("ERROR, La Variable que esta a la Derecha de la Asignacion NO esta Declarada",yylineno);  
+                                                                        } 
+                                                                ;}
+    break;
+
+  case 57:
+
+/* Line 1455 of yacc.c  */
+#line 207 "TP5.y"
+    {
+                                                                        aux = buscoSimbolo((yyvsp[(1) - (3)].cadena)); 
+                                                                        if (aux) 
+                                                                                agregarErrorSemantico("ERROR, Doble Declaracion De Variables", yylineno); 
+                                                                        else {
+                                                                                if (strcmp(tipo, "char") == 0) {
+                                                                                        aux = agregoSimbolo(strdup((yyvsp[(1) - (3)].cadena)), tipo, 1);  
+                                                                                        aux->value.valChar = (yyvsp[(3) - (3)].caracter);   
+                                                                                }
+                                                                                else 
+                                                                                        agregarErrorSemantico("ERROR, Son De Distinto Tipo",yylineno); 
+                                                                        }  
+                                                                ;}
     break;
 
   case 58:
 
 /* Line 1455 of yacc.c  */
-#line 308 "TP5.y"
-    { agregoParametro("void");;}
+#line 222 "TP5.y"
+    {
+                                                                        aux = buscoSimbolo((yyvsp[(1) - (3)].cadena)); 
+                                                                        if (aux) 
+                                                                                agregarErrorSemantico("ERROR, Doble Declaracion De Variables",yylineno); 
+                                                                        else  {
+                                                                                if (strcmp(tipo,"int") == 0) {
+                                                                                        aux = agregoSimbolo(strdup((yyvsp[(1) - (3)].cadena)) , tipo, 1);  
+                                                                                        aux->value.valEnt = (yyvsp[(3) - (3)].mystruct).valor_entero; 
+                                                                                } 
+                                                                                else 
+                                                                                        agregarErrorSemantico("ERROR, Son De Distinto Tipo",yylineno); 
+                                                                        } 
+                                                                ;}
+    break;
+
+  case 59:
+
+/* Line 1455 of yacc.c  */
+#line 237 "TP5.y"
+    { 
+                                                                        aux = buscoSimbolo((yyvsp[(1) - (3)].cadena)); 
+                                                                        if (aux) 
+                                                                                agregarErrorSemantico("ERROR, Doble Declaracion De Variables",yylineno); 
+                                                                        else {
+                                                                                if (strcmp(tipo, "float") == 0) {
+                                                                                        aux = agregoSimbolo((yyvsp[(1) - (3)].cadena) , tipo, 1);  
+                                                                                        aux->value.valReal = (yyvsp[(3) - (3)].mystruct).valor_real;  
+                                                                                } 
+                                                                                else 
+                                                                                        agregarErrorSemantico("ERROR, Son De Distinto Tipo",yylineno);
+                                                                        } 
+                                                                ;}
+    break;
+
+  case 60:
+
+/* Line 1455 of yacc.c  */
+#line 252 "TP5.y"
+    {
+                                                                        aux=buscoSimbolo((yyvsp[(1) - (3)].cadena)); 
+                                                                        if (aux)  
+                                                                                agregarErrorSemantico("ERROR, Doble Declaracion De Variables",yylineno);
+                                                                        else {
+                                                                                if (strcmp(tipo, "char*") == 0) {
+                                                                                        aux = agregoSimbolo(strdup((yyvsp[(1) - (3)].cadena)) , tipo, 1);  
+                                                                                        aux->value.valString = (yyvsp[(3) - (3)].cadena); } 
+                                                                                else 
+                                                                                        agregarErrorSemantico("ERROR, Son De Distinto Tipo",yylineno);  
+                                                                        } 
+                                                                ;}
     break;
 
   case 61:
 
 /* Line 1455 of yacc.c  */
-#line 314 "TP5.y"
-    { agregoParametro((yyvsp[(1) - (2)].cadena));;}
+#line 267 "TP5.y"
+    { agregarErrorSintactico("ERROR, Se intento Inicializar Con Un Valor Incorrecto",yylineno); ;}
     break;
 
   case 62:
 
 /* Line 1455 of yacc.c  */
-#line 315 "TP5.y"
-    { agregoParametro(strcat(tipo,"*"));;}
+#line 269 "TP5.y"
+    { agregarErrorSintactico("ERROR, Identificador Incorrecto de la Variable a Declarar con Inicializacion",yylineno);;}
     break;
 
   case 63:
 
 /* Line 1455 of yacc.c  */
-#line 316 "TP5.y"
-    { agregarErrorSemantico("ERROR : Falta el tipo de dato del parametro.",yylineno);;}
+#line 273 "TP5.y"
+    { 
+                                                                        aux=buscoSimbolo((yyvsp[(1) - (2)].cadena)); 
+                                                                        if (aux)  agregarErrorSemantico("ERROR, El Identificador ya esta Declarado",yylineno); 
+                                                                        else {
+                                                                                aux=agregoSimbolo((yyvsp[(1) - (2)].cadena) , tipo, 2);   
+                                                                                aux->tiposParametros = listaParametrosAux;  }
+
+                                                                                  listaParametrosAux = NULL; ;}
     break;
 
   case 64:
 
 /* Line 1455 of yacc.c  */
-#line 317 "TP5.y"
-    { agregarErrorSemantico("ERROR : Falta el tipo de dato del puntero parametro.",yylineno);;}
-    break;
-
-  case 65:
-
-/* Line 1455 of yacc.c  */
-#line 318 "TP5.y"
-    { agregarErrorSemantico("ERROR : Falta el identificador en el parametro.",yylineno);;}
+#line 283 "TP5.y"
+    {  agregarErrorSintactico("ERROR, Nombre de la Funcion Incorrecto",yylineno);;}
     break;
 
   case 66:
 
 /* Line 1455 of yacc.c  */
-#line 319 "TP5.y"
-    { agregarErrorSemantico("ERROR : Falta el identificador del puntero del parametro.",yylineno);;}
-    break;
-
-  case 67:
-
-/* Line 1455 of yacc.c  */
-#line 323 "TP5.y"
-    {
-                                                                aux = buscoSimbolo((yyvsp[(1) - (4)].cadena));  
-                                                                if (aux) { 
-                                                                        if(aux->type == 1){
-                                                                                agregarErrorSemantico("Error: El IDENTIFICADOR esta declarado como variable.",yylineno);} 
-                     
-                                                                        if (compararParametros(aux->tiposParametros, listaParametrosAux) == 1){
-                                                                                agregarErrorSemantico("Error: La cantidad o tipos de parametros son incorrectos.",yylineno);} 
-                        
-                                                                        if (compararParametros(aux->tiposParametros, listaParametrosAux) == 0){
-                                                                                agregarErrorSemantico("\nCantidad y tipos de parametros correctos",yylineno);} 
-
-                                                                } 
-                                                                else {
-                                                                        agregarErrorSemantico("Error: No está declarada la función.",yylineno); 
-                                                                }
-                                                                
-                                                                listaParametrosAux = NULL;
-                         
-                                                                ;}
-    break;
-
-  case 68:
-
-/* Line 1455 of yacc.c  */
-#line 347 "TP5.y"
-    { agregarErrorSintactico("ERROR : falta '(' en la invocacion de la función.",yylineno); ;}
+#line 289 "TP5.y"
+    { agregoParametro("void");;}
     break;
 
   case 69:
 
 /* Line 1455 of yacc.c  */
-#line 348 "TP5.y"
-    { agregarErrorSintactico("ERROR : falta ')' en la invocacion de la función.",yylineno); ;}
+#line 294 "TP5.y"
+    { agregoParametro((yyvsp[(1) - (2)].cadena));;}
+    break;
+
+  case 70:
+
+/* Line 1455 of yacc.c  */
+#line 295 "TP5.y"
+    { agregoParametro(strcat(tipo,"*"));;}
+    break;
+
+  case 71:
+
+/* Line 1455 of yacc.c  */
+#line 296 "TP5.y"
+    { agregarErrorSintactico("ERROR, Falta tipo de dato del parametro",yylineno);;}
     break;
 
   case 72:
 
 /* Line 1455 of yacc.c  */
-#line 355 "TP5.y"
-    { agregoArgumento("void"); ;}
+#line 297 "TP5.y"
+    { agregarErrorSintactico("ERROR, Falta tipo de dato del puntero parametro",yylineno);;}
     break;
 
   case 73:
 
 /* Line 1455 of yacc.c  */
-#line 356 "TP5.y"
-    {        
-                                        aux = buscoSimbolo((yyvsp[(1) - (1)].cadena));    
-                                        if (aux) 
-                                                agregoArgumento(aux->tipo); 
-                                        else 
-                                                agregarErrorSemantico("ERROR : La variable no está declarada.",yylineno);
-                                        ;}
+#line 298 "TP5.y"
+    { agregarErrorSintactico("ERROR, Falta identificador en parametro",yylineno);;}
     break;
 
   case 74:
 
 /* Line 1455 of yacc.c  */
-#line 363 "TP5.y"
-    { agregoArgumento("char*"); ;}
+#line 299 "TP5.y"
+    { agregarErrorSintactico("ERROR, Falta identificador del puntero parametro",yylineno);;}
     break;
 
   case 75:
 
 /* Line 1455 of yacc.c  */
-#line 364 "TP5.y"
-    { agregoArgumento("int");   ;}
+#line 304 "TP5.y"
+    {
+                                                                        aux = buscoSimbolo((yyvsp[(1) - (5)].cadena));  
+                                                                        if (aux) { 
+                                                                                if (aux->type == 1) { 
+                                                                                        agregarErrorSemantico("ERROR, El IDENTIFICADOR esta Declarado como Variable",yylineno); 
+                                                                                }
+                     
+                                                                                if (compararParametros(aux->tiposParametros, listaParametrosAux) == 1) {
+                                                                                        agregarErrorSemantico("ERROR, Se Invoco una Funcion con la Cantidad o Tipos de Parametros Incorrectos",yylineno); 
+                                                                                } 
+                        
+                                                                                if (compararParametros(aux->tiposParametros, listaParametrosAux) == 0) {
+                                                                                        printf ("Linea %i:  Se Invoco una Funcion con la Cantidad y Tipos De Parametros Correctos\n\n",yylineno);
+                                                                                } 
+                                                                        } 
+
+                                                                        else { 
+                                                                                agregarErrorSemantico("ERROR, No esta Declarada la Funcion",yylineno);  
+                                                                        }
+                                                                
+                                                                        listaParametrosAux = NULL; 
+                                                                ;}
     break;
 
   case 76:
 
 /* Line 1455 of yacc.c  */
-#line 365 "TP5.y"
-    { agregoArgumento("char");  ;}
+#line 328 "TP5.y"
+    { agregarErrorSintactico("ERROR, Falta '(' en la Invocacion de la Funcion",yylineno); ;}
     break;
 
   case 77:
 
 /* Line 1455 of yacc.c  */
-#line 369 "TP5.y"
-    {(yyval.mystruct).tipo=(yyvsp[(1) - (1)].mystruct).tipo;
-                                            (yyval.mystruct).valor_entero=(yyvsp[(1) - (1)].mystruct).valor_entero;;}
-    break;
-
-  case 78:
-
-/* Line 1455 of yacc.c  */
-#line 371 "TP5.y"
-    {(yyval.mystruct).tipo=(yyvsp[(1) - (1)].mystruct).tipo;
-                                            (yyval.mystruct).valor_real=(yyvsp[(1) - (1)].mystruct).valor_real;;}
-    break;
-
-  case 79:
-
-/* Line 1455 of yacc.c  */
-#line 375 "TP5.y"
-    { 
-                                                        if ((yyvsp[(1) - (3)].mystruct).tipo == (yyvsp[(3) - (3)].mystruct).tipo)  { // Verifico que los tipos de constantes sean iguales
-
-                                                        if((yyvsp[(1) - (3)].mystruct).tipo == 1)  { (yyval.mystruct).valor_entero=(yyvsp[(1) - (3)].mystruct).valor_entero+(yyvsp[(3) - (3)].mystruct).valor_entero; } // si son enteros , sumo las expresiones y asigno el valor.
-        
-                                                        else { (yyval.mystruct).valor_real=(yyvsp[(1) - (3)].mystruct).valor_real+(yyvsp[(3) - (3)].mystruct).valor_real; } // si son constantes reales , sumo las expresiones y asigno el valor.
-                                                        }
-        
-                                                        else { agregarErrorSemantico("Los operandos son de distinto tipo, no se puede realizar la operación.",yylineno); }
-        
-                                                ;}
+#line 329 "TP5.y"
+    { agregarErrorSintactico("ERROR, Falta ')' en la Invocacion de la Funcion",yylineno); ;}
     break;
 
   case 80:
 
 /* Line 1455 of yacc.c  */
-#line 388 "TP5.y"
-    { 
-                                                        if ((yyvsp[(1) - (3)].mystruct).tipo == (yyvsp[(3) - (3)].mystruct).tipo) { 
-       
-                                                        if ((yyvsp[(1) - (3)].mystruct).tipo == 1) { (yyval.mystruct).valor_entero=(yyvsp[(1) - (3)].mystruct).valor_entero+(yyvsp[(3) - (3)].mystruct).valor_entero; }
-        
-                                                        else { (yyval.mystruct).valor_real=(yyvsp[(1) - (3)].mystruct).valor_real+(yyvsp[(3) - (3)].mystruct).valor_real; }
-                                                        }
-        
-                                                        else { agregarErrorSemantico("Los operandos son de distinto tipo, no se puede realizar la operación.",yylineno);}
-        
-                                                ;}
+#line 336 "TP5.y"
+    { agregoArgumento("void"); ;}
     break;
 
   case 81:
 
 /* Line 1455 of yacc.c  */
-#line 401 "TP5.y"
-    { 
-                                                        if((yyvsp[(1) - (3)].mystruct).tipo == (yyvsp[(3) - (3)].mystruct).tipo)  { 
+#line 339 "TP5.y"
+    {        
+                                        aux = buscoSimbolo((yyvsp[(1) - (1)].cadena));    
+                                        if (aux) 
+                                                agregoArgumento(aux->tipo); 
+                                        else 
+                                                agregarErrorSemantico("ERROR, La Variable NO esta Declarada",yylineno); 
+                                ;}
+    break;
 
-                                                        if((yyvsp[(1) - (3)].mystruct).tipo == 1) { (yyval.mystruct).valor_entero=(yyvsp[(1) - (3)].mystruct).valor_entero+(yyvsp[(3) - (3)].mystruct).valor_entero; }
-        
-                                                        else  { (yyval.mystruct).valor_real=(yyvsp[(1) - (3)].mystruct).valor_real+(yyvsp[(3) - (3)].mystruct).valor_real; }
+  case 82:
 
-                                                        }
-        
-                                                        else  { agregarErrorSemantico("Los operandos son de distinto tipo, no se puede realizar la operación.",yylineno); }
-        
-                                                ;}
+/* Line 1455 of yacc.c  */
+#line 347 "TP5.y"
+    { agregoArgumento("char*"); ;}
     break;
 
   case 83:
 
 /* Line 1455 of yacc.c  */
-#line 415 "TP5.y"
+#line 348 "TP5.y"
+    { agregoArgumento("int");   ;}
+    break;
+
+  case 84:
+
+/* Line 1455 of yacc.c  */
+#line 349 "TP5.y"
+    { agregoArgumento("char");  ;}
+    break;
+
+  case 85:
+
+/* Line 1455 of yacc.c  */
+#line 350 "TP5.y"
+    { agregoArgumento("real");  ;}
+    break;
+
+  case 86:
+
+/* Line 1455 of yacc.c  */
+#line 354 "TP5.y"
+    { (yyval.mystruct).tipo=(yyvsp[(1) - (1)].mystruct).tipo;(yyval.mystruct).valor_entero=(yyvsp[(1) - (1)].mystruct).valor_entero; ;}
+    break;
+
+  case 87:
+
+/* Line 1455 of yacc.c  */
+#line 355 "TP5.y"
+    { (yyval.mystruct).tipo=(yyvsp[(1) - (1)].mystruct).tipo;(yyval.mystruct).valor_real=(yyvsp[(1) - (1)].mystruct).valor_real;     ;}
+    break;
+
+  case 88:
+
+/* Line 1455 of yacc.c  */
+#line 358 "TP5.y"
+    { 
+                                                        aux = buscoSimbolo((yyvsp[(1) - (3)].cadena)); 
+                                                        if (aux) {  
+                                                                if ((strcmp(aux->tipo,"int") == 0) && ((yyvsp[(3) - (3)].mystruct).tipo == 1) ) {
+                                                                        aux->value.valEnt = (yyvsp[(3) - (3)].mystruct).valor_entero; 
+                                                                        (yyval.mystruct).valor_entero = (yyvsp[(3) - (3)].mystruct).valor_entero;  
+                                                                } 
+
+                                                                else  if ((strcmp(aux->tipo,"float") == 0) && ((yyvsp[(3) - (3)].mystruct).tipo == 2) ) {
+                                                                        aux->value.valReal = (yyvsp[(3) - (3)].mystruct).valor_real; 
+                                                                        (yyval.mystruct).valor_real = (yyvsp[(3) - (3)].mystruct).valor_real;  
+                                                                } 
+                                                                
+                                                                else      
+                                                                        agregarErrorSemantico("ERROR, Son de Distinto Tipo",yylineno);    
+                                                                }
+        
+                                                        else { 
+                                                                agregarErrorSemantico("ERROR, La Variable NO esta Declarada",yylineno); 
+                                                        } 
+                                                ;}
+    break;
+
+  case 89:
+
+/* Line 1455 of yacc.c  */
+#line 382 "TP5.y"
+    { 
+                                                        if ((yyvsp[(1) - (3)].mystruct).tipo == (yyvsp[(3) - (3)].mystruct).tipo)  { 
+
+                                                                if ((yyvsp[(1) - (3)].mystruct).tipo==1)  {
+                                                                        (yyval.mystruct).valor_entero = (yyvsp[(1) - (3)].mystruct).valor_entero + (yyvsp[(3) - (3)].mystruct).valor_entero;
+                                                                }
+                                                                else  { 
+                                                                        (yyval.mystruct).valor_real = (yyvsp[(1) - (3)].mystruct).valor_real + (yyvsp[(3) - (3)].mystruct).valor_real;
+                                                                } 
+                                                        }
+        
+                                                        else { 
+                                                                agregarErrorSemantico("ERROR, Los Operandos Son de Distinto Tipo, NO se Realizo la Operacion Completa",yylineno);
+                                                        } 
+                                                ;}
+    break;
+
+  case 90:
+
+/* Line 1455 of yacc.c  */
+#line 400 "TP5.y"
+    { 
+                                                        if ((yyvsp[(1) - (3)].mystruct).tipo == (yyvsp[(3) - (3)].mystruct).tipo) { 
+       
+                                                                if((yyvsp[(1) - (3)].mystruct).tipo==1) {
+                                                                        (yyval.mystruct).valor_entero = (yyvsp[(1) - (3)].mystruct).valor_entero - (yyvsp[(3) - (3)].mystruct).valor_entero; 
+                                                                }
+                                                                else {
+                                                                        (yyval.mystruct).valor_real = (yyvsp[(1) - (3)].mystruct).valor_real - (yyvsp[(3) - (3)].mystruct).valor_real;
+                                                                }  
+                                                        }
+        
+                                                        else { 
+                                                                agregarErrorSemantico("ERROR, Los Operandos Son de Distinto Tipo, NO se Realizo la Operacion Completa",yylineno);
+                                                        } 
+                                                ;}
+    break;
+
+  case 91:
+
+/* Line 1455 of yacc.c  */
+#line 417 "TP5.y"
+    { 
+                                                        if ((yyvsp[(1) - (3)].mystruct).tipo == (yyvsp[(3) - (3)].mystruct).tipo) { 
+
+                                                                if ((yyvsp[(1) - (3)].mystruct).tipo == 1) { 
+                                                                        (yyval.mystruct).valor_entero = (yyvsp[(1) - (3)].mystruct).valor_entero * (yyvsp[(3) - (3)].mystruct).valor_entero; 
+                                                                }
+                                                                else { 
+                                                                        (yyval.mystruct).valor_real = (yyvsp[(1) - (3)].mystruct).valor_real * (yyvsp[(3) - (3)].mystruct).valor_real; 
+                                                                } 
+                                                        }
+        
+                                                        else { 
+                                                                agregarErrorSemantico("ERROR, Los Operandos Son de Distinto Tipo NO se Realizo la Operacion Completa",yylineno);
+                                                        } 
+                                                ;}
+    break;
+
+  case 93:
+
+/* Line 1455 of yacc.c  */
+#line 434 "TP5.y"
     { (yyval.mystruct).valor_entero = (yyvsp[(2) - (3)].mystruct).valor_entero ; ;}
     break;
 
 
 
 /* Line 1455 of yacc.c  */
-#line 2043 "TP5.tab.c"
+#line 2131 "TP5.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -2251,10 +2339,9 @@ yyreturn:
 
 
 /* Line 1675 of yacc.c  */
-#line 420 "TP5.y"
+#line 437 "TP5.y"
 
 
-// Puntero que apunta a la tabla de símbolos
 symrec *sym_table;
 
 int main(){
@@ -2263,7 +2350,7 @@ int main(){
         #endif
 
         yyin = fopen("archivo.c","r");
-        printf("\n");
+        printf("\n\n");
         yyparse();
         
         mostrarListaVariables();

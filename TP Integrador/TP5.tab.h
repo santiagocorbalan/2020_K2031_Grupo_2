@@ -54,7 +54,7 @@
      WHILE = 270,
      SWITCH = 271,
      IF = 272,
-     ELSE = 273
+     TKN_ELSE = 273
    };
 #endif
 
@@ -65,7 +65,7 @@ typedef union YYSTYPE
 {
 
 /* Line 1676 of yacc.c  */
-#line 33 "TP5.y"
+#line 29 "TP5.y"
 
     struct yylval_struct
       {

@@ -6,11 +6,12 @@ int a;
 char a;
 char* h = 3.2;
 char* j = "hola";
+int var_deFOR2 ;
 
 char* funcc(int a, char b);
 void miFuncion(int a, int b);
-miFuncion(4,2)
-miFuncion(4)
+miFuncion(4,2);
+miFuncion(4);
 
 int c = ;
 
