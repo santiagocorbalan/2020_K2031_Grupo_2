@@ -34,24 +34,24 @@ symrec *aux;
       float valor_real;
       } mystruct;
 
-          char* cadena;
-         char caracter;
-          int entero;
-          float real;
-
+        char* cadena;
+        char caracter;
+        int entero;
+        float real;
 }
 
 %start input
 
 %type <mystruct> expresion
 
-%token <cadena> TIPO_DE_DATO 
-%token <caracter> CONSTANTE_CARACTER 
-%token <cadena> IDENTIFICADOR     
-%token <cadena> LITERAL_CADENA
-%token <cadena> TKN_VOID
-%token <mystruct> CONSTANTE_ENTERA
-%token <mystruct> CONSTANTE_REAL
+%token <cadena>         TIPO_DE_DATO 
+%token <caracter>       CONSTANTE_CARACTER 
+%token <cadena>         IDENTIFICADOR     
+%token <cadena>         LITERAL_CADENA
+%token <cadena>         TKN_VOID
+%token <mystruct>       CONSTANTE_ENTERA
+%token <mystruct>       CONSTANTE_REAL
+
 %token BREAK
 %token CONTINUE
 %token RETURN
@@ -77,9 +77,7 @@ line:   '\n'
         | declaracion   
         | sentencia
         | invocacionDeFuncion  
-       
 ;
-
 
 sentencia:  sentenciaExpresion                                                       
         | sentenciaCompuesta                                                                                           
@@ -88,11 +86,9 @@ sentencia:  sentenciaExpresion
         | sentenciaDeSalto 
 ;
 
-
 sentenciaExpresion:    opExpresion ';'
                       | opExpresion  error      { agregarErrorSintactico("ERROR, Falta ';' al Final de la Linea",yylineno); }                             
 ;
-
 
 opExpresion:            /* vacio */             { printf("Linea %i:  Se encontro una sentencia vacia\n\n",yylineno); }  
                         | expresion      
@@ -133,7 +129,7 @@ sentenciaDeIteracion:   WHILE '(' expresion ')' sentencia                       
 ;
 
 sentenciaDeSalto:       CONTINUE ';'                                                            { printf("Linea %i:  Se encontro la sentencia CONTINUE\n\n",yylineno);       }
-                        |CONTINUE error                                                         { agregarErrorSintactico("ERROR, Falta ';' al Final de la Linea",yylineno);  } 
+                        | CONTINUE error                                                         { agregarErrorSintactico("ERROR, Falta ';' al Final de la Linea",yylineno);  } 
                         | BREAK ';'                                                             { printf("Linea %i:  Se encontro la sentencia BREAK\n\n",yylineno);          }
                         | BREAK error                                                           { agregarErrorSintactico("ERROR, Falta ';' al Final de la Linea",yylineno);  } 
                         | RETURN opExpresion  ';'                                               { printf("Linea %i:  Se encontro la sentencia RETURN\n\n",yylineno);         }
@@ -145,16 +141,16 @@ declaracion:            TIPO_DE_DATO            { tipo = $<cadena>1;} declaracio
                         | TKN_VOID              { tipo = "void"; } declaracionDefinicionFuncion                    
 ;
 
-declaraciones:  declaracionDefinicionFuncion          
-                | declaracionVariables ';'  
-                | declaracionVariables error  { agregarErrorSintactico("ERROR, Falta ';' al Final de la Linea",yylineno); }                    
+declaraciones:          declaracionDefinicionFuncion          
+                        | declaracionVariables ';'  
+                        | declaracionVariables error                                            { agregarErrorSintactico("ERROR, Falta ';' al Final de la Linea",yylineno); }                    
 ;
 
 declaracionVariables:   listaVariables 
 ;
 
-listaVariables:   unaVariableSimple                          
-                | unaVariableSimple ',' listaVariables 
+listaVariables:         unaVariableSimple                          
+                        | unaVariableSimple ',' listaVariables 
 ;
 
 unaVariableSimple:      IDENTIFICADOR   
@@ -170,7 +166,7 @@ unaVariableSimple:      IDENTIFICADOR
                                                                 {
                                                                         aux = buscoSimbolo($<cadena>1); 
                                                                         if (aux) 
-                                                                                agregarErrorSemantico("ERROR, Doble Declaracion De Variables",yylineno);
+                                                                                agregarErrorSemantico("ERROR, Doble Declaracion De Variables", yylineno);
                                                                         else  {
                                                                                 symrec *aux2=buscoSimbolo($<cadena>3); 
                                                         
@@ -264,39 +260,42 @@ unaVariableSimple:      IDENTIFICADOR
 
                              
                                                        
-                            | IDENTIFICADOR '=' error               { agregarErrorSintactico("ERROR, Se intento Inicializar Con Un Valor Incorrecto",yylineno); }
+                        | IDENTIFICADOR '=' error               { agregarErrorSintactico("ERROR, Se intento Inicializar Con Un Valor Incorrecto",yylineno); }
 
-                            | error '=' CONSTANTE_ENTERA            { agregarErrorSintactico("ERROR, Identificador Incorrecto de la Variable a Declarar con Inicializacion",yylineno);}
+                        | error '=' CONSTANTE_ENTERA            { agregarErrorSintactico("ERROR, Identificador Incorrecto de la Variable a Declarar con Inicializacion",yylineno);}
                              
 ;
 
-declaracionDefinicionFuncion: IDENTIFICADOR parametrosFuncion { 
-                                                                        aux=buscoSimbolo($<cadena>1); 
-                                                                        if (aux)  agregarErrorSemantico("ERROR, El Identificador ya esta Declarado",yylineno); 
+declaracionDefinicionFuncion: IDENTIFICADOR parametrosFuncion 
+                                                                { 
+                                                                        aux = buscoSimbolo($<cadena>1); 
+                                                                        if (aux)  
+                                                                                agregarErrorSemantico("ERROR, El Identificador ya esta Declarado",yylineno); 
                                                                         else {
                                                                                 aux=agregoSimbolo($<cadena>1 , tipo, 2);   
-                                                                                aux->tiposParametros = listaParametrosAux;  }
+                                                                                aux->tiposParametros = listaParametrosAux;  
+                                                                        }
 
-                                                                                  listaParametrosAux = NULL; }
+                                                                        listaParametrosAux = NULL; 
+                                                                }
 
-
-                              | error parametrosFuncion {  agregarErrorSintactico("ERROR, Nombre de la Funcion Incorrecto",yylineno);}
+                              | error parametrosFuncion { agregarErrorSintactico("ERROR, Nombre de la Funcion Incorrecto",yylineno); }
 ;
                     
 parametrosFuncion:   '(' listaParametros ')' ';'    
 ;
 
-listaParametros:         /* vacio */  { agregoParametro("void");} 
-                | parametros
-                | parametros ',' listaParametros 
+listaParametros:         /* vacio */  { agregoParametro("void"); } 
+                        | parametros
+                        | parametros ',' listaParametros 
 ;
                
-parametros:       TIPO_DE_DATO IDENTIFICADOR       { agregoParametro($<cadena>1);} 
-                | TIPO_DE_DATO '*' IDENTIFICADOR   { agregoParametro(strcat(tipo,"*"));}
-                | error IDENTIFICADOR              { agregarErrorSintactico("ERROR, Falta tipo de dato del parametro",yylineno);}
-                | error '*' IDENTIFICADOR          { agregarErrorSintactico("ERROR, Falta tipo de dato del puntero parametro",yylineno);}
-                | TIPO_DE_DATO error               { agregarErrorSintactico("ERROR, Falta identificador en parametro",yylineno);}
-                | TIPO_DE_DATO '*' error           { agregarErrorSintactico("ERROR, Falta identificador del puntero parametro",yylineno);}
+parametros:       TIPO_DE_DATO IDENTIFICADOR       { agregoParametro($<cadena>1); } 
+                | TIPO_DE_DATO '*' IDENTIFICADOR   { agregoParametro(strcat(tipo,"*")); }
+                | error IDENTIFICADOR              { agregarErrorSintactico("ERROR, Falta tipo de dato del parametro",yylineno); }
+                | error '*' IDENTIFICADOR          { agregarErrorSintactico("ERROR, Falta tipo de dato del puntero parametro",yylineno); }
+                | TIPO_DE_DATO error               { agregarErrorSintactico("ERROR, Falta identificador en parametro",yylineno); }
+                | TIPO_DE_DATO '*' error           { agregarErrorSintactico("ERROR, Falta identificador del puntero parametro",yylineno); }
 
 ;
 
